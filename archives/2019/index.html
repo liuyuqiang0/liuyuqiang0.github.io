@@ -21,6 +21,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
 
 
 
@@ -399,7 +411,7 @@
         
           
         
-        Um..! 2 posts in total. Keep on posting.
+        Um..! 1 post. Keep on posting.
       </span>
       
 
@@ -424,42 +436,7 @@
 
       <h2 class="post-title">
         
-          <a class="post-title-link" href="/2019/05/28/hello-world-1/" itemprop="url">
-            
-              <span itemprop="name">hello world</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-28T13:49:56+08:00" content="2019-05-28">
-          05-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/05/28/hello-world/" itemprop="url">
+          <a class="post-title-link" href="/2019/05/28/Hello-World/" itemprop="url">
             
               <span itemprop="name">Hello World</span>
             
@@ -468,7 +445,7 @@
       </h2>
 
       <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-28T13:29:23+08:00" content="2019-05-28">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-05-28T20:56:34+08:00" content="2019-05-28">
           05-28
         </time>
       </div>
@@ -527,7 +504,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">1</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -854,7 +831,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("hello world");titles.push("Hello World");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("Hello World");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {

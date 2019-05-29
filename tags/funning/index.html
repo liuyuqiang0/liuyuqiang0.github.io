@@ -147,7 +147,7 @@
 <meta name="keywords" content="NO response">
 <meta property="og:type" content="website">
 <meta property="og:title" content="种花家">
-<meta property="og:url" content="http://sfz-lyq.cn/categories/学习笔记/index.html">
+<meta property="og:url" content="http://sfz-lyq.cn/tags/funning/index.html">
 <meta property="og:site_name" content="种花家">
 <meta property="og:description" content="what you will be,the world will be">
 <meta property="og:locale" content="zh-Hans">
@@ -161,7 +161,7 @@
 
   
   
-  <link rel="canonical" href="http://sfz-lyq.cn/categories/学习笔记/">
+  <link rel="canonical" href="http://sfz-lyq.cn/tags/funning/">
 
 
 
@@ -171,7 +171,7 @@
   };
 </script>
 
-  <title>Category: 学习笔记 | 种花家</title>
+  <title>Tag: funning | 种花家</title>
   
 
 
@@ -278,7 +278,7 @@
         
         
           
-          <li class="menu-item menu-item-tags">
+          <li class="menu-item menu-item-tags menu-item-active">
 
     
     
@@ -295,7 +295,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
 
     
     
@@ -400,11 +400,11 @@
   
   
   
-  <div class="post-block category">
+  <div class="post-block tag">
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>学习笔记<small>Category</small>
+        <h1>funning<small>Tag</small>
         </h1>
       </div>
 
@@ -416,16 +416,16 @@
 
       <h2 class="post-title">
         
-          <a class="post-title-link" href="/2019/05/29/Hello-World-Again/" itemprop="url">
+          <a class="post-title-link" href="/2019/05/29/test/" itemprop="url">
             
-              <span itemprop="name">Hello World Again!</span>
+              <span itemprop="name">test</span>
             
           </a>
         
       </h2>
 
       <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-29T15:26:00+08:00" content="2019-05-29">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-05-29T21:08:10+08:00" content="2019-05-29">
           05-29
         </time>
       </div>
@@ -828,8 +828,8 @@
       //https://hexo.io/docs/variables.html
       var isPost = ''.length > 0
       var isArchive = '' === 'true'
-      var isCategory = '学习笔记'.length > 0
-      var isTag = ''.length > 0
+      var isCategory = ''.length > 0
+      var isTag = 'funning'.length > 0
 
       if (isPost) { //is article page
         var title = ''
@@ -840,7 +840,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("Hello World Again!");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("test");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {

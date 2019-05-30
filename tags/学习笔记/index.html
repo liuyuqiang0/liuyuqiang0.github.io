@@ -146,14 +146,13 @@
   <meta name="description" content="what you will be,the world will be">
 <meta name="keywords" content="NO response">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Schedule">
-<meta property="og:url" content="http://sfz-lyq.cn/Schedule/index.html">
+<meta property="og:title" content="种花家">
+<meta property="og:url" content="http://sfz-lyq.cn/tags/学习笔记/index.html">
 <meta property="og:site_name" content="种花家">
 <meta property="og:description" content="what you will be,the world will be">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-29T13:28:17.837Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Schedule">
+<meta name="twitter:title" content="种花家">
 <meta name="twitter:description" content="what you will be,the world will be">
 
 
@@ -162,7 +161,7 @@
 
   
   
-  <link rel="canonical" href="http://sfz-lyq.cn/Schedule/">
+  <link rel="canonical" href="http://sfz-lyq.cn/tags/学习笔记/">
 
 
 
@@ -172,7 +171,7 @@
   };
 </script>
 
-  <title>Schedule | 种花家</title>
+  <title>Tag: 学习笔记 | 种花家</title>
   
 
 
@@ -220,7 +219,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -279,7 +278,7 @@
         
         
           
-          <li class="menu-item menu-item-tags">
+          <li class="menu-item menu-item-tags menu-item-active">
 
     
     
@@ -398,48 +397,79 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-    
-    
-    <div class="post-block page">
-      <header class="post-header">
-
-<h1 class="post-title" itemprop="name headline">Schedule
-
-</h1>
-
-<div class="post-meta">
   
   
+  
+  <div class="post-block tag">
 
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-        
-        
-          
-        
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>学习笔记<small>Tag</small>
+        </h1>
       </div>
+
       
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+          <a class="post-title-link" href="/2019/05/29/Hello-World-Again/" itemprop="url">
+            
+              <span itemprop="name">Hello World Again!</span>
+            
+          </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-05-29T15:26:00+08:00" content="2019-05-29">
+          05-29
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
       
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+          <a class="post-title-link" href="/2019/05/28/Hello-World/" itemprop="url">
+            
+              <span itemprop="name">Hello World</span>
+            
+          </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-05-28T20:56:34+08:00" content="2019-05-28">
+          05-28
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
       
     </div>
-    
 
-
-
-    
-    
-    
   </div>
+  
+  
+  
+
+  
+
 
 
           </div>
@@ -479,7 +509,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -547,7 +577,7 @@
                   
                     
                   
-                  <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" title="QQ &rarr; tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+                  <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" title="qq &rarr; tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>qq</a>
                 </span>
               
             </div>
@@ -733,10 +763,6 @@
 
 
   
-  <script src="/js/scrollspy.js?v=7.1.1"></script>
-<script src="/js/post-details.js?v=7.1.1"></script>
-
-
 
   
 
@@ -826,13 +852,13 @@
       var articles = db.collection('articles')
 
       //https://hexo.io/docs/variables.html
-      var isPost = 'Schedule'.length > 0
+      var isPost = ''.length > 0
       var isArchive = '' === 'true'
       var isCategory = ''.length > 0
-      var isTag = ''.length > 0
+      var isTag = '学习笔记'.length > 0
 
       if (isPost) { //is article page
-        var title = 'Schedule'
+        var title = ''
         var doc = articles.doc(title)
 
         getCount(doc, true).then(appendCountTo($('.post-meta')))
@@ -840,7 +866,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = '' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("Hello World Again!");titles.push("Hello World");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {

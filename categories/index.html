@@ -146,14 +146,14 @@
   <meta name="description" content="what you will be,the world will be">
 <meta name="keywords" content="NO response">
 <meta property="og:type" content="website">
-<meta property="og:title" content="categories">
+<meta property="og:title" content="All categories">
 <meta property="og:url" content="http://sfz-lyq.cn/categories/index.html">
 <meta property="og:site_name" content="种花家">
 <meta property="og:description" content="what you will be,the world will be">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-29T12:50:03.396Z">
+<meta property="og:updated_time" content="2019-05-30T08:38:40.870Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
+<meta name="twitter:title" content="All categories">
 <meta name="twitter:description" content="what you will be,the world will be">
 
 
@@ -172,7 +172,7 @@
   };
 </script>
 
-  <title>categories | 种花家</title>
+  <title>All categories | 种花家</title>
   
 
 
@@ -405,7 +405,7 @@
     <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">categories
+<h1 class="post-title" itemprop="name headline">All categories
 
 </h1>
 
@@ -445,6 +445,10 @@
           </div>
           
 
+  
+
+
+
         </div>
         
           
@@ -479,7 +483,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -547,7 +551,7 @@
                   
                     
                   
-                  <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" title="QQ &rarr; tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+                  <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" title="qq &rarr; tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>qq</a>
                 </span>
               
             </div>
@@ -753,6 +757,8 @@
   
 
 
+  
+
 
   
 
@@ -826,13 +832,13 @@
       var articles = db.collection('articles')
 
       //https://hexo.io/docs/variables.html
-      var isPost = 'categories'.length > 0
+      var isPost = 'All categories'.length > 0
       var isArchive = '' === 'true'
       var isCategory = ''.length > 0
       var isTag = ''.length > 0
 
       if (isPost) { //is article page
-        var title = 'categories'
+        var title = 'All categories'
         var doc = articles.doc(title)
 
         getCount(doc, true).then(appendCountTo($('.post-meta')))

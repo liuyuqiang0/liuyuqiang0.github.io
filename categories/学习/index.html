@@ -147,7 +147,7 @@
 <meta name="keywords" content="NO response">
 <meta property="og:type" content="website">
 <meta property="og:title" content="种花家">
-<meta property="og:url" content="http://sfz-lyq.cn/categories/诗歌杂文/index.html">
+<meta property="og:url" content="http://sfz-lyq.cn/categories/学习/index.html">
 <meta property="og:site_name" content="种花家">
 <meta property="og:description" content="what you will be,the world will be">
 <meta property="og:locale" content="zh-Hans">
@@ -161,7 +161,7 @@
 
   
   
-  <link rel="canonical" href="http://sfz-lyq.cn/categories/诗歌杂文/">
+  <link rel="canonical" href="http://sfz-lyq.cn/categories/学习/">
 
 
 
@@ -171,7 +171,7 @@
   };
 </script>
 
-  <title>Category: 诗歌杂文 | 种花家</title>
+  <title>Category: 学习 | 种花家</title>
   
 
 
@@ -404,7 +404,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>诗歌杂文<small>Category</small>
+        <h1>学习<small>Category</small>
         </h1>
       </div>
 
@@ -416,17 +416,69 @@
 
       <h2 class="post-title">
         
-          <a class="post-title-link" href="/2019/05/29/test/" itemprop="url">
+          <a class="post-title-link" href="/2019/05/30/我是如何一步步搭建起这个博客的/" itemprop="url">
             
-              <span itemprop="name">Test</span>
+              <span itemprop="name">我是如何一步步搭建起这个博客的</span>
             
           </a>
         
       </h2>
 
       <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-29T21:08:10+08:00" content="2019-05-29">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-05-30T14:26:41+08:00" content="2019-05-30">
+          05-30
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+          <a class="post-title-link" href="/2019/05/29/Hello-World-Again/" itemprop="url">
+            
+              <span itemprop="name">Hello World Again!</span>
+            
+          </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-05-29T15:26:00+08:00" content="2019-05-29">
           05-29
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+          <a class="post-title-link" href="/2019/05/28/Hello-World/" itemprop="url">
+            
+              <span itemprop="name">Hello World</span>
+            
+          </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-05-28T20:56:34+08:00" content="2019-05-28">
+          05-28
         </time>
       </div>
 
@@ -495,16 +547,18 @@
                 <div class="site-state-item site-state-categories">
                   
                     
+                      <a href="/categories/">
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">3</span>
-                    <span class="site-state-item-name">categories</span>
                   
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
                 </div>
               
 
@@ -836,7 +890,7 @@
       //https://hexo.io/docs/variables.html
       var isPost = ''.length > 0
       var isArchive = '' === 'true'
-      var isCategory = '诗歌杂文'.length > 0
+      var isCategory = '学习'.length > 0
       var isTag = ''.length > 0
 
       if (isPost) { //is article page
@@ -848,7 +902,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("Test");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("我是如何一步步搭建起这个博客的");titles.push("Hello World Again!");titles.push("Hello World");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {

@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+    
+
+    
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Times New Roman:300,300italic,400,400italic,700,700italicTimes New Roman:300,300italic,400,400italic,700,700italicTimes New Roman:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1. 注释 单行注释：以#开头,为了增加代码的可读性，#后面通常接一个空格 多行注释：每行以#开头或三引号 ‘’’ … ‘’’ 、 “”” … “”” TODO注释：在程序开发时，为了避免自己忘记某项功能的实现，在系统框架搭建好了后可以在相应功能处增加注释，以便后续开发。 TODO 功能描述，注意空格，表示待完成的任务，也可以指定开发人员执行  2. 多行语句 python通常是一行写完一条语句，">
+<meta name="keywords" content="学习笔记,Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python语言基础">
+<meta property="og:url" content="http://sfz-lyq.cn/2019/05/31/python-语言基础/index.html">
+<meta property="og:site_name" content="种花家">
+<meta property="og:description" content="1. 注释 单行注释：以#开头,为了增加代码的可读性，#后面通常接一个空格 多行注释：每行以#开头或三引号 ‘’’ … ‘’’ 、 “”” … “”” TODO注释：在程序开发时，为了避免自己忘记某项功能的实现，在系统框架搭建好了后可以在相应功能处增加注释，以便后续开发。 TODO 功能描述，注意空格，表示待完成的任务，也可以指定开发人员执行  2. 多行语句 python通常是一行写完一条语句，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-31T16:02:09.114Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python语言基础">
+<meta name="twitter:description" content="1. 注释 单行注释：以#开头,为了增加代码的可读性，#后面通常接一个空格 多行注释：每行以#开头或三引号 ‘’’ … ‘’’ 、 “”” … “”” TODO注释：在程序开发时，为了避免自己忘记某项功能的实现，在系统框架搭建好了后可以在相应功能处增加注释，以便后续开发。 TODO 功能描述，注意空格，表示待完成的任务，也可以指定开发人员执行  2. 多行语句 python通常是一行写完一条语句，">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://sfz-lyq.cn/2019/05/31/python-语言基础/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Python语言基础 | 种花家</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">种花家</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">null   =   *</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sfz-lyq.cn/2019/05/31/python-语言基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liuyuqiang0">
+      <meta itemprop="description" content="what you will be,the world will be">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="种花家">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python语言基础
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-05-31 19:30:00" itemprop="dateCreated datePublished" datetime="2019-05-31T19:30:00+08:00">2019-05-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-01 00:02:09" itemprop="dateModified" datetime="2019-06-01T00:02:09+08:00">2019-06-01</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="1-注释"><a href="#1-注释" class="headerlink" title="1. 注释"></a>1. 注释</h5><ul>
+<li>单行注释：以#开头,为了增加代码的可读性，#后面通常接一个空格</li>
+<li>多行注释：每行以#开头或三引号 ‘’’ … ‘’’ 、 “”” … “””</li>
+<li>TODO注释：在程序开发时，为了避免自己忘记某项功能的实现，在系统框架搭建好了后可以在相应功能处增加注释，以便后续开发。</li>
+<li>TODO 功能描述，注意空格，表示待完成的任务，也可以指定开发人员执行</li>
+</ul>
+<h5 id="2-多行语句"><a href="#2-多行语句" class="headerlink" title="2. 多行语句"></a>2. 多行语句</h5><ul>
+<li>python通常是一行写完一条语句，但如果语句很长，我们可以使用反斜杠 \ 来实现多行语句，例如：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  sum=  num1+ \</span><br><span class="line">num2+ \</span><br><span class="line">        num3</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="3-同一行显示多条语句"><a href="#3-同一行显示多条语句" class="headerlink" title="3. 同一行显示多条语句"></a>3. 同一行显示多条语句</h5><ul>
+<li>通常每行代码负责一个动作，同时python 可以在同一行显示多条语句，语句之间使用分号 ；分割。</li>
+</ul>
+<h5 id="4-输出语句：print"><a href="#4-输出语句：print" class="headerlink" title="4. 输出语句：print()"></a>4. 输出语句：print()</h5><p>  4.1 输出数值常量：print(10)<br>  4.2 输出字符串常量：print(“Hello World!”); print(‘Hello World!’);<br>  4.3 输出字符型或数值型变量:print(x)<br>  4.4 一行输出多个变量（自动加空格）：printf(a,b)，例如：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   a=5;</span><br><span class="line">b=6;</span><br><span class="line">printf(a,b);</span><br><span class="line"> &gt;&gt;&gt;5 6</span><br></pre></td></tr></table></figure></p>
+<p>  4.5 手动控制输出<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   a=5;</span><br><span class="line">print(&quot;this is a test !\n %d&quot; %a);</span><br><span class="line">&gt;&gt;&gt;this is a test !</span><br><span class="line">&gt;&gt;&gt; 5</span><br><span class="line">a,b=5,6</span><br><span class="line">print(&apos;a=%d,b=%d\n&apos;%(a,b));//多个变量输出</span><br><span class="line">&gt;&gt;&gt;a=5,b=6</span><br></pre></td></tr></table></figure></p>
+<ol start="5">
+<li>输入语句：input(),将键盘输入的字符串保存到变量中，python3 默认是字符串类型，但如果输入合法则可以用类型转换函数进行转换<br>name=input(‘请输入您的名字：’); #提示用户输入名字<br>print(‘你刚才输入的是%s’ %name); #显示你刚才输出的字符串  %s是字符串转义</li>
+</ol>
+<h5 id="6-python常见错误"><a href="#6-python常见错误" class="headerlink" title="6. python常见错误"></a>6. python常见错误</h5><ul>
+<li>缩进错误：IndentationError:unexpected indent  #目前的python代码每行前不需要增加多于空格</li>
+<li>语法错误：SyntaxError :invalid syntax</li>
+<li>命令错误：NameError: name ‘***’ is not defined</li>
+</ul>
+<h5 id="7-Python版本"><a href="#7-Python版本" class="headerlink" title="7. Python版本"></a>7. Python版本</h5><ul>
+<li>目前市场上有两个python 版本并存，分别是python 2.x 和 Python 3.x</li>
+<li>Python 2.x默认不支持中文，解释器名称是python</li>
+<li>Python 3.x的解释器名称是python3</li>
+</ul>
+<h5 id="8-交互式运行python程序"><a href="#8-交互式运行python程序" class="headerlink" title="8. 交互式运行python程序"></a>8. 交互式运行python程序</h5><ul>
+<li>在终端中输入python便可直接运行解释器，不需要输入要执行的文件名</li>
+<li>在python的shell中直接输入Python的代码回车即可看到执行结果，适合学习/验证Python语法或者局部代码，但代码不能保存</li>
+<li>用 exit() 或 CTRL + d  退出解释器</li>
+</ul>
+<h5 id="9-Python的IDE-–-Pycharm"><a href="#9-Python的IDE-–-Pycharm" class="headerlink" title="9. Python的IDE – Pycharm"></a>9. Python的IDE – Pycharm</h5><ul>
+<li>集成开发环境（IDE）,集成了开发软件需要的所有工具，一般包括： 图形用户界面、代码编辑器、编译器/解释器、调试器等</li>
+<li>PyCharm 适合开发大型项目</li>
+<li>Pycharm 常用快捷键：<ul>
+<li>替换全文：选中内容然后 shift + F6会提示修改全文匹配信息。 </li>
+<li>注释与取消注释： CTRL + /</li>
+<li>收缩所有的代码块：Ctrl + Shift + -</li>
+<li>展开所有的代码块：Ctrl + Shift + +</li>
+</ul>
+</li>
+</ul>
+<h5 id="10-类型转换函数"><a href="#10-类型转换函数" class="headerlink" title="10. 类型转换函数"></a>10. 类型转换函数</h5><ul>
+<li>int(x)  将x转换为一个整数</li>
+<li>float(x) 将x转换为一个浮点数</li>
+<li>list(str) 将str转化为list类型</li>
+</ul>
+<h5 id="11-Linux上的Shebang符号"><a href="#11-Linux上的Shebang符号" class="headerlink" title="11. Linux上的Shebang符号(#!)"></a>11. Linux上的Shebang符号(#!)</h5><ul>
+<li>#!这个符号叫Shebang或者Sha-bang</li>
+<li>#!通常在Unix系统脚本的第一行开头使用</li>
+<li>指明执行这个脚本文件的解释程序</li>
+<li>用which 查看python解释器缩在路径 一般是/usr/bin/python</li>
+<li>在源程序第一行增加 #!/usr/bin/python</li>
+<li>然后修改主python文件的权限增加执行权限即可在终端直接执行</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记-Python/" rel="tag"># 学习笔记,Python</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/31/NYOJ-95-众数问题/" rel="next" title="NYOJ 95-众数问题">
+                <i class="fa fa-chevron-left"></i> NYOJ 95-众数问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/31/python数据类型/" rel="prev" title="Python数据类型">
+                Python数据类型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">liuyuqiang0</p>
+              <div class="site-description motion-element" itemprop="description">what you will be,the world will be</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/NYIST_TC_LYQ" title="CSDN &rarr; https://blog.csdn.net/NYIST_TC_LYQ" rel="noopener" target="_blank"><i class="fa fa-fw fa-CSDN"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" title="qq &rarr; tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>qq</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://nyoj.top" title="http://nyoj.top" rel="noopener" target="_blank">NYOJ</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-注释"><span class="nav-number">1.</span> <span class="nav-text">1. 注释</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-多行语句"><span class="nav-number">2.</span> <span class="nav-text">2. 多行语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-同一行显示多条语句"><span class="nav-number">3.</span> <span class="nav-text">3. 同一行显示多条语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-输出语句：print"><span class="nav-number">4.</span> <span class="nav-text">4. 输出语句：print()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-python常见错误"><span class="nav-number">5.</span> <span class="nav-text">6. python常见错误</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-Python版本"><span class="nav-number">6.</span> <span class="nav-text">7. Python版本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-交互式运行python程序"><span class="nav-number">7.</span> <span class="nav-text">8. 交互式运行python程序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-Python的IDE-–-Pycharm"><span class="nav-number">8.</span> <span class="nav-text">9. Python的IDE – Pycharm</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-类型转换函数"><span class="nav-number">9.</span> <span class="nav-text">10. 类型转换函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11-Linux上的Shebang符号"><span class="nav-number">10.</span> <span class="nav-text">11. Linux上的Shebang符号(#!)</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liuyuqiang0</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+  
+  <script>
+    (function () {
+
+      firebase.initializeApp({
+        apiKey: '',
+        projectId: ''
+      })
+
+      function getCount(doc, increaseCount) {
+        //increaseCount will be false when not in article page
+
+        return doc.get().then(function (d) {
+          var count
+          if (!d.exists) { //has no data, initialize count
+            if (increaseCount) {
+              doc.set({
+                count: 1
+              })
+              count = 1
+            }
+            else {
+              count = 0
+            }
+          }
+          else { //has data
+            count = d.data().count
+            if (increaseCount) {
+              if (!(window.localStorage && window.localStorage.getItem(title))) { //if first view this article
+                doc.set({ //increase count
+                  count: count + 1
+                })
+                count++
+              }
+            }
+          }
+          if (window.localStorage && increaseCount) { //mark as visited
+            localStorage.setItem(title, true)
+          }
+
+          return count
+        })
+      }
+
+      function appendCountTo(el) {
+        return function (count) {
+          $(el).append(
+            $('<span>').addClass('post-visitors-count').append(
+              $('<span>').addClass('post-meta-divider').text('|')
+            ).append(
+              $('<span>').addClass('post-meta-item-icon').append(
+                $('<i>').addClass('fa fa-users')
+              )
+              ).append($('<span>').text('Views ' + count))
+          )
+        }
+      }
+
+      var db = firebase.firestore()
+      var articles = db.collection('articles')
+
+      //https://hexo.io/docs/variables.html
+      var isPost = 'Python语言基础'.length > 0
+      var isArchive = '' === 'true'
+      var isCategory = ''.length > 0
+      var isTag = ''.length > 0
+
+      if (isPost) { //is article page
+        var title = 'Python语言基础'
+        var doc = articles.doc(title)
+
+        getCount(doc, true).then(appendCountTo($('.post-meta')))
+      }
+      else if (!isArchive && !isCategory && !isTag) { //is index page
+        var titles = [] //array to titles
+
+        var postsstr = '' //if you have a better way to get titles of posts, please change it
+        eval(postsstr)
+
+        var promises = titles.map(function (title) {
+          return articles.doc(title)
+        }).map(function (doc) {
+          return getCount(doc)
+        })
+        Promise.all(promises).then(function (counts) {
+          var metas = $('.post-meta')
+          counts.forEach(function (val, idx) {
+            appendCountTo(metas[idx])(val)
+          })
+        })
+      }
+    })()
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

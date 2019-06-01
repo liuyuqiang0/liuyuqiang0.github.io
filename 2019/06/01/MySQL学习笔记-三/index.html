@@ -143,17 +143,18 @@
 
 
 
-  <meta name="description" content="what you will be,the world will be">
-<meta name="keywords" content="NO response">
-<meta property="og:type" content="website">
-<meta property="og:title" content="种花家">
-<meta property="og:url" content="http://sfz-lyq.cn/archives/2019/05/page/3/index.html">
+  <meta name="description" content="学习地址 p8-p12建表过程与字符类型意义 建表过程就相当于在A4纸上画表头的过程：==声明字段== 建表和列类型有什么关系：  分析：A4纸是数据的存储空间，大小有限。请问：你准备给学号字段留多宽？给姓名字段留多宽？ 想要能够容纳放置的内容但又不浪费。 储存同样的数据，不同的列类型，所占据的空间和效率是不一样的，这就是建表前要知道列类型的意义。 故，重点：列类型的存储范围与占据的字节关系。">
+<meta name="keywords" content="学习笔记,MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL学习笔记(三)">
+<meta property="og:url" content="http://sfz-lyq.cn/2019/06/01/MySQL学习笔记-三/index.html">
 <meta property="og:site_name" content="种花家">
-<meta property="og:description" content="what you will be,the world will be">
+<meta property="og:description" content="学习地址 p8-p12建表过程与字符类型意义 建表过程就相当于在A4纸上画表头的过程：==声明字段== 建表和列类型有什么关系：  分析：A4纸是数据的存储空间，大小有限。请问：你准备给学号字段留多宽？给姓名字段留多宽？ 想要能够容纳放置的内容但又不浪费。 储存同样的数据，不同的列类型，所占据的空间和效率是不一样的，这就是建表前要知道列类型的意义。 故，重点：列类型的存储范围与占据的字节关系。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-01T15:35:34.910Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="种花家">
-<meta name="twitter:description" content="what you will be,the world will be">
+<meta name="twitter:title" content="MySQL学习笔记(三)">
+<meta name="twitter:description" content="学习地址 p8-p12建表过程与字符类型意义 建表过程就相当于在A4纸上画表头的过程：==声明字段== 建表和列类型有什么关系：  分析：A4纸是数据的存储空间，大小有限。请问：你准备给学号字段留多宽？给姓名字段留多宽？ 想要能够容纳放置的内容但又不浪费。 储存同样的数据，不同的列类型，所占据的空间和效率是不一样的，这就是建表前要知道列类型的意义。 故，重点：列类型的存储范围与占据的字节关系。">
 
 
 
@@ -161,7 +162,7 @@
 
   
   
-  <link rel="canonical" href="http://sfz-lyq.cn/archives/2019/05/page/3/">
+  <link rel="canonical" href="http://sfz-lyq.cn/2019/06/01/MySQL学习笔记-三/">
 
 
 
@@ -171,7 +172,7 @@
   };
 </script>
 
-  <title>Archive | 种花家</title>
+  <title>MySQL学习笔记(三) | 种花家</title>
   
 
 
@@ -219,7 +220,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -312,7 +313,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
 
     
     
@@ -371,143 +372,263 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sfz-lyq.cn/2019/06/01/MySQL学习笔记-三/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liuyuqiang0">
+      <meta itemprop="description" content="what you will be,the world will be">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="种花家">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">MySQL学习笔记(三)
+
+              
+            
+          </h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-06-01 23:33:00 / Modified: 23:35:34" itemprop="dateCreated datePublished" datetime="2019-06-01T23:33:00+08:00">2019-06-01</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
           
-        
-        Um..! 24 posts in total. Keep on posting.
-      </span>
-      
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
 
-      
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a></span>
 
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="学习地址-p8-p12"><a href="#学习地址-p8-p12" class="headerlink" title="学习地址 p8-p12"></a><center><a href="https://www.bilibili.com/video/av19538278" target="_blank" rel="noopener">学习地址 p8-p12</a></center></h3><h4 id="建表过程与字符类型意义"><a href="#建表过程与字符类型意义" class="headerlink" title="建表过程与字符类型意义"></a>建表过程与字符类型意义</h4><p> 建表过程就相当于在A4纸上画表头的过程：==声明字段==<br> 建表和列类型有什么关系：</p>
+<ul>
+<li><strong>分析</strong>：A4纸是数据的存储空间，大小有限。请问：你准备给学号字段留多宽？给姓名字段留多宽？</li>
+<li><strong>想要能够容纳放置的内容但又不浪费。</strong></li>
+<li>储存同样的数据，不同的列类型，所占据的空间和效率是不一样的，这就是建表前要知道列类型的意义。</li>
+<li>故，<strong>重点</strong>：列类型的存储范围与占据的字节关系。</li>
+</ul>
+<h4 id="MySQL三大列类型"><a href="#MySQL三大列类型" class="headerlink" title="MySQL三大列类型"></a>MySQL三大列类型</h4><ul>
+<li>==数值型==<ul>
+<li>整形：<strong>默认是有符号型</strong><ul>
+<li>Tinyint：1字节，-128-127，0-255</li>
+<li>Smallint：2字节，-32768-32767，0-65535</li>
+<li>Mediuint：3字节，-8388608-8388607，0-16777215</li>
+<li>Int：4字节，-2147483648-2147483647，0-4294967295</li>
+<li>bigint：8字节，-9223372036854775808-9223372036854775807，0-18446744073709551615</li>
+<li>M、unsigned、zerofill意义：声明时在列类型后面加unsigned表示其为无符号类型，zerofill表示位数不够时用0填充，M表示补0宽度，和zerofill配合使用才有意义。</li>
+</ul>
+</li>
+<li>小数（浮点型/定点型）<ul>
+<li>Float(M,D)：M叫“精度”，代表总位数；D是“标度”，代表小数点后几位</li>
+<li>decimal(M,D)：定点型将整数部分和小数部分分开存储，比float精确（0.23与0.25）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>==字符串型==：M限制的是字符不是字节<ul>
+<li>Char(M)：定长字符串(0&lt;=M&lt;=255)，方便计算文件指针偏移量，磁盘查找效率更优。如果不够长度用空格在尾部补齐，如果本身右侧有空格会丢失，读出时右侧所有空格被清除。</li>
+<li>Varchar(M)：变长字符串(0&lt;=M&lt;=65535)，列内容前有1-2个字节前缀来标记实际内容长度。</li>
+<li>Text：文本类型，可以存储较大的文本段，搜索速度稍慢，不用加默认值（加了也没用）    ，一般用来存储文章内容、新闻内容等。</li>
+<li>Blob：二进制类型，用来存储图像、音频等二进制信息，防止因字符集问题导致信息丢失。</li>
+</ul>
+</li>
+<li>==日期时间类型==<ul>
+<li>Date日期</li>
+<li>Time 时间</li>
+<li>Datetime日期时间类型</li>
+<li>Year 年类型</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
           </div>
         
-        
 
         
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
         
-          <a class="post-title-link" href="/2019/05/29/Hello-World-Again/" itemprop="url">
-            
-              <span itemprop="name">Hello World Again!</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-29T15:26:00+08:00" content="2019-05-29">
-          05-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
+        </div>
+      
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/05/28/Hello-World/" itemprop="url">
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span itemprop="name">Hello World</span>
+              <a href="/2019/06/01/NYOJ-101-两点距离/" rel="next" title="NYOJ 101-两点距离">
+                <i class="fa fa-chevron-left"></i> NYOJ 101-两点距离
+              </a>
             
-          </a>
-        
-      </h2>
+          </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-28T20:56:00+08:00" content="2019-05-28">
-          05-28
-        </time>
-      </div>
+          <span class="post-nav-divider"></span>
 
-    </header>
-  </article>
-
-
-
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
-    </div>
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2019/05/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/archives/2019/05/">1</a><a class="page-number" href="/archives/2019/05/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
+  </article>
 
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -527,8 +648,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -674,6 +804,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习地址-p8-p12"><span class="nav-number">1.</span> <span class="nav-text">学习地址 p8-p12</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#建表过程与字符类型意义"><span class="nav-number">1.1.</span> <span class="nav-text">建表过程与字符类型意义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL三大列类型"><span class="nav-number">1.2.</span> <span class="nav-text">MySQL三大列类型</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -827,6 +974,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
 
   
 
@@ -842,6 +993,8 @@
 
   
 
+
+  
 
 
   
@@ -916,13 +1069,13 @@
       var articles = db.collection('articles')
 
       //https://hexo.io/docs/variables.html
-      var isPost = ''.length > 0
-      var isArchive = 'true' === 'true'
+      var isPost = 'MySQL学习笔记(三)'.length > 0
+      var isArchive = '' === 'true'
       var isCategory = ''.length > 0
       var isTag = ''.length > 0
 
       if (isPost) { //is article page
-        var title = ''
+        var title = 'MySQL学习笔记(三)'
         var doc = articles.doc(title)
 
         getCount(doc, true).then(appendCountTo($('.post-meta')))
@@ -930,7 +1083,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("Hello World Again!");titles.push("Hello World");' //if you have a better way to get titles of posts, please change it
+        var postsstr = '' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {
@@ -962,6 +1115,25 @@
   
 
   
+  <script>
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  </script>
+
 
   
 

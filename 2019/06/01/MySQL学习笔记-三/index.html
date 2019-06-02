@@ -143,18 +143,18 @@
 
 
 
-  <meta name="description" content="学习地址 p8-p12建表过程与字符类型意义 建表过程就相当于在A4纸上画表头的过程：==声明字段== 建表和列类型有什么关系：  分析：A4纸是数据的存储空间，大小有限。请问：你准备给学号字段留多宽？给姓名字段留多宽？ 想要能够容纳放置的内容但又不浪费。 储存同样的数据，不同的列类型，所占据的空间和效率是不一样的，这就是建表前要知道列类型的意义。 故，重点：列类型的存储范围与占据的字节关系。">
+  <meta name="description" content="学习地址 p8-p13建表过程与字符类型意义 建表过程就相当于在A4纸上画表头的过程：声明字段 建表和列类型有什么关系：  分析：A4纸是数据的存储空间，大小有限。请问：你准备给学号字段留多宽？给姓名字段留多宽？ 想要能够容纳放置的内容但又不浪费。 储存同样的数据，不同的列类型，所占据的空间和效率是不一样的，这就是建表前要知道列类型的意义。 故，重点：列类型的存储范围与占据的字节关系。  MySQ">
 <meta name="keywords" content="学习笔记,MySQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL学习笔记(三)">
 <meta property="og:url" content="http://sfz-lyq.cn/2019/06/01/MySQL学习笔记-三/index.html">
 <meta property="og:site_name" content="种花家">
-<meta property="og:description" content="学习地址 p8-p12建表过程与字符类型意义 建表过程就相当于在A4纸上画表头的过程：==声明字段== 建表和列类型有什么关系：  分析：A4纸是数据的存储空间，大小有限。请问：你准备给学号字段留多宽？给姓名字段留多宽？ 想要能够容纳放置的内容但又不浪费。 储存同样的数据，不同的列类型，所占据的空间和效率是不一样的，这就是建表前要知道列类型的意义。 故，重点：列类型的存储范围与占据的字节关系。">
+<meta property="og:description" content="学习地址 p8-p13建表过程与字符类型意义 建表过程就相当于在A4纸上画表头的过程：声明字段 建表和列类型有什么关系：  分析：A4纸是数据的存储空间，大小有限。请问：你准备给学号字段留多宽？给姓名字段留多宽？ 想要能够容纳放置的内容但又不浪费。 储存同样的数据，不同的列类型，所占据的空间和效率是不一样的，这就是建表前要知道列类型的意义。 故，重点：列类型的存储范围与占据的字节关系。  MySQ">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-01T15:35:34.910Z">
+<meta property="og:updated_time" content="2019-06-02T01:49:09.067Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL学习笔记(三)">
-<meta name="twitter:description" content="学习地址 p8-p12建表过程与字符类型意义 建表过程就相当于在A4纸上画表头的过程：==声明字段== 建表和列类型有什么关系：  分析：A4纸是数据的存储空间，大小有限。请问：你准备给学号字段留多宽？给姓名字段留多宽？ 想要能够容纳放置的内容但又不浪费。 储存同样的数据，不同的列类型，所占据的空间和效率是不一样的，这就是建表前要知道列类型的意义。 故，重点：列类型的存储范围与占据的字节关系。">
+<meta name="twitter:description" content="学习地址 p8-p13建表过程与字符类型意义 建表过程就相当于在A4纸上画表头的过程：声明字段 建表和列类型有什么关系：  分析：A4纸是数据的存储空间，大小有限。请问：你准备给学号字段留多宽？给姓名字段留多宽？ 想要能够容纳放置的内容但又不浪费。 储存同样的数据，不同的列类型，所占据的空间和效率是不一样的，这就是建表前要知道列类型的意义。 故，重点：列类型的存储范围与占据的字节关系。  MySQ">
 
 
 
@@ -435,12 +435,24 @@
                 
               
 
-              <time title="Created: 2019-06-01 23:33:00 / Modified: 23:35:34" itemprop="dateCreated datePublished" datetime="2019-06-01T23:33:00+08:00">2019-06-01</time>
+              <time title="Created: 2019-06-01 23:33:00" itemprop="dateCreated datePublished" datetime="2019-06-01T23:33:00+08:00">2019-06-01</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-02 09:49:09" itemprop="dateModified" datetime="2019-06-02T09:49:09+08:00">2019-06-02</time>
               
             
           </span>
@@ -506,15 +518,14 @@
       
 
       
-        <h3 id="学习地址-p8-p12"><a href="#学习地址-p8-p12" class="headerlink" title="学习地址 p8-p12"></a><center><a href="https://www.bilibili.com/video/av19538278" target="_blank" rel="noopener">学习地址 p8-p12</a></center></h3><h4 id="建表过程与字符类型意义"><a href="#建表过程与字符类型意义" class="headerlink" title="建表过程与字符类型意义"></a>建表过程与字符类型意义</h4><p> 建表过程就相当于在A4纸上画表头的过程：==声明字段==<br> 建表和列类型有什么关系：</p>
+        <h3 id="学习地址-p8-p13"><a href="#学习地址-p8-p13" class="headerlink" title="学习地址 p8-p13"></a><center><a href="https://www.bilibili.com/video/av19538278" target="_blank" rel="noopener">学习地址 p8-p13</a></center></h3><h4 id="建表过程与字符类型意义"><a href="#建表过程与字符类型意义" class="headerlink" title="建表过程与字符类型意义"></a>建表过程与字符类型意义</h4><p> 建表过程就相当于在A4纸上画表头的过程：<strong>声明字段</strong><br> 建表和列类型有什么关系：</p>
 <ul>
 <li><strong>分析</strong>：A4纸是数据的存储空间，大小有限。请问：你准备给学号字段留多宽？给姓名字段留多宽？</li>
 <li><strong>想要能够容纳放置的内容但又不浪费。</strong></li>
 <li>储存同样的数据，不同的列类型，所占据的空间和效率是不一样的，这就是建表前要知道列类型的意义。</li>
 <li>故，<strong>重点</strong>：列类型的存储范围与占据的字节关系。</li>
 </ul>
-<h4 id="MySQL三大列类型"><a href="#MySQL三大列类型" class="headerlink" title="MySQL三大列类型"></a>MySQL三大列类型</h4><ul>
-<li>==数值型==<ul>
+<h4 id="MySQL三大列类型"><a href="#MySQL三大列类型" class="headerlink" title="MySQL三大列类型"></a>MySQL三大列类型</h4><h5 id="数值型"><a href="#数值型" class="headerlink" title="数值型"></a>数值型</h5><ul>
 <li>整形：<strong>默认是有符号型</strong><ul>
 <li>Tinyint：1字节，-128-127，0-255</li>
 <li>Smallint：2字节，-32768-32767，0-65535</li>
@@ -530,21 +541,26 @@
 </ul>
 </li>
 </ul>
-</li>
-<li>==字符串型==：M限制的是字符不是字节<ul>
+<h5 id="字符串型：M限制的是字符不是字节"><a href="#字符串型：M限制的是字符不是字节" class="headerlink" title="字符串型：M限制的是字符不是字节"></a>字符串型：M限制的是字符不是字节</h5><ul>
 <li>Char(M)：定长字符串(0&lt;=M&lt;=255)，方便计算文件指针偏移量，磁盘查找效率更优。如果不够长度用空格在尾部补齐，如果本身右侧有空格会丢失，读出时右侧所有空格被清除。</li>
 <li>Varchar(M)：变长字符串(0&lt;=M&lt;=65535)，列内容前有1-2个字节前缀来标记实际内容长度。</li>
 <li>Text：文本类型，可以存储较大的文本段，搜索速度稍慢，不用加默认值（加了也没用）    ，一般用来存储文章内容、新闻内容等。</li>
 <li>Blob：二进制类型，用来存储图像、音频等二进制信息，防止因字符集问题导致信息丢失。</li>
 </ul>
-</li>
-<li>==日期时间类型==<ul>
-<li>Date日期</li>
-<li>Time 时间</li>
-<li>Datetime日期时间类型</li>
-<li>Year 年类型</li>
+<h5 id="日期时间类型"><a href="#日期时间类型" class="headerlink" title="日期时间类型"></a>日期时间类型</h5><ul>
+<li>Date日期：3个字节，格式YYYY-MM-DD，1000-01-01～9999-12-31</li>
+<li>Time 时间：3个字节，HH:MM:SS，-838:59:59’和838:59:59‘</li>
+<li>Datetime日期时间：8个字节，YYYY-MM-DD HH:MM:SS，1000-01-01 00:00:00～9999-12-31 23:59:59</li>
+<li>Year 年类型：1个字节，YYYY和YY，1901-2155</li>
 </ul>
-</li>
+<hr>
+<h6 id="终端下显示时间日期"><a href="#终端下显示时间日期" class="headerlink" title="终端下显示时间日期"></a>终端下显示时间日期</h6><ul>
+<li>date：显示日期时间</li>
+<li>cal：显示本月第几天，<code>-y</code>显示本年第几天</li>
+</ul>
+<hr>
+<h6 id="ERROR-1366问题："><a href="#ERROR-1366问题：" class="headerlink" title="ERROR 1366问题："></a>ERROR 1366问题：</h6><ul>
+<li>错误原因，客户端没有声明字符集</li>
 </ul>
 
       
@@ -605,6 +621,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/02/MySQL学习笔记-四/" rel="prev" title="MySQL学习笔记(四)">
+                MySQL学习笔记(四) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -673,7 +693,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -815,7 +835,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习地址-p8-p12"><span class="nav-number">1.</span> <span class="nav-text">学习地址 p8-p12</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#建表过程与字符类型意义"><span class="nav-number">1.1.</span> <span class="nav-text">建表过程与字符类型意义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL三大列类型"><span class="nav-number">1.2.</span> <span class="nav-text">MySQL三大列类型</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习地址-p8-p13"><span class="nav-number">1.</span> <span class="nav-text">学习地址 p8-p13</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#建表过程与字符类型意义"><span class="nav-number">1.1.</span> <span class="nav-text">建表过程与字符类型意义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL三大列类型"><span class="nav-number">1.2.</span> <span class="nav-text">MySQL三大列类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数值型"><span class="nav-number">1.2.1.</span> <span class="nav-text">数值型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#字符串型：M限制的是字符不是字节"><span class="nav-number">1.2.2.</span> <span class="nav-text">字符串型：M限制的是字符不是字节</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#日期时间类型"><span class="nav-number">1.2.3.</span> <span class="nav-text">日期时间类型</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#终端下显示时间日期"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">终端下显示时间日期</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#ERROR-1366问题："><span class="nav-number">1.2.3.2.</span> <span class="nav-text">ERROR 1366问题：</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>

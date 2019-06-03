@@ -151,7 +151,7 @@
 <meta property="og:site_name" content="种花家">
 <meta property="og:description" content="学习地址p1-p3 数据库(DB)：DataBase。DB是长期存储在计算机内的有组织、可共享的大量的数据集合。它可以供各种用户共享，具有最小冗余度和较高的数据独立性。不同的厂商对sql标准的执行有微笑差异，比如mysql没有全连接full join，也没有sql server中的topN用法。 数据库管理员(DBA)：DataBase Administrator。 数据库管理系统(DBMS)：D">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-01T06:28:06.739Z">
+<meta property="og:updated_time" content="2019-06-03T04:25:52.514Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL学习笔记(一)">
 <meta name="twitter:description" content="学习地址p1-p3 数据库(DB)：DataBase。DB是长期存储在计算机内的有组织、可共享的大量的数据集合。它可以供各种用户共享，具有最小冗余度和较高的数据独立性。不同的厂商对sql标准的执行有微笑差异，比如mysql没有全连接full join，也没有sql server中的topN用法。 数据库管理员(DBA)：DataBase Administrator。 数据库管理系统(DBMS)：D">
@@ -452,7 +452,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-01 14:28:06" itemprop="dateModified" datetime="2019-06-01T14:28:06+08:00">2019-06-01</time>
+                <time title="Modified: 2019-06-03 12:25:52" itemprop="dateModified" datetime="2019-06-03T12:25:52+08:00">2019-06-03</time>
               
             
           </span>
@@ -534,26 +534,29 @@
 <h5 id="MySQL安装"><a href="#MySQL安装" class="headerlink" title="MySQL安装"></a>MySQL安装</h5><ul>
 <li>过程略。视频中版本是5.5的，我所使用的是Ver 14.14 Distrib 5.7.26, for Linux (x86_64) using  EditLine wrapper。<a href="https://blog.csdn.net/zhwyj1019/article/details/80274269" target="_blank" rel="noopener">安装</a><a href="https://blog.csdn.net/li_wei_quan/article/details/78549891" target="_blank" rel="noopener">教程</a>，<a href="https://www.runoob.com/mysql/mysql-tutorial.html" target="_blank" rel="noopener">使用教程</a></li>
 <li>软件，尤其是开源软件尽量安装稳定版的，不要追求最新版。</li>
-<li>在终端敲mysql时其实是掉用了一个可执行文件，比如Win系统下的mysql.exe，这个可执行文件在你的安装目录的/bin里面。</li>
-<li>但，系统如何知道去对应目录下找到可执行文件呢，不一定知道。系统有==环境变量==的概念，在环境变量指定的几个目录及当前目录下寻找啊。</li>
+<li>在终端敲mysql时其实是调用了一个可执行文件，比如Win系统下的mysql.exe，这个可执行文件在你的安装目录的/bin里面。</li>
+<li>但，系统如何知道去对应目录下找到可执行文件呢，不一定知道。系统有<strong>环境变量</strong>的概念，在环境变量指定的几个目录及当前目录下寻找啊。</li>
 <li>所以，安装软件时如果自定义安装目录要么添加环境变量(centos系统在/etc/profile中添加即可)，要么到指定目录下执行。  </li>
 </ul>
 <h4 id="mysql十条基本入门语句"><a href="#mysql十条基本入门语句" class="headerlink" title="mysql十条基本入门语句"></a>mysql十条基本入门语句</h4><p><strong>1.  连接服务器</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mysql -u root -p</span><br><span class="line">Enter password:</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>执行成功后出现<code>mysql&gt;</code> 命令提示窗口，你可以在上面执行任何 SQL 语句。</li>
 <li>如果想退出：<code>mysql&gt;exit</code> 即可</li>
-<li>连接成功后面对的是==库==  </li>
+<li>连接成功后面对的是<strong>库</strong></li>
 </ul>
 <p><strong>2.  选则库与查看表</strong>  </p>
 <ul>
 <li>选库语句: <code>use 库名</code></li>
 <li>如果不知道存在哪些库想查看所有库：<code>mysql&gt;show databases</code></li>
-<li>选完库面对的是==表==</li>
+<li>选完库面对的是<strong>表</strong>  </li>
 <li>查看库下面所有的表：<code>show tables;</code></li>
 </ul>
 <p><strong>3.  创建与删除库</strong></p>
 <ul>
-<li>创建语句：<code>create database 数据库名 [charset 字符集];</code><br>*注：后面的是可选字段；创建库同时也会创建一个简单表。</li>
+<li>创建语句：<code>create database 数据库名 [charset 字符集];</code>  <ul>
+<li>注：后面的是可选字段；创建库同时也会创建一个简单表。</li>
+</ul>
+</li>
 <li>删除库：<code>drop database 数据库名;</code></li>
 <li>MySQL中表/列可以改名，database不能改名，但phpAdmin似乎有这个功能，它是先新建库，把表复制到新库，再删除旧库完成的。    </li>
 </ul>

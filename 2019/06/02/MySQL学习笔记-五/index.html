@@ -143,18 +143,18 @@
 
 
 
-  <meta name="description" content="学习地址 p15-p18表修改之列的增删改 增加列：Alter table 表名 add 列名 列类型 列参数;[默认加在表末尾]加在指定列后面：Alter table 表名 add 列名 列类型 列参数 after 指定列名;加在最前面：Alter table 表名 add 列名 列类型 列参数 first;   删除列：Alter table 表名 drop 列名;   修改列类型：Alter">
+  <meta name="description" content="学习地址 p15-p20表修改之列的增删改 增加列：Alter table 表名 add 列名 列类型 列参数;[默认加在表末尾]加在指定列后面：Alter table 表名 add 列名 列类型 列参数 after 指定列名;加在最前面：Alter table 表名 add 列名 列类型 列参数 first;   删除列：Alter table 表名 drop 列名;   修改列类型：Alter">
 <meta name="keywords" content="学习笔记,MySQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL学习笔记(五)">
 <meta property="og:url" content="http://sfz-lyq.cn/2019/06/02/MySQL学习笔记-五/index.html">
 <meta property="og:site_name" content="种花家">
-<meta property="og:description" content="学习地址 p15-p18表修改之列的增删改 增加列：Alter table 表名 add 列名 列类型 列参数;[默认加在表末尾]加在指定列后面：Alter table 表名 add 列名 列类型 列参数 after 指定列名;加在最前面：Alter table 表名 add 列名 列类型 列参数 first;   删除列：Alter table 表名 drop 列名;   修改列类型：Alter">
+<meta property="og:description" content="学习地址 p15-p20表修改之列的增删改 增加列：Alter table 表名 add 列名 列类型 列参数;[默认加在表末尾]加在指定列后面：Alter table 表名 add 列名 列类型 列参数 after 指定列名;加在最前面：Alter table 表名 add 列名 列类型 列参数 first;   删除列：Alter table 表名 drop 列名;   修改列类型：Alter">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-03T13:32:47.086Z">
+<meta property="og:updated_time" content="2019-06-04T13:43:04.431Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL学习笔记(五)">
-<meta name="twitter:description" content="学习地址 p15-p18表修改之列的增删改 增加列：Alter table 表名 add 列名 列类型 列参数;[默认加在表末尾]加在指定列后面：Alter table 表名 add 列名 列类型 列参数 after 指定列名;加在最前面：Alter table 表名 add 列名 列类型 列参数 first;   删除列：Alter table 表名 drop 列名;   修改列类型：Alter">
+<meta name="twitter:description" content="学习地址 p15-p20表修改之列的增删改 增加列：Alter table 表名 add 列名 列类型 列参数;[默认加在表末尾]加在指定列后面：Alter table 表名 add 列名 列类型 列参数 after 指定列名;加在最前面：Alter table 表名 add 列名 列类型 列参数 first;   删除列：Alter table 表名 drop 列名;   修改列类型：Alter">
 
 
 
@@ -452,7 +452,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-06-03 21:32:47" itemprop="dateModified" datetime="2019-06-03T21:32:47+08:00">2019-06-03</time>
+                <time title="Modified: 2019-06-04 21:43:04" itemprop="dateModified" datetime="2019-06-04T21:43:04+08:00">2019-06-04</time>
               
             
           </span>
@@ -518,7 +518,7 @@
       
 
       
-        <h3 id="学习地址-p15-p18"><a href="#学习地址-p15-p18" class="headerlink" title="学习地址 p15-p18"></a><center><a href="https://www.bilibili.com/video/av19538278" target="_blank" rel="noopener">学习地址 p15-p18</a></center></h3><h4 id="表修改之列的增删改"><a href="#表修改之列的增删改" class="headerlink" title="表修改之列的增删改"></a>表修改之列的增删改</h4><ol>
+        <h3 id="学习地址-p15-p20"><a href="#学习地址-p15-p20" class="headerlink" title="学习地址 p15-p20"></a><center><a href="https://www.bilibili.com/video/av19538278" target="_blank" rel="noopener">学习地址 p15-p20</a></center></h3><h4 id="表修改之列的增删改"><a href="#表修改之列的增删改" class="headerlink" title="表修改之列的增删改"></a>表修改之列的增删改</h4><ol>
 <li>增加列：<code>Alter table 表名 add 列名 列类型 列参数;</code>[默认加在表末尾]<br>加在指定列后面：<code>Alter table 表名 add 列名 列类型 列参数 after 指定列名;</code><br>加在最前面：<code>Alter table 表名 add 列名 列类型 列参数 first;</code>  </li>
 <li>删除列：<code>Alter table 表名 drop 列名;</code>  </li>
 <li>修改列类型：<code>Alter table 表名 modify 列名 新类型 新参数;</code>  </li>
@@ -550,8 +550,29 @@
 <li>where是对表中的数据发挥作用，where发挥作用时表上实际并没有别名列，发挥完作用形成的结果里才有别名列。</li>
 <li>如果想在结果列(别名列)再进行筛选，得用<code>having</code>  </li>
 </ul>
-<p>一道面试题：一个num整数列，用一条语句把[20,29]的数改为20且把[30,39]之间的数改为30：<code>update test set num=floor(num/10)*10 where num bwtween 20 and 39</code>  </p>
-<h5>大胆把列当成变量看！</h5>
+<p>一道面试题：一个num整数列，用一条语句把[20,29]的数改为20且把[30,39]之间的数改为30：<code>update test set num=floor(num/10)*10 where num bwtween 20 and 39;</code>  </p>
+<p></p><h5>大胆把列当成变量看！</h5>  <p></p>
+<h4 id="group分组及统计函数详解"><a href="#group分组及统计函数详解" class="headerlink" title="group分组及统计函数详解"></a>group分组及统计函数详解</h4><ul>
+<li>查询最贵的商品价格：<code>select max(shop_price) from goods;</code></li>
+<li>查询商品库存总量：<code>select sum(goods_num) from goods;</code></li>
+<li>查询所所有商品的平均价格：<code>select avg(shop_price) from goods;</code></li>
+<li>统计有多少种商品：<code>select count(*) from goods</code>  <ul>
+<li><code>select count(*) from table_name</code> 查询的是绝对行数，不管是否NULL</li>
+<li><code>select count(列名) from table_name</code>  查询的是该列不为null的行数</li>
+</ul>
+</li>
+<li>一次计算完每个栏目下的库存量之和：<code>select sum(goods_number) from goods group by cat_id;</code>  </li>
+</ul>
+<h4 id="having-筛选"><a href="#having-筛选" class="headerlink" title="having 筛选"></a>having 筛选</h4><p><strong> 在结果集中筛选。</strong></p>
+<ul>
+<li><p>查询栏目的积压货款，且筛选出积压金额&gt;20000的栏目：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select cat_id,sum(goods_number*shop_price) as tot </span><br><span class="line">group by cat_id</span><br><span class="line">having tot&gt;20000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询比市场价省的钱，且省的钱&gt;200的商品<br>where实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select goods_id,market_price,shop_price,market_price-shop_price as discount </span><br><span class="line">from goods</span><br><span class="line">where market_price-shop_price&gt;200</span><br></pre></td></tr></table></figure>
+<p>having 实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select goods_id,market_price,shop_price,market_price-shop_price as discount </span><br><span class="line">from goods</span><br><span class="line">having discount&gt;200</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
@@ -829,7 +850,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习地址-p15-p18"><span class="nav-number">1.</span> <span class="nav-text">学习地址 p15-p18</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#表修改之列的增删改"><span class="nav-number">1.1.</span> <span class="nav-text">表修改之列的增删改</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#question：如果列类型改了导致数据存不下？"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">question：如果列类型改了导致数据存不下？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表的查询"><span class="nav-number">1.2.</span> <span class="nav-text">表的查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#where-常用运算符"><span class="nav-number">1.2.1.</span> <span class="nav-text">where 常用运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#where-匹配"><span class="nav-number">1.2.2.</span> <span class="nav-text">where 匹配</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL查询模型"><span class="nav-number">1.3.</span> <span class="nav-text">SQL查询模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.1.</span> <span class="nav-text">大胆把列当成变量看！</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习地址-p15-p20"><span class="nav-number">1.</span> <span class="nav-text">学习地址 p15-p20</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#表修改之列的增删改"><span class="nav-number">1.1.</span> <span class="nav-text">表修改之列的增删改</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#question：如果列类型改了导致数据存不下？"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">question：如果列类型改了导致数据存不下？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表的查询"><span class="nav-number">1.2.</span> <span class="nav-text">表的查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#where-常用运算符"><span class="nav-number">1.2.1.</span> <span class="nav-text">where 常用运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#where-匹配"><span class="nav-number">1.2.2.</span> <span class="nav-text">where 匹配</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL查询模型"><span class="nav-number">1.3.</span> <span class="nav-text">SQL查询模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">1.3.1.</span> <span class="nav-text">大胆把列当成变量看！</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#group分组及统计函数详解"><span class="nav-number">1.4.</span> <span class="nav-text">group分组及统计函数详解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#having-筛选"><span class="nav-number">1.5.</span> <span class="nav-text">having 筛选</span></a></li></ol></div>
             
 
           </div>

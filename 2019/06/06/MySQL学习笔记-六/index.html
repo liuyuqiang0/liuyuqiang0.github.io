@@ -143,18 +143,18 @@
 
 
 
-  <meta name="description" content="学习地址p1-p3 数据库(DB)：DataBase。DB是长期存储在计算机内的有组织、可共享的大量的数据集合。它可以供各种用户共享，具有最小冗余度和较高的数据独立性。不同的厂商对sql标准的执行有微笑差异，比如mysql没有全连接full join，也没有sql server中的topN用法。 数据库管理员(DBA)：DataBase Administrator。 数据库管理系统(DBMS)：D">
+  <meta name="description" content="学习地址 p23-p26子查询where型子查询把内层的查询结果作为外层查询的比较条件  查出本网站最新的(goods_id最大的)一条商品 思路：按goods_id desc排序，再取第一行 select goods_id,goods_name,from goods order by goods_id desc limit 1;   查出本网站最新的(goods_id最大的)一条商品，要求不用排">
 <meta name="keywords" content="学习笔记,MySQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL学习笔记(一)">
-<meta property="og:url" content="http://sfz-lyq.cn/2019/05/30/MySQL学习笔记-一/index.html">
+<meta property="og:title" content="MySQL学习笔记(六)">
+<meta property="og:url" content="http://sfz-lyq.cn/2019/06/06/MySQL学习笔记-六/index.html">
 <meta property="og:site_name" content="种花家">
-<meta property="og:description" content="学习地址p1-p3 数据库(DB)：DataBase。DB是长期存储在计算机内的有组织、可共享的大量的数据集合。它可以供各种用户共享，具有最小冗余度和较高的数据独立性。不同的厂商对sql标准的执行有微笑差异，比如mysql没有全连接full join，也没有sql server中的topN用法。 数据库管理员(DBA)：DataBase Administrator。 数据库管理系统(DBMS)：D">
+<meta property="og:description" content="学习地址 p23-p26子查询where型子查询把内层的查询结果作为外层查询的比较条件  查出本网站最新的(goods_id最大的)一条商品 思路：按goods_id desc排序，再取第一行 select goods_id,goods_name,from goods order by goods_id desc limit 1;   查出本网站最新的(goods_id最大的)一条商品，要求不用排">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-03T04:25:52.514Z">
+<meta property="og:updated_time" content="2019-06-06T06:33:01.848Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MySQL学习笔记(一)">
-<meta name="twitter:description" content="学习地址p1-p3 数据库(DB)：DataBase。DB是长期存储在计算机内的有组织、可共享的大量的数据集合。它可以供各种用户共享，具有最小冗余度和较高的数据独立性。不同的厂商对sql标准的执行有微笑差异，比如mysql没有全连接full join，也没有sql server中的topN用法。 数据库管理员(DBA)：DataBase Administrator。 数据库管理系统(DBMS)：D">
+<meta name="twitter:title" content="MySQL学习笔记(六)">
+<meta name="twitter:description" content="学习地址 p23-p26子查询where型子查询把内层的查询结果作为外层查询的比较条件  查出本网站最新的(goods_id最大的)一条商品 思路：按goods_id desc排序，再取第一行 select goods_id,goods_name,from goods order by goods_id desc limit 1;   查出本网站最新的(goods_id最大的)一条商品，要求不用排">
 
 
 
@@ -162,7 +162,7 @@
 
   
   
-  <link rel="canonical" href="http://sfz-lyq.cn/2019/05/30/MySQL学习笔记-一/">
+  <link rel="canonical" href="http://sfz-lyq.cn/2019/06/06/MySQL学习笔记-六/">
 
 
 
@@ -172,7 +172,7 @@
   };
 </script>
 
-  <title>MySQL学习笔记(一) | 种花家</title>
+  <title>MySQL学习笔记(六) | 种花家</title>
   
 
 
@@ -392,7 +392,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sfz-lyq.cn/2019/05/30/MySQL学习笔记-一/">
+    <link itemprop="mainEntityOfPage" href="http://sfz-lyq.cn/2019/06/06/MySQL学习笔记-六/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liuyuqiang0">
@@ -409,7 +409,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">MySQL学习笔记(一)
+          <h1 class="post-title" itemprop="name headline">MySQL学习笔记(六)
 
               
             
@@ -435,24 +435,12 @@
                 
               
 
-              <time title="Created: 2019-05-30 21:11:00" itemprop="dateCreated datePublished" datetime="2019-05-30T21:11:00+08:00">2019-05-30</time>
+              <time title="Created: 2019-06-06 13:23:00 / Modified: 14:33:01" itemprop="dateCreated datePublished" datetime="2019-06-06T13:23:00+08:00">2019-06-06</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-06-03 12:25:52" itemprop="dateModified" datetime="2019-06-03T12:25:52+08:00">2019-06-03</time>
               
             
           </span>
@@ -518,60 +506,26 @@
       
 
       
-        <h3 id="学习地址p1-p3"><a href="#学习地址p1-p3" class="headerlink" title="学习地址p1-p3"></a><center><a href="https://www.bilibili.com/video/av19538278" target="_blank" rel="noopener">学习地址p1-p3</a></center></h3><ul>
-<li>数据库(DB)：DataBase。DB是长期存储在计算机内的有组织、可共享的大量的数据集合。它可以供各种用户共享，具有最小冗余度和较高的数据独立性。不同的厂商对sql标准的执行有微笑差异，比如mysql没有全连接<code>full join</code>，也没有sql server中的<code>topN</code>用法。</li>
-<li>数据库管理员(DBA)：DataBase Administrator。</li>
-<li>数据库管理系统(DBMS)：DataBase Management System。DBMS是由DBA对DB的查询、更新、删除、修改操作的。DBMS用来操纵和管理DB的软件，用于建立、使用和维护DB。它对DB进行统一的管理和控制，以保证DB的安全性和完整性，用户可以通过DBMS访问DB中的数据，DBA也可以通过DBMS进行DB的维护工作，它可使多个应用程序和用户拥有不同的方法在同时或不同时刻去建立、修改和询问DB。主流有MySQL与oracle等。</li>
-<li>数据库系统(DBS)：DataBase System。包括DB、DBMS、应用系统、DBA。<blockquote>
-<p>数据库系统属于系统软件，数据库管理系统属于应用软件。  </p>
-</blockquote>
-</li>
+        <h3 id="学习地址-p23-p26"><a href="#学习地址-p23-p26" class="headerlink" title="学习地址 p23-p26"></a><center><a href="https://www.bilibili.com/video/av19538278" target="_blank" rel="noopener">学习地址 p23-p26</a></center></h3><h4 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h4><h5 id="where型子查询"><a href="#where型子查询" class="headerlink" title="where型子查询"></a>where型子查询</h5><p>把内层的查询结果作为外层查询的比较条件</p>
+<ol>
+<li>查出本网站最新的(goods_id最大的)一条商品<ul>
+<li>思路：按goods_id desc排序，再取第一行</li>
+<li>select goods_id,goods_name,from goods order by goods_id desc limit 1;</li>
 </ul>
-<h5 id="为什么学习MySQL？"><a href="#为什么学习MySQL？" class="headerlink" title="为什么学习MySQL？"></a>为什么学习MySQL？</h5><ol>
-<li>MySQL与linux、php、apache配合紧密，LAMP架构。</li>
-<li>mysql开源免费。</li>
+</li>
+<li>查出本网站最新的(goods_id最大的)一条商品，要求不用排序<ul>
+<li>思路：拆两步走，先查出goods_id最大的，然后再根据结果查出goods_name。</li>
+<li><code>select max(goods_id) from goods;</code> + <code>select goods_id,goods_name from goods where goods_id=?</code></li>
+<li>两条语句合并就是子查询了：<code>select goods_id,goods_name from goods where goods_id=(select max(goods_id) from goods);</code>  </li>
+</ul>
+</li>
 </ol>
-<h5 id="MySQL安装"><a href="#MySQL安装" class="headerlink" title="MySQL安装"></a>MySQL安装</h5><ul>
-<li>过程略。视频中版本是5.5的，我所使用的是Ver 14.14 Distrib 5.7.26, for Linux (x86_64) using  EditLine wrapper。<a href="https://blog.csdn.net/zhwyj1019/article/details/80274269" target="_blank" rel="noopener">安装</a><a href="https://blog.csdn.net/li_wei_quan/article/details/78549891" target="_blank" rel="noopener">教程</a>，<a href="https://www.runoob.com/mysql/mysql-tutorial.html" target="_blank" rel="noopener">使用教程</a></li>
-<li>软件，尤其是开源软件尽量安装稳定版的，不要追求最新版。</li>
-<li>在终端敲mysql时其实是调用了一个可执行文件，比如Win系统下的mysql.exe，这个可执行文件在你的安装目录的/bin里面。</li>
-<li>但，系统如何知道去对应目录下找到可执行文件呢，不一定知道。系统有<strong>环境变量</strong>的概念，在环境变量指定的几个目录及当前目录下寻找啊。</li>
-<li>所以，安装软件时如果自定义安装目录要么添加环境变量(centos系统在/etc/profile中添加即可)，要么到指定目录下执行。  </li>
-</ul>
-<h4 id="mysql十条基本入门语句"><a href="#mysql十条基本入门语句" class="headerlink" title="mysql十条基本入门语句"></a>mysql十条基本入门语句</h4><p><strong>1.  连接服务器</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mysql -u root -p</span><br><span class="line">Enter password:</span><br></pre></td></tr></table></figure></p>
+<h5 id="from型子查询"><a href="#from型子查询" class="headerlink" title="from型子查询"></a>from型子查询</h5><p>内层sql的查询结果当作一张临时表，这张表只是各种运算出来的结果看不出原数据表的结构，而这张临时表供外层sql再次查询。</p>
+<h5 id="exists型子查询"><a href="#exists型子查询" class="headerlink" title="exists型子查询"></a>exists型子查询</h5><p>把外层sql的结果拿到内层sql去测试，如果内层sql成立，则该行取出</p>
 <ul>
-<li>执行成功后出现<code>mysql&gt;</code> 命令提示窗口，你可以在上面执行任何 SQL 语句。</li>
-<li>如果想退出：<code>mysql&gt;exit</code> 即可</li>
-<li>连接成功后面对的是<strong>库</strong></li>
-</ul>
-<p><strong>2.  选则库与查看表</strong>  </p>
-<ul>
-<li>选库语句: <code>use 库名</code></li>
-<li>如果不知道存在哪些库想查看所有库：<code>mysql&gt;show databases</code></li>
-<li>选完库面对的是<strong>表</strong>  </li>
-<li>查看库下面所有的表：<code>show tables;</code></li>
-</ul>
-<p><strong>3.  创建与删除库</strong></p>
-<ul>
-<li>创建语句：<code>create database 数据库名 [charset 字符集];</code>  <ul>
-<li>注：后面的是可选字段；创建库同时也会创建一个简单表。</li>
-</ul>
-</li>
-<li>删除库：<code>drop database 数据库名;</code></li>
-<li>MySQL中表/列可以改名，database不能改名，但phpAdmin似乎有这个功能，它是先新建库，把表复制到新库，再删除旧库完成的。    </li>
-</ul>
-<p><strong>4.  创建和删除表</strong></p>
-<ul>
-<li>删除表：<code>drop table table_name;</code></li>
-<li>创建表：<code>create table table_name;</code></li>
-</ul>
-<p><strong>5.  重命名和清空表</strong></p>
-<ul>
-<li>重命名：<code>rename table table_name1 to table_name2;</code></li>
-<li>清空表：<code>truncate table_name;</code><blockquote>
-<p>truncate与delete区别：truncate相当于删表再重建一张相同结构的表；delete是把数据清除了而已。如果决定全清空truncat要更快一些。</p>
-</blockquote>
-</li>
+<li>查出有商品的栏目</li>
+<li>思考：什么样的表叫做下面有商品</li>
+<li>答：<code>select * from goods where cat_id=X</code>能取出数据</li>
 </ul>
 
       
@@ -623,8 +577,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/30/我是如何一步步搭建起这个博客的/" rel="next" title="我是如何一步步搭建起这个博客的">
-                <i class="fa fa-chevron-left"></i> 我是如何一步步搭建起这个博客的
+              <a href="/2019/06/05/HTML语法在Markdown的一些应用/" rel="next" title="HTML语法在Markdown的一些应用">
+                <i class="fa fa-chevron-left"></i> HTML语法在Markdown的一些应用
               </a>
             
           </div>
@@ -633,8 +587,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/05/31/MySQL学习笔记-二/" rel="prev" title="MySQL学习笔记(二)">
-                MySQL学习笔记(二) <i class="fa fa-chevron-right"></i>
+              <a href="/2019/06/06/NYOJ/" rel="prev" title="NYOJ 114-某种序列">
+                NYOJ 114-某种序列 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -868,7 +822,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习地址p1-p3"><span class="nav-number">1.</span> <span class="nav-text">学习地址p1-p3</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#为什么学习MySQL？"><span class="nav-number">1.0.1.</span> <span class="nav-text">为什么学习MySQL？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MySQL安装"><span class="nav-number">1.0.2.</span> <span class="nav-text">MySQL安装</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql十条基本入门语句"><span class="nav-number">1.1.</span> <span class="nav-text">mysql十条基本入门语句</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习地址-p23-p26"><span class="nav-number">1.</span> <span class="nav-text">学习地址 p23-p26</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#子查询"><span class="nav-number">1.1.</span> <span class="nav-text">子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#where型子查询"><span class="nav-number">1.1.1.</span> <span class="nav-text">where型子查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#from型子查询"><span class="nav-number">1.1.2.</span> <span class="nav-text">from型子查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#exists型子查询"><span class="nav-number">1.1.3.</span> <span class="nav-text">exists型子查询</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1122,13 +1076,13 @@
       var articles = db.collection('articles')
 
       //https://hexo.io/docs/variables.html
-      var isPost = 'MySQL学习笔记(一)'.length > 0
+      var isPost = 'MySQL学习笔记(六)'.length > 0
       var isArchive = '' === 'true'
       var isCategory = ''.length > 0
       var isTag = ''.length > 0
 
       if (isPost) { //is article page
-        var title = 'MySQL学习笔记(一)'
+        var title = 'MySQL学习笔记(六)'
         var doc = articles.doc(title)
 
         getCount(doc, true).then(appendCountTo($('.post-meta')))

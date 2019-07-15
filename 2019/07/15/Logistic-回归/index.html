@@ -156,7 +156,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/07/15/5d2c1dee422d076645.png">
 <meta property="og:image" content="https://i.loli.net/2019/07/15/5d2c269d5004814353.png">
 <meta property="og:image" content="https://i.loli.net/2019/07/15/5d2c26ea8ca8062647.png">
-<meta property="og:updated_time" content="2019-07-15T07:12:33.844Z">
+<meta property="og:updated_time" content="2019-07-15T07:18:41.181Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Logistic 回归">
 <meta name="twitter:description" content="学习地址分类classification例子     垃圾邮件分类 肿瘤良性还是恶性  在这类预测问题中y是一个离散的值，只有{0,1}两种取值。如果用线形回归模型计算分类，得出的h&amp;theta;(x)可能远大于1或远小于0，而我们希望得到的是0或者1。所以，提出逻辑回归模型，让0&amp;lt;= h&amp;theta;(x) &amp;lt;=1。逻辑回归实际是一个分类算法。   假设陈述目的：当有一个分类问题时，">
@@ -441,7 +441,7 @@
                 
               
 
-              <time title="Created: 2019-07-15 09:00:00 / Modified: 15:12:33" itemprop="dateCreated datePublished" datetime="2019-07-15T09:00:00+08:00">2019-07-15</time>
+              <time title="Created: 2019-07-15 09:00:00 / Modified: 15:18:41" itemprop="dateCreated datePublished" datetime="2019-07-15T09:00:00+08:00">2019-07-15</time>
             
 
             
@@ -534,7 +534,7 @@
 <li><p>如何理解代价函数：代价函数描述了预测结果与样本实际的偏离程度。当y=1，我们的hypothesis也为1时，Cost为0，这是对的（无偏差）这就说明预测对了；而如果预测结果趋于0，那么Cost趋向正无穷，说明与实际偏差很大。对于y=0的情况也是同理。</p>
 </li>
 </ol>
-<h4 id="简化代价函数与梯度下降"><a href="#简化代价函数与梯度下降" class="headerlink" title="简化代价函数与梯度下降"></a>简化代价函数与梯度下降</h4><p>逻辑回归代价函数J(&theta;)：注意y只有两个值故容易合并<br><img src="https://i.loli.net/2019/07/15/5d2bed8559bf636025.png" alt="2019-07-15 11-05-31 的屏幕截图.png"><br><img src="https://i.loli.net/2019/07/15/5d2bef64f0ea844193.png" alt="2019-07-15 11-13-25 的屏幕截图.png">  </p>
+<h4 id="简化代价函数与梯度下降"><a href="#简化代价函数与梯度下降" class="headerlink" title="简化代价函数与梯度下降"></a>简化代价函数与梯度下降</h4><p>逻辑回归代价函数J(&theta;)：注意y只有两个值故容易合并<br>关于梯度下降推导：<a href="https://www.jianshu.com/p/610859e27f66" target="_blank" rel="noopener">公式推导</a><br><img src="https://i.loli.net/2019/07/15/5d2bed8559bf636025.png" alt="2019-07-15 11-05-31 的屏幕截图.png"><br><img src="https://i.loli.net/2019/07/15/5d2bef64f0ea844193.png" alt="2019-07-15 11-13-25 的屏幕截图.png">  </p>
 <ol>
 <li>为什么这样选择代价函数，事实上我们知道代价函数有很多，这个是根据统计学的极大似然估计法得出来的，这个函数有一个特点是它是<strong>凸</strong>的。  </li>
 <li>将J(&theta;)简化之后我们就可以尝试利用<strong>梯度下降</strong>来最小化它并得到最小化时的参数&theta;，再用参数来做预测。  </li>
@@ -610,6 +610,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/07/15/正则化/" rel="prev" title="正则化">
+                正则化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -677,7 +681,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">46</span>
+                    <span class="site-state-item-count">47</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

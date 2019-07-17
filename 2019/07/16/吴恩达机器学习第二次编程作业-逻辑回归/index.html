@@ -153,7 +153,8 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/07/16/5d2d6e90a260a72174.png">
 <meta property="og:image" content="https://i.loli.net/2019/07/16/5d2d7269b6c2f65646.png">
-<meta property="og:updated_time" content="2019-07-16T14:22:48.682Z">
+<meta property="og:image" content="https://i.loli.net/2019/07/17/5d2e7705009fa32467.png">
+<meta property="og:updated_time" content="2019-07-17T02:27:36.941Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="吴恩达机器学习第二次编程作业-逻辑回归">
 <meta name="twitter:description" content="课时60编程作业：逻辑回归工具：pycharm2019.1，Python3.5  参考资料： Logistic回归总结、梯度下降求解逻辑回归 、数据提取、Python 不同颜色可视化数据集、Dataframe筛选数据、DataFrame类型转换成array类型 1. 逻辑回归任务：建立一个逻辑回归分类模型来预测一个学生是否能被大学录取 1.1 数据可视化先利用pandas库提取数据，然后分类，绘制">
@@ -438,12 +439,24 @@
                 
               
 
-              <time title="Created: 2019-07-16 17:10:00 / Modified: 22:22:48" itemprop="dateCreated datePublished" datetime="2019-07-16T17:10:00+08:00">2019-07-16</time>
+              <time title="Created: 2019-07-16 17:10:00" itemprop="dateCreated datePublished" datetime="2019-07-16T17:10:00+08:00">2019-07-16</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-17 10:27:36" itemprop="dateModified" datetime="2019-07-17T10:27:36+08:00">2019-07-17</time>
               
             
           </span>
@@ -516,7 +529,30 @@
 <h4 id="1-逻辑回归"><a href="#1-逻辑回归" class="headerlink" title="1. 逻辑回归"></a>1. 逻辑回归</h4><p>任务：建立一个逻辑回归分类模型来预测一个学生是否能被大学录取</p>
 <h5 id="1-1-数据可视化"><a href="#1-1-数据可视化" class="headerlink" title="1.1 数据可视化"></a>1.1 数据可视化</h5><p>先利用pandas库提取数据，然后分类，绘制。<br>pandas需要手动添加一行表示列名，不然以第一行数据作为列名，数据类型自动识别。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">def pandas_getData():</span><br><span class="line">    data = pd.read_csv(&apos;./ex2/ex2data1.txt&apos;)</span><br><span class="line">    y = data[&apos;y&apos;]   # 按列名提取</span><br><span class="line">    data1 = data[y == 0]  # 数据分类</span><br><span class="line">    data2 = data[y == 1]  # 已录取</span><br><span class="line">    return data,data1,data2,data.shape[0]</span><br><span class="line"></span><br><span class="line">def plot_data(data1,data2):</span><br><span class="line">    plt.plot(data1[&apos;x1&apos;],data1[&apos;x2&apos;],&apos;yo&apos;,label=&apos;Not admitted&apos;)</span><br><span class="line">    plt.plot(data2[&apos;x1&apos;],data2[&apos;x2&apos;],&apos;k+&apos;,label=&apos;Admitted&apos;)</span><br><span class="line">    plt.xlim(30,101)</span><br><span class="line">    plt.ylim(30,100)</span><br><span class="line">    plt.xlabel(&apos;Exam 1 score&apos;,fontsize=10)</span><br><span class="line">    plt.ylabel(&apos;Exam 2 score&apos;, fontsize=10)</span><br><span class="line">    plt.legend(loc=1,fontsize=8)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure></p>
 <p><img src="https://i.loli.net/2019/07/16/5d2d6e90a260a72174.png" alt="Figure_1.png"></p>
-<h5 id="1-2-Cost-function-and-gradient"><a href="#1-2-Cost-function-and-gradient" class="headerlink" title="1.2 Cost function and gradient"></a>1.2 Cost function and gradient</h5><p><img src="https://i.loli.net/2019/07/16/5d2d7269b6c2f65646.png" alt="2019-07-16 14-44-13 的屏幕截图.png"></p>
+<h5 id="1-2-Cost-function-and-gradient"><a href="#1-2-Cost-function-and-gradient" class="headerlink" title="1.2 Cost function and gradient"></a>1.2 Cost function and gradient</h5><p><img src="https://i.loli.net/2019/07/16/5d2d7269b6c2f65646.png" alt="2019-07-16 14-44-13 的屏幕截图.png">  </p>
+<p>关于为什么学习率&alpha;这里不用除以m均值化在参考资料中有回答说&alpha;是个常数，可以省掉m，本人不是很懂。<br>代价函数与梯度下降只要有线形回归的基础就很好计算：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def Cost_Function(x,y,theta,m):</span><br><span class="line">    hypothesis=1/(1+np.exp(-np.dot(x,theta)))   # 假设函数</span><br><span class="line">    Cost_J =-1/m*(y*np.log(hypothesis)+(1-y)*np.log(1-hypothesis)).sum()</span><br><span class="line">    return Cost_J</span><br><span class="line"></span><br><span class="line">def Gradient_descent(x,y,theta,m,alpha,iterations):</span><br><span class="line">    for iteration in range(iterations):</span><br><span class="line">        hypothesis=1/(1+np.exp(-np.dot(x,theta)))</span><br><span class="line">        theta=theta-alpha*np.dot(x.T,hypothesis-y)</span><br><span class="line">    return theta   # 我们只需要最终的参数theta来进行预测</span><br></pre></td></tr></table></figure></p>
+<p>用梯度下降的方法来计算参数&theta;还需要初始化参数init_theta、&alpha;以及迭代次数MaxIter，也别忘了X需要增加一列1表示x0。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">data,data1,data2,m=pandas_getData()  # 获取数据</span><br><span class="line"># plot_data(data1,data2)  # 绘制数据</span><br><span class="line">x=np.array(data[[&apos;x1&apos;,&apos;x2&apos;]])  # 将DataFrame类型转换成array类型</span><br><span class="line">y=np.array(data[&apos;y&apos;]).reshape(m,1)</span><br><span class="line">x=np.hstack((np.ones((m,1)),x))   # 增加一列 X0=1</span><br><span class="line">init_theta=np.zeros((x.shape[1],1)) # 初始化theta</span><br><span class="line">MaxIter=2000000  # 迭代次数</span><br><span class="line">alpha=0.00001 # 学习率</span><br><span class="line">print(&apos;初始代价函数为：&apos;,Cost_Function(x,y,init_theta,m)) # 这里如果代价函数没写错计算出来的值应该是0.6931471805599453</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>在源文档中给出的求参数的方法是用Octave调库直接得出，网上找到的很多博客也是用scipy库函数。毫无疑问库中封装了最简介高效的方法。但如果我就想使用梯度下降呢？  </li>
+<li>本人已经试过了，需要不停的调参（&alpha;和MaxIter），这对于机器性能是个考验。用库函数得出的最优参数是：[-25.16131867,   0.20623159,   0.20147149]，用这个参数向量求出的代价函数值为：0.2034977015894744。</li>
+<li>本人在不停的调参过程中发现当我把学习率&alpha;设置为0.00001时，再一直增大迭代次数发现实验结果越来越接近文档给出的最优值，考虑到机器性能我只增加到了200000次，梯度下降得出的参数&theta;向量为：[-19.08468795   0.15767916   0.15228738]，用此参数求出的代价函数值为：0.21041324594328958</li>
+<li>有了参数&theta;就可以用来进行预测和绘制决策边界线了</li>
+</ul>
+<h5 id="预测和决策边界线"><a href="#预测和决策边界线" class="headerlink" title="预测和决策边界线"></a>预测和决策边界线</h5><ol>
+<li>还记得之前说过h<sub>&theta;</sub>(x)=1/(1+e<sup>-&theta;<sup>T</sup>X</sup>))，这个函数用来预测分类y=1概率。</li>
+<li>我们可以设定阈值为0.5，只要h&gt;=0.5，那么就判定这是属于1，否则属于0。</li>
+<li>上面是具体计算方法，我们可以有两种形式来预测：一种是用给定的样本X看看其h函数概率；还有一种是直接用训练样本跑，看有多少个正确分类了，这个百分比越高说明预测越准确。</li>
+<li>以上是预测方法，那么关于决策边界线，这个在吴恩达机器学习视频中已经给出。没有实践很容易忽略这点，我们要观察h函数，它是一个sigma函数，只要&theta;<sup>T</sup>X的值大于等于0，那么h函数值就大于等于0.5，想想看是不是。而X向量是样本点，这条分界线就是若干个样本点，这些样本点所计算出来的&theta;<sup>T</sup>X=&theta;<sub>0</sub>+&theta;<sub>1</sub>X<sub>1</sub>+… 值应该等于0，两侧的点要么大于0计算出来的h值就大于0.5，反之同理。</li>
+<li>用文档给出的样本[1 45 85]预测的概率为0.7221802，文档给出的概率为0.776。看来梯度下降算法确实不如其他算法，唯一的优点可能就是简单了。</li>
+<li><p>先用训练样本来看看实验效果如何：  89.00%</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def text_sample(x,y,theta,m):</span><br><span class="line">    hypothesis=1/(1+np.exp(-np.dot(x,theta)))</span><br><span class="line">    cnt_correct=0</span><br><span class="line">    for i in range(m):</span><br><span class="line">        if hypothesis[i][0]&gt;=0.5 and y[i][0]==1:cnt_correct=cnt_correct+1 # 正确预测1</span><br><span class="line">        if hypothesis[i][0]&lt;0.5 and y[i][0]==0:cnt_correct=cnt_correct+1 # 正确预测0</span><br><span class="line">    correct_percent=cnt_correct/m  # 计算准确率</span><br><span class="line">    print(&apos;%.2f%%&apos; %(correct_percent*100))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>绘制决策边界，我们已经知道决策边界线的&theta;<sup>T</sup>X=&theta;<sub>0</sub>+&theta;<sub>1</sub>X<sub>1</sub>+…&theta;<sub>n</sub>X<sub>n</sub>=0，数据图的横轴是X1，纵轴是X2，那么随便造几百个X1，根据此公式计算X2再绘制直线即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">def plotDecisionBoundary(data1,data2,x,y,theta):</span><br><span class="line">    plt.plot(data1[&apos;x1&apos;], data1[&apos;x2&apos;], &apos;yo&apos;, label=&apos;Not admitted&apos;)</span><br><span class="line">    plt.plot(data2[&apos;x1&apos;], data2[&apos;x2&apos;], &apos;k+&apos;, label=&apos;Admitted&apos;)</span><br><span class="line">    plt.xlim(30, 101)</span><br><span class="line">    plt.ylim(30, 100)</span><br><span class="line">    plt.xlabel(&apos;Exam 1 score&apos;, fontsize=10)</span><br><span class="line">    plt.ylabel(&apos;Exam 2 score&apos;, fontsize=10)</span><br><span class="line">    plt.legend(loc=1, fontsize=8)</span><br><span class="line"></span><br><span class="line">    x1 = np.arange(130, step=0.1)</span><br><span class="line">    x2 = -(final_theta[0] + x1 * final_theta[1]) / final_theta[2]</span><br><span class="line">    plt.plot(x1, x2)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="https://i.loli.net/2019/07/17/5d2e7705009fa32467.png" alt="Figure_2.png"></p>
+<p>至此，简单逻辑回归分类模型已经完成，下面是第二部分-正则化。</p>
 
       
     </div>
@@ -834,7 +870,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#课时60编程作业：逻辑回归"><span class="nav-number">1.</span> <span class="nav-text">课时60编程作业：逻辑回归</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-逻辑回归"><span class="nav-number">1.1.</span> <span class="nav-text">1. 逻辑回归</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-数据可视化"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 数据可视化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-Cost-function-and-gradient"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 Cost function and gradient</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#课时60编程作业：逻辑回归"><span class="nav-number">1.</span> <span class="nav-text">课时60编程作业：逻辑回归</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-逻辑回归"><span class="nav-number">1.1.</span> <span class="nav-text">1. 逻辑回归</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-数据可视化"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 数据可视化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-Cost-function-and-gradient"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 Cost function and gradient</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#预测和决策边界线"><span class="nav-number">1.1.3.</span> <span class="nav-text">预测和决策边界线</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

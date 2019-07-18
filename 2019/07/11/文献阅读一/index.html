@@ -158,7 +158,7 @@
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pLmxvbGkubmV0LzIwMTkvMDcvMTEvNWQyNjkwYmU2NGRkNzI4NjgzLnBuZw">
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pLmxvbGkubmV0LzIwMTkvMDcvMTEvNWQyNjkwYzA0ZGNjZTgzNjkxLnBuZw">
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pLmxvbGkubmV0LzIwMTkvMDcvMTEvNWQyNjkwYmU0YzRlZDI0OTk4LnBuZw">
-<meta property="og:updated_time" content="2019-07-13T11:53:48.473Z">
+<meta property="og:updated_time" content="2019-07-17T13:27:57.683Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文献阅读一">
 <meta name="twitter:description" content="Visual Object Tracking for Unmanned Aerial Vehicles:A Benchmark and New Motion Models 无人机视觉目标追踪：一个基准和新的运动模型作者：Siyi Li, Dit-Yan Yeung单位：香港科技大学计算机科学与工程学系邮箱：sliay@cse.ust.hk,dyyeung@cse.ust.hk摘要尽管最近视觉追踪领">
@@ -460,7 +460,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-13 19:53:48" itemprop="dateModified" datetime="2019-07-13T19:53:48+08:00">2019-07-13</time>
+                <time title="Modified: 2019-07-17 21:27:57" itemprop="dateModified" datetime="2019-07-17T21:27:57+08:00">2019-07-17</time>
               
             
           </span>
@@ -536,6 +536,12 @@
 </ul>
 <h4 id="Camera-Model"><a href="#Camera-Model" class="headerlink" title="Camera Model"></a>Camera Model</h4><ul>
 <li>一款摄像机型描述了3D世界与2D平面图的一个映射。大量关于多视图几何学的摄像机型号已经被仔细地研究过了（Hartley and Zisserman 2003)。最广泛使用的一款是通用针孔摄像机型。Hoiem, Efros, and Hebert 2008 提出了一种简化的摄像机模型，假设所关注到的所有物体都停留在地面上。这个简化的摄像机模型已经被用来追踪地面物体例如汽车和行人（(Choi,Pantofaru, and Savarese 2013）。然而，所有的摄像机模型需要摄像机的初始化信息来推断物体的3维定位和校准摄像头。不幸的是，这些信息在许多物体追踪应用中并不容易获得。</li>
+<li>在这里我们通过在2D图像平面中直接参数化摄像机来采用一种不同方法。我们注意到由于无人机上的摄像头通常离目标很远，我们可能会简单地忽略掉任何目标和背景线索之间深度的不同，并因此假设所捕捉到的框架可以被看成不同的平面目标。然后，从双视图几何的角度来看，这些平面通过射影变换联系在一起，射影变换也被称为二维同形。在数学上，让g<sub>t</sub>和g<sub>t-1</sub>分别代表t和t-1帧中静态特征点的齐次坐标。接下来我们就可以通过变化矩阵H来将相机模型参数化了。请注意因为我们介绍相机模型的主要目的是大概地为追踪指导一下搜索区域而不是决定精确的位置，上面的同形近似值在实际中效果不错。因此，我们只需要估算变换矩阵H。由于相机的初始信息不再需要，这个方法在其适用性上更为普遍。</li>
+</ul>
+<h4 id="Baseline-Method"><a href="#Baseline-Method" class="headerlink" title="Baseline Method"></a>Baseline Method</h4><ul>
+<li>在传统的追踪方法上，只有目标移动被模型化。让z<sub>t</sub>和z<sub>t-1</sub>分别代表t和t-1帧中的目标坐标。运动模型就被简单地表示成：   <center> z<sub>t</sub>=z<sub>t-1</sub>+&Delta;z<sub>t</sub> </center><br>基于粒子过滤的方法采用高斯分布&Delta;z<sub>t</sub> 模型，而基于滑动窗的方法基于局部均匀分布的&Delta;z<sub>t</sub>模型。这个简单的移动模型在一般情况下效果不错。然而，在极端情况下例如无人机追踪，仅仅&Delta;z<sub>t</sub>模型是不够的。具体来说，假定一个小的&Delta;z<sub>t</sub>将会丢失下一个帧中的目标，而假定一个大的&Delta;z<sub>t</sub>将会增加漂移的风险。  </li>
+<li>基于上面的相机假设，我们可以将新的运动模型表示成相机投影和目标运动的结合：<br><center> z<sub>t</sub>=H<sub>t</sub>z<sub>t-1</sub>+&Delta;z<sub>t</sub> </center><br>H<sub>t</sub>代表相机移动，&Delta;z<sub>t</sub>是由于目标移动而引起的位置替换。一旦我们对相机移动H<sub>t</sub>有了一个合理的评估，那么目标移动替换在局部地区也可以更精确地估算。</li>
+<li>注意这个基线算法可以更轻易地被纳入到已有地追踪方法中。具体来说，我们首先通过特征点匹配来估算同形图H<sub>t</sub>（Fischler and Bolles 1981）。然后，之前的目标位置估算通过H<sub>t</sub>投影到当前地图像平面。对于基于滑动窗地追踪器，以转换后的目标坐标为中心地局部区域将会被搜索。对于基于粒子过滤器的追踪器，所有被维护的候选样本将会被转换到当前的图像平面中。除了这些修改，每一个追踪器还是以同样的方式工作。</li>
 </ul>
 
       
@@ -858,7 +864,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual-Object-Tracking-for-Unmanned-Aerial-Vehicles"><span class="nav-number">1.</span> <span class="nav-text">Visual Object Tracking for Unmanned Aerial Vehicles:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Benchmark-and-New-Motion-Models"><span class="nav-number">2.</span> <span class="nav-text">A Benchmark and New Motion Models</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无人机视觉目标追踪："><span class="nav-number">3.</span> <span class="nav-text">无人机视觉目标追踪：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个基准和新的运动模型"><span class="nav-number">4.</span> <span class="nav-text">一个基准和新的运动模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#作者：Siyi-Li-Dit-Yan-Yeung"><span class="nav-number">4.0.1.</span> <span class="nav-text">作者：Siyi Li, Dit-Yan Yeung</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#单位：香港科技大学计算机科学与工程学系"><span class="nav-number">4.0.2.</span> <span class="nav-text">单位：香港科技大学计算机科学与工程学系</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#邮箱：sliay-cse-ust-hk-dyyeung-cse-ust-hk"><span class="nav-number">4.0.3.</span> <span class="nav-text">邮箱：sliay@cse.ust.hk,dyyeung@cse.ust.hk</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#摘要"><span class="nav-number">4.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引言"><span class="nav-number">4.2.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Camera-Model"><span class="nav-number">4.3.</span> <span class="nav-text">Camera Model</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual-Object-Tracking-for-Unmanned-Aerial-Vehicles"><span class="nav-number">1.</span> <span class="nav-text">Visual Object Tracking for Unmanned Aerial Vehicles:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Benchmark-and-New-Motion-Models"><span class="nav-number">2.</span> <span class="nav-text">A Benchmark and New Motion Models</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无人机视觉目标追踪："><span class="nav-number">3.</span> <span class="nav-text">无人机视觉目标追踪：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个基准和新的运动模型"><span class="nav-number">4.</span> <span class="nav-text">一个基准和新的运动模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#作者：Siyi-Li-Dit-Yan-Yeung"><span class="nav-number">4.0.1.</span> <span class="nav-text">作者：Siyi Li, Dit-Yan Yeung</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#单位：香港科技大学计算机科学与工程学系"><span class="nav-number">4.0.2.</span> <span class="nav-text">单位：香港科技大学计算机科学与工程学系</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#邮箱：sliay-cse-ust-hk-dyyeung-cse-ust-hk"><span class="nav-number">4.0.3.</span> <span class="nav-text">邮箱：sliay@cse.ust.hk,dyyeung@cse.ust.hk</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#摘要"><span class="nav-number">4.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引言"><span class="nav-number">4.2.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Camera-Model"><span class="nav-number">4.3.</span> <span class="nav-text">Camera Model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Baseline-Method"><span class="nav-number">4.4.</span> <span class="nav-text">Baseline Method</span></a></li></ol></div>
             
 
           </div>

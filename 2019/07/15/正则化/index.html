@@ -153,8 +153,10 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/07/15/5d2c6ea06c51924638.png">
 <meta property="og:image" content="https://i.loli.net/2019/07/15/5d2c6fa462f4c49815.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/19/5d31282ca072b95835.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/19/5d3128ff913fa70328.png">
 <meta property="og:image" content="https://i.loli.net/2019/07/15/5d2c7a1746ed613920.png">
-<meta property="og:updated_time" content="2019-07-15T13:05:48.873Z">
+<meta property="og:updated_time" content="2019-07-19T09:23:21.314Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则化">
 <meta name="twitter:description" content="学习地址过度拟合 虽然拟合出来的曲线通过了所有的样本点，但弯弯曲曲不稳定，具有高方差。训练过度使得拟合曲线千方百计把样本分开，但应用到新的样本数据时效果很差。如果特征很多，但样本数很少就容易出现这种情况。 解决办法： 减少特征数：人工选择特征/模式选择算法 正则化：减少数据规模或者说参数&amp;theta;的大小        代价函数在之前的代价函数基础上在增加penalty，即加上关于&amp;theta;">
@@ -439,12 +441,24 @@
                 
               
 
-              <time title="Created: 2019-07-15 16:54:00 / Modified: 21:05:48" itemprop="dateCreated datePublished" datetime="2019-07-15T16:54:00+08:00">2019-07-15</time>
+              <time title="Created: 2019-07-15 16:54:00" itemprop="dateCreated datePublished" datetime="2019-07-15T16:54:00+08:00">2019-07-15</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-19 17:23:21" itemprop="dateModified" datetime="2019-07-19T17:23:21+08:00">2019-07-19</time>
               
             
           </span>
@@ -520,7 +534,8 @@
 </ul>
 <h4 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h4><p>在之前的代价函数基础上在增加penalty，即加上关于&theta;的多项式: &lambda;/(2m)*m&Sigma;(&theta;<sub>j</sub>)<sup>2</sup>，叫做正则化项。而这个正则化项所乘的参数&lambda;叫做正则化参数。<br>得到了新的代价函数J，  这是正则化线形回归的优化目标<br>为什么要加上正则化项呢？我们的目标是尽量最小化代价函数J，这样会将&theta;一起减小，但拟合出来的曲线更符合要求。</p>
 <h4 id="线形回归的正则化"><a href="#线形回归的正则化" class="headerlink" title="线形回归的正则化"></a>线形回归的正则化</h4><p>对于正则化梯度下降的&theta;更新问题：<br><img src="https://i.loli.net/2019/07/15/5d2c6ea06c51924638.png" alt="2019-07-15 20-12-27 的屏幕截图.png"><br>对于正则化的正规方程问题：<br><img src="https://i.loli.net/2019/07/15/5d2c6fa462f4c49815.png" alt="2019-07-15 20-20-42 的屏幕截图.png"><br>对于不可逆问题，在正则化中只要&lambda;&gt;0，那么括号里面的一定是可逆的。</p>
-<h4 id="逻辑回归的正则化"><a href="#逻辑回归的正则化" class="headerlink" title="逻辑回归的正则化"></a>逻辑回归的正则化</h4><p><img src="https://i.loli.net/2019/07/15/5d2c7a1746ed613920.png" alt="2019-07-15 21-05-17 的屏幕截图.png"></p>
+<h4 id="逻辑回归的正则化"><a href="#逻辑回归的正则化" class="headerlink" title="逻辑回归的正则化"></a>逻辑回归的正则化</h4><p>防止过拟合现象，代价函数加上正则化项。<br><img src="https://i.loli.net/2019/07/19/5d31282ca072b95835.png" alt="2019-07-19 10-16-53 的屏幕截图.png"><br>梯度下降：<br><img src="https://i.loli.net/2019/07/19/5d3128ff913fa70328.png" alt="2019-07-19 10-19-33 的屏幕截图.png"></p>
+<p><img src="https://i.loli.net/2019/07/15/5d2c7a1746ed613920.png" alt="2019-07-15 21-05-17 的屏幕截图.png"></p>
 
       
     </div>
@@ -581,7 +596,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/16/吴恩达机器学习第二次编程作业-逻辑回归/" rel="prev" title="吴恩达机器学习第二次编程作业-逻辑回归">
+              <a href="/2019/07/16/达机器学习第二次编程作业-逻辑回归/" rel="prev" title="吴恩达机器学习第二次编程作业-逻辑回归">
                 吴恩达机器学习第二次编程作业-逻辑回归 <i class="fa fa-chevron-right"></i>
               </a>
             

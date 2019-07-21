@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+    
+
+    
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Times New Roman:300,300italic,400,400italic,700,700italicTimes New Roman:300,300italic,400,400italic,700,700italicTimes New Roman:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="北京信息科技大学第十一届程序设计竞赛感觉没有吉首大学那场好玩。老年选手智商尽失，勉勉强强刷刷水题维持生活。   A    kotori和糖果卡了一天，made竟然是个煞笔题，用map取重剪去搜索节点就可以了，但竟然还会爆INT？？？？题意：n堆石头，每堆一个，合并的代价是两堆数量差值。求合并成一堆最小代价。分析：哈夫曼合并树模型，容易推出公式f(n)=f(n/2)+f((n+1)/2)+(n&amp;am">
+<meta name="keywords" content="刷题,acm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="北京信息科技大学第十一届程序设计竞赛 部分题解">
+<meta property="og:url" content="http://sfz-lyq.cn/2019/07/21/北京信息科技大学第十一届程序设计竞赛-部分题解/index.html">
+<meta property="og:site_name" content="种花家">
+<meta property="og:description" content="北京信息科技大学第十一届程序设计竞赛感觉没有吉首大学那场好玩。老年选手智商尽失，勉勉强强刷刷水题维持生活。   A    kotori和糖果卡了一天，made竟然是个煞笔题，用map取重剪去搜索节点就可以了，但竟然还会爆INT？？？？题意：n堆石头，每堆一个，合并的代价是两堆数量差值。求合并成一堆最小代价。分析：哈夫曼合并树模型，容易推出公式f(n)=f(n/2)+f((n+1)/2)+(n&amp;am">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-21T13:21:13.909Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="北京信息科技大学第十一届程序设计竞赛 部分题解">
+<meta name="twitter:description" content="北京信息科技大学第十一届程序设计竞赛感觉没有吉首大学那场好玩。老年选手智商尽失，勉勉强强刷刷水题维持生活。   A    kotori和糖果卡了一天，made竟然是个煞笔题，用map取重剪去搜索节点就可以了，但竟然还会爆INT？？？？题意：n堆石头，每堆一个，合并的代价是两堆数量差值。求合并成一堆最小代价。分析：哈夫曼合并树模型，容易推出公式f(n)=f(n/2)+f((n+1)/2)+(n&amp;am">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://sfz-lyq.cn/2019/07/21/北京信息科技大学第十一届程序设计竞赛-部分题解/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>北京信息科技大学第十一届程序设计竞赛 部分题解 | 种花家</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">种花家</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">null   =   *</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sfz-lyq.cn/2019/07/21/北京信息科技大学第十一届程序设计竞赛-部分题解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liuyuqiang0">
+      <meta itemprop="description" content="what you will be,the world will be">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="种花家">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">北京信息科技大学第十一届程序设计竞赛 部分题解
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-21 20:37:00 / Modified: 21:21:13" itemprop="dateCreated datePublished" datetime="2019-07-21T20:37:00+08:00">2019-07-21</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/刷题/" itemprop="url" rel="index"><span itemprop="name">刷题</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="北京信息科技大学第十一届程序设计竞赛"><a href="#北京信息科技大学第十一届程序设计竞赛" class="headerlink" title="北京信息科技大学第十一届程序设计竞赛"></a><center><a href="https://ac.nowcoder.com/acm/contest/940#question" target="_blank" rel="noopener">北京信息科技大学第十一届程序设计竞赛</a></center></h3><p>感觉没有吉首大学那场好玩。<br>老年选手智商尽失，勉勉强强刷刷水题维持生活。  </p>
+<h4 id="A-kotori和糖果"><a href="#A-kotori和糖果" class="headerlink" title="A    kotori和糖果"></a>A    kotori和糖果</h4><p>卡了一天，made竟然是个煞笔题，用map取重剪去搜索节点就可以了，但竟然还会爆INT？？？？<br>题意：n堆石头，每堆一个，合并的代价是两堆数量差值。求合并成一堆最小代价。<br>分析：哈夫曼合并树模型，容易推出公式f(n)=f(n/2)+f((n+1)/2)+(n&amp;1)，但对于n=1e18运算节点太多重复太多，所以用map处理。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int INF=0x3f3f3f;</span><br><span class="line">const int N=1e3+10;</span><br><span class="line">map&lt;long long ,long long &gt;q;</span><br><span class="line">long long fun(long long n)</span><br><span class="line">&#123;</span><br><span class="line">    if(n&lt;=2) return q[n]=0;</span><br><span class="line">    if(q[n]) return q[n];</span><br><span class="line">    return q[n]=fun(n/2)+fun((n+1)/2)+(n&amp;1);</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int t;</span><br><span class="line">    long long n;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;t);</span><br><span class="line">    q.clear();</span><br><span class="line">    while(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf(&quot;%lld&quot;,&amp;n);</span><br><span class="line">        printf(&quot;%lld\n&quot;,fun(n));</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="B-kotori和气球"><a href="#B-kotori和气球" class="headerlink" title="B    kotori和气球"></a>B    kotori和气球</h4><p>题意：n中颜色数量不限的气球，选m个摆成一排，相同颜色不能相邻，方案数对109取余。<br>分析：<code>ans=n*(n-1)*(n-1)* *** *(n-1)</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int MOD=109;</span><br><span class="line">const int N=1e5+10;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,m;</span><br><span class="line">    while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        int ans=n;</span><br><span class="line">        for(int i=1;i&lt;m;i++)</span><br><span class="line">            ans=ans*(n-1)%MOD;</span><br><span class="line">        printf(&quot;%d\n&quot;,ans);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="C-kotori和出道"><a href="#C-kotori和出道" class="headerlink" title="C    kotori和出道"></a>C    kotori和出道</h4><p>题意：n个人始终成一个环，依次报数，偶数出列，求最后剩下的人是谁。<br>分析：经典约瑟夫环问题。但这题打个表规律就出来了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import math</span><br><span class="line">while True:</span><br><span class="line">    try:</span><br><span class="line">        t=int(input())</span><br><span class="line">        for i in range(t):</span><br><span class="line">            n=int(input())</span><br><span class="line">            x=int(math.log2(n))</span><br><span class="line">            n=n-2**x</span><br><span class="line">            print(2*n+1)</span><br><span class="line">    except:break</span><br></pre></td></tr></table></figure></p>
+<h4 id="D-kotori和迷宫"><a href="#D-kotori和迷宫" class="headerlink" title="D    kotori和迷宫"></a>D    kotori和迷宫</h4><p>题意：意思就是从起点开始搜，到了出口’e’就直接出去，求能到达的出口数量和最近出口的距离。<br>分析：在广搜的基础上加一句即可，判断当前点是否为出口’e’，是直接<code>continue</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int MOD=109;</span><br><span class="line">const int N=1e5+10;</span><br><span class="line">int n,m,ans1,ans2,vis[55][55];</span><br><span class="line">char s[55][55];</span><br><span class="line">struct node</span><br><span class="line">&#123;</span><br><span class="line">    int x,y,step;</span><br><span class="line">&#125;;</span><br><span class="line">queue&lt;node&gt;q;</span><br><span class="line">void bfs(int x,int y,int step)</span><br><span class="line">&#123;</span><br><span class="line">    ans1=0,ans2=90;</span><br><span class="line">    node tmp;</span><br><span class="line">    tmp.x=x,tmp.y=y,tmp.step=0;</span><br><span class="line">    memset(vis,0,sizeof(vis));</span><br><span class="line">    while(!q.empty()) q.pop();</span><br><span class="line">    q.push(tmp);</span><br><span class="line">    while(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        tmp=q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        if(vis[tmp.x][tmp.y]) continue;</span><br><span class="line">        vis[tmp.x][tmp.y]=1;</span><br><span class="line">        if(s[tmp.x][tmp.y]==&apos;e&apos;)</span><br><span class="line">        &#123;</span><br><span class="line">            ans1++;</span><br><span class="line">            ans2=min(ans2,tmp.step);</span><br><span class="line">            continue;</span><br><span class="line">        &#125;</span><br><span class="line">        if(tmp.x-1&gt;0&amp;&amp;s[tmp.x-1][tmp.y]!=&apos;*&apos;&amp;&amp;!vis[tmp.x-1][tmp.y])</span><br><span class="line">        q.push(node&#123;tmp.x-1,tmp.y,tmp.step+1&#125;);</span><br><span class="line">        if(tmp.x+1&lt;=n&amp;&amp;s[tmp.x+1][tmp.y]!=&apos;*&apos;&amp;&amp;!vis[tmp.x+1][tmp.y])</span><br><span class="line">        q.push(node&#123;tmp.x+1,tmp.y,tmp.step+1&#125;);</span><br><span class="line">        if(tmp.y-1&gt;0&amp;&amp;s[tmp.x][tmp.y-1]!=&apos;*&apos;&amp;&amp;!vis[tmp.x][tmp.y-1])</span><br><span class="line">        q.push(node&#123;tmp.x,tmp.y-1,tmp.step+1&#125;);</span><br><span class="line">        if(tmp.y+1&lt;=m&amp;&amp;s[tmp.x][tmp.y+1]!=&apos;*&apos;&amp;&amp;!vis[tmp.x][tmp.y+1])</span><br><span class="line">        q.push(node&#123;tmp.x,tmp.y+1,tmp.step+1&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    if(ans1==0) puts(&quot;-1&quot;);</span><br><span class="line">    else printf(&quot;%d %d\n&quot;,ans1,ans2);</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        int sx,sy;</span><br><span class="line">        for(int i=1; i&lt;=n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(&quot;%s&quot;,s[i]+1);</span><br><span class="line">            for(int j=1; j&lt;=m; j++)</span><br><span class="line">                if(s[i][j]==&apos;k&apos;)</span><br><span class="line">                    sx=i,sy=j;</span><br><span class="line">        &#125;</span><br><span class="line">        bfs(sx,sy,0);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="E-kotori和素因子"><a href="#E-kotori和素因子" class="headerlink" title="E    kotori和素因子"></a>E    kotori和素因子</h4><ul>
+<li>题意：n&le;10个数，每个数&le;1000。从每个数中选出一个素因子，要求所选出的所有素因子不同。求这些素因子的和的最小值。  </li>
+<li>分析：正解是暴搜即可。1000以内的数每个数由最多5个素因子之积组成，那么暴力的复杂度是5<sup>10</sup>=9765625。  </li>
+<li>题解2：费用流模型。源点0到[1-n]这n个数分别建边容量为1，费用为0；n个数每个数分别与它的素因子建边，容量为1，费用为0（或1，这样素因子到汇点的费用为0即可）；素因子到汇点T建边，容量为1，费用为素因子大小。</li>
+<li>想想看这样为什么费用流模型可以？费用流模型在最大流的基础上求最小费用，流量自然是我们这n个数每个数都要选一个，我们给每个数i都创建流量为1的通路，那么最终最大流量就是n，不到n输出-1；费用是素因子对答案的贡献，当一个数有多个素因子时就有多个选择，那么费用流模型会自动找寻增广轨寻求费用最小的那条通道。费用流模型能解决更大的数据范围，具体没算。被自己的机智折服。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int INF=0x3f3f3f;</span><br><span class="line">const int N=1e3+10;</span><br><span class="line">struct Edge</span><br><span class="line">&#123;</span><br><span class="line">    int to,next,cap,flow,cost;</span><br><span class="line">&#125; e[N*10];</span><br><span class="line">int head[N],tot,tn;</span><br><span class="line">int pre[N],dis[N];</span><br><span class="line">int vis[N];</span><br><span class="line">void init(int num)</span><br><span class="line">&#123;</span><br><span class="line">    tot=0;//边的数量</span><br><span class="line">    tn=num;</span><br><span class="line">    memset(head,-1,sizeof(head));</span><br><span class="line">&#125;</span><br><span class="line">void add(int u,int v,int cap,int cost)</span><br><span class="line">&#123;</span><br><span class="line">    e[tot].to=v,e[tot].cap=cap,e[tot].cost=cost,e[tot].flow=0;</span><br><span class="line">    e[tot].next=head[u];</span><br><span class="line">    head[u]=tot++;</span><br><span class="line">    e[tot].to=u,e[tot].cap=0,e[tot].cost=-cost,e[tot].flow=0;</span><br><span class="line">    e[tot].next=head[v];</span><br><span class="line">    head[v]=tot++;</span><br><span class="line">&#125;</span><br><span class="line">bool spfa(int s,int t)</span><br><span class="line">&#123;</span><br><span class="line">    queue&lt;int&gt;q;</span><br><span class="line">    for(int i=0; i&lt;=tn; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        dis[i]=INF;</span><br><span class="line">        vis[i]=0;</span><br><span class="line">        pre[i]=-1;</span><br><span class="line">    &#125;</span><br><span class="line">    dis[s]=0;</span><br><span class="line">    vis[s]=1;</span><br><span class="line">    q.push(s);</span><br><span class="line">    while(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        int u=q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        vis[u]=0;</span><br><span class="line">        for(int i=head[u]; i+1; i=e[i].next)</span><br><span class="line">        &#123;</span><br><span class="line">            int v=e[i].to;</span><br><span class="line">            if(e[i].cap&gt;e[i].flow&amp;&amp;dis[v]&gt;dis[u]+e[i].cost)</span><br><span class="line">            &#123;</span><br><span class="line">                dis[v]=dis[u]+e[i].cost;</span><br><span class="line">                pre[v]=i;</span><br><span class="line">                if(!vis[v])</span><br><span class="line">                &#123;</span><br><span class="line">                    vis[v]=1;</span><br><span class="line">                    q.push(v);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if(pre[t]==-1)  return false;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line">void mincost_maxflow(int s,int t,int n)</span><br><span class="line">&#123;</span><br><span class="line">    int cost=0;</span><br><span class="line">    int flow=0;</span><br><span class="line">    while(spfa(s,t))</span><br><span class="line">    &#123;</span><br><span class="line">        int Min=INF;</span><br><span class="line">        for(int i=pre[t]; i!=-1; i=pre[e[i^1].to])</span><br><span class="line">            if(Min&gt;e[i].cap-e[i].flow)</span><br><span class="line">                Min=e[i].cap-e[i].flow;</span><br><span class="line">        for(int i=pre[t]; i!=-1; i=pre[e[i^1].to])</span><br><span class="line">        &#123;</span><br><span class="line">            e[i].flow+=Min;</span><br><span class="line">            e[i^1].flow-=Min;</span><br><span class="line">            cost+=e[i].cost*Min;</span><br><span class="line">        &#125;</span><br><span class="line">        flow+=Min;</span><br><span class="line">    &#125;</span><br><span class="line">    if(flow&lt;n||flow&gt;=INF) puts(&quot;-1&quot;);</span><br><span class="line">    else printf(&quot;%d\n&quot;,cost);</span><br><span class="line">&#125;</span><br><span class="line">int prime[1003],Vis[1003];</span><br><span class="line">int a[50];</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,cnt=0;</span><br><span class="line">    memset(prime,-1,sizeof(prime));</span><br><span class="line">    prime[0]=prime[1]=0;</span><br><span class="line">    for(int i=2; i&lt;=1000; i++)</span><br><span class="line">        if(prime[i])</span><br><span class="line">        &#123;</span><br><span class="line">            for(int j=i*i; j&lt;=1000; j+=i)</span><br><span class="line">                prime[j]=0;</span><br><span class="line">            prime[cnt++]=i;</span><br><span class="line">        &#125;</span><br><span class="line">    while(~scanf(&quot;%d&quot;,&amp;n))</span><br><span class="line">    &#123;</span><br><span class="line">        memset(Vis,0,sizeof(Vis));</span><br><span class="line">        int Cnt=0;</span><br><span class="line">        for(int i=1; i&lt;=n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(&quot;%d&quot;,&amp;a[i]);</span><br><span class="line">            for(int j=0; j&lt;cnt; j++)</span><br><span class="line">                if(a[i]%prime[j]==0&amp;&amp;Vis[prime[j]]==0)</span><br><span class="line">                    Vis[prime[j]]=++Cnt;</span><br><span class="line">        &#125;</span><br><span class="line">        init(1+n+Cnt+2);</span><br><span class="line">        for(int i=1; i&lt;=n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            add(0,i,1,0);  //源点到i</span><br><span class="line">            for(int j=0; j&lt;cnt; j++)</span><br><span class="line">                if(a[i]%prime[j]==0)</span><br><span class="line">                    add(i,n+Vis[prime[j]],1,prime[j]);  //i到素因子</span><br><span class="line">        &#125;</span><br><span class="line">        for(int j=0; j&lt;cnt; j++)</span><br><span class="line">            if(Vis[prime[j]])</span><br><span class="line">                add(n+Vis[prime[j]],n+Cnt+2,1,0);  //素因子到汇点</span><br><span class="line">        mincost_maxflow(0,n+Cnt+2,n);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="H-andy和购物"><a href="#H-andy和购物" class="headerlink" title="H    andy和购物"></a>H    andy和购物</h4><p>题意：水题，排序计算内积即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">while True:</span><br><span class="line">    try:</span><br><span class="line">        t=int(input())</span><br><span class="line">        for i in range(t):</span><br><span class="line">            n=int(input())</span><br><span class="line">            a=list(map(int,input().split()))</span><br><span class="line">            b=list(map(float,input().split()))</span><br><span class="line">            a.sort()</span><br><span class="line">            b.sort(reverse=True)</span><br><span class="line">            ans=0</span><br><span class="line">            for j in range(n):</span><br><span class="line">                ans=ans+a[j]*b[j]</span><br><span class="line">            print(&apos;%.3f&apos;%ans)</span><br><span class="line">    except:break</span><br></pre></td></tr></table></figure></p>
+<h4 id="I-andy种树"><a href="#I-andy种树" class="headerlink" title="I    andy种树"></a>I    andy种树</h4><p>题意：每次选一个区间加一，然后最后想知道1-n每个坐标的数是多少。<br>分析：会线段树用线段树区间更新单点查询裸题。不会线段树用左家右减法即可，区间左端点加1，区间右端点再往右一个的位置减一，最后累加。烂大街的技巧。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int MOD=1e9+7;</span><br><span class="line">const int N=1e6+10;</span><br><span class="line">int a[N];</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,m;</span><br><span class="line">    while(~scanf(&quot;%d%d&quot;,&amp;n,&amp;m))</span><br><span class="line">    &#123;</span><br><span class="line">        memset(a,0,sizeof(a));</span><br><span class="line">        int l,r;</span><br><span class="line">        for(int i=1;i&lt;=m;i++)</span><br><span class="line">        &#123;</span><br><span class="line">         scanf(&quot;%d%d&quot;,&amp;l,&amp;r);</span><br><span class="line">         a[l]++;</span><br><span class="line">         a[r+1]--;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=1;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            a[i]+=a[i-1];</span><br><span class="line">            printf(&quot;%d%c&quot;,a[i],i==n?&apos;\n&apos;:&apos; &apos;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="J-andy的树被砍了"><a href="#J-andy的树被砍了" class="headerlink" title="J    andy的树被砍了"></a>J    andy的树被砍了</h4><p>题意：煞笔题还想好好伪装。<br>分析：伤害直接累加，然后求某棵树先加上对应前一个的累加伤害值，再在伤害数组中lower_bound()二分查找。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int MOD=1e9+7;</span><br><span class="line">const int N=1e6+10;</span><br><span class="line">long long a[N],b[N];</span><br><span class="line">int n;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    while(~scanf(&quot;%d&quot;,&amp;n))</span><br><span class="line">    &#123;</span><br><span class="line">        a[0]=b[0]=0;</span><br><span class="line">        for(int i=1; i&lt;=n; i++)</span><br><span class="line">            scanf(&quot;%lld&quot;,&amp;a[i]);</span><br><span class="line">        for(int i=1; i&lt;=n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            scanf(&quot;%lld&quot;,&amp;b[i]);</span><br><span class="line">            b[i]+=b[i-1];</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=1; i&lt;=n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            int pos=lower_bound(b+1,b+n+1,a[i]+b[i-1])-b;</span><br><span class="line">            printf(&quot;%d%c&quot;,pos,i==n?&apos;\n&apos;:&apos; &apos;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/刷题/" rel="tag"># 刷题</a>
+          
+            <a href="/tags/acm/" rel="tag"># acm</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/18/吉首大学2019年程序设计竞赛-部分题解/" rel="next" title="吉首大学2019年程序设计竞赛 部分题解">
+                <i class="fa fa-chevron-left"></i> 吉首大学2019年程序设计竞赛 部分题解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/21/南航第二周总结/" rel="prev" title="南航第二周总结">
+                南航第二周总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">liuyuqiang0</p>
+              <div class="site-description motion-element" itemprop="description">what you will be,the world will be</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/NYIST_TC_LYQ" title="CSDN &rarr; https://blog.csdn.net/NYIST_TC_LYQ" rel="noopener" target="_blank"><i class="fa fa-fw fa-CSDN"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" title="qq &rarr; tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>qq</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://nyoj.top" title="http://nyoj.top" rel="noopener" target="_blank">NYOJ</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#北京信息科技大学第十一届程序设计竞赛"><span class="nav-number">1.</span> <span class="nav-text">北京信息科技大学第十一届程序设计竞赛</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-kotori和糖果"><span class="nav-number">1.1.</span> <span class="nav-text">A    kotori和糖果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-kotori和气球"><span class="nav-number">1.2.</span> <span class="nav-text">B    kotori和气球</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-kotori和出道"><span class="nav-number">1.3.</span> <span class="nav-text">C    kotori和出道</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#D-kotori和迷宫"><span class="nav-number">1.4.</span> <span class="nav-text">D    kotori和迷宫</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#E-kotori和素因子"><span class="nav-number">1.5.</span> <span class="nav-text">E    kotori和素因子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#H-andy和购物"><span class="nav-number">1.6.</span> <span class="nav-text">H    andy和购物</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#I-andy种树"><span class="nav-number">1.7.</span> <span class="nav-text">I    andy种树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#J-andy的树被砍了"><span class="nav-number">1.8.</span> <span class="nav-text">J    andy的树被砍了</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liuyuqiang0</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+  
+  <script>
+    (function () {
+
+      firebase.initializeApp({
+        apiKey: '',
+        projectId: ''
+      })
+
+      function getCount(doc, increaseCount) {
+        //increaseCount will be false when not in article page
+
+        return doc.get().then(function (d) {
+          var count
+          if (!d.exists) { //has no data, initialize count
+            if (increaseCount) {
+              doc.set({
+                count: 1
+              })
+              count = 1
+            }
+            else {
+              count = 0
+            }
+          }
+          else { //has data
+            count = d.data().count
+            if (increaseCount) {
+              if (!(window.localStorage && window.localStorage.getItem(title))) { //if first view this article
+                doc.set({ //increase count
+                  count: count + 1
+                })
+                count++
+              }
+            }
+          }
+          if (window.localStorage && increaseCount) { //mark as visited
+            localStorage.setItem(title, true)
+          }
+
+          return count
+        })
+      }
+
+      function appendCountTo(el) {
+        return function (count) {
+          $(el).append(
+            $('<span>').addClass('post-visitors-count').append(
+              $('<span>').addClass('post-meta-divider').text('|')
+            ).append(
+              $('<span>').addClass('post-meta-item-icon').append(
+                $('<i>').addClass('fa fa-users')
+              )
+              ).append($('<span>').text('Views ' + count))
+          )
+        }
+      }
+
+      var db = firebase.firestore()
+      var articles = db.collection('articles')
+
+      //https://hexo.io/docs/variables.html
+      var isPost = '北京信息科技大学第十一届程序设计竞赛 部分题解'.length > 0
+      var isArchive = '' === 'true'
+      var isCategory = ''.length > 0
+      var isTag = ''.length > 0
+
+      if (isPost) { //is article page
+        var title = '北京信息科技大学第十一届程序设计竞赛 部分题解'
+        var doc = articles.doc(title)
+
+        getCount(doc, true).then(appendCountTo($('.post-meta')))
+      }
+      else if (!isArchive && !isCategory && !isTag) { //is index page
+        var titles = [] //array to titles
+
+        var postsstr = '' //if you have a better way to get titles of posts, please change it
+        eval(postsstr)
+
+        var promises = titles.map(function (title) {
+          return articles.doc(title)
+        }).map(function (doc) {
+          return getCount(doc)
+        })
+        Promise.all(promises).then(function (counts) {
+          var metas = $('.post-meta')
+          counts.forEach(function (val, idx) {
+            appendCountTo(metas[idx])(val)
+          })
+        })
+      }
+    })()
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

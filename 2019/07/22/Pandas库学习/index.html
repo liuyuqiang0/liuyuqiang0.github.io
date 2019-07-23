@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+    
+
+    
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Times New Roman:300,300italic,400,400italic,700,700italicTimes New Roman:300,300italic,400,400italic,700,700italicTimes New Roman:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Python库之pandas环境：Pycharm2019.01，python3.5  Series与DataFrameSeries与DataFrame分别对应于一维序列与二维表结构 Series创建Series，索引默认从0开始：1234567891011121314import pandas as pdimport numpy as nps1=pd.Series([1,2,-3,-5])prin">
+<meta name="keywords" content="学习笔记,Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pandas库学习">
+<meta property="og:url" content="http://sfz-lyq.cn/2019/07/22/Pandas库学习/index.html">
+<meta property="og:site_name" content="种花家">
+<meta property="og:description" content="Python库之pandas环境：Pycharm2019.01，python3.5  Series与DataFrameSeries与DataFrame分别对应于一维序列与二维表结构 Series创建Series，索引默认从0开始：1234567891011121314import pandas as pdimport numpy as nps1=pd.Series([1,2,-3,-5])prin">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/07/23/5d3675f5991d230861.png">
+<meta property="og:updated_time" content="2019-07-23T02:51:33.973Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Pandas库学习">
+<meta name="twitter:description" content="Python库之pandas环境：Pycharm2019.01，python3.5  Series与DataFrameSeries与DataFrame分别对应于一维序列与二维表结构 Series创建Series，索引默认从0开始：1234567891011121314import pandas as pdimport numpy as nps1=pd.Series([1,2,-3,-5])prin">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/23/5d3675f5991d230861.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://sfz-lyq.cn/2019/07/22/Pandas库学习/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Pandas库学习 | 种花家</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">种花家</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">null   =   *</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sfz-lyq.cn/2019/07/22/Pandas库学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liuyuqiang0">
+      <meta itemprop="description" content="what you will be,the world will be">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="种花家">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Pandas库学习
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-22 17:13:00" itemprop="dateCreated datePublished" datetime="2019-07-22T17:13:00+08:00">2019-07-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-23 10:51:33" itemprop="dateModified" datetime="2019-07-23T10:51:33+08:00">2019-07-23</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Python库之pandas"><a href="#Python库之pandas" class="headerlink" title="Python库之pandas"></a><center><a href="https://www.bilibili.com/video/av38356551" target="_blank" rel="noopener">Python库之pandas</a></center></h3><p>环境：Pycharm2019.01，python3.5</p>
+<hr>
+<h4 id="Series与DataFrame"><a href="#Series与DataFrame" class="headerlink" title="Series与DataFrame"></a>Series与DataFrame</h4><p>Series与DataFrame分别对应于一维序列与二维表结构</p>
+<h5 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h5><p>创建Series，索引默认从0开始：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line">import numpy as np</span><br><span class="line">s1=pd.Series([1,2,-3,-5])</span><br><span class="line">print(s1)</span><br><span class="line">print(s1.values,type(s1)) # 查看s1的元素</span><br><span class="line">print(s1.index) # 查看s1的索引，显示[0,4)，步长为1</span><br><span class="line">- - - - - - - - - </span><br><span class="line">0    1</span><br><span class="line">1    2</span><br><span class="line">2   -3</span><br><span class="line">3   -5</span><br><span class="line">dtype: int64</span><br><span class="line">[ 1  2 -3 -5]</span><br><span class="line">RangeIndex(start=0, stop=4, step=1)</span><br></pre></td></tr></table></figure></p>
+<p>pandas是基于numpy来构建的，所以这个一维序列所使用的结构也是array，但在Pycharm下type是Series类型的。  </p>
+<p>创建索引，不使用默认索引：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">s2=pd.Series([1,2.0,-3,-5],index=[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;])</span><br><span class="line">print(s2)</span><br><span class="line">print(s2[&apos;c&apos;]) # 根据索引取值，设置的索引必须对应值</span><br><span class="line">- - - - - - - - -</span><br><span class="line">a    1.0</span><br><span class="line">b    2.0</span><br><span class="line">c   -3.0</span><br><span class="line">d   -5.0</span><br><span class="line">dtype: float64</span><br><span class="line">-3.0</span><br></pre></td></tr></table></figure></p>
+<p>Series可以看成一个定长的有序字典。字典没有顺序的概念，但Series一旦赋值就固定了。</p>
+<h5 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line">import numpy as np</span><br><span class="line">data=&#123;</span><br><span class="line">    &apos;year&apos;:[2014,2015,2016,2017],</span><br><span class="line">    &apos;income&apos;:[10,20,30,40],</span><br><span class="line">    &apos;outcome&apos;:[10,20,30,40]</span><br><span class="line">&#125;</span><br><span class="line">df1=pd.DataFrame(data) </span><br><span class="line">print(df1)</span><br><span class="line">- - - - - - - - - - - - -</span><br><span class="line">   income  outcome  year</span><br><span class="line">0      10       10  2014</span><br><span class="line">1      20       20  2015</span><br><span class="line">2      30       30  2016</span><br><span class="line">3      40       40  2017</span><br></pre></td></tr></table></figure>
+<p>使用其他方法创建DataFrame:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">df2=pd.DataFrame(np.arange(10).reshape(2,5))</span><br><span class="line">df3=pd.DataFrame(np.arange(12).reshape(3,4),index=[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;],columns=[1,5,2,6])</span><br><span class="line">print(df2)</span><br><span class="line">print(df3)</span><br><span class="line">print(df2.index） # 行</span><br><span class="line">print(df2.columns) # 列</span><br><span class="line">print(df2.values) # 输出值</span><br><span class="line">a=df2.values </span><br><span class="line">print(type(a))  # a是array类型</span><br><span class="line">print(df2.describe()) # 描述df2属性 </span><br><span class="line">- - - - - - - - - - - - </span><br><span class="line">   0  1  2  3  4</span><br><span class="line">0  0  1  2  3  4</span><br><span class="line">1  5  6  7  8  9</span><br><span class="line">   1  5   2   6</span><br><span class="line">a  0  1   2   3</span><br><span class="line">b  4  5   6   7</span><br><span class="line">c  8  9  10  11</span><br><span class="line">RangeIndex(start=0, stop=2, step=1)</span><br><span class="line">RangeIndex(start=0, stop=5, step=1)</span><br><span class="line">[[0 1 2 3 4]</span><br><span class="line"> [5 6 7 8 9]]</span><br><span class="line">&lt;class &apos;numpy.ndarray&apos;&gt;</span><br><span class="line">0         1         2         3         4</span><br><span class="line">count  2.000000  2.000000  2.000000  2.000000  2.000000 # 行数</span><br><span class="line">mean   2.500000  3.500000  4.500000  5.500000  6.500000 # 平均值</span><br><span class="line">std    3.535534  3.535534  3.535534  3.535534  3.535534 # 标准差</span><br><span class="line">min    0.000000  1.000000  2.000000  3.000000  4.000000 # 最小值</span><br><span class="line">25%    1.250000  2.250000  3.250000  4.250000  5.250000 # 列和的1/4</span><br><span class="line">50%    2.500000  3.500000  4.500000  5.500000  6.500000</span><br><span class="line">75%    3.750000  4.750000  5.750000  6.750000  7.750000</span><br><span class="line">max    5.000000  6.000000  7.000000  8.000000  9.000000</span><br></pre></td></tr></table></figure></p>
+<p>转置与排序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">df4=pd.DataFrame(np.arange(10).reshape(2,5),index=[1,2],columns=[2,1,5,6,0])</span><br><span class="line">print(df4)</span><br><span class="line">print(df4.T)</span><br><span class="line">print(df4.sort_index(axis=1)) # 按列名大小排序</span><br><span class="line">print(df4.sort_values(by=5)) # 按第5列值大小排序</span><br><span class="line">- - - - - - - - - - - - -</span><br><span class="line">   2  1  5  6  0</span><br><span class="line">1  0  1  2  3  4</span><br><span class="line">2  5  6  7  8  9</span><br><span class="line">   1  2</span><br><span class="line">2  0  5</span><br><span class="line">1  1  6</span><br><span class="line">5  2  7</span><br><span class="line">6  3  8</span><br><span class="line">0  4  9</span><br><span class="line">   0  1  2  5  6</span><br><span class="line">1  4  1  0  2  3</span><br><span class="line">2  9  6  5  7  8</span><br><span class="line">   2  1  5  6  0</span><br><span class="line">1  0  1  2  3  4</span><br><span class="line">2  5  6  7  8  9</span><br></pre></td></tr></table></figure></p>
+<h4 id="pandas选择数据"><a href="#pandas选择数据" class="headerlink" title="pandas选择数据"></a>pandas选择数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">indexs=pd.date_range(&apos;20190105&apos;,periods=3)</span><br><span class="line">df5=pd.DataFrame(np.arange(12).reshape(3,4),index=indexs,columns=[&apos;A&apos;,&apos;B&apos;,&apos;C&apos;,&apos;D&apos;])</span><br><span class="line">print(df5)</span><br><span class="line">print(df5[&apos;B&apos;]) # 将DataFrame的列获取为一个Series</span><br><span class="line"># print(df5.B) # 作用同上</span><br><span class="line">print(df5[0:2]) # 获取表的前两行</span><br><span class="line">print(df5.loc[&apos;20190107&apos;,[&apos;B&apos;,&apos;D&apos;]]) # 通过标签选择数据再获取其中的列</span><br><span class="line">print(df5.iloc[0:3,2:4]) # 通过位置选择数据，行列从0开始和numpy类似</span><br><span class="line">print(df5.iloc[[0,2],[1,3]]) # 选择不连续的行列值</span><br><span class="line">- - - - - - - - - - - - - - -</span><br><span class="line">            A  B   C   D</span><br><span class="line">2019-01-05  0  1   2   3</span><br><span class="line">2019-01-06  4  5   6   7</span><br><span class="line">2019-01-07  8  9  10  11</span><br><span class="line">2019-01-05    1</span><br><span class="line">2019-01-06    5</span><br><span class="line">2019-01-07    9</span><br><span class="line">Freq: D, Name: B, dtype: int64</span><br><span class="line">            A  B  C  D</span><br><span class="line">2019-01-05  0  1  2  3</span><br><span class="line">2019-01-06  4  5  6  7</span><br><span class="line">B     9</span><br><span class="line">D    11</span><br><span class="line">Name: 2019-01-07 00:00:00, dtype: int64</span><br><span class="line">             C   D</span><br><span class="line">2019-01-05   2   3</span><br><span class="line">2019-01-06   6   7</span><br><span class="line">2019-01-07  10  11</span><br><span class="line">            B   D</span><br><span class="line">2019-01-05  1   3</span><br><span class="line">2019-01-07  9  11</span><br></pre></td></tr></table></figure>
+<p>通过混合标签选择数据：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">indexs=pd.date_range(&apos;20190105&apos;,periods=3)</span><br><span class="line">df6=pd.DataFrame(np.arange(12).reshape(3,4),index=indexs,columns=[&apos;A&apos;,&apos;B&apos;,&apos;C&apos;,&apos;D&apos;])</span><br><span class="line">print(df6)</span><br><span class="line">print(df6.ix[1:3,[&apos;B&apos;,&apos;D&apos;]]) # 和numpy类似</span><br><span class="line">print(df6.C&gt;=6) # 判断某列与值的关系，这里就可以将逻辑回归数据分开data1=data[y=1]</span><br><span class="line">- - - - - - - - - - - - - - </span><br><span class="line">            A  B   C   D</span><br><span class="line">2019-01-05  0  1   2   3</span><br><span class="line">2019-01-06  4  5   6   7</span><br><span class="line">2019-01-07  8  9  10  11</span><br><span class="line">            B   D</span><br><span class="line">2019-01-06  5   7</span><br><span class="line">2019-01-07  9  11</span><br><span class="line">2019-01-05    False</span><br><span class="line">2019-01-06     True</span><br><span class="line">2019-01-07     True</span><br><span class="line">Freq: D, Name: C, dtype: bool</span><br></pre></td></tr></table></figure></p>
+<h4 id="pandas赋值及操作"><a href="#pandas赋值及操作" class="headerlink" title="pandas赋值及操作"></a>pandas赋值及操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">indexs=np.arange(20190101,20190103)</span><br><span class="line">df7=pd.DataFrame(np.arange(10).reshape(2,5),index=indexs,columns=[&apos;A&apos;,&quot;B&quot;,&apos;C&apos;,&apos;D&apos;,&apos;E&apos;])</span><br><span class="line">print(df7)</span><br><span class="line">print(df7.iloc[1,3]) # 输出第1行第3列的数</span><br><span class="line">df7[df7.iloc[0:1]&lt;3]=3 # 将第0行小与3的数替换成3</span><br><span class="line">print(df7)</span><br><span class="line">df7[&apos;F&apos;]=10  # 插入一列并赋值为10，df7.loc[&apos;F&apos;]=10则表示插入一行赋值为10</span><br><span class="line">print(df7)</span><br><span class="line">- - - - - - - - - - - - - - -</span><br><span class="line">          A  B  C  D  E</span><br><span class="line">20190101  0  1  2  3  4</span><br><span class="line">20190102  5  6  7  8  9</span><br><span class="line">8</span><br><span class="line">          A  B  C  D  E</span><br><span class="line">20190101  3  3  3  3  4</span><br><span class="line">20190102  5  6  7  8  9</span><br><span class="line">          A  B  C  D  E   F</span><br><span class="line">20190101  0  1  2  3  4  10</span><br><span class="line">20190102  5  6  7  8  9  10</span><br></pre></td></tr></table></figure>
+<p>插入行或列：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">indexs=np.arange(20190101,20190103)</span><br><span class="line">df7=pd.DataFrame(np.arange(10).reshape(2,5),index=indexs,columns=[&apos;A&apos;,&quot;B&quot;,&apos;C&apos;,&apos;D&apos;,&apos;E&apos;])</span><br><span class="line">print(df7)</span><br><span class="line">s1=pd.Series([1,2,3,4,5],index=[&apos;A&apos;,&apos;B&apos;,&apos;C&apos;,&apos;D&apos;,&apos;E&apos;])</span><br><span class="line">s1.name=&apos;S1&apos;</span><br><span class="line">df7=df7.append(s1) # 在行尾添加</span><br><span class="line">print(df7)</span><br><span class="line">df7.insert(df7.shape[1],&apos;F&apos;,10) # 在列尾增添一列，全部赋为0，df7.pop(&apos;F&apos;)或del df7[&apos;F&apos;] 则表示删除这列</span><br><span class="line">print(df7)</span><br><span class="line">df7=df7.drop([&apos;E&apos;,&apos;F&apos;],axis=1) # 删除列</span><br><span class="line">print(df7)</span><br><span class="line">- - - - - - - - - - - - </span><br><span class="line">          A  B  C  D  E</span><br><span class="line">20190101  0  1  2  3  4</span><br><span class="line">20190102  5  6  7  8  9</span><br><span class="line">          A  B  C  D  E</span><br><span class="line">20190101  0  1  2  3  4</span><br><span class="line">20190102  5  6  7  8  9</span><br><span class="line">S1        1  2  3  4  5</span><br><span class="line">          A  B  C  D  E   F</span><br><span class="line">20190101  0  1  2  3  4  10</span><br><span class="line">20190102  5  6  7  8  9  10</span><br><span class="line">S1        1  2  3  4  5  10</span><br><span class="line">          A  B  C  D</span><br><span class="line">20190101  0  1  2  3</span><br><span class="line">20190102  5  6  7  8</span><br><span class="line">S1        1  2  3  4</span><br></pre></td></tr></table></figure></p>
+<h4 id="pandas处理丢失数据"><a href="#pandas处理丢失数据" class="headerlink" title="pandas处理丢失数据"></a>pandas处理丢失数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">indexs=np.arange(1,4)</span><br><span class="line">df1=pd.DataFrame(np.arange(12).reshape(3,4),index=indexs,columns=[&apos;A&apos;,&apos;B&apos;,&apos;C&apos;,&apos;D&apos;])</span><br><span class="line">df2=pd.DataFrame(df1,index=indexs,columns=[&apos;A&apos;,&apos;B&apos;,&apos;C&apos;,&apos;D&apos;,&apos;E&apos;]) # 没有指定默认为空Nan</span><br><span class="line">print(df1)</span><br><span class="line">print(df2) </span><br><span class="line">print(df2.dropna(axis=1,how=&apos;any&apos;)) # 指定列只要有空值就删除这一行，how=[&apos;any&apos;,&apos;all&apos;]，any表示任意，all表示全部满足空则删除</span><br><span class="line">print(df2.fillna(value=1)) # 用1填充表格中所有空值</span><br><span class="line">print(np.any(df2.isnull()))  # 是否存在空值，np.all()需要都为空值则True</span><br><span class="line">- - - - - - - - - - - -</span><br><span class="line">   A  B   C   D</span><br><span class="line">1  0  1   2   3</span><br><span class="line">2  4  5   6   7</span><br><span class="line">3  8  9  10  11</span><br><span class="line">   A  B   C   D   E</span><br><span class="line">1  0  1   2   3 NaN</span><br><span class="line">2  4  5   6   7 NaN</span><br><span class="line">3  8  9  10  11 NaN</span><br><span class="line">   A  B   C   D    E</span><br><span class="line">1  0  1   2   3  1.0</span><br><span class="line">2  4  5   6   7  1.0</span><br><span class="line">3  8  9  10  11  1.0</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+<h4 id="pandas读取及写入文件"><a href="#pandas读取及写入文件" class="headerlink" title="pandas读取及写入文件"></a>pandas读取及写入文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line">import numpy as np</span><br><span class="line">data=pd.read_csv(&apos;file_path&apos;) # 读取文件，可选项参数：delimiter=&apos;,&apos;表示以&apos;,&apos;为分隔符，dtype=int表示生成int类型数据</span><br><span class="line">data.to_csv(&apos;file_path&apos;）# 默认保存为csv格式文件，也可以选择其他格式</span><br></pre></td></tr></table></figure>
+<h4 id="pandas数据合并"><a href="#pandas数据合并" class="headerlink" title="pandas数据合并"></a>pandas数据合并</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">df1=pd.DataFrame(np.arange(12).reshape(3,4),columns=[&apos;A&apos;,&apos;B&apos;,&apos;C&apos;,&apos;D&apos;])</span><br><span class="line">df2=pd.DataFrame(np.arange(12,24).reshape(3,4),columns=[&apos;A&apos;,&apos;B&apos;,&apos;C&apos;,&apos;D&apos;])</span><br><span class="line">df3=pd.DataFrame(np.arange(24,36).reshape(3,4),columns=[&apos;A&apos;,&apos;B&apos;,&apos;C&apos;,&apos;D&apos;])</span><br><span class="line">df4=pd.concat([df1,df2,df3],axis=0)</span><br><span class="line">print(df4) # 纵向合并，注意列名应该对应，不然出现空值</span><br><span class="line">print(pd.concat([df1,df2,df3],axis=0,ignore_index=True))</span><br><span class="line"># 纵向合并，不考虑原来的index，重新编排index</span><br><span class="line">print(pd.concat([df1,df2,df3],axis=1)) # 横向合并，不指定axis，默认为0</span><br><span class="line">df5=pd.DataFrame(np.arange(24,36).reshape(3,4),columns=[&apos;A&apos;,&apos;B&apos;,&apos;c&apos;,&apos;d&apos;])</span><br><span class="line">print(pd.concat([df1,df2,df5],join=&apos;inner&apos;,ignore_index=True)) # axis默认为0，合并表时inner表示舍弃列名不对应的列，outer表示缺少的部分用Nan填充</span><br><span class="line">df2=pd.DataFrame(np.arange(12,24).reshape(4,3),columns=[&apos;A&apos;,&apos;C&apos;,&apos;D&apos;])</span><br><span class="line">print(pd.concat([df1,df2],axis=1,join_axes=[df1.index])) # 横向合并，index使用df1的index，不指定则会出现空值</span><br><span class="line">- - - - - - - - - - - - - - - - - - - - - </span><br><span class="line">    A   B   C   D</span><br><span class="line">0   0   1   2   3</span><br><span class="line">1   4   5   6   7</span><br><span class="line">2   8   9  10  11</span><br><span class="line">0  12  13  14  15</span><br><span class="line">1  16  17  18  19</span><br><span class="line">2  20  21  22  23</span><br><span class="line">0  24  25  26  27</span><br><span class="line">1  28  29  30  31</span><br><span class="line">2  32  33  34  35</span><br><span class="line">    A   B   C   D</span><br><span class="line">0   0   1   2   3</span><br><span class="line">1   4   5   6   7</span><br><span class="line">2   8   9  10  11</span><br><span class="line">3  12  13  14  15</span><br><span class="line">4  16  17  18  19</span><br><span class="line">5  20  21  22  23</span><br><span class="line">6  24  25  26  27</span><br><span class="line">7  28  29  30  31</span><br><span class="line">8  32  33  34  35</span><br><span class="line">   A  B   C   D   A   B   C   D   A   B   C   D</span><br><span class="line">0  0  1   2   3  12  13  14  15  24  25  26  27</span><br><span class="line">1  4  5   6   7  16  17  18  19  28  29  30  31</span><br><span class="line">2  8  9  10  11  20  21  22  23  32  33  34  35</span><br><span class="line">    A   B</span><br><span class="line">0   0   1</span><br><span class="line">1   4   5</span><br><span class="line">2   8   9</span><br><span class="line">3  12  13</span><br><span class="line">4  16  17</span><br><span class="line">5  20  21</span><br><span class="line">6  24  25</span><br><span class="line">7  28  29</span><br><span class="line">8  32  33</span><br><span class="line">   A  B   C   D   A   C   D</span><br><span class="line">0  0  1   2   3  12  13  14</span><br><span class="line">1  4  5   6   7  15  16  17</span><br><span class="line">2  8  9  10  11  18  19  20</span><br></pre></td></tr></table></figure>
+<h4 id="pandas合并merge"><a href="#pandas合并merge" class="headerlink" title="pandas合并merge"></a>pandas合并merge</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">df1=pd.DataFrame(&#123;&apos;key&apos;:[1,2,3,4],</span><br><span class="line">                  &apos;1&apos;:[11,12,13,14],</span><br><span class="line">                  &apos;2&apos;:[21,22,23,24]&#125;)</span><br><span class="line">df2=pd.DataFrame(&#123;&apos;key&apos;:[1,2,3,4],</span><br><span class="line">                  &apos;3&apos;:[31,32,33,34],</span><br><span class="line">                  &apos;4&apos;:[41,42,43,44]&#125;)</span><br><span class="line">print(df1)</span><br><span class="line">print(df2)</span><br><span class="line">print(pd.merge(df1,df2,on=&apos;key&apos;))  # 根据key相同的行进行横向合并，还可以加参数how=[&apos;left&apos;,&apos;right&apos;,&apos;inner&apos;,&apos;outer&apos;]，分别表示只考虑左边右边，默认为inner，outer为用空值补全；可以用参数indicator=Ture显示merge偏向信息</span><br><span class="line">- - - - - - - - - - - - - - - - - - - - - </span><br><span class="line">    1   2  key</span><br><span class="line">0  11  21    1</span><br><span class="line">1  12  22    2</span><br><span class="line">2  13  23    3</span><br><span class="line">3  14  24    4</span><br><span class="line">    3   4  key</span><br><span class="line">0  31  41    1</span><br><span class="line">1  32  42    2</span><br><span class="line">2  33  43    3</span><br><span class="line">3  34  44    4</span><br><span class="line">    1   2  key   3   4</span><br><span class="line">0  11  21    1  31  41</span><br><span class="line">1  12  22    2  32  42</span><br><span class="line">2  13  23    3  33  43</span><br><span class="line">3  14  24    4  34  44</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">#### pandas plot</span><br></pre></td></tr></table></figure>
+<p>x=pd.DataFrame(np.random.randn(1000),index=np.arange(1000)) # 随机1000个数<br>x=x.cumsum() # 累加求和<br>plt.plot(x) # 绘制<br>plt.show()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![Figure_5.png](https://i.loli.net/2019/07/23/5d3675f598f3680394.png)</span><br></pre></td></tr></table></figure></p>
+<p>import pandas as pd<br>import numpy as np<br>import matplotlib.pyplot as plt<br>x=pd.DataFrame(np.random.randn(1000,4),index=np.arange(1000),columns=[‘A’,’B’,’C’,’D’]) # 随机生成4组随机数，行和列都已经指定<br>x=x.cumsum() # 累加求和<br>print(x.head()) # 打印前5行<br>plt.plot(x)<br>plt.show()</p>
+<hr>
+<pre><code>A         B         C         D
+</code></pre><p>0  1.659744  0.107002 -0.370865 -0.339613<br>1  0.735340 -0.106536  0.469888 -1.700528<br>2  2.015053 -0.821541 -0.234350 -1.447786<br>3  3.367802 -0.139346 -2.070282 -1.300126<br>4  2.802626 -0.284305 -3.187980 -1.908843<br><code>`</code><br><img src="https://i.loli.net/2019/07/23/5d3675f5991d230861.png" alt="Figure_6.png"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/22/吴恩达机器学习第三次编程作业-神经网络/" rel="next" title="吴恩达机器学习第三次编程作业-神经网络">
+                <i class="fa fa-chevron-left"></i> 吴恩达机器学习第三次编程作业-神经网络
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">liuyuqiang0</p>
+              <div class="site-description motion-element" itemprop="description">what you will be,the world will be</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">54</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">24</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/NYIST_TC_LYQ" title="CSDN &rarr; https://blog.csdn.net/NYIST_TC_LYQ" rel="noopener" target="_blank"><i class="fa fa-fw fa-CSDN"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" title="qq &rarr; tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>qq</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://nyoj.top" title="http://nyoj.top" rel="noopener" target="_blank">NYOJ</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python库之pandas"><span class="nav-number">1.</span> <span class="nav-text">Python库之pandas</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Series与DataFrame"><span class="nav-number">1.1.</span> <span class="nav-text">Series与DataFrame</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Series"><span class="nav-number">1.1.1.</span> <span class="nav-text">Series</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DataFrame"><span class="nav-number">1.1.2.</span> <span class="nav-text">DataFrame</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pandas选择数据"><span class="nav-number">1.2.</span> <span class="nav-text">pandas选择数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pandas赋值及操作"><span class="nav-number">1.3.</span> <span class="nav-text">pandas赋值及操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pandas处理丢失数据"><span class="nav-number">1.4.</span> <span class="nav-text">pandas处理丢失数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pandas读取及写入文件"><span class="nav-number">1.5.</span> <span class="nav-text">pandas读取及写入文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pandas数据合并"><span class="nav-number">1.6.</span> <span class="nav-text">pandas数据合并</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pandas合并merge"><span class="nav-number">1.7.</span> <span class="nav-text">pandas合并merge</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liuyuqiang0</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+  
+  <script>
+    (function () {
+
+      firebase.initializeApp({
+        apiKey: '',
+        projectId: ''
+      })
+
+      function getCount(doc, increaseCount) {
+        //increaseCount will be false when not in article page
+
+        return doc.get().then(function (d) {
+          var count
+          if (!d.exists) { //has no data, initialize count
+            if (increaseCount) {
+              doc.set({
+                count: 1
+              })
+              count = 1
+            }
+            else {
+              count = 0
+            }
+          }
+          else { //has data
+            count = d.data().count
+            if (increaseCount) {
+              if (!(window.localStorage && window.localStorage.getItem(title))) { //if first view this article
+                doc.set({ //increase count
+                  count: count + 1
+                })
+                count++
+              }
+            }
+          }
+          if (window.localStorage && increaseCount) { //mark as visited
+            localStorage.setItem(title, true)
+          }
+
+          return count
+        })
+      }
+
+      function appendCountTo(el) {
+        return function (count) {
+          $(el).append(
+            $('<span>').addClass('post-visitors-count').append(
+              $('<span>').addClass('post-meta-divider').text('|')
+            ).append(
+              $('<span>').addClass('post-meta-item-icon').append(
+                $('<i>').addClass('fa fa-users')
+              )
+              ).append($('<span>').text('Views ' + count))
+          )
+        }
+      }
+
+      var db = firebase.firestore()
+      var articles = db.collection('articles')
+
+      //https://hexo.io/docs/variables.html
+      var isPost = 'Pandas库学习'.length > 0
+      var isArchive = '' === 'true'
+      var isCategory = ''.length > 0
+      var isTag = ''.length > 0
+
+      if (isPost) { //is article page
+        var title = 'Pandas库学习'
+        var doc = articles.doc(title)
+
+        getCount(doc, true).then(appendCountTo($('.post-meta')))
+      }
+      else if (!isArchive && !isCategory && !isTag) { //is index page
+        var titles = [] //array to titles
+
+        var postsstr = '' //if you have a better way to get titles of posts, please change it
+        eval(postsstr)
+
+        var promises = titles.map(function (title) {
+          return articles.doc(title)
+        }).map(function (doc) {
+          return getCount(doc)
+        })
+        Promise.all(promises).then(function (counts) {
+          var metas = $('.post-meta')
+          counts.forEach(function (val, idx) {
+            appendCountTo(metas[idx])(val)
+          })
+        })
+      }
+    })()
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

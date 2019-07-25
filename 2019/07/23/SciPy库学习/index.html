@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+    
+
+    
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Times New Roman:300,300italic,400,400italic,700,700italicTimes New Roman:300,300italic,400,400italic,700,700italicTimes New Roman:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Python库之SciPy工具：Pycharm2019.01，Python3.5   参考资料：Scipy Lecture Notes  关于Scipy Scipy包中有许多工具用来解决科学计算的一些共同问题。不同的子模块负责不同的应用。比如插值、拟合、最优化、图像处理、数值计算以及特殊函数等等。    Scipy中许多模块都是基于numpy的，scipy命名空间中许多主要的函数实际上就是nump">
+<meta name="keywords" content="学习笔记,Python,机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SciPy库学习">
+<meta property="og:url" content="http://sfz-lyq.cn/2019/07/23/SciPy库学习/index.html">
+<meta property="og:site_name" content="种花家">
+<meta property="og:description" content="Python库之SciPy工具：Pycharm2019.01，Python3.5   参考资料：Scipy Lecture Notes  关于Scipy Scipy包中有许多工具用来解决科学计算的一些共同问题。不同的子模块负责不同的应用。比如插值、拟合、最优化、图像处理、数值计算以及特殊函数等等。    Scipy中许多模块都是基于numpy的，scipy命名空间中许多主要的函数实际上就是nump">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/07/23/5d370585e4b6652582.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/24/5d37b4eac692090537.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/24/5d37c4a47fb5b32171.png">
+<meta property="og:updated_time" content="2019-07-24T06:56:54.631Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SciPy库学习">
+<meta name="twitter:description" content="Python库之SciPy工具：Pycharm2019.01，Python3.5   参考资料：Scipy Lecture Notes  关于Scipy Scipy包中有许多工具用来解决科学计算的一些共同问题。不同的子模块负责不同的应用。比如插值、拟合、最优化、图像处理、数值计算以及特殊函数等等。    Scipy中许多模块都是基于numpy的，scipy命名空间中许多主要的函数实际上就是nump">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/23/5d370585e4b6652582.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://sfz-lyq.cn/2019/07/23/SciPy库学习/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>SciPy库学习 | 种花家</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">种花家</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">null   =   *</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sfz-lyq.cn/2019/07/23/SciPy库学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liuyuqiang0">
+      <meta itemprop="description" content="what you will be,the world will be">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="种花家">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SciPy库学习
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-23 14:13:00" itemprop="dateCreated datePublished" datetime="2019-07-23T14:13:00+08:00">2019-07-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-24 14:56:54" itemprop="dateModified" datetime="2019-07-24T14:56:54+08:00">2019-07-24</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习笔记/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Python库之SciPy"><a href="#Python库之SciPy" class="headerlink" title="Python库之SciPy"></a><center>Python库之SciPy</center></h3><p>工具：Pycharm2019.01，Python3.5  </p>
+<p>参考资料：<a href="http://scipy-lectures.org/index.html" target="_blank" rel="noopener">Scipy Lecture Notes</a></p>
+<hr>
+<h4 id="关于Scipy"><a href="#关于Scipy" class="headerlink" title="关于Scipy"></a>关于Scipy</h4><ul>
+<li>Scipy包中有许多工具用来解决科学计算的一些共同问题。不同的子模块负责不同的应用。比如插值、拟合、最优化、图像处理、数值计算以及特殊函数等等。   </li>
+<li>Scipy中许多模块都是基于numpy的，scipy命名空间中许多主要的函数实际上就是numpy函数比如scipy.cos就是np.cos，故通常一起导入numpy库和scipy库</li>
+</ul>
+<h4 id="File-input-output-scipy-io"><a href="#File-input-output-scipy-io" class="headerlink" title="File input/output: scipy.io"></a>File input/output: scipy.io</h4><p><code>import numpy as np</code><br><code>from scipy import io as sio</code>  </p>
+<ol>
+<li><code>sio.savemat(&#39;file_path&#39;,{&#39;key&#39;,value})</code> : 将一个用命名和数组的字典保存到matlab样式的.mat文件中。  </li>
+<li><code>sio.loadmat(&#39;file_path&#39;)</code>：导入.mat格式的文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">from scipy import io as sio</span><br><span class="line">a = np.ones((3, 3))</span><br><span class="line">sio.savemat(&apos;file.mat&apos;,&#123;&apos;a&apos;:a&#125;) # 将命名为‘a’的字典保存为.mat格式的文件，默认保存到当前目录下，(.mat)后缀可以不加</span><br><span class="line">data = sio.loadmat(&apos;file.mat&apos;)</span><br><span class="line">print(data[&apos;a&apos;])</span><br><span class="line">- - - - - - - - - </span><br><span class="line">[[1. 1. 1.]</span><br><span class="line"> [1. 1. 1.]</span><br><span class="line"> [1. 1. 1.]]</span><br></pre></td></tr></table></figure>
+<h4 id="Linear-algebra-operations-scipy-linalg"><a href="#Linear-algebra-operations-scipy-linalg" class="headerlink" title="Linear algebra operations: scipy.linalg"></a>Linear algebra operations: scipy.linalg</h4><p>线形代数运算<br><code>import numpy as np</code><br><code>from scipy import linalg</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a=np.array([[1,2],[3,4]])</span><br><span class="line">print(linalg.det(a))  # 求方阵的行列式，要求必须是方阵</span><br><span class="line">print(linalg.inv(a)) # 求逆，必须可逆，否则报错提示奇异(singular不可逆)矩阵</span><br><span class="line">print(np.allclose(np.dot(a,linalg.inv(a)),np.eye(2))) # 判断是否为单位矩阵</span><br><span class="line">- - - - - - - - </span><br><span class="line">-2.0</span><br><span class="line">[[-2.   1. ]</span><br><span class="line"> [ 1.5 -0.5]]</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
+<p>奇异值分解：<br>关于奇异值分解：<a href="https://www.cnblogs.com/tgycoder/p/6266786.html" target="_blank" rel="noopener">SVD简介</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">from scipy import linalg</span><br><span class="line">arr = np.arange(9).reshape((3, 3)) + np.diag([1, 0, 1])</span><br><span class="line">print(arr)</span><br><span class="line">uarr, spec, vharr = linalg.svd(arr)  # uarr应该是伪逆</span><br></pre></td></tr></table></figure></p>
+<h4 id="Interpolation-scipy-interpolate"><a href="#Interpolation-scipy-interpolate" class="headerlink" title="Interpolation: scipy.interpolate"></a><a href="http://scipy-lectures.org/intro/scipy.html#interpolation-scipy-interpolate" target="_blank" rel="noopener">Interpolation: scipy.interpolate</a></h4><p>插值。<br>没看懂。<br>代码：<a href="http://scipy-lectures.org/intro/scipy/auto_examples/plot_interpolation.html#a-demo-of-1d-interpolation" target="_blank" rel="noopener">A demo of 1D interpolation</a></p>
+<h4 id="Optimization-and-fit-scipy-optimize"><a href="#Optimization-and-fit-scipy-optimize" class="headerlink" title="Optimization and fit: scipy.optimize"></a>Optimization and fit: scipy.optimize</h4><p>scipy.optimize提供一种算法来最小化函数值(规模或多维度)，曲线拟合和根查找<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import scipy.optimize as opt</span><br></pre></td></tr></table></figure></p>
+<h5 id="Curve-fitting"><a href="#Curve-fitting" class="headerlink" title="Curve fitting"></a>Curve fitting</h5><p>曲线拟合，这里以sin()曲线为例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def test_func(x, a, b):  # 定义函数</span><br><span class="line">    return a * np.sin(b * x)</span><br><span class="line">x_data = np.linspace(-5, 5, num=50)</span><br><span class="line">y_data = 2.9 * np.sin(1.5 * x_data) + np.random.normal(size=50) # sin函数存在偏差</span><br><span class="line">params, params_covariance =opt.curve_fit(test_func, x_data, y_data, p0=[2, 2]) # 求上面函数参数a，b</span><br><span class="line">plt.scatter(x_data,y_data,label=&apos;Data&apos;)</span><br><span class="line">plt.legend(loc=&apos;upper right&apos;)</span><br><span class="line">plt.plot(x_data,test_func(x_data,params[0],params[1]),label=&apos;fitted function&apos;) # 拟合</span><br><span class="line">plt.legend(loc=&apos;upper right&apos;)</span><br><span class="line">plt.show() # 显示效果如下</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://i.loli.net/2019/07/23/5d370585e4b6652582.png" alt="Figure_7.png"></p>
+<h5 id="Finding-the-minimum-of-a-scalar-function"><a href="#Finding-the-minimum-of-a-scalar-function" class="headerlink" title="Finding the minimum of a scalar function"></a>Finding the minimum of a scalar function</h5><p>寻找标量函数最小值。<br>例如：<br>下面函数全局最优(小)值为-1.3，而局部最优值大概3.8。<br>用<code>opt.minimize()</code>函数，需要定义函数f()，以及传入起点坐标x0，返回找到的最小值信息（包括函数值，坐标等）。<br>为什么说是局部最优呢，当x0=5时，返回的函数值是8.3，位于x=3.83处。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def f(x):</span><br><span class="line">    return x**2 + 10*np.sin(x）</span><br><span class="line">x = np.arange(-10, 10, 0.1)</span><br><span class="line">plt.plot(x, f(x)) </span><br><span class="line">plt.show() </span><br><span class="line">result=opt.minimize(f,x0=0) # 寻找局部最小值的x坐标</span><br><span class="line">print(result) # 打印返回结果信息，</span><br><span class="line">- - - - - - - - - - -  </span><br><span class="line">   fun: -7.945823375615215  # 局部最小值</span><br><span class="line"> hess_inv: array([[0.08589237]])</span><br><span class="line">      jac: array([-1.1920929e-06])</span><br><span class="line">  message: &apos;Optimization terminated successfully.&apos;</span><br><span class="line">     nfev: 18</span><br><span class="line">      nit: 5</span><br><span class="line">     njev: 6</span><br><span class="line">   status: 0</span><br><span class="line">  success: True</span><br><span class="line">        x: array([-1.30644012])  # 局部最小值的坐标</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://i.loli.net/2019/07/24/5d37b4eac692090537.png" alt="Figure_8.png"></p>
+<p>如果我们不知道全局最优点附近信息也就无法合理选择起点X0了，而<code>opt.basinhopping()</code>函数可以找到全局最优解。将上面<code>opt.minimize(f,x0=0)</code>替换成<code>opt.basinhopping(f,x0)</code>即可，x0还是需要赋初值，经测试当x0=7时找到的是全局最优(-1.3,-7.9)，而当x0=5时找到的是局部最优值(3.8,8.3)，故为了找到全局最优保险的方法还是需要多试几个参数。</p>
+<p>试试<code>opt.minimize_scalar()</code>方法：能找到全局最优解<br><code>opt.minimize_scalar()</code>是只有一个变量时的最小函数值，而<code>opt.minimize()</code>是变量作为一个参数向量传进去的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def f(x):</span><br><span class="line">    return x**2 + 10*np.sin(x)</span><br><span class="line">x = np.arange(-10, 10, 0.1)</span><br><span class="line">result=opt.minimize_scalar(f)</span><br><span class="line">print(result.x, result.fun)</span><br><span class="line">- - - - - - - - - - - - - - - -  - - - - - </span><br><span class="line">-1.3064400120612139 -7.945823375615284</span><br></pre></td></tr></table></figure>
+<h5 id="Finding-the-roots-of-a-scalar-function"><a href="#Finding-the-roots-of-a-scalar-function" class="headerlink" title="Finding the roots of a scalar function"></a>Finding the roots of a scalar function</h5><p>需求：想找到x=？时，f(x)=0。<br>方法：opt.root(f,x0)，x0需要赋初值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def f(x):</span><br><span class="line">    return x**2 + 10*np.sin(x)</span><br><span class="line">x = np.arange(-10, 10, 0.1)</span><br><span class="line">root=opt.root(f,x0=-3) # 设置起点，只能找到一个，要找到另外一个需要调参使得x0=1</span><br><span class="line">print(root.x,root.fun)</span><br><span class="line">root=opt.root(f,x0=1)</span><br><span class="line">print(root.x,root.fun)</span><br><span class="line">- - - - - - - - - - - - - - - - -</span><br><span class="line">[-2.47948183] [-1.77635684e-15]</span><br><span class="line">[0.] [0.]</span><br></pre></td></tr></table></figure></p>
+<p>将以上三个函数绘制到一张图中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">def f(x): # 定义函数</span><br><span class="line">    return x**2 + 10*np.sin(x)</span><br><span class="line">x = np.arange(-10, 10, 0.1)</span><br><span class="line"></span><br><span class="line"># Global optimization</span><br><span class="line">grid = (-10, 10, 0.1)</span><br><span class="line">xmin_global = opt.brute(f, (grid, )) # 暴力找出参数列表中所得解的最优值</span><br><span class="line">print(&quot;Global minima found %s&quot; % xmin_global)</span><br><span class="line"></span><br><span class="line"># Constrain optimization</span><br><span class="line">xmin_local = opt.fminbound(f, 0, 10) # 在取区间(0,10)找局部最优解</span><br><span class="line">print(&quot;Local minimum found %s&quot; % xmin_local)</span><br><span class="line"></span><br><span class="line">root = opt.root(f, 1)  # our initial guess is 1</span><br><span class="line">print(&quot;First root found %s&quot; % root.x)</span><br><span class="line">root2 = opt.root(f, -2.5)</span><br><span class="line">print(&quot;Second root found %s&quot; % root2.x)</span><br><span class="line"></span><br><span class="line">fig = plt.figure(figsize=(6, 4)) # 新建画布对象指定size</span><br><span class="line">ax = fig.add_subplot(111) # 将画布分成一行一列指定第一块区域作为对象赋给ax</span><br><span class="line"></span><br><span class="line"># Plot the function</span><br><span class="line">ax.plot(x, f(x), &apos;b-&apos;, label=&quot;f(x)&quot;)</span><br><span class="line"></span><br><span class="line"># Plot the minima</span><br><span class="line">xmins = np.array([xmin_global[0], xmin_local])</span><br><span class="line">ax.plot(xmins, f(xmins), &apos;go&apos;, label=&quot;Minima&quot;)</span><br><span class="line"></span><br><span class="line"># Plot the roots</span><br><span class="line">roots = np.array([root.x, root2.x])</span><br><span class="line">ax.plot(roots, f(roots), &apos;kv&apos;, label=&quot;Roots&quot;)</span><br><span class="line"></span><br><span class="line"># Decorate the figure</span><br><span class="line">ax.legend(loc=&apos;best&apos;) # 自适应选择位置</span><br><span class="line">ax.set_xlabel(&apos;x&apos;)</span><br><span class="line">ax.set_ylabel(&apos;f(x)&apos;)</span><br><span class="line">ax.axhline(0, color=&apos;gray&apos;) # 设置y=0画横线</span><br><span class="line">plt.show()</span><br><span class="line">- - - - - - - - - - - - - - - - - - </span><br><span class="line">Global minima found [-1.30641113]</span><br><span class="line">Local minimum found 3.8374671194983834</span><br><span class="line">First root found [0.]</span><br><span class="line">Second root found [-2.47948183]</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://i.loli.net/2019/07/24/5d37c4a47fb5b32171.png" alt="Figure_9.png">  </p>
+<p>未完待续…..</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/22/Pandas库学习/" rel="next" title="Pandas库学习">
+                <i class="fa fa-chevron-left"></i> Pandas库学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/24/Scikit-learn/" rel="prev" title="scikit-learn: machine learning in Python">
+                scikit-learn: machine learning in Python <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">liuyuqiang0</p>
+              <div class="site-description motion-element" itemprop="description">what you will be,the world will be</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">56</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/NYIST_TC_LYQ" title="CSDN &rarr; https://blog.csdn.net/NYIST_TC_LYQ" rel="noopener" target="_blank"><i class="fa fa-fw fa-CSDN"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" title="qq &rarr; tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>qq</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://nyoj.top" title="http://nyoj.top" rel="noopener" target="_blank">NYOJ</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python库之SciPy"><span class="nav-number">1.</span> <span class="nav-text">Python库之SciPy</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于Scipy"><span class="nav-number">1.1.</span> <span class="nav-text">关于Scipy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#File-input-output-scipy-io"><span class="nav-number">1.2.</span> <span class="nav-text">File input/output: scipy.io</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linear-algebra-operations-scipy-linalg"><span class="nav-number">1.3.</span> <span class="nav-text">Linear algebra operations: scipy.linalg</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Interpolation-scipy-interpolate"><span class="nav-number">1.4.</span> <span class="nav-text">Interpolation: scipy.interpolate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Optimization-and-fit-scipy-optimize"><span class="nav-number">1.5.</span> <span class="nav-text">Optimization and fit: scipy.optimize</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Curve-fitting"><span class="nav-number">1.5.1.</span> <span class="nav-text">Curve fitting</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Finding-the-minimum-of-a-scalar-function"><span class="nav-number">1.5.2.</span> <span class="nav-text">Finding the minimum of a scalar function</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Finding-the-roots-of-a-scalar-function"><span class="nav-number">1.5.3.</span> <span class="nav-text">Finding the roots of a scalar function</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liuyuqiang0</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+  
+  <script>
+    (function () {
+
+      firebase.initializeApp({
+        apiKey: '',
+        projectId: ''
+      })
+
+      function getCount(doc, increaseCount) {
+        //increaseCount will be false when not in article page
+
+        return doc.get().then(function (d) {
+          var count
+          if (!d.exists) { //has no data, initialize count
+            if (increaseCount) {
+              doc.set({
+                count: 1
+              })
+              count = 1
+            }
+            else {
+              count = 0
+            }
+          }
+          else { //has data
+            count = d.data().count
+            if (increaseCount) {
+              if (!(window.localStorage && window.localStorage.getItem(title))) { //if first view this article
+                doc.set({ //increase count
+                  count: count + 1
+                })
+                count++
+              }
+            }
+          }
+          if (window.localStorage && increaseCount) { //mark as visited
+            localStorage.setItem(title, true)
+          }
+
+          return count
+        })
+      }
+
+      function appendCountTo(el) {
+        return function (count) {
+          $(el).append(
+            $('<span>').addClass('post-visitors-count').append(
+              $('<span>').addClass('post-meta-divider').text('|')
+            ).append(
+              $('<span>').addClass('post-meta-item-icon').append(
+                $('<i>').addClass('fa fa-users')
+              )
+              ).append($('<span>').text('Views ' + count))
+          )
+        }
+      }
+
+      var db = firebase.firestore()
+      var articles = db.collection('articles')
+
+      //https://hexo.io/docs/variables.html
+      var isPost = 'SciPy库学习'.length > 0
+      var isArchive = '' === 'true'
+      var isCategory = ''.length > 0
+      var isTag = ''.length > 0
+
+      if (isPost) { //is article page
+        var title = 'SciPy库学习'
+        var doc = articles.doc(title)
+
+        getCount(doc, true).then(appendCountTo($('.post-meta')))
+      }
+      else if (!isArchive && !isCategory && !isTag) { //is index page
+        var titles = [] //array to titles
+
+        var postsstr = '' //if you have a better way to get titles of posts, please change it
+        eval(postsstr)
+
+        var promises = titles.map(function (title) {
+          return articles.doc(title)
+        }).map(function (doc) {
+          return getCount(doc)
+        })
+        Promise.all(promises).then(function (counts) {
+          var metas = $('.post-meta')
+          counts.forEach(function (val, idx) {
+            appendCountTo(metas[idx])(val)
+          })
+        })
+      }
+    })()
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

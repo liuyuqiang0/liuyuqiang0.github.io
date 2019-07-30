@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+    
+
+    
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Times New Roman:300,300italic,400,400italic,700,700italicTimes New Roman:300,300italic,400,400italic,700,700italicTimes New Roman:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="学习地址代价函数在之前的前向传播算法中并没于介绍神经网络是如何训练参数的，而作业也是直接给出了&amp;theta;1和&amp;theta;2。那么这里介绍神经网络的代价函数就是这个目的。定义：      L：神经网络总层数      sl：第l层的单元数，不包括bias unit在内 二分类问题输出只有0和1，但多元分类问题输出可能是个向量也可能是个矩阵，这里就先用下图为例，输出是一个4维向量 神经网络代价函">
+<meta name="keywords" content="学习笔记,机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="神经网络参数的反向传播算法">
+<meta property="og:url" content="http://sfz-lyq.cn/2019/07/29/神经网络参数的反向传播算法/index.html">
+<meta property="og:site_name" content="种花家">
+<meta property="og:description" content="学习地址代价函数在之前的前向传播算法中并没于介绍神经网络是如何训练参数的，而作业也是直接给出了&amp;theta;1和&amp;theta;2。那么这里介绍神经网络的代价函数就是这个目的。定义：      L：神经网络总层数      sl：第l层的单元数，不包括bias unit在内 二分类问题输出只有0和1，但多元分类问题输出可能是个向量也可能是个矩阵，这里就先用下图为例，输出是一个4维向量 神经网络代价函">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3e4a733a89d29057.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3e4fd74dd0e36818.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3e56d1ba02418982.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3e57ba630bb65590.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3e62512d6d194144.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3e693128cbf17961.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3e94b32da1941274.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3ea10938ff424869.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3ea6c63625485539.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3ea6c62261433560.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3eaa259ce1e67757.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3eaa258db9847713.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3eaa7dec8da36393.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3eab6b3767473775.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3eafe8d3d9240264.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3eb41f9e37855213.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3eb6788a0ca86336.png">
+<meta property="og:updated_time" content="2019-07-29T09:09:45.079Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="神经网络参数的反向传播算法">
+<meta name="twitter:description" content="学习地址代价函数在之前的前向传播算法中并没于介绍神经网络是如何训练参数的，而作业也是直接给出了&amp;theta;1和&amp;theta;2。那么这里介绍神经网络的代价函数就是这个目的。定义：      L：神经网络总层数      sl：第l层的单元数，不包括bias unit在内 二分类问题输出只有0和1，但多元分类问题输出可能是个向量也可能是个矩阵，这里就先用下图为例，输出是一个4维向量 神经网络代价函">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/29/5d3e4a733a89d29057.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://sfz-lyq.cn/2019/07/29/神经网络参数的反向传播算法/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>神经网络参数的反向传播算法 | 种花家</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">种花家</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">null   =   *</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sfz-lyq.cn/2019/07/29/神经网络参数的反向传播算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liuyuqiang0">
+      <meta itemprop="description" content="what you will be,the world will be">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="种花家">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">神经网络参数的反向传播算法
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-29 09:13:00 / Modified: 17:09:45" itemprop="dateCreated datePublished" datetime="2019-07-29T09:13:00+08:00">2019-07-29</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="学习地址"><a href="#学习地址" class="headerlink" title="学习地址"></a><center><a href="https://study.163.com/course/courseLearn.htm?courseId=1004570029#/learn/video?lessonId=1051775907&amp;courseId=1004570029" target="_blank" rel="noopener">学习地址</a></center></h3><h4 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h4><p>在之前的前向传播算法中并没于介绍神经网络是如何训练参数的，而作业也是直接给出了&theta;<sup>1</sup>和&theta;<sup>2</sup>。那么这里介绍神经网络的代价函数就是这个目的。<br>定义：<br>      L：神经网络总层数<br>      s<sub>l</sub>：第l层的单元数，不包括bias unit在内</p>
+<p>二分类问题输出只有0和1，但多元分类问题输出可能是个向量也可能是个矩阵，这里就先用下图为例，输出是一个4维<strong>向量</strong><br><img src="https://i.loli.net/2019/07/29/5d3e4a733a89d29057.png" alt="2019-07-29 09-21-12 的屏幕截图.png"></p>
+<p>神经网络代价函数：<br><img src="https://i.loli.net/2019/07/29/5d3e4fd74dd0e36818.png" alt="2019-07-29 09-45-49 的屏幕截图.png"><br>关于神经网络代价函数解释：</p>
+<ul>
+<li>在神经网络问题中，应用的是多元分类问题，输出一个多维向量，那么假设函数h<sub>&theta;</sub>(X)&isin;R<sup>K</sup>。(h<sub>&theta;</sub>(X))<sub>i</sub>表示第i个输出的假设函数。我们在多元分类与前向传播算法中就是根据这个值确定属于哪一分类的。</li>
+<li>y<sub>k</sub><sup>(i)</sup>表示第i的样本的输出，也是一个binary vector如上图。</li>
+<li>最后一项是正则化项，最初(逻辑回归)在接触正则化项的时候只是为了防止过拟合现象，这里本质也还是逻辑回归。有时候正则化项也叫惩罚项，老板是这样叫的。</li>
+<li>为什么正则化项是三层循环呢？用上面的神经网络图来解释，就相当于把每条线上的权值求平方和而已，一般不惩罚第0项&theta;，但其实惩罚也没多大差别，只不过不惩罚&theta;<sub>0</sub>更常用些。</li>
+</ul>
+<h4 id="反向传播算法-Backpropagation"><a href="#反向传播算法-Backpropagation" class="headerlink" title="反向传播算法 Backpropagation"></a><font color="red">反向传播算法 Backpropagation</font></h4><p>视频地址：<a href="https://study.163.com/course/courseLearn.htm?courseId=1004570029#/learn/video?lessonId=1051773834&amp;courseId=1004570029" target="_blank" rel="noopener">反向传播算法</a> ，比较复杂<br>目的：最小化代价函数。<br>TODO：代码实现计算代价函数J(&theta;)，推导并实现出偏导项<br><img src="https://i.loli.net/2019/07/29/5d3e56d1ba02418982.png" alt="2019-07-29 10-15-33 的屏幕截图.png"><br>梯度计算方法如下：这里参照前向传播作业可以直接用矩阵实现<br>h<sub>&theta;</sub>(x)叫<a href="https://www.cnblogs.com/missidiot/p/9378079.html" target="_blank" rel="noopener">激活值</a><br><img src="https://i.loli.net/2019/07/29/5d3e57ba630bb65590.png" alt="2019-07-29 10-17-55 的屏幕截图.png"></p>
+<p>反向传播算法概念与计算方法:<br><img src="https://i.loli.net/2019/07/29/5d3e62512d6d194144.png" alt="2019-07-29 11-04-33 的屏幕截图.png"><br>解释：</p>
+<ul>
+<li>&delta;<sub>j</sub><sup style="margin-left:-5px">(l)</sup>表示第i层第j个节点误差，即a<sub>j</sub><sup style="margin-left:-5px">(i)</sup>-y<sub>j</sub>。  </li>
+<li>知道了最后一层的误差就可以推出前面所有层的误差，如上计算公式</li>
+<li>g&prime;(z<sup>(3)</sup>)表示导数项，z=&theta;<sup>T</sup>X；h<sub>&theta;</sub>(X)=g(z)=a=sigmoid(z)=1/(1+e<sup>-z</sup>)。而由微积分对z求导可以推出g&prime;(z<sup>(3)</sup>)=a<sup>(3)</sup>  (1-a<sup>(3)</sup>)，其余同理。这里<code>.*</code>表示普通元素对应相乘。</li>
+</ul>
+<p>计算方法：<br><img src="https://i.loli.net/2019/07/29/5d3e693128cbf17961.png" alt="2019-07-29 11-29-06 的屏幕截图.png"></p>
+<h4 id="理解反向传播算法"><a href="#理解反向传播算法" class="headerlink" title="理解反向传播算法"></a>理解反向传播算法</h4><p>Cost(i)表示了神经网络预测样本值的准确程度，即网络的输出值与实际y值的偏差程度<br>反向传播算法实际上是在计算&delta;<sub>j</sub><sup style="margin-left:-5px">(l)</sup>，而&delta;<sub>j</sub><sup style="margin-left:-5px">(l)</sup>恰恰等于cost(i)关于z<sub>j</sub><sup style="margin-left:-5px">(l)</sup>的偏导数，其中对于只有一个样本输入来说，cost(i)已经给出如下：<br><img src="https://i.loli.net/2019/07/29/5d3e94b32da1941274.png" alt="2019-07-29 14-39-38 的屏幕截图.png"><br><img src="https://i.loli.net/2019/07/29/5d3ea10938ff424869.png" alt="2019-07-29 15-32-15 的屏幕截图.png"></p>
+<h4 id="展开参数"><a href="#展开参数" class="headerlink" title="展开参数"></a>展开参数</h4><p>为了计算方便将所有参数矩阵展开成向量形式，传入函数进行计算<br><img src="https://i.loli.net/2019/07/29/5d3ea6c63625485539.png" alt="2019-07-29 15-56-23 的屏幕截图.png"><br><img src="https://i.loli.net/2019/07/29/5d3ea6c62261433560.png" alt="2019-07-29 15-56-44 的屏幕截图.png"></p>
+<h4 id="梯度检测"><a href="#梯度检测" class="headerlink" title="梯度检测"></a>梯度检测</h4><p>为了保证正确实现了梯度，而且每次下降都是正确的，不至于最终得出结果和实际误差存在量级别的差异。<br>梯度检测是计算量非常大，在验证了反向传播算法所计算的梯度和梯度检测相差不多时就可以关闭梯度检测再直接用反向传播算法训练分类器。<br><img src="https://i.loli.net/2019/07/29/5d3eaa259ce1e67757.png" alt="2019-07-29 16-10-49 的屏幕截图.png"><br><img src="https://i.loli.net/2019/07/29/5d3eaa258db9847713.png" alt="2019-07-29 16-09-57 的屏幕截图.png"><br><img src="https://i.loli.net/2019/07/29/5d3eaa7dec8da36393.png" alt="2019-07-29 16-12-37 的屏幕截图.png"><br><img src="https://i.loli.net/2019/07/29/5d3eab6b3767473775.png" alt="2019-07-29 16-16-12 的屏幕截图.png"></p>
+<h4 id="随机初始化"><a href="#随机初始化" class="headerlink" title="随机初始化"></a>随机初始化</h4><p>高级优化算法中会默认我们所传入的参数是会提供一些初始值的。<br>问题：如果对参数进行初始化？  </p>
+<p><font color="red" size="5px">思想1：全部赋为0</font> ，在神经网络中并不适用   </p>
+<p><font color="red" size="5px">思想2：随机初始化</font><br><img src="https://i.loli.net/2019/07/29/5d3eafe8d3d9240264.png" alt="2019-07-29 16-35-45 的屏幕截图.png"></p>
+<h4 id="汇总"><a href="#汇总" class="headerlink" title="汇总"></a>汇总</h4><ol>
+<li>选择神经网络结构：输入单元个数为单个样本输入X<sup>(i)</sup>的维数；输出单元的个数[1-10]都可以，但一般用向量且对应位为1其余为0表示i.e，[0,0,0,1,0,0]<sup>T</sup>；隐藏单元通常默认只有一层，但也可不止一层，这样每个隐藏层单元数要相同，通常等于特征数，或者是特征数的倍数个。</li>
+<li>训练神经网络：随机初始化权重&theta;为接近0的数；实现前向传播算法得到h<sub>&theta;</sub>((x<sup>(i)</sup>))；计算代价函数；实现反向传播算法得到偏导数项；用梯度检查比较得出的偏导数项，确定偏差不大则屏蔽梯度检查部分；使用梯度下降或更高级的优化方法来最小化J(&theta;)并得到参数&theta;<br><img src="https://i.loli.net/2019/07/29/5d3eb41f9e37855213.png" alt="2019-07-29 16-53-29 的屏幕截图.png"><br><img src="https://i.loli.net/2019/07/29/5d3eb6788a0ca86336.png" alt="2019-07-29 17-03-44 的屏幕截图.png"></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/28/南航第三周总结/" rel="next" title="南航第三周总结">
+                <i class="fa fa-chevron-left"></i> 南航第三周总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/30/吴恩达机器学习第五次编程作用-正则线性回归和偏差-方差/" rel="prev" title="吴恩达机器学习第五次编程作用-正则线性回归和偏差/方差">
+                吴恩达机器学习第五次编程作用-正则线性回归和偏差/方差 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">liuyuqiang0</p>
+              <div class="site-description motion-element" itemprop="description">what you will be,the world will be</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/NYIST_TC_LYQ" title="CSDN &rarr; https://blog.csdn.net/NYIST_TC_LYQ" rel="noopener" target="_blank"><i class="fa fa-fw fa-CSDN"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" title="qq &rarr; tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>qq</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://nyoj.top" title="http://nyoj.top" rel="noopener" target="_blank">NYOJ</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习地址"><span class="nav-number">1.</span> <span class="nav-text">学习地址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代价函数"><span class="nav-number">1.1.</span> <span class="nav-text">代价函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反向传播算法-Backpropagation"><span class="nav-number">1.2.</span> <span class="nav-text">反向传播算法 Backpropagation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#理解反向传播算法"><span class="nav-number">1.3.</span> <span class="nav-text">理解反向传播算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#展开参数"><span class="nav-number">1.4.</span> <span class="nav-text">展开参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度检测"><span class="nav-number">1.5.</span> <span class="nav-text">梯度检测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#随机初始化"><span class="nav-number">1.6.</span> <span class="nav-text">随机初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#汇总"><span class="nav-number">1.7.</span> <span class="nav-text">汇总</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liuyuqiang0</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+  
+  <script>
+    (function () {
+
+      firebase.initializeApp({
+        apiKey: '',
+        projectId: ''
+      })
+
+      function getCount(doc, increaseCount) {
+        //increaseCount will be false when not in article page
+
+        return doc.get().then(function (d) {
+          var count
+          if (!d.exists) { //has no data, initialize count
+            if (increaseCount) {
+              doc.set({
+                count: 1
+              })
+              count = 1
+            }
+            else {
+              count = 0
+            }
+          }
+          else { //has data
+            count = d.data().count
+            if (increaseCount) {
+              if (!(window.localStorage && window.localStorage.getItem(title))) { //if first view this article
+                doc.set({ //increase count
+                  count: count + 1
+                })
+                count++
+              }
+            }
+          }
+          if (window.localStorage && increaseCount) { //mark as visited
+            localStorage.setItem(title, true)
+          }
+
+          return count
+        })
+      }
+
+      function appendCountTo(el) {
+        return function (count) {
+          $(el).append(
+            $('<span>').addClass('post-visitors-count').append(
+              $('<span>').addClass('post-meta-divider').text('|')
+            ).append(
+              $('<span>').addClass('post-meta-item-icon').append(
+                $('<i>').addClass('fa fa-users')
+              )
+              ).append($('<span>').text('Views ' + count))
+          )
+        }
+      }
+
+      var db = firebase.firestore()
+      var articles = db.collection('articles')
+
+      //https://hexo.io/docs/variables.html
+      var isPost = '神经网络参数的反向传播算法'.length > 0
+      var isArchive = '' === 'true'
+      var isCategory = ''.length > 0
+      var isTag = ''.length > 0
+
+      if (isPost) { //is article page
+        var title = '神经网络参数的反向传播算法'
+        var doc = articles.doc(title)
+
+        getCount(doc, true).then(appendCountTo($('.post-meta')))
+      }
+      else if (!isArchive && !isCategory && !isTag) { //is index page
+        var titles = [] //array to titles
+
+        var postsstr = '' //if you have a better way to get titles of posts, please change it
+        eval(postsstr)
+
+        var promises = titles.map(function (title) {
+          return articles.doc(title)
+        }).map(function (doc) {
+          return getCount(doc)
+        })
+        Promise.all(promises).then(function (counts) {
+          var metas = $('.post-meta')
+          counts.forEach(function (val, idx) {
+            appendCountTo(metas[idx])(val)
+          })
+        })
+      }
+    })()
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

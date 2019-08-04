@@ -160,7 +160,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/08/02/5d43b02d25ac752590.png">
 <meta property="og:image" content="https://i.loli.net/2019/08/02/5d43de3a067ec20800.png">
 <meta property="og:image" content="https://i.loli.net/2019/08/02/5d43de3a149ee60570.png">
-<meta property="og:updated_time" content="2019-08-02T06:55:27.968Z">
+<meta property="og:updated_time" content="2019-08-02T08:57:31.915Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="应用机器学习建议">
 <meta name="twitter:description" content="学习地址决定下一步做什么例子，当实现了正则化线形回归，使用新的数据集测试假设函数，却发现偏差很大？如何解决？  获得更多训练样本（耗时耗力） 尝试更少的特征数据集 尝试更多的特征 添加多项式特征 减少或增大lambda  如何事半功倍，时间用在刀刃上？ 机器学习诊断法测试算法哪里出现问题，获得有意义的尝试和改进。 评估假设hypothesis 选取少量数据集 随机选择70%作为训练样本，另外30%">
@@ -445,7 +445,7 @@
                 
               
 
-              <time title="Created: 2019-08-02 09:53:00 / Modified: 14:55:27" itemprop="dateCreated datePublished" datetime="2019-08-02T09:53:00+08:00">2019-08-02</time>
+              <time title="Created: 2019-08-02 09:53:00 / Modified: 16:57:31" itemprop="dateCreated datePublished" datetime="2019-08-02T09:53:00+08:00">2019-08-02</time>
             
 
             
@@ -524,6 +524,7 @@
 <li>随机选择70%作为训练样本，另外30%作为测试样本</li>
 <li>用训练样本最小化代价函数得到参数</li>
 <li><strong>用测试样本计算误差</strong>，根据所用模型计算相应代价函数</li>
+<li>注意：参数是用训练样本得出的，再用参数计算交叉验证误差</li>
 </ul>
 <h4 id="模型选择和训练、验证、测试集"><a href="#模型选择和训练、验证、测试集" class="headerlink" title="模型选择和训练、验证、测试集"></a>模型选择和训练、验证、测试集</h4><p>模型选择相当于选择一个多项式h<sub>&theta;</sub>(X)=&theta;<sup>T</sup>X，其中如何选择X的次数degree呢？<br>我们选用不同的degree，用训练样本最小化代价函数即误差得到参数，然后用测试样本跑<strong>误差</strong>进行选择，选择<strong>测试样本误差最小</strong>的那个即可。<br>但这样存在一个问题，我们是用的是<strong>测试集</strong>进行误差评估，这样就过于乐观 了。<br><img src="https://i.loli.net/2019/08/02/5d43a1a5493c660376.png" alt="2019-08-02 10-27-36 的屏幕截图.png"></p>
 <p>为了评估假设函数，我们在之前的基础上做修改。<br>调整训练样本比例为60%，在用20%作为交叉验证集CV，最后20%作为测试集。<br>在模式选择即选择degree的时候用训练集训练参数，根据交叉验证集选择误差最小的 -&gt; the better choice<br><img src="https://i.loli.net/2019/08/02/5d43a4393124375025.png" alt="2019-08-02 10-46-15 的屏幕截图.png"><br><img src="https://i.loli.net/2019/08/02/5d43a4393e0a665751.png" alt="2019-08-02 10-47-03 的屏幕截图.png"></p>
@@ -662,7 +663,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-count">62</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

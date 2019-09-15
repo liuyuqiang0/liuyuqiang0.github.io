@@ -152,7 +152,8 @@
 <meta property="og:description" content="前言前一节在学完正则表达式后视频给了一个小练习：爬取某个网站的图片。就几行代码，不难。 自己本学期的一个小目标：做一个敏感信息过滤器。首先得学会语音和图片处理，然后使用模型训练过滤器，最后进行分类预测。核心在于训练数据抓取与处理，模型的选择。 本文，通过爬取某个网站的图片，初步接触爬虫技术。 步骤 导入相关Python包requests 选择要爬取的图片网站链接 分析网站源码观察图片链接特点 爬取">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/09/13/WN7tUJdFpca8nBy.png">
-<meta property="og:updated_time" content="2019-09-13T14:45:01.153Z">
+<meta property="og:image" content="https://i.loli.net/2019/09/15/nVAPt3f9Qb6OIdU.png">
+<meta property="og:updated_time" content="2019-09-15T11:04:10.933Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python爬虫小练习">
 <meta name="twitter:description" content="前言前一节在学完正则表达式后视频给了一个小练习：爬取某个网站的图片。就几行代码，不难。 自己本学期的一个小目标：做一个敏感信息过滤器。首先得学会语音和图片处理，然后使用模型训练过滤器，最后进行分类预测。核心在于训练数据抓取与处理，模型的选择。 本文，通过爬取某个网站的图片，初步接触爬虫技术。 步骤 导入相关Python包requests 选择要爬取的图片网站链接 分析网站源码观察图片链接特点 爬取">
@@ -437,12 +438,24 @@
                 
               
 
-              <time title="Created: 2019-09-13 22:02:00 / Modified: 22:45:01" itemprop="dateCreated datePublished" datetime="2019-09-13T22:02:00+08:00">2019-09-13</time>
+              <time title="Created: 2019-09-13 22:02:00" itemprop="dateCreated datePublished" datetime="2019-09-13T22:02:00+08:00">2019-09-13</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-09-15 19:04:10" itemprop="dateModified" datetime="2019-09-15T19:04:10+08:00">2019-09-15</time>
               
             
           </span>
@@ -518,9 +531,18 @@
 <h4 id="分析源码"><a href="#分析源码" class="headerlink" title="分析源码"></a>分析源码</h4><p>贴上部分源码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">            &lt;li&gt;&lt;a href=&quot;&quot;   &gt;&lt;img src=&quot;http://www.xiaohuar.com/skin/default/images/mr_2.gif&quot; width=&quot;61&quot; height=&quot;30&quot; /&gt;&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">            &lt;li&gt;&lt;a href=&quot;http://www.xiaohuar.com/hua/&quot;    &gt;&lt;img src=&quot;http://www.xiaohuar.com/skin/default/images/zx_2.gif&quot; width=&quot;61&quot; height=&quot;30&quot; /&gt;&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">             &lt;li&gt;&lt;a href=&quot;http://www.xiaohuar.com/2014.html&quot;&gt;&lt;img src=&quot;http://www.xiaohuar.com/skin/default/images/jx_2.gif&quot; width=&quot;61&quot; height=&quot;30&quot; /&gt;&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">              &lt;li&gt;&lt;a href=&quot;http://www.xiaohuar.com/xiaocao/&quot;   &gt;&lt;img src=&quot;http://www.xiaohuar.com/skin/default/images/jx_3.gif&quot; width=&quot;61&quot; height=&quot;30&quot; /&gt;&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">         &lt;/ul&gt;</span><br></pre></td></tr></table></figure></p>
 <p>我们需要的是.jpg格式的图片链接，而这些链接前缀为<code>src=&quot;&quot;</code>，我们只需要<code>&quot;&quot;</code>里面内容即可，但有的链接并不是完整http形式，如：<code>&lt;img width=&quot;210&quot; alt=&quot;烟台大学校花王煜&quot; src=&quot;/d/file/20190912/8774b906215adeae8963173b1e0df146.jpg&quot;&gt;</code>，故我们爬取之后需要加上网址前缀。</p>
 <h4 id="爬取网页源码"><a href="#爬取网页源码" class="headerlink" title="爬取网页源码"></a>爬取网页源码</h4><p>导入<code>requests</code>包之后，使用<code>requests.get(url)</code>即可获得链接资源信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resp=requests.get(url_1) # 获取源码</span><br><span class="line">we_data=resp.text  # 将源码信息保存下来</span><br><span class="line"># print(resp) # if net work well then except to see: &lt;Response [200]&gt;</span><br></pre></td></tr></table></figure></p>
-<h4 id="过滤图片链接"><a href="#过滤图片链接" class="headerlink" title="过滤图片链接"></a>过滤图片链接</h4><p>这是前一节正则表达式的概念。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">reg=re.compile(r&apos;src=&quot;(.+?.jpg)&quot;&apos;) # re.compile(r&apos;src=\&apos;(.+?.jpg)\&apos;&apos;)</span><br><span class="line">res=re.findall(reg,we_data) # 返回获取的网址列表</span><br><span class="line"># print(res)</span><br></pre></td></tr></table></figure></p>
+<h4 id="过滤图片链接"><a href="#过滤图片链接" class="headerlink" title="过滤图片链接"></a>过滤图片链接</h4><p>这是前一节<a href="https://sfz-lyq.cn/2019/09/12/Python%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/#more">正则表达式</a>的概念。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">reg=re.compile(r&apos;src=&quot;(.+?.jpg)&quot;&apos;) # re.compile(r&apos;src=\&apos;(.+?.jpg)\&apos;&apos;)</span><br><span class="line">res=re.findall(reg,we_data) # 返回获取的网址列表</span><br><span class="line"># print(res)</span><br></pre></td></tr></table></figure></p>
 <h4 id="获取图片信息并写入文件"><a href="#获取图片信息并写入文件" class="headerlink" title="获取图片信息并写入文件"></a>获取图片信息并写入文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">num=0 # 给图片编号</span><br><span class="line">for i in res:</span><br><span class="line">    if i.startswith(&apos;/d&apos;): # 如果链接不是完整的http形式，则手动加上前缀</span><br><span class="line">        i=&apos;http://www.xiaohuar.com&apos; +i # </span><br><span class="line">    # print(i)</span><br><span class="line">    b=requests.get(i) # 获取图片信息</span><br><span class="line">    with open(r&apos;./craw_practise1_xiaohua/%s.jpg&apos; %num,&apos;wb&apos;) as f: # 写入文件，需要新建文件夹</span><br><span class="line">        f.write(b.content)</span><br><span class="line">        f.close()</span><br><span class="line">        print(&apos;num_%s complete&apos; % num)</span><br><span class="line">        num=num+1</span><br></pre></td></tr></table></figure>
-<p>所爬取的图片就不放上来了。<br>在爬取其他网站时，稍加更改也有用，但有的图片过大，爬取很慢。需要使用<code>os</code>包和其他相关包改进，最后封装成脚本。还有很多需要学习。</p>
+<p>所爬取的图片就不放上来了。<br>在爬取其他网站时，稍加更改也有用，但有的图片过大，爬取很慢。需要使用<code>os</code>包和其他相关包改进，最后封装成脚本。还有很多需要学习。  </p>
+<p><a href="https://paste.ubuntu.com/p/qvT8TRvGxT/" target="_blank" rel="noopener">完整代码</a> </p>
+<h4 id="读取本地图片"><a href="#读取本地图片" class="headerlink" title="读取本地图片"></a>读取本地图片</h4><p>注意，我们所爬取的图片保存格式是<code>.jpg</code>，故在使用相关包时候留意是否只支持<code>.png</code>格式的图片。<br>我们可以在新建的本地文件夹下查看图片，也可以直接读取出来。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt # 图片处理包</span><br><span class="line"></span><br><span class="line">def show_picture(file,num):</span><br><span class="line">    for i in range(num):</span><br><span class="line">        path = file + str(i) + &apos;.jpg&apos;  # str(i) = (&apos;%d&apos; %i)</span><br><span class="line">        img=plt.imread(path) # 需要pillow包的支持，不然只能读.png格式的图片</span><br><span class="line">        plt.subplot(num/7,7,i+1) # 在一个画布中划分子画布，指定显示区域</span><br><span class="line">        plt.imshow(img)</span><br><span class="line">        plt.axis(&apos;off&apos;) #不显示坐标轴</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line">show_picture(file=&apos;./craw_practise1_xiaohua/&apos;,num=49)</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://i.loli.net/2019/09/15/nVAPt3f9Qb6OIdU.png" alt="Figure_26.png"></p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ol>
+<li><a href="https://www.cnblogs.com/piaojianxue/p/10822024.html" target="_blank" rel="noopener">Python中读取、显示和保存图片的方法</a></li>
+<li><a href="https://www.cnblogs.com/devilmaycry812839668/p/9291591.html" target="_blank" rel="noopener">python3 读入一个jpg格式的图片，并转换长宽像素个数，然后进行绘制</a></li>
+<li><a href="https://blog.csdn.net/huangxudongzzZ/article/details/90256923" target="_blank" rel="noopener">Python 多个图同时在不同窗口显示</a></li>
+<li><a href="https://sfz-lyq.cn//2019/07/07/Python%E5%9B%BE%E5%BD%A2%E7%BB%98%E5%88%B6/">Python图形绘制</a></li>
+</ol>
 
       
     </div>
@@ -580,6 +602,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/14/无监督学习/" rel="prev" title="无监督学习： K-Means">
+                无监督学习： K-Means <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -648,7 +674,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">69</span>
+                    <span class="site-state-item-count">71</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -860,7 +886,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#导入相关包"><span class="nav-number">2.1.</span> <span class="nav-text">导入相关包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择图片网站"><span class="nav-number">2.2.</span> <span class="nav-text">选择图片网站</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析源码"><span class="nav-number">2.3.</span> <span class="nav-text">分析源码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#爬取网页源码"><span class="nav-number">2.4.</span> <span class="nav-text">爬取网页源码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#过滤图片链接"><span class="nav-number">2.5.</span> <span class="nav-text">过滤图片链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取图片信息并写入文件"><span class="nav-number">2.6.</span> <span class="nav-text">获取图片信息并写入文件</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#导入相关包"><span class="nav-number">2.1.</span> <span class="nav-text">导入相关包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择图片网站"><span class="nav-number">2.2.</span> <span class="nav-text">选择图片网站</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析源码"><span class="nav-number">2.3.</span> <span class="nav-text">分析源码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#爬取网页源码"><span class="nav-number">2.4.</span> <span class="nav-text">爬取网页源码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#过滤图片链接"><span class="nav-number">2.5.</span> <span class="nav-text">过滤图片链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取图片信息并写入文件"><span class="nav-number">2.6.</span> <span class="nav-text">获取图片信息并写入文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读取本地图片"><span class="nav-number">2.7.</span> <span class="nav-text">读取本地图片</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>

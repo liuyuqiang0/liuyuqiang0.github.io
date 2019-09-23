@@ -147,7 +147,7 @@
 <meta name="keywords" content="NO response">
 <meta property="og:type" content="website">
 <meta property="og:title" content="种花家">
-<meta property="og:url" content="http://sfz-lyq.cn/categories/生活/index.html">
+<meta property="og:url" content="http://sfz-lyq.cn/tags/Python/page/4/index.html">
 <meta property="og:site_name" content="种花家">
 <meta property="og:description" content="what you will be,the world will be">
 <meta property="og:locale" content="zh-Hans">
@@ -161,7 +161,7 @@
 
   
   
-  <link rel="canonical" href="http://sfz-lyq.cn/categories/生活/">
+  <link rel="canonical" href="http://sfz-lyq.cn/tags/Python/page/4/">
 
 
 
@@ -171,7 +171,7 @@
   };
 </script>
 
-  <title>Category: 生活 | 种花家</title>
+  <title>Tag: Python | 种花家</title>
   
 
 
@@ -278,7 +278,7 @@
         
         
           
-          <li class="menu-item menu-item-tags">
+          <li class="menu-item menu-item-tags menu-item-active">
 
     
     
@@ -295,7 +295,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
 
     
     
@@ -400,11 +400,11 @@
   
   
   
-  <div class="post-block category">
+  <div class="post-block tag">
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>生活<small>Category</small>
+        <h1>Python<small>Tag</small>
         </h1>
       </div>
 
@@ -416,69 +416,17 @@
 
       <h2 class="post-title">
         
-          <a class="post-title-link" href="/2019/07/14/南航第一周总结/" itemprop="url">
+          <a class="post-title-link" href="/2019/05/31/NYOJ-62-笨小熊/" itemprop="url">
             
-              <span itemprop="name">2019.7.14 每周总结</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-14T19:52:00+08:00" content="2019-07-14">
-          07-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/05/29/test/" itemprop="url">
-            
-              <span itemprop="name">Test</span>
+              <span itemprop="name">NYOJ 62-笨小熊</span>
             
           </a>
         
       </h2>
 
       <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-29T21:08:00+08:00" content="2019-05-29">
-          05-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/05/29/Hello-World-Last/" itemprop="url">
-            
-              <span itemprop="name">Hello World Last!</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-05-29T20:00:00+08:00" content="2019-05-29">
-          05-29
+        <time class="post-time" itemprop="dateCreated" datetime="2019-05-31T18:42:00+08:00" content="2019-05-31">
+          05-31
         </time>
       </div>
 
@@ -495,6 +443,10 @@
   
 
   
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/tags/Python/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/tags/Python/">1</a><span class="space">&hellip;</span><a class="page-number" href="/tags/Python/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
+
 
 
 
@@ -986,8 +938,8 @@
       //https://hexo.io/docs/variables.html
       var isPost = ''.length > 0
       var isArchive = '' === 'true'
-      var isCategory = '生活'.length > 0
-      var isTag = ''.length > 0
+      var isCategory = ''.length > 0
+      var isTag = 'Python'.length > 0
 
       if (isPost) { //is article page
         var title = ''
@@ -998,7 +950,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("2019.7.14 每周总结");titles.push("Test");titles.push("Hello World Last!");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("NYOJ 62-笨小熊");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {

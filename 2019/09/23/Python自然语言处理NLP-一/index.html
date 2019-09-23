@@ -143,18 +143,20 @@
 
 
 
-  <meta name="description" content="学习地址什么是机器学习定义Samuel：在没有明确设置的情况下，使计算机具有学习能力的研究领域。Mitchell：计算机程序从经验E中学习，解决某一任务T，进行某一性能度量P，通过P测定在T上的表现因经验E而提高。 机器学习算法Main监督学习： Supervised learning非监督学习：Unsupervised learning Others强化学习：Reinforcement  lea">
-<meta name="keywords" content="学习笔记,机器学习">
+  <meta name="description" content="学习地址语料库 古腾堡gutenberg  123456789from nltk.corpus import gutenbergemmma=gutenberg.words(&amp;apos;austen-emma.txt&amp;apos;) # j简爱# print(type(emmma),len(emmma)) # 192427for fileid in gutenberg.fileids(): # aus">
+<meta name="keywords" content="Python,NLP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习概述">
-<meta property="og:url" content="http://sfz-lyq.cn/2019/06/04/机器学习概述/index.html">
+<meta property="og:title" content="Python自然语言处理NLP(二)">
+<meta property="og:url" content="http://sfz-lyq.cn/2019/09/23/Python自然语言处理NLP-一/index.html">
 <meta property="og:site_name" content="种花家">
-<meta property="og:description" content="学习地址什么是机器学习定义Samuel：在没有明确设置的情况下，使计算机具有学习能力的研究领域。Mitchell：计算机程序从经验E中学习，解决某一任务T，进行某一性能度量P，通过P测定在T上的表现因经验E而提高。 机器学习算法Main监督学习： Supervised learning非监督学习：Unsupervised learning Others强化学习：Reinforcement  lea">
+<meta property="og:description" content="学习地址语料库 古腾堡gutenberg  123456789from nltk.corpus import gutenbergemmma=gutenberg.words(&amp;apos;austen-emma.txt&amp;apos;) # j简爱# print(type(emmma),len(emmma)) # 192427for fileid in gutenberg.fileids(): # aus">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-04T15:04:31.505Z">
+<meta property="og:image" content="https://www.privacypic.com/images/2019/09/23/Figure_39b8d1601601d5d69b.png">
+<meta property="og:updated_time" content="2019-09-23T13:14:37.686Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="机器学习概述">
-<meta name="twitter:description" content="学习地址什么是机器学习定义Samuel：在没有明确设置的情况下，使计算机具有学习能力的研究领域。Mitchell：计算机程序从经验E中学习，解决某一任务T，进行某一性能度量P，通过P测定在T上的表现因经验E而提高。 机器学习算法Main监督学习： Supervised learning非监督学习：Unsupervised learning Others强化学习：Reinforcement  lea">
+<meta name="twitter:title" content="Python自然语言处理NLP(二)">
+<meta name="twitter:description" content="学习地址语料库 古腾堡gutenberg  123456789from nltk.corpus import gutenbergemmma=gutenberg.words(&amp;apos;austen-emma.txt&amp;apos;) # j简爱# print(type(emmma),len(emmma)) # 192427for fileid in gutenberg.fileids(): # aus">
+<meta name="twitter:image" content="https://www.privacypic.com/images/2019/09/23/Figure_39b8d1601601d5d69b.png">
 
 
 
@@ -162,7 +164,7 @@
 
   
   
-  <link rel="canonical" href="http://sfz-lyq.cn/2019/06/04/机器学习概述/">
+  <link rel="canonical" href="http://sfz-lyq.cn/2019/09/23/Python自然语言处理NLP-一/">
 
 
 
@@ -172,7 +174,7 @@
   };
 </script>
 
-  <title>机器学习概述 | 种花家</title>
+  <title>Python自然语言处理NLP(二) | 种花家</title>
   
 
 
@@ -392,7 +394,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sfz-lyq.cn/2019/06/04/机器学习概述/">
+    <link itemprop="mainEntityOfPage" href="http://sfz-lyq.cn/2019/09/23/Python自然语言处理NLP-一/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liuyuqiang0">
@@ -409,7 +411,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">机器学习概述
+          <h1 class="post-title" itemprop="name headline">Python自然语言处理NLP(二)
 
               
             
@@ -435,7 +437,7 @@
                 
               
 
-              <time title="Created: 2019-06-04 21:52:00 / Modified: 23:04:31" itemprop="dateCreated datePublished" datetime="2019-06-04T21:52:00+08:00">2019-06-04</time>
+              <time title="Created: 2019-09-23 15:03:00 / Modified: 21:14:37" itemprop="dateCreated datePublished" datetime="2019-09-23T15:03:00+08:00">2019-09-23</time>
             
 
             
@@ -457,14 +459,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a></span>
 
                 
                 
@@ -506,18 +501,45 @@
       
 
       
-        <h3 id="学习地址"><a href="#学习地址" class="headerlink" title="学习地址"></a><center><a href="https://study.163.com/course/courseMain.htm?courseId=1004570029" target="_blank" rel="noopener">学习地址</a></center></h3><h4 id="什么是机器学习"><a href="#什么是机器学习" class="headerlink" title="什么是机器学习"></a>什么是机器学习</h4><h5 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h5><p>Samuel：在没有明确设置的情况下，使计算机具有学习能力的研究领域。<br>Mitchell：计算机程序从经验E中学习，解决某一任务T，进行某一性能度量P，通过P测定在T上的表现因经验E而提高。</p>
-<h5 id="机器学习算法"><a href="#机器学习算法" class="headerlink" title="机器学习算法"></a>机器学习算法</h5><p></p><h6>Main</h6><br>监督学习： Supervised learning<br>非监督学习：Unsupervised learning<p></p>
-<p></p><h6>Others</h6><br>强化学习：Reinforcement  learning<br>推荐系统：recommender systems <p></p>
-<h4 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h4><p>我们给出数据集，有输入和输出。里面可能包含了想要的答案，而电脑要做的是给出更多的正确答案。</p>
-<ul>
-<li>回归：预测连续值(线形/非线形)的属性(输出)    –&gt; 卖房案例</li>
-<li>分类：预测离散值的输出(0/1)   –&gt; 肿瘤是否良性  </li>
+        <h3 id="学习地址"><a href="#学习地址" class="headerlink" title="学习地址"></a><center><a href="https://www.bilibili.com/video/av29796449/?p=11" target="_blank" rel="noopener">学习地址</a></center></h3><h4 id="语料库"><a href="#语料库" class="headerlink" title="语料库"></a>语料库</h4><ul>
+<li>古腾堡gutenberg</li>
 </ul>
-<h4 id="非监督学习"><a href="#非监督学习" class="headerlink" title="非监督学习"></a>非监督学习</h4><p>给出数据集，但除了裸的数据外什么都没有，要求在里面找到某种结构。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from nltk.corpus import gutenberg</span><br><span class="line">emmma=gutenberg.words(&apos;austen-emma.txt&apos;) # j简爱</span><br><span class="line"># print(type(emmma),len(emmma)) # 192427</span><br><span class="line">for fileid in gutenberg.fileids(): # austen-emma.txt, austen-persuasion.txt, austen-sense.txt, ...</span><br><span class="line">    num_char=len(gutenberg.raw(fileid)) # sum every char</span><br><span class="line">    num_words=len(gutenberg.words(fileid)) # sum of word num</span><br><span class="line">    num_sents=len(gutenberg.sents(fileid)) # sum of sentence num</span><br><span class="line">    num_vocab=len(set([w.lower() for w in gutenberg.words(fileid)]))</span><br><span class="line">    print(fileid,&apos;:&apos;,num_char//num_words,num_words//num_sents,num_words//num_vocab)</span><br></pre></td></tr></table></figure>
 <ul>
-<li>聚类：将数据集分类   –&gt; Gogle news案例</li>
+<li>网络聊天webtext</li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from nltk.corpus import webtext </span><br><span class="line">for fileid in webtext.fileids():</span><br><span class="line">    print(fileid,&apos;: &apos;,webtext.raw(fileid)[:50]) # 每种类型的网络用语内容前50个单词</span><br></pre></td></tr></table></figure>
+<ul>
+<li>即时聊天语料库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from nltk.corpus import nps_chat</span><br><span class="line"></span><br><span class="line">for fileid in nps_chat.fileids():</span><br><span class="line">    print(fileid) # # 10-19-20s_706posts.xml, 10-19-30s_705posts.xml, 10-19-40s_686posts.xml</span><br><span class="line">chatroom=nps_chat.posts(&apos;10-19-20s_706posts.xml&apos;)</span><br><span class="line">print(type(chatroom),len(chatroom))</span><br><span class="line">print(chatroom[123]) # [&apos;i&apos;, &apos;do&apos;, &quot;n&apos;t&quot;, &apos;want&apos;, &apos;hot&apos;, &apos;pics&apos;, &apos;of&apos;, &apos;a&apos;, &apos;female&apos;, &apos;,&apos;, &apos;I&apos;, &apos;can&apos;, &apos;look&apos;, &apos;in&apos;, &apos;a&apos;, &apos;mirror&apos;, &apos;.&apos;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>布朗语料库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">from nltk.corpus import brown</span><br><span class="line">for fileid in brown.fileids(): # ca01, ca02, ca03, ca04, ...</span><br><span class="line">    print(fileid)</span><br><span class="line">for x in brown.categories(): # adventure, belles_lettres, editorial, fiction, government, hobbies, humor, ...</span><br><span class="line">    print(x)</span><br><span class="line">news_text1=brown.words(categories=&apos;news&apos;)</span><br><span class="line">print(news_text1) # [&apos;The&apos;, &apos;Fulton&apos;, &apos;County&apos;, &apos;Grand&apos;, &apos;Jury&apos;, &apos;said&apos;, ...]</span><br><span class="line">news_text2=brown.words(fileids=[&apos;cg22&apos;])</span><br><span class="line">print(news_text2) # [&apos;Does&apos;, &apos;our&apos;, &apos;society&apos;, &apos;have&apos;, &apos;a&apos;, &apos;runaway&apos;, &apos;,&apos;, ...]</span><br><span class="line">news_text3=brown.sents(categories=[&apos;news&apos;,&apos;editorial&apos;,&apos;reviews&apos;])</span><br><span class="line">print(news_text3)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>路透社语料库</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from nltk.corpus import reuters</span><br><span class="line">print(len(reuters.fileids())) # 10788</span><br><span class="line">print(len(reuters.categories())) # 90</span><br></pre></td></tr></table></figure>
+<ul>
+<li>就职演讲语料库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">from nltk.corpus import inaugural</span><br><span class="line"></span><br><span class="line">cfd=nltk.ConditionalFreqDist(</span><br><span class="line">    (target,fileid[:4])</span><br><span class="line">    for fileid in inaugural.fileids()</span><br><span class="line">    for w in inaugural.words(fileid)</span><br><span class="line">    for target in [&apos;america&apos;,&apos;citizen&apos;]</span><br><span class="line">    if w.lower().startswith(target)</span><br><span class="line">)</span><br><span class="line">cfd.plot() # Construct a new empty conditional frequency distribution</span><br></pre></td></tr></table></figure>
+<p><img src="https://www.privacypic.com/images/2019/09/23/Figure_39b8d1601601d5d69b.png" alt="Figure_39b8d1601601d5d69b.png"></p>
+<h4 id="条件频率分布"><a href="#条件频率分布" class="headerlink" title="条件频率分布"></a>条件频率分布</h4><p>nltk有两种方法可以生成频率图，一种是上图所示代码，另外一种用表格形式生成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">from nltk.corpus import udhr</span><br><span class="line"></span><br><span class="line">cfd=nltk.ConditionalFreqDist(</span><br><span class="line">    (lang,len(word))</span><br><span class="line">    for lang in [&apos;English&apos;,&apos;German_Deutsch&apos;]</span><br><span class="line">    for word in udhr.words(lang+&apos;-Latin1&apos;)</span><br><span class="line">)</span><br><span class="line">cfd.tabulate(conditions=[&apos;English&apos;,&apos;German_Deutsch&apos;],samples=np.arange(10),cumulative=False)</span><br><span class="line"></span><br><span class="line">- - - - - - - - - - - - -</span><br><span class="line">                 0   1   2   3   4   5   6   7   8   9 </span><br><span class="line">       English   0 185 340 358 114 169 117 157 118  80 </span><br><span class="line">German_Deutsch   0 171  92 351 103 177 119  97 103  62</span><br></pre></td></tr></table></figure></p>
+<h4 id="词典"><a href="#词典" class="headerlink" title="词典"></a>词典</h4><ul>
+<li><p>停用词：高频词汇但是没有什么实际意义，如’a’,’an’,’the’ …，在实际应用中可以将这些高频词汇过滤掉，剩下一些关键词更有研究意义。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def content_fraction(text): # 提取关键词</span><br><span class="line">    stopwords = stopwords.words(&apos;english&apos;)</span><br><span class="line">    content=[w for w in text if w.lower() not in stopwords] # 过滤停用词</span><br><span class="line">    return content</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>发音词典</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">from nltk.corpus import  cmudict</span><br><span class="line"></span><br><span class="line">entries=cmudict.entries()</span><br><span class="line">#print(len(entries)) # 133737</span><br><span class="line">for entry in entries[39943:39951]:</span><br><span class="line">    print(entry)</span><br><span class="line"></span><br><span class="line">- - - - - - - - - - - - - - -</span><br><span class="line">(&apos;explorer&apos;, [&apos;IH0&apos;, &apos;K&apos;, &apos;S&apos;, &apos;P&apos;, &apos;L&apos;, &apos;AO1&apos;, &apos;R&apos;, &apos;ER0&apos;])</span><br><span class="line">(&apos;explorers&apos;, [&apos;IH0&apos;, &apos;K&apos;, &apos;S&apos;, &apos;P&apos;, &apos;L&apos;, &apos;AO1&apos;, &apos;R&apos;, &apos;ER0&apos;, &apos;Z&apos;])</span><br><span class="line">(&apos;explores&apos;, [&apos;IH0&apos;, &apos;K&apos;, &apos;S&apos;, &apos;P&apos;, &apos;L&apos;, &apos;AO1&apos;, &apos;R&apos;, &apos;Z&apos;])</span><br><span class="line">(&apos;exploring&apos;, [&apos;IH0&apos;, &apos;K&apos;, &apos;S&apos;, &apos;P&apos;, &apos;L&apos;, &apos;AO1&apos;, &apos;R&apos;, &apos;IH0&apos;, &apos;NG&apos;])</span><br><span class="line">(&apos;explosion&apos;, [&apos;IH0&apos;, &apos;K&apos;, &apos;S&apos;, &apos;P&apos;, &apos;L&apos;, &apos;OW1&apos;, &apos;ZH&apos;, &apos;AH0&apos;, &apos;N&apos;])</span><br><span class="line">(&apos;explosions&apos;, [&apos;IH0&apos;, &apos;K&apos;, &apos;S&apos;, &apos;P&apos;, &apos;L&apos;, &apos;OW1&apos;, &apos;ZH&apos;, &apos;AH0&apos;, &apos;N&apos;, &apos;Z&apos;])</span><br><span class="line">(&apos;explosive&apos;, [&apos;IH0&apos;, &apos;K&apos;, &apos;S&apos;, &apos;P&apos;, &apos;L&apos;, &apos;OW1&apos;, &apos;S&apos;, &apos;IH0&apos;, &apos;V&apos;])</span><br><span class="line">(&apos;explosively&apos;, [&apos;EH2&apos;, &apos;K&apos;, &apos;S&apos;, &apos;P&apos;, &apos;L&apos;, &apos;OW1&apos;, &apos;S&apos;, &apos;IH0&apos;, &apos;V&apos;, &apos;L&apos;, &apos;IY0&apos;])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>词汇工具<code>from nltk.corpus import toolbox</code></li>
+</ul>
+<h4 id="同义词"><a href="#同义词" class="headerlink" title="同义词"></a>同义词</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">from nltk.corpus import wordnet as wn</span><br><span class="line">similar=wn.synsets(&apos;sweet&apos;)</span><br><span class="line">print(similar) # 查看所属同义词集</span><br><span class="line">print(wn.synset(&apos;sweet.n.01&apos;).definition()) # 查看这种词集的定义</span><br><span class="line">print(wn.synset(&apos;car.n.01&apos;).examples()) # 这种定义下的一个例句</span><br><span class="line">print(wn.synset(&apos;car.n.01&apos;).lemmas()) # 查看同义词集词条</span><br><span class="line">print(wn.lemma(&apos;car.n.01.automobile&apos;).synset()) # 查找所属同义词集</span><br><span class="line"></span><br><span class="line">- - - - - - - - - - - - - - - - - - </span><br><span class="line">[Synset(&apos;sweet.n.01&apos;), Synset(&apos;dessert.n.01&apos;), Synset(&apos;sweet.n.03&apos;), Synset(&apos;sweet.n.04&apos;), Synset(&apos;sweetness.n.02&apos;), Synset(&apos;sweet.a.01&apos;), Synset(&apos;angelic.s.03&apos;), Synset(&apos;dulcet.s.02&apos;), Synset(&apos;sweet.s.04&apos;), Synset(&apos;gratifying.s.01&apos;), Synset(&apos;odoriferous.s.03&apos;), Synset(&apos;sweet.a.07&apos;), Synset(&apos;fresh.a.06&apos;), Synset(&apos;fresh.s.09&apos;), Synset(&apos;sugared.s.01&apos;), Synset(&apos;sweetly.r.01&apos;)]</span><br><span class="line">English phonetician; one of the founders of modern phonetics (1845-1912)</span><br><span class="line">[&apos;he needs a car to get to work&apos;]</span><br><span class="line">[Lemma(&apos;car.n.01.car&apos;), Lemma(&apos;car.n.01.auto&apos;), Lemma(&apos;car.n.01.automobile&apos;), Lemma(&apos;car.n.01.machine&apos;), Lemma(&apos;car.n.01.motorcar&apos;)]</span><br><span class="line">Synset(&apos;car.n.01&apos;)</span><br></pre></td></tr></table></figure>
+<p>#### </p>
 
       
     </div>
@@ -541,9 +563,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+            <a href="/tags/Python/" rel="tag"># Python</a>
           
-            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+            <a href="/tags/NLP/" rel="tag"># NLP</a>
           
         </div>
       
@@ -568,8 +590,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/02/伤离别/" rel="next" title="伤离别">
-                <i class="fa fa-chevron-left"></i> 伤离别
+              <a href="/2019/09/22/自然语言处理NLP-一/" rel="next" title="Python自然语言处理NLP(一)">
+                <i class="fa fa-chevron-left"></i> Python自然语言处理NLP(一)
               </a>
             
           </div>
@@ -577,10 +599,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/05/送快递/" rel="prev" title="送快递!">
-                送快递! <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -867,7 +885,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习地址"><span class="nav-number">1.</span> <span class="nav-text">学习地址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是机器学习"><span class="nav-number">1.1.</span> <span class="nav-text">什么是机器学习</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#定义"><span class="nav-number">1.1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#机器学习算法"><span class="nav-number">1.1.2.</span> <span class="nav-text">机器学习算法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">Main</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">Others</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#监督学习"><span class="nav-number">1.2.</span> <span class="nav-text">监督学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非监督学习"><span class="nav-number">1.3.</span> <span class="nav-text">非监督学习</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习地址"><span class="nav-number">1.</span> <span class="nav-text">学习地址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语料库"><span class="nav-number">1.1.</span> <span class="nav-text">语料库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件频率分布"><span class="nav-number">1.2.</span> <span class="nav-text">条件频率分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#词典"><span class="nav-number">1.3.</span> <span class="nav-text">词典</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同义词"><span class="nav-number">1.4.</span> <span class="nav-text">同义词</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1121,13 +1139,13 @@
       var articles = db.collection('articles')
 
       //https://hexo.io/docs/variables.html
-      var isPost = '机器学习概述'.length > 0
+      var isPost = 'Python自然语言处理NLP(二)'.length > 0
       var isArchive = '' === 'true'
       var isCategory = ''.length > 0
       var isTag = ''.length > 0
 
       if (isPost) { //is article page
-        var title = '机器学习概述'
+        var title = 'Python自然语言处理NLP(二)'
         var doc = articles.doc(title)
 
         getCount(doc, true).then(appendCountTo($('.post-meta')))

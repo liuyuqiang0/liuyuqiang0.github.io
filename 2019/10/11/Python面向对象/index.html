@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+    
+
+    
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Times New Roman:300,300italic,400,400italic,700,700italicTimes New Roman:300,300italic,400,400italic,700,700italicTimes New Roman:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="学习地址面向过程如何做 把完成某一个需求的所有步骤从头到尾逐步实现 根据开发需求，将某些功能独立的代码封装成一个又一个函数 最后完成的代码，就是顺序地调用不同的函数  特点 注重步骤与过程，不注重职责分工 如果需求复杂，代码会变得很复杂 开发复杂项目，没有固定的套路，开发难度大  面向对象相比较函数，面向对象是更大的封装，根据职责再一个对象中封装多个方法 如何做 在完成某一个需求前，首先确定职责–">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python面向对象">
+<meta property="og:url" content="http://sfz-lyq.cn/2019/10/11/Python面向对象/index.html">
+<meta property="og:site_name" content="种花家">
+<meta property="og:description" content="学习地址面向过程如何做 把完成某一个需求的所有步骤从头到尾逐步实现 根据开发需求，将某些功能独立的代码封装成一个又一个函数 最后完成的代码，就是顺序地调用不同的函数  特点 注重步骤与过程，不注重职责分工 如果需求复杂，代码会变得很复杂 开发复杂项目，没有固定的套路，开发难度大  面向对象相比较函数，面向对象是更大的封装，根据职责再一个对象中封装多个方法 如何做 在完成某一个需求前，首先确定职责–">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-19T16:07:51.794Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python面向对象">
+<meta name="twitter:description" content="学习地址面向过程如何做 把完成某一个需求的所有步骤从头到尾逐步实现 根据开发需求，将某些功能独立的代码封装成一个又一个函数 最后完成的代码，就是顺序地调用不同的函数  特点 注重步骤与过程，不注重职责分工 如果需求复杂，代码会变得很复杂 开发复杂项目，没有固定的套路，开发难度大  面向对象相比较函数，面向对象是更大的封装，根据职责再一个对象中封装多个方法 如何做 在完成某一个需求前，首先确定职责–">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://sfz-lyq.cn/2019/10/11/Python面向对象/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Python面向对象 | 种花家</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">种花家</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">null   =   *</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sfz-lyq.cn/2019/10/11/Python面向对象/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liuyuqiang0">
+      <meta itemprop="description" content="what you will be,the world will be">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="种花家">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python面向对象
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-10-11 15:51:00" itemprop="dateCreated datePublished" datetime="2019-10-11T15:51:00+08:00">2019-10-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-10-20 00:07:51" itemprop="dateModified" datetime="2019-10-20T00:07:51+08:00">2019-10-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="学习地址"><a href="#学习地址" class="headerlink" title="学习地址"></a><center><a href="https://www.bilibili.com/video/av68350017/?p=390" target="_blank" rel="noopener">学习地址</a></center></h3><h4 id="面向过程"><a href="#面向过程" class="headerlink" title="面向过程"></a>面向过程</h4><h5 id="如何做"><a href="#如何做" class="headerlink" title="如何做"></a>如何做</h5><ol>
+<li>把完成某一个需求的所有步骤从头到尾逐步实现</li>
+<li>根据开发需求，将某些功能独立的代码封装成一个又一个函数</li>
+<li>最后完成的代码，就是顺序地调用不同的函数</li>
+</ol>
+<h5 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h5><ol>
+<li>注重步骤与过程，不注重职责分工</li>
+<li>如果需求复杂，代码会变得很复杂</li>
+<li>开发复杂项目，没有固定的套路，开发难度大</li>
+</ol>
+<h4 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h4><p>相比较函数，面向对象是更大的封装，根据职责再一个对象中封装多个方法</p>
+<h5 id="如何做-1"><a href="#如何做-1" class="headerlink" title="如何做"></a>如何做</h5><ol>
+<li>在完成某一个需求前，首先确定职责–要做的事情(方法)</li>
+<li>根据职责确定不同的对象，在对象内部封装不同的方法</li>
+<li>最后完成的代码，就是顺序地让不同地对象调用不同的方法</li>
+</ol>
+<h5 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h5><ol>
+<li>注重对象和职责，不同的对象承担不同的职责，</li>
+<li>更加适合应对复杂的需求变化，是专门应对复杂项目开发，提供的规定套路</li>
+<li>需要在面向过程的基础上，再学习一些面向对象的语法</li>
+</ol>
+<h4 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h4><ol>
+<li><p>类<br>类是对一群具有<strong>相同特征</strong>或者<strong>行为</strong>的事物的一个统称，不能直接使用<br>特征 被称为 属性<br>行为 被称为 方法</p>
+</li>
+<li><p>对象<br>对象是由类别创建出来的一个具体的存在，可以直接使用<br>由哪一个类创建出来的对象，就拥有那一个类中定义的方法与属性</p>
+</li>
+<li><p>关系<br>类只有一个，对象可以有很多个<br>不同对象之间属性可能会各不相同     </p>
+</li>
+</ol>
+<h4 id="类的设计"><a href="#类的设计" class="headerlink" title="类的设计"></a>类的设计</h4><p>使用面向对象开发前，应该首先分析需求，确定一下程序中需要包含哪些类！<br>对于每个类，紧扣属性与方法<br>类名： 比如动物，人类，大驼峰命名法（单词首字母大写，不用下划线）<br>属性： 这类事物的特征，比如人有年龄身高<br>方法：事物具有的行为，比如人会吃饭睡觉</p>
+<h5 id="类名确定"><a href="#类名确定" class="headerlink" title="类名确定"></a>类名确定</h5><p>名词提炼法：分析整个业务流程，出现的名词，通常就是找到的类</p>
+<h5 id="属性和方法的确定"><a href="#属性和方法的确定" class="headerlink" title="属性和方法的确定"></a>属性和方法的确定</h5><p>对 <strong>对象的特征描述</strong>，通常定义成属性<br><strong>对象具有的行为（动词）</strong>通常可以定义成方法</p>
+<h4 id="面向对象基础语法"><a href="#面向对象基础语法" class="headerlink" title="面向对象基础语法"></a>面向对象基础语法</h4><p>目标：  </p>
+<ol>
+<li><code>dir</code>内置函数</li>
+<li>定义简单的类（只包含方法）</li>
+<li>方法中的<code>self</code>参数</li>
+<li>初始化方法</li>
+<li>内置方法和属性</li>
+</ol>
+<h5 id="dir内置函数"><a href="#dir内置函数" class="headerlink" title="dir内置函数"></a>dir内置函数</h5><p>在Python中对象几乎是无处不在的，如何验证对象呢：</p>
+<ol>
+<li>在<strong>标识符/数据</strong> 后面接一个<code>.</code>，然乎按下tab键，会显示该对象能调用的常用方法列表</li>
+<li>使用内置函数<code>dir</code>，在dir()函数中传入<strong>标识符/数据</strong>，可以查看对象内的所有属性与方法</li>
+</ol>
+<p><code>__方法名__</code>格式的方法是Python中提供的内置方法/属性<br>常用几个：</p>
+<ol>
+<li><code>__new__</code> : 方法，创建对象时，会被自动调用</li>
+<li><code>__init__</code>: 方法，对象被初始化时，会被自动调用</li>
+<li><code>__del__</code>： 方法，对象被从内存中销毁前，会被自动调用</li>
+<li><code>__str__</code>： 方法，返回对象描述信息，print函数输出使用</li>
+</ol>
+<h5 id="定义简单类"><a href="#定义简单类" class="headerlink" title="定义简单类"></a>定义简单类</h5><p>语法格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class ClassName:</span><br><span class="line">    def fun1(self,parameter_list):</span><br><span class="line">        pass</span><br><span class="line">    def fun2(self,parameter_list):</span><br><span class="line">        pass</span><br><span class="line">        class name:</span><br><span class="line">    def fun1(self,parameter_list):</span><br><span class="line">        pass</span><br><span class="line">    def fun2(self,parameter_list):</span><br><span class="line">        pass</span><br></pre></td></tr></table></figure></p>
+<p>方法定义无特殊之处，但参数列表第一个必须是<code>self</code></p>
+<h5 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h5><p>语法格式：<code>object_name=ClassName()</code></p>
+<h5 id="简单面向对象程序"><a href="#简单面向对象程序" class="headerlink" title="简单面向对象程序"></a>简单面向对象程序</h5><ol>
+<li>需求<ul>
+<li><strong>小猫</strong>爱<strong>吃</strong>鱼，小猫要<strong>喝</strong>水</li>
+</ul>
+</li>
+<li>分析<ul>
+<li>定义一个猫类<code>Cat</code></li>
+<li>定义两个方法<code>eat</code>和<code>drink</code></li>
+<li>按照需求– 不需要定义属性</li>
+</ul>
+</li>
+<li>实现  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  class Cat:</span><br><span class="line">    def eat(self): # 哪一个对象调用了方法，self就是那一个对象的引用</span><br><span class="line">        print(&apos;eat fish!&apos;)</span><br><span class="line">    def drink(self):</span><br><span class="line">        print(&apos;drink water!&apos;)</span><br><span class="line"></span><br><span class="line">cat1=Cat() # 创建对象</span><br><span class="line">cat1.drink() # 调用方法</span><br><span class="line"></span><br><span class="line">- - - - - - - - - - - </span><br><span class="line">drink water!</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h5 id="关于引用的概念"><a href="#关于引用的概念" class="headerlink" title="关于引用的概念"></a>关于引用的概念</h5><p>在上述代码中，使用类创建对象后，<code>cat1</code>变量中仍然记录的是对象在内存中的地址，即<code>cat1</code>变量引用了新建的猫对象<br>使用<code>print</code>输出对象变量，默认情况下，是能够输出这个变量引用的对象是由哪一个类创建的对象，以及在内存中的十六进制地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">print(cat1)</span><br><span class="line">addr=id(cat1)</span><br><span class="line">print(&apos;%d , %x&apos; %(addr,addr))</span><br><span class="line">- - - - - - - - - - - </span><br><span class="line">&lt;__main__.Cat object at 0x7f0166bddcf8&gt;</span><br><span class="line">139643995413752 , 7f0166bddcf8</span><br></pre></td></tr></table></figure></p>
+<p>思考：如果再创建另一个对象，这两个对象是一样的吗？  </p>
+<ul>
+<li>答案是否的，但如果用等号赋值，那么就是用一个引用了</li>
+</ul>
+<h5 id="方法中的self参数"><a href="#方法中的self参数" class="headerlink" title="方法中的self参数"></a>方法中的self参数</h5><p>案例改造：给对象增加属性<br>实现很容易，但并不建议使用，对象属性的封装应该在类的内部<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat1.name=&apos;Tom&apos; # 直接给新增的属性赋值就可以了</span><br><span class="line">print(dir(cat1))</span><br><span class="line"></span><br><span class="line">- - - - - - - - - - - </span><br><span class="line">[&apos;__class__&apos;, &apos;__delattr__&apos;, &apos;__dict__&apos;, &apos;__dir__&apos;, &apos;__doc__&apos;, &apos;__eq__&apos;, &apos;__format__&apos;, &apos;__ge__&apos;, &apos;__getattribute__&apos;, &apos;__gt__&apos;, &apos;__hash__&apos;, &apos;__init__&apos;, &apos;__le__&apos;, &apos;__lt__&apos;, &apos;__module__&apos;, &apos;__ne__&apos;, &apos;__new__&apos;, &apos;__reduce__&apos;, &apos;__reduce_ex__&apos;, &apos;__repr__&apos;, &apos;__setattr__&apos;, &apos;__sizeof__&apos;, &apos;__str__&apos;, &apos;__subclasshook__&apos;, &apos;__weakref__&apos;, &apos;drink&apos;, &apos;eat&apos;, &apos;name&apos;]</span><br></pre></td></tr></table></figure></p>
+<p>之前的代码中介绍过self表示调用方法的那个对象的引用，那么也可以在类中用self访问新增的属性，但是在类中没有定义这个属性就很不方便了。</p>
+<h5 id="初始化方法"><a href="#初始化方法" class="headerlink" title="初始化方法"></a>初始化方法</h5><p>当使用类名()创建对象时，对自动执行以下操作：</p>
+<ol>
+<li>在内存空间中为对象分配空间 - - 创建对象</li>
+<li>为对象的属性设置初始值 - - 初始化方法（init）</li>
+</ol>
+<p> 这个初始化方法就是<code>__init__</code>方法，这个方法时对象的内置方法，专门用来定义一个类中具有哪些属性的方法<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> class Cat:</span><br><span class="line">    def __init__(self): # 创建对象时自动调用</span><br><span class="line">        print(&apos;this is init&apos;)</span><br><span class="line"></span><br><span class="line">tom=Cat()</span><br><span class="line"></span><br><span class="line">- - - -  - - - -</span><br><span class="line">this is init</span><br></pre></td></tr></table></figure></p>
+<h5 id="在初始化方法内部定义属性"><a href="#在初始化方法内部定义属性" class="headerlink" title="在初始化方法内部定义属性"></a>在初始化方法内部定义属性</h5><p> 在<code>__init__</code>方法内部使用<code>self.属性名=属性的初始值</code>就可以定义属性，在创建对象时新的对象都会拥有该属性<br> 这样，我们就可以把外部新增属性的代码写进初始化方法<code>__init__</code>中即可</p>
+<h5 id="使用参数设置属性初始值"><a href="#使用参数设置属性初始值" class="headerlink" title="使用参数设置属性初始值"></a>使用参数设置属性初始值</h5><p>其实就是希望在新建对象时同时赋初始值，这些初始值需自己指定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Cat:</span><br><span class="line">    def __init__(self,name):</span><br><span class="line">        self.name=name</span><br><span class="line"></span><br><span class="line">cat1=Cat(&apos;Tom&apos;)</span><br><span class="line">print(cat1.name)</span><br><span class="line"></span><br><span class="line">- - - - - - - - - - - - -</span><br><span class="line">Tom</span><br></pre></td></tr></table></figure></p>
+<h5 id="内置方法和属性"><a href="#内置方法和属性" class="headerlink" title="内置方法和属性"></a>内置方法和属性</h5><ol>
+<li><p><code>__del__</code>方法<br>和<code>__init__</code>方法相反，但类似，也可以在函数体中做希望做的事，在所有代码执行结束之后会自动调用，也可以使用<code>del 对象名</code>手动销毁，<code>__del__</code>函数体中的方法自动执行，这即是我们希望对象在被销毁前做的事。</p>
+</li>
+<li><p>生命周期<br>从使用类名创建，生命周期开始，到<code>__del__</code>方法调用，生命周期结束。注意这些内置方法不用手动定义也会自动执行，我们手动定义也只是希望在自动调用时希望做的事。</p>
+</li>
+</ol>
+<h5 id="str-方法"><a href="#str-方法" class="headerlink" title="__str__方法"></a><code>__str__</code>方法</h5><p>前面提到过使用<code>print</code>输出对象变量 时，默认情况下会输出这个变量引用的对象是由哪一个类创建的，以及16进制地址<br>在开发中，如果希望使用<code>print</code>输出对象变量时，能打印出自定义的内容，就可以利用<code>__str__</code>这个内置方法。<strong>注意：<code>__str__</code>方法必须返回一个字符串</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Cat:</span><br><span class="line">    def __init__(self,name):</span><br><span class="line">        self.name=name</span><br><span class="line">    def __del__(self):</span><br><span class="line">        print(&apos;goodbye!&apos;)</span><br><span class="line">    def __str__(self):</span><br><span class="line">        return &quot;I&apos;m a cat %s&quot; %self.name</span><br><span class="line"></span><br><span class="line">cat1=Cat(&apos;Tom&apos;)</span><br><span class="line">print(cat1)</span><br><span class="line"></span><br><span class="line">- - - - - - - - - - - - </span><br><span class="line">I&apos;m a cat Tom</span><br><span class="line">goodbye!</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/26/决策树/" rel="next" title="决策树">
+                <i class="fa fa-chevron-left"></i> 决策树
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">liuyuqiang0</p>
+              <div class="site-description motion-element" itemprop="description">what you will be,the world will be</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/NYIST_TC_LYQ" title="CSDN &rarr; https://blog.csdn.net/NYIST_TC_LYQ" rel="noopener" target="_blank"><i class="fa fa-fw fa-CSDN"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" title="qq &rarr; tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>qq</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://nyoj.top" title="http://nyoj.top" rel="noopener" target="_blank">NYOJ</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习地址"><span class="nav-number">1.</span> <span class="nav-text">学习地址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#面向过程"><span class="nav-number">1.1.</span> <span class="nav-text">面向过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#如何做"><span class="nav-number">1.1.1.</span> <span class="nav-text">如何做</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#特点"><span class="nav-number">1.1.2.</span> <span class="nav-text">特点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#面向对象"><span class="nav-number">1.2.</span> <span class="nav-text">面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#如何做-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">如何做</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#特点-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">特点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类和对象"><span class="nav-number">1.3.</span> <span class="nav-text">类和对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类的设计"><span class="nav-number">1.4.</span> <span class="nav-text">类的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#类名确定"><span class="nav-number">1.4.1.</span> <span class="nav-text">类名确定</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#属性和方法的确定"><span class="nav-number">1.4.2.</span> <span class="nav-text">属性和方法的确定</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#面向对象基础语法"><span class="nav-number">1.5.</span> <span class="nav-text">面向对象基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#dir内置函数"><span class="nav-number">1.5.1.</span> <span class="nav-text">dir内置函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#定义简单类"><span class="nav-number">1.5.2.</span> <span class="nav-text">定义简单类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建对象"><span class="nav-number">1.5.3.</span> <span class="nav-text">创建对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#简单面向对象程序"><span class="nav-number">1.5.4.</span> <span class="nav-text">简单面向对象程序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关于引用的概念"><span class="nav-number">1.5.5.</span> <span class="nav-text">关于引用的概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法中的self参数"><span class="nav-number">1.5.6.</span> <span class="nav-text">方法中的self参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#初始化方法"><span class="nav-number">1.5.7.</span> <span class="nav-text">初始化方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在初始化方法内部定义属性"><span class="nav-number">1.5.8.</span> <span class="nav-text">在初始化方法内部定义属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用参数设置属性初始值"><span class="nav-number">1.5.9.</span> <span class="nav-text">使用参数设置属性初始值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内置方法和属性"><span class="nav-number">1.5.10.</span> <span class="nav-text">内置方法和属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#str-方法"><span class="nav-number">1.5.11.</span> <span class="nav-text">__str__方法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liuyuqiang0</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+  
+  <script>
+    (function () {
+
+      firebase.initializeApp({
+        apiKey: '',
+        projectId: ''
+      })
+
+      function getCount(doc, increaseCount) {
+        //increaseCount will be false when not in article page
+
+        return doc.get().then(function (d) {
+          var count
+          if (!d.exists) { //has no data, initialize count
+            if (increaseCount) {
+              doc.set({
+                count: 1
+              })
+              count = 1
+            }
+            else {
+              count = 0
+            }
+          }
+          else { //has data
+            count = d.data().count
+            if (increaseCount) {
+              if (!(window.localStorage && window.localStorage.getItem(title))) { //if first view this article
+                doc.set({ //increase count
+                  count: count + 1
+                })
+                count++
+              }
+            }
+          }
+          if (window.localStorage && increaseCount) { //mark as visited
+            localStorage.setItem(title, true)
+          }
+
+          return count
+        })
+      }
+
+      function appendCountTo(el) {
+        return function (count) {
+          $(el).append(
+            $('<span>').addClass('post-visitors-count').append(
+              $('<span>').addClass('post-meta-divider').text('|')
+            ).append(
+              $('<span>').addClass('post-meta-item-icon').append(
+                $('<i>').addClass('fa fa-users')
+              )
+              ).append($('<span>').text('Views ' + count))
+          )
+        }
+      }
+
+      var db = firebase.firestore()
+      var articles = db.collection('articles')
+
+      //https://hexo.io/docs/variables.html
+      var isPost = 'Python面向对象'.length > 0
+      var isArchive = '' === 'true'
+      var isCategory = ''.length > 0
+      var isTag = ''.length > 0
+
+      if (isPost) { //is article page
+        var title = 'Python面向对象'
+        var doc = articles.doc(title)
+
+        getCount(doc, true).then(appendCountTo($('.post-meta')))
+      }
+      else if (!isArchive && !isCategory && !isTag) { //is index page
+        var titles = [] //array to titles
+
+        var postsstr = '' //if you have a better way to get titles of posts, please change it
+        eval(postsstr)
+
+        var promises = titles.map(function (title) {
+          return articles.doc(title)
+        }).map(function (doc) {
+          return getCount(doc)
+        })
+        Promise.all(promises).then(function (counts) {
+          var metas = $('.post-meta')
+          counts.forEach(function (val, idx) {
+            appendCountTo(metas[idx])(val)
+          })
+        })
+      }
+    })()
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

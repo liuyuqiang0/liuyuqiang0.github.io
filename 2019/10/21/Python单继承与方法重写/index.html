@@ -151,7 +151,7 @@
 <meta property="og:site_name" content="种花家">
 <meta property="og:description" content="学习地址单继承目标：  单继承 多继承  面向对象三大特性 封装：根据职责将属性和方法封装到一个抽象的类中 多态：不同的对象调用相同的方法，产生不同的执行结果，增加代码的灵活度 继承：实现代码的重用，相同的代码不需要重复的编写  单继承 继承的概念：子类拥有父类所 有方法和属性 继承的语法： 12class class_name(father_name):  pass  子类继承自父类，拥有父类所">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-21T13:55:30.339Z">
+<meta property="og:updated_time" content="2019-10-22T03:40:57.775Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python继承与属性">
 <meta name="twitter:description" content="学习地址单继承目标：  单继承 多继承  面向对象三大特性 封装：根据职责将属性和方法封装到一个抽象的类中 多态：不同的对象调用相同的方法，产生不同的执行结果，增加代码的灵活度 继承：实现代码的重用，相同的代码不需要重复的编写  单继承 继承的概念：子类拥有父类所 有方法和属性 继承的语法： 12class class_name(father_name):  pass  子类继承自父类，拥有父类所">
@@ -435,12 +435,24 @@
                 
               
 
-              <time title="Created: 2019-10-21 15:22:00 / Modified: 21:55:30" itemprop="dateCreated datePublished" datetime="2019-10-21T15:22:00+08:00">2019-10-21</time>
+              <time title="Created: 2019-10-21 15:22:00" itemprop="dateCreated datePublished" datetime="2019-10-21T15:22:00+08:00">2019-10-21</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-10-22 11:40:57" itemprop="dateModified" datetime="2019-10-22T11:40:57+08:00">2019-10-22</time>
               
             
           </span>
@@ -522,6 +534,7 @@
 <li><p>继承的传递性<br>简单来说，就是<strong>派生类的派生类</strong>可以调用基类的方法和属性。<br>但是，注意这个传递的<del>唯一性</del>，只能单线继承，类似树状结构。</p>
 </li>
 </ol>
+<h4 id="继承示例"><a href="#继承示例" class="headerlink" title="继承示例"></a>继承示例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class A:</span><br><span class="line">    def __init__(self,name):</span><br><span class="line">        self.name=name</span><br><span class="line"></span><br><span class="line">class B(A):</span><br><span class="line">    def play(self):</span><br><span class="line">        print(&apos;%s is playing&apos; %self.name)</span><br><span class="line"></span><br><span class="line">b=B(&apos;abc&apos;)</span><br><span class="line">b.play()</span><br><span class="line"></span><br><span class="line">- - - - - - - - - - - - </span><br><span class="line">abc is playing</span><br></pre></td></tr></table></figure>
 <h4 id="方法的重写"><a href="#方法的重写" class="headerlink" title="方法的重写"></a>方法的重写</h4><p>当父类的方法不能满足子类的需求时，可以对方法进行<strong>重写(override)</strong>。<br>重写父类方法有两种情况：</p>
 <ol>
 <li><strong>覆盖</strong>父类的方法：开发中如果父类的方法实现和子类的方法实现完全不同的情况，在子类中定义和父类同名的方法并实现</li>
@@ -610,6 +623,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/10/22/Python多态与类属性/" rel="prev" title="Python多态与类属性、类方法">
+                Python多态与类属性、类方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -677,7 +694,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">83</span>
+                    <span class="site-state-item-count">84</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -895,7 +912,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习地址"><span class="nav-number">1.</span> <span class="nav-text">学习地址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#单继承"><span class="nav-number">1.1.</span> <span class="nav-text">单继承</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#面向对象三大特性"><span class="nav-number">1.1.1.</span> <span class="nav-text">面向对象三大特性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#单继承-1"><span class="nav-number">1.1.2.</span> <span class="nav-text">单继承</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法的重写"><span class="nav-number">1.2.</span> <span class="nav-text">方法的重写</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用父类名调用父类方法"><span class="nav-number">1.2.1.</span> <span class="nav-text">使用父类名调用父类方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#私有方法和属性"><span class="nav-number">1.3.</span> <span class="nav-text">私有方法和属性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概念"><span class="nav-number">1.3.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#定义方式"><span class="nav-number">1.3.2.</span> <span class="nav-text">定义方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#伪私有"><span class="nav-number">1.3.3.</span> <span class="nav-text">伪私有</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多继承"><span class="nav-number">1.4.</span> <span class="nav-text">多继承</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概念及语法"><span class="nav-number">1.4.1.</span> <span class="nav-text">概念及语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#同名方法与属性"><span class="nav-number">1.4.2.</span> <span class="nav-text">同名方法与属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决多继承重名问题的MRO-方法搜索顺序"><span class="nav-number">1.4.3.</span> <span class="nav-text">解决多继承重名问题的MRO(方法搜索顺序)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#新式类和旧式类"><span class="nav-number">1.4.4.</span> <span class="nav-text">新式类和旧式类</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习地址"><span class="nav-number">1.</span> <span class="nav-text">学习地址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#单继承"><span class="nav-number">1.1.</span> <span class="nav-text">单继承</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#面向对象三大特性"><span class="nav-number">1.1.1.</span> <span class="nav-text">面向对象三大特性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#单继承-1"><span class="nav-number">1.1.2.</span> <span class="nav-text">单继承</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#继承示例"><span class="nav-number">1.2.</span> <span class="nav-text">继承示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法的重写"><span class="nav-number">1.3.</span> <span class="nav-text">方法的重写</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用父类名调用父类方法"><span class="nav-number">1.3.1.</span> <span class="nav-text">使用父类名调用父类方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#私有方法和属性"><span class="nav-number">1.4.</span> <span class="nav-text">私有方法和属性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概念"><span class="nav-number">1.4.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#定义方式"><span class="nav-number">1.4.2.</span> <span class="nav-text">定义方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#伪私有"><span class="nav-number">1.4.3.</span> <span class="nav-text">伪私有</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多继承"><span class="nav-number">1.5.</span> <span class="nav-text">多继承</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概念及语法"><span class="nav-number">1.5.1.</span> <span class="nav-text">概念及语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#同名方法与属性"><span class="nav-number">1.5.2.</span> <span class="nav-text">同名方法与属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决多继承重名问题的MRO-方法搜索顺序"><span class="nav-number">1.5.3.</span> <span class="nav-text">解决多继承重名问题的MRO(方法搜索顺序)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#新式类和旧式类"><span class="nav-number">1.5.4.</span> <span class="nav-text">新式类和旧式类</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

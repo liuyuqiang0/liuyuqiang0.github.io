@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+    
+
+    
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Times New Roman:300,300italic,400,400italic,700,700italicTimes New Roman:300,300italic,400,400italic,700,700italicTimes New Roman:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="学习地址单例目标  单例设计模式 __new__方法 Python中的单例   单例设计模式 设计模式    设计模式是前人工作的总结和提炼，通常，被人们广泛流传的设计模式都是针对某一特定问题的成熟解决方案 使用设计模式是为了可重用代码、让代码更容易地被他人理解、保证代码地可靠性   单例设计模式  目的 – 让类创建的对象，在系统中只有唯一的一个实例 每一次执行类名()返回的对象，内存地址是相同">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python单例与异常">
+<meta property="og:url" content="http://sfz-lyq.cn/2019/10/23/Python单例与异常/index.html">
+<meta property="og:site_name" content="种花家">
+<meta property="og:description" content="学习地址单例目标  单例设计模式 __new__方法 Python中的单例   单例设计模式 设计模式    设计模式是前人工作的总结和提炼，通常，被人们广泛流传的设计模式都是针对某一特定问题的成熟解决方案 使用设计模式是为了可重用代码、让代码更容易地被他人理解、保证代码地可靠性   单例设计模式  目的 – 让类创建的对象，在系统中只有唯一的一个实例 每一次执行类名()返回的对象，内存地址是相同">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-23T08:46:11.698Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python单例与异常">
+<meta name="twitter:description" content="学习地址单例目标  单例设计模式 __new__方法 Python中的单例   单例设计模式 设计模式    设计模式是前人工作的总结和提炼，通常，被人们广泛流传的设计模式都是针对某一特定问题的成熟解决方案 使用设计模式是为了可重用代码、让代码更容易地被他人理解、保证代码地可靠性   单例设计模式  目的 – 让类创建的对象，在系统中只有唯一的一个实例 每一次执行类名()返回的对象，内存地址是相同">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://sfz-lyq.cn/2019/10/23/Python单例与异常/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Python单例与异常 | 种花家</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">种花家</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">null   =   *</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sfz-lyq.cn/2019/10/23/Python单例与异常/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liuyuqiang0">
+      <meta itemprop="description" content="what you will be,the world will be">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="种花家">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python单例与异常
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-10-23 14:57:00 / Modified: 16:46:11" itemprop="dateCreated datePublished" datetime="2019-10-23T14:57:00+08:00">2019-10-23</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="学习地址"><a href="#学习地址" class="headerlink" title="学习地址"></a><center><a href="https://www.bilibili.com/video/av68350017/?p=445" target="_blank" rel="noopener">学习地址</a></center></h3><h3 id="单例"><a href="#单例" class="headerlink" title="单例"></a>单例</h3><p>目标</p>
+<ol>
+<li>单例设计模式</li>
+<li><code>__new__</code>方法</li>
+<li>Python中的单例</li>
+</ol>
+<hr>
+<h4 id="单例设计模式"><a href="#单例设计模式" class="headerlink" title="单例设计模式"></a>单例设计模式</h4><ol>
+<li><p>设计模式  </p>
+<ul>
+<li>设计模式是<strong>前人工作的总结和提炼</strong>，通常，被人们广泛流传的设计模式都是针对某一特定问题的成熟解决方案</li>
+<li>使用设计模式是为了可重用代码、让代码更容易地被他人理解、保证代码地可靠性</li>
+</ul>
+</li>
+<li><p>单例设计模式</p>
+<ul>
+<li>目的 – 让类创建的对象，在系统中只有<strong>唯一的一个实例</strong></li>
+<li>每一次执行<code>类名()</code>返回的对象，<strong>内存地址是相同的</strong></li>
+</ul>
+</li>
+<li><p>单例设计模式的应用场景</p>
+<ul>
+<li>音乐播放对象</li>
+<li>回收站对象</li>
+<li>打印机对象</li>
+<li>都只有唯一的一个存在</li>
+</ul>
+</li>
+</ol>
+<h4 id="new-方法"><a href="#new-方法" class="headerlink" title="__new__方法"></a><code>__new__</code>方法</h4><p> 使用<code>类名()</code>创建对象时，<code>Python</code>解释器会调用<code>__new__</code>方法为对象分配空间 <code>__new__</code>是一个由<code>object</code>基类提供的内置的静态方法，主要作用有两个  </p>
+<ul>
+<li>在内存中为对象<strong>分配空间</strong></li>
+<li>返回对象的引用</li>
+</ul>
+<p><code>Python</code>的解释器获得对象的引用后，将引用作为第一个参数，传递给<code>__init__</code>方法</p>
+<blockquote>
+<p>了解<code>__new__</code>方法就可以进行改造了<br>重写<code>__new__</code>方法的代码十分固定！</p>
+</blockquote>
+<p>重写<code>__new__</code>方法一定要<code>return super().__new__(cls)</code><br>否则，<code>Python</code>解释器得不到分配了空间的对象引用，就不会调用对象的初始化方法<br>注意：<code>__new__</code>是一个静态方法，在调用时需要主动传递参数<code>cls</code><br>示例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class MusicPlayer(object):</span><br><span class="line">    def __new__(cls, *args, **kwargs):</span><br><span class="line">        # auto call</span><br><span class="line">        print(&apos;Create objects, allocate memory&apos;)</span><br><span class="line">        # 为对象分配空间并返回引用</span><br><span class="line">        # return super().__new__(cls)</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        print(&apos;player init....&apos;)</span><br><span class="line"></span><br><span class="line">player=MusicPlayer()</span><br><span class="line">print(player)</span><br><span class="line"></span><br><span class="line">- - - - - - -</span><br><span class="line">Create objects, allocate memory</span><br><span class="line">None</span><br></pre></td></tr></table></figure></p>
+<h4 id="Python中的单例"><a href="#Python中的单例" class="headerlink" title="Python中的单例"></a>Python中的单例</h4><h5 id="单例-1"><a href="#单例-1" class="headerlink" title="单例"></a>单例</h5><p>让类创建的对象，在系统中只有唯一的一个实例，即每次创建对象所返回的引用是一样的  </p>
+<ol>
+<li>定义一个类属性，初始值是<code>None</code>，用于记录单例对象的引用</li>
+<li>重写<code>__new__</code>方法</li>
+<li>如果类属性<code>is None</code>，调用父类方法分配空间，记录引用</li>
+<li>否则，返回这个类属性代表的引用</li>
+</ol>
+<h5 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class MusicPlayer(object):</span><br><span class="line">    instance=None</span><br><span class="line">    def __new__(cls, *args, **kwargs):</span><br><span class="line">        # auto call</span><br><span class="line">        # print(&apos;Create objects, allocate memory&apos;)</span><br><span class="line">        if MusicPlayer.instance is None: MusicPlayer.instance=super().__new__(cls)</span><br><span class="line">        return MusicPlayer.instance</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        print(&apos;player init....&apos;)</span><br><span class="line"></span><br><span class="line">player1=MusicPlayer()</span><br><span class="line">print(player1)</span><br><span class="line">player2=MusicPlayer()</span><br><span class="line">print(player2)</span><br><span class="line"></span><br><span class="line">- - - - - - - - - - - -</span><br><span class="line">player init....</span><br><span class="line">&lt;__main__.MusicPlayer object at 0x7f2f98dd69b0&gt;</span><br><span class="line">player init....</span><br><span class="line">&lt;__main__.MusicPlayer object at 0x7f2f98dd69b0&gt;</span><br></pre></td></tr></table></figure>
+<p>可以看到两次创建对象的内存地址是一样的</p>
+<h5 id="代码升级"><a href="#代码升级" class="headerlink" title="代码升级"></a>代码升级</h5><p>需求</p>
+<ul>
+<li>使得单例对象在被创建时，只执行一次初始化工作(音乐播放器换歌不需要重启)  </li>
+</ul>
+<p>解决</p>
+<ul>
+<li>定义一个类属性<code>init_flag</code>初始值为<code>False</code>标记是否执行过初始化动作</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class MusicPlayer(object):</span><br><span class="line">    instance=None</span><br><span class="line">    init_flag=False</span><br><span class="line">    def __new__(cls, *args, **kwargs):</span><br><span class="line">        # auto call</span><br><span class="line">        # print(&apos;Create objects, allocate memory&apos;)</span><br><span class="line">        if MusicPlayer.instance is None: MusicPlayer.instance=super().__new__(cls)</span><br><span class="line">        return MusicPlayer.instance</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        if MusicPlayer.init_flag == True:return</span><br><span class="line">        print(&apos;player init....&apos;)</span><br><span class="line">        MusicPlayer.init_flag=True</span><br><span class="line"></span><br><span class="line">player1=MusicPlayer()</span><br><span class="line">print(player1)</span><br><span class="line">player2=MusicPlayer()</span><br><span class="line">print(player2)</span><br><span class="line"></span><br><span class="line">- - - - - - - - - - - - </span><br><span class="line">player init....</span><br><span class="line">&lt;__main__.MusicPlayer object at 0x7f5e4abc4a20&gt;</span><br><span class="line">&lt;__main__.MusicPlayer object at 0x7f5e4abc4a20&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><p>目标</p>
+<ol>
+<li>概念</li>
+<li>捕获异常</li>
+<li>异常的传递</li>
+<li>自定义异常</li>
+</ol>
+<hr>
+<h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>程序在运行时，如果<code>Python</code>解释器遇到一个错误，会停止程序的执行，并且提示一些错误信息，这就是异常<br><strong>程序停止执行并且提示错误信息</strong>这个动作，我们通常称之为：<strong>抛出(raise)异常</strong></p>
+<h4 id="异常捕获"><a href="#异常捕获" class="headerlink" title="异常捕获"></a>异常捕获</h4><p>程序开发时，很难将所有的特殊情况都处理的面面俱到，通过异常捕获可以针对突发事件做集中的处理，从而保证程序的稳定性和健壮性</p>
+<h5 id="简单的捕获异常语法"><a href="#简单的捕获异常语法" class="headerlink" title="简单的捕获异常语法"></a>简单的捕获异常语法</h5><p>在程序开发中，如果对某些代码的执行不能确定是否正确，可以增加<code>try:</code>来捕获异常<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    # try to do </span><br><span class="line">    pass</span><br><span class="line">except:</span><br><span class="line">    # deal with error</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></p>
+<p>比如程序设计中常见的多组输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">while True:</span><br><span class="line">    try:</span><br><span class="line">        a,b=int(input())</span><br><span class="line">        print(a+b)</span><br><span class="line">    except:break</span><br></pre></td></tr></table></figure></p>
+<h5 id="根据错误类型捕获异常"><a href="#根据错误类型捕获异常" class="headerlink" title="根据错误类型捕获异常"></a>根据错误类型捕获异常</h5><p>在程序执行时，可能会遇到不同类型的异常，并且需要针对不同类型的异常，做出不同的响应，这个时候，就需要捕获错误类型了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    # 尝试执行的代码</span><br><span class="line">	pass</span><br><span class="line">except error_1:</span><br><span class="line">    # 针对错误类型1，对应的代码处理，下面同理</span><br><span class="line">    pass</span><br><span class="line">except (error_2,error_3):</span><br><span class="line">    pass</span><br><span class="line">except Exception as result: # 捕获未知错误</span><br><span class="line">    print(&apos;unknown mistake: %s&apos; %result)</span><br></pre></td></tr></table></figure></p>
+<p>当Python解释器抛出异常时，最后一行错误信息的第一个单词就是错误类型，即代码中的<code>error</code>，如<code>ValueError</code>、<code>ZeroDivisionError</code>等等</p>
+<h5 id="异常捕获完整语法"><a href="#异常捕获完整语法" class="headerlink" title="异常捕获完整语法"></a>异常捕获完整语法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    # 尝试执行</span><br><span class="line">    pass</span><br><span class="line">except error_1:</span><br><span class="line">    # 错误类型1，对应的处理</span><br><span class="line">    pass</span><br><span class="line">except (error_2,error_3):</span><br><span class="line">    pass</span><br><span class="line">except Exception as result:</span><br><span class="line">    print(&apos;unknown mistake: %s&apos; result)</span><br><span class="line">else:</span><br><span class="line">    # 没有异常会执行的代码</span><br><span class="line">    pass</span><br><span class="line">finally:</span><br><span class="line">    # 无论是否有异常，都会执行的代码</span><br><span class="line">    print(&quot;this must be execution&quot;)</span><br></pre></td></tr></table></figure>
+<h4 id="异常的传递性"><a href="#异常的传递性" class="headerlink" title="异常的传递性"></a>异常的传递性</h4><p>异常的传递 – 当函数/方法执行出现异常，会将异常传递给函数/方法的调用一方<br>如果传递到主程序，仍然没有异常处理，程序才会被终止</p>
+<p>提示：</p>
+<ol>
+<li>在开发中，可以在主函数中增加异常捕获</li>
+<li>主函数中调用的其他函数，出现异常都会传递到主函数的异常捕获中</li>
+<li>只需在主函数中进行异常捕获，保证代码整洁性</li>
+</ol>
+<h4 id="主动抛出异常"><a href="#主动抛出异常" class="headerlink" title="主动抛出异常"></a>主动抛出异常</h4><p>在开发中，除了代码执行出错<code>Python</code>解释器会抛出异常外<br>还可以根据应用程序特有的需求业务主动抛出异常</p>
+<h5 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h5><p>Python中提供了一个<code>Exception</code>异常类<br>在开发时，如果满足特定业务需求时，希望抛出异常，可以：</p>
+<ol>
+<li>创建一个<code>Exception</code>对象</li>
+<li>使用<code>raise</code>关键字抛出异常对象</li>
+</ol>
+<h5 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h5><p>需求</p>
+<ol>
+<li>定义<code>input_password</code>函数，提示用户输入密码</li>
+<li>如果用户输入长度&lt;8，抛出异常</li>
+<li>如果用户输入长度&gt;=8，返回输入的密码</li>
+</ol>
+<p>实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">def input_password():</span><br><span class="line">    password=input(&apos;please input password: &apos;)</span><br><span class="line">    if len(password)&gt;=8:return password</span><br><span class="line"></span><br><span class="line">    print(&apos;raise an exception&apos;)</span><br><span class="line">    exp=Exception(&apos;the length of password is not enough&apos;)</span><br><span class="line">    raise exp</span><br><span class="line"></span><br><span class="line">try:</span><br><span class="line">    print(input_password())</span><br><span class="line">except Exception as result:</span><br><span class="line">    print(result)</span><br><span class="line"></span><br><span class="line">- - - - - - - - - - - - -</span><br><span class="line">please input password: 12345</span><br><span class="line">raise an exception</span><br><span class="line">the length of password is not enough</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/22/Python多态与类属性/" rel="next" title="Python多态与类属性、类方法">
+                <i class="fa fa-chevron-left"></i> Python多态与类属性、类方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">liuyuqiang0</p>
+              <div class="site-description motion-element" itemprop="description">what you will be,the world will be</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">28</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/NYIST_TC_LYQ" title="CSDN &rarr; https://blog.csdn.net/NYIST_TC_LYQ" rel="noopener" target="_blank"><i class="fa fa-fw fa-CSDN"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" title="qq &rarr; tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>qq</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://nyoj.top" title="http://nyoj.top" rel="noopener" target="_blank">NYOJ</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习地址"><span class="nav-number">1.</span> <span class="nav-text">学习地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例"><span class="nav-number">2.</span> <span class="nav-text">单例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#单例设计模式"><span class="nav-number">2.1.</span> <span class="nav-text">单例设计模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#new-方法"><span class="nav-number">2.2.</span> <span class="nav-text">__new__方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Python中的单例"><span class="nav-number">2.3.</span> <span class="nav-text">Python中的单例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#单例-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">单例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#实现"><span class="nav-number">2.3.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码升级"><span class="nav-number">2.3.3.</span> <span class="nav-text">代码升级</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常"><span class="nav-number">3.</span> <span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概念"><span class="nav-number">3.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异常捕获"><span class="nav-number">3.2.</span> <span class="nav-text">异常捕获</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#简单的捕获异常语法"><span class="nav-number">3.2.1.</span> <span class="nav-text">简单的捕获异常语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#根据错误类型捕获异常"><span class="nav-number">3.2.2.</span> <span class="nav-text">根据错误类型捕获异常</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#异常捕获完整语法"><span class="nav-number">3.2.3.</span> <span class="nav-text">异常捕获完整语法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异常的传递性"><span class="nav-number">3.3.</span> <span class="nav-text">异常的传递性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主动抛出异常"><span class="nav-number">3.4.</span> <span class="nav-text">主动抛出异常</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#抛出异常"><span class="nav-number">3.4.1.</span> <span class="nav-text">抛出异常</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#示例"><span class="nav-number">3.4.2.</span> <span class="nav-text">示例</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liuyuqiang0</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+  
+  <script>
+    (function () {
+
+      firebase.initializeApp({
+        apiKey: '',
+        projectId: ''
+      })
+
+      function getCount(doc, increaseCount) {
+        //increaseCount will be false when not in article page
+
+        return doc.get().then(function (d) {
+          var count
+          if (!d.exists) { //has no data, initialize count
+            if (increaseCount) {
+              doc.set({
+                count: 1
+              })
+              count = 1
+            }
+            else {
+              count = 0
+            }
+          }
+          else { //has data
+            count = d.data().count
+            if (increaseCount) {
+              if (!(window.localStorage && window.localStorage.getItem(title))) { //if first view this article
+                doc.set({ //increase count
+                  count: count + 1
+                })
+                count++
+              }
+            }
+          }
+          if (window.localStorage && increaseCount) { //mark as visited
+            localStorage.setItem(title, true)
+          }
+
+          return count
+        })
+      }
+
+      function appendCountTo(el) {
+        return function (count) {
+          $(el).append(
+            $('<span>').addClass('post-visitors-count').append(
+              $('<span>').addClass('post-meta-divider').text('|')
+            ).append(
+              $('<span>').addClass('post-meta-item-icon').append(
+                $('<i>').addClass('fa fa-users')
+              )
+              ).append($('<span>').text('Views ' + count))
+          )
+        }
+      }
+
+      var db = firebase.firestore()
+      var articles = db.collection('articles')
+
+      //https://hexo.io/docs/variables.html
+      var isPost = 'Python单例与异常'.length > 0
+      var isArchive = '' === 'true'
+      var isCategory = ''.length > 0
+      var isTag = ''.length > 0
+
+      if (isPost) { //is article page
+        var title = 'Python单例与异常'
+        var doc = articles.doc(title)
+
+        getCount(doc, true).then(appendCountTo($('.post-meta')))
+      }
+      else if (!isArchive && !isCategory && !isTag) { //is index page
+        var titles = [] //array to titles
+
+        var postsstr = '' //if you have a better way to get titles of posts, please change it
+        eval(postsstr)
+
+        var promises = titles.map(function (title) {
+          return articles.doc(title)
+        }).map(function (doc) {
+          return getCount(doc)
+        })
+        Promise.all(promises).then(function (counts) {
+          var metas = $('.post-meta')
+          counts.forEach(function (val, idx) {
+            appendCountTo(metas[idx])(val)
+          })
+        })
+      }
+    })()
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

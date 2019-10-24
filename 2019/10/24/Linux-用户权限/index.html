@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+    
+
+    
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Times New Roman:300,300italic,400,400italic,700,700italicTimes New Roman:300,300italic,400,400italic,700,700italicTimes New Roman:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="用户和权限用户管理包括用户与组管理对文件/目录的权限包括：123读    r  4  写    w  2  执行  x  1 用ls -l 可以以列表的形式查看文件的详细信息第一列是 - 表明是文件， d 则表示目录后面的依次是 拥有者权限，组权限，其他用户权限再后面是硬链接数 拥有者，组，大小，时间，名称    硬链接数含义： 通俗的讲就是有多少种方式可以访问到当前目录/文件注：要想在终端对文件">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 用户权限">
+<meta property="og:url" content="http://sfz-lyq.cn/2019/10/24/Linux-用户权限/index.html">
+<meta property="og:site_name" content="种花家">
+<meta property="og:description" content="用户和权限用户管理包括用户与组管理对文件/目录的权限包括：123读    r  4  写    w  2  执行  x  1 用ls -l 可以以列表的形式查看文件的详细信息第一列是 - 表明是文件， d 则表示目录后面的依次是 拥有者权限，组权限，其他用户权限再后面是硬链接数 拥有者，组，大小，时间，名称    硬链接数含义： 通俗的讲就是有多少种方式可以访问到当前目录/文件注：要想在终端对文件">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-24T14:53:52.621Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux 用户权限">
+<meta name="twitter:description" content="用户和权限用户管理包括用户与组管理对文件/目录的权限包括：123读    r  4  写    w  2  执行  x  1 用ls -l 可以以列表的形式查看文件的详细信息第一列是 - 表明是文件， d 则表示目录后面的依次是 拥有者权限，组权限，其他用户权限再后面是硬链接数 拥有者，组，大小，时间，名称    硬链接数含义： 通俗的讲就是有多少种方式可以访问到当前目录/文件注：要想在终端对文件">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://sfz-lyq.cn/2019/10/24/Linux-用户权限/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Linux 用户权限 | 种花家</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">种花家</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">null   =   *</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sfz-lyq.cn/2019/10/24/Linux-用户权限/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liuyuqiang0">
+      <meta itemprop="description" content="what you will be,the world will be">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="种花家">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux 用户权限
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-10-24 22:42:00 / Modified: 22:53:52" itemprop="dateCreated datePublished" datetime="2019-10-24T22:42:00+08:00">2019-10-24</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="用户和权限"><a href="#用户和权限" class="headerlink" title="用户和权限"></a>用户和权限</h4><p>用户管理包括用户与组管理<br>对文件/目录的权限包括：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">读    r  4  </span><br><span class="line">写    w  2  </span><br><span class="line">执行  x  1</span><br></pre></td></tr></table></figure></p>
+<p>用ls -l 可以以列表的形式查看文件的详细信息<br>第一列是 <code>-</code> 表明是文件， <code>d</code> 则表示目录<br>后面的依次是 拥有者权限，组权限，其他用户权限<br>再后面是硬链接数 拥有者，组，大小，时间，名称   </p>
+<p><strong>硬链接数含义</strong>： 通俗的讲就是有多少种方式可以访问到当前目录/文件<br>注：要想在终端对文件进行操作，必须有可执行权限</p>
+<h4 id="组"><a href="#组" class="headerlink" title="组"></a>组</h4><p>为了方便用户管理，提出组的概念，在实际应用中可以预先对组设置好权限，然后将不同的用户添加到对应的组中，从而不用依次为每个用户设置权限</p>
+<h4 id="chmod-修改文件-拥有者和组-权限"><a href="#chmod-修改文件-拥有者和组-权限" class="headerlink" title="chmod 修改文件 拥有者和组 权限"></a>chmod 修改文件 拥有者和组 权限</h4><p>chmod可以修改用户/相对文件/目录的权限<br><code>chmod +/-rwx 文件名|目录名</code><br><code>chmod [options] mode file...</code>  </p>
+<p><code>-R</code>： 改变目录及其所有子目录的文件的权限<br><code>-v</code> ：详细说明权限的变化</p>
+<p>关于超级用户  </p>
+<ul>
+<li>Linux 系统中的root 帐号通常用于系统的维护和管理，对操作系统的所有资源具有访问权限</li>
+<li>Linux系统在安装过程中，系统会自动创建一个用户帐号，而这个默认的用户就成为“标准用户”</li>
+<li>su 是substitute user缩写，表示使用另一个用户的身份</li>
+<li>sudo命令用来以其他身份执行命令，预设的身份为root</li>
+<li>用户使用sudo时，必须先输入密码，之后会有5分钟的有效期，超过期限必须重新输入密码</li>
+</ul>
+<h4 id="组管理终端命令"><a href="#组管理终端命令" class="headerlink" title="组管理终端命令"></a>组管理终端命令</h4><p>Tips：创建组/删除组的终端命令都需要通过 sudo 执行,组信息保存在<code>/etc/group</code>文件中<br> 添加组： <code>groupadd  group_name</code><br>删除组： <code>groupdel  group_name</code><br>确认组信息： <code>cat/etc/group</code><br>递归修改文件/目录的所属组： <code>chgrp -R group_name 文件/目录名</code></p>
+<h4 id="创建用户-设置密码-删除用户"><a href="#创建用户-设置密码-删除用户" class="headerlink" title="创建用户/设置密码/删除用户"></a>创建用户/设置密码/删除用户</h4><p>添加新用户： <code>useradd -m -g 组名 用户名</code>  </p>
+<ul>
+<li><code>-m</code> 自动建立用户家目录，如果忘了添加-m从而无法在home目录下看到新用户，可以删除用户重新创建</li>
+<li><code>-g</code> 指定用户所在组，否则创建一个同名的组</li>
+</ul>
+<p>设置用户密码： <code>passwd 用户名</code></p>
+<ul>
+<li>如果是普通用户，直接用passwd可以修改自己的账户密码</li>
+</ul>
+<p>删除用户： <code>userdel -r 用户名</code></p>
+<ul>
+<li><code>-r</code> 会自动删除用户家目录</li>
+</ul>
+<h4 id="查看用户信息"><a href="#查看用户信息" class="headerlink" title="查看用户信息"></a>查看用户信息</h4><p><code>id 用户名</code> ： 查看用户UID 和 GID信息<br><code>who</code>： 查看当前所有登录的用户列表<br><code>whoami</code>： 查看当前登录用户的账号名  </p>
+<h4 id="passwd"><a href="#passwd" class="headerlink" title="passwd"></a>passwd</h4><p><code>/etc/passwd</code> 文件存放的是用户的信息，由6个分号组成的7个信息，分别是：</p>
+<ul>
+<li>用户名;密码（x,表示加密的密码）;UID;GID;用户全名或本地账号;家目录;登录使用的Shell，就是登录之后，使用的终端命令<br>例：<code>liuyuqiang0:x:1000:1000:liuyuqiang0:/home/liuyuqiang0:/bin/bash</code>  <ul>
+<li>passwd 可以修改当前用户的登录密码，更新用户的身份认证令牌.</li>
+<li>在超级管理员权限下可以修改任何用户的密码，命令格式为passwd +要修改的用户的名称<ul>
+<li><code>-d</code>：删除密码，仅有系统管理者才能使用；</li>
+<li><code>-f</code>：强制执行；</li>
+<li><code>-k</code>：设置只有在密码过期失效后，方能更新；</li>
+<li><code>-l</code>：锁住密码</li>
+<li><code>-s</code>：列出密码的相关信息，仅有系统管理者才能使用；</li>
+<li><code>-u</code>：解开已上锁的帐号</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="usermod"><a href="#usermod" class="headerlink" title="usermod"></a>usermod</h4><p><code>usermod</code>可以用来设置用户的主组/附加组和登录Shell<br><code>usermod -g 组 用户名</code>   修改用户的主组</p>
+<ul>
+<li>主组：通常在新建用户时指定，在etc/passwd 的第四列GID对应的组</li>
+</ul>
+<p><code>usermod -G 组 用户名   //修改用户的附加组</code></p>
+<ul>
+<li>附加组：在etc/group中最后一列表示该组的用户列表，用于指定用户的附加权限，需重新登录有效</li>
+</ul>
+<p><code>usermod -s /bin/bash 用户名</code></p>
+<ul>
+<li>修改用户登录Shell</li>
+</ul>
+<h4 id="which"><a href="#which" class="headerlink" title="which"></a>which</h4><p><code>/etc/passwd</code> 是用于保存用户信息的文件<br><code>/usr/bin/passwd</code> 是用于修改用户密码的程序<br><code>which</code>命令可以查看执行命令所在的位置</p>
+<p>关于bin和sbin  </p>
+<ul>
+<li>在Linux 中，绝大多数可执行文件都是保存在<code>/bin、/sbin、/usr/bin、/usr/sbin</code></li>
+<li><code>/bin(binary)</code>是二进制执行文件目录，主要用于具体应用</li>
+<li><code>/sbin(system binary)</code>是系统管理员专用的二进制代码存放目录，主要用户系统管理</li>
+<li><code>/usr/bin(user commands for applications)</code>后期安装的一些软件</li>
+<li><code>/usr/sbin(super user commands for applications)</code>超级用户的一些管理程序</li>
+</ul>
+<h4 id="切换用户"><a href="#切换用户" class="headerlink" title="切换用户"></a>切换用户</h4><p><code>su-用户名</code>： 切换用户，并且切换到用户家目录(不加减号只切换用户)<br><code>exit</code>： 退出当前登录账户，返回上层登录用户</p>
+<h4 id="修改文件权限"><a href="#修改文件权限" class="headerlink" title="修改文件权限"></a>修改文件权限</h4><p><code>chgrp -R 组名 文件名|目录名</code></p>
+<ul>
+<li>递归修改文件|目录的组</li>
+</ul>
+<p>chown 用户名 文件名|目录名`</p>
+<ul>
+<li>修改文件|目录的拥有者</li>
+</ul>
+<p><code>chmod -R 755 文件名|目录名</code></p>
+<ul>
+<li>递归修改文件权限</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/24/Linux-远程登录和复制文件/" rel="next" title="Linux 远程登录和复制文件">
+                <i class="fa fa-chevron-left"></i> Linux 远程登录和复制文件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/24/Linux-系统信息相关命令/" rel="prev" title="Linux 系统信息相关命令">
+                Linux 系统信息相关命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">liuyuqiang0</p>
+              <div class="site-description motion-element" itemprop="description">what you will be,the world will be</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">93</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/NYIST_TC_LYQ" title="CSDN &rarr; https://blog.csdn.net/NYIST_TC_LYQ" rel="noopener" target="_blank"><i class="fa fa-fw fa-CSDN"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" title="qq &rarr; tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>qq</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://nyoj.top" title="http://nyoj.top" rel="noopener" target="_blank">NYOJ</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#用户和权限"><span class="nav-number">1.</span> <span class="nav-text">用户和权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#组"><span class="nav-number">2.</span> <span class="nav-text">组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#chmod-修改文件-拥有者和组-权限"><span class="nav-number">3.</span> <span class="nav-text">chmod 修改文件 拥有者和组 权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#组管理终端命令"><span class="nav-number">4.</span> <span class="nav-text">组管理终端命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建用户-设置密码-删除用户"><span class="nav-number">5.</span> <span class="nav-text">创建用户/设置密码/删除用户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看用户信息"><span class="nav-number">6.</span> <span class="nav-text">查看用户信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#passwd"><span class="nav-number">7.</span> <span class="nav-text">passwd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#usermod"><span class="nav-number">8.</span> <span class="nav-text">usermod</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#which"><span class="nav-number">9.</span> <span class="nav-text">which</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#切换用户"><span class="nav-number">10.</span> <span class="nav-text">切换用户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改文件权限"><span class="nav-number">11.</span> <span class="nav-text">修改文件权限</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liuyuqiang0</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+  
+  <script>
+    (function () {
+
+      firebase.initializeApp({
+        apiKey: '',
+        projectId: ''
+      })
+
+      function getCount(doc, increaseCount) {
+        //increaseCount will be false when not in article page
+
+        return doc.get().then(function (d) {
+          var count
+          if (!d.exists) { //has no data, initialize count
+            if (increaseCount) {
+              doc.set({
+                count: 1
+              })
+              count = 1
+            }
+            else {
+              count = 0
+            }
+          }
+          else { //has data
+            count = d.data().count
+            if (increaseCount) {
+              if (!(window.localStorage && window.localStorage.getItem(title))) { //if first view this article
+                doc.set({ //increase count
+                  count: count + 1
+                })
+                count++
+              }
+            }
+          }
+          if (window.localStorage && increaseCount) { //mark as visited
+            localStorage.setItem(title, true)
+          }
+
+          return count
+        })
+      }
+
+      function appendCountTo(el) {
+        return function (count) {
+          $(el).append(
+            $('<span>').addClass('post-visitors-count').append(
+              $('<span>').addClass('post-meta-divider').text('|')
+            ).append(
+              $('<span>').addClass('post-meta-item-icon').append(
+                $('<i>').addClass('fa fa-users')
+              )
+              ).append($('<span>').text('Views ' + count))
+          )
+        }
+      }
+
+      var db = firebase.firestore()
+      var articles = db.collection('articles')
+
+      //https://hexo.io/docs/variables.html
+      var isPost = 'Linux 用户权限'.length > 0
+      var isArchive = '' === 'true'
+      var isCategory = ''.length > 0
+      var isTag = ''.length > 0
+
+      if (isPost) { //is article page
+        var title = 'Linux 用户权限'
+        var doc = articles.doc(title)
+
+        getCount(doc, true).then(appendCountTo($('.post-meta')))
+      }
+      else if (!isArchive && !isCategory && !isTag) { //is index page
+        var titles = [] //array to titles
+
+        var postsstr = '' //if you have a better way to get titles of posts, please change it
+        eval(postsstr)
+
+        var promises = titles.map(function (title) {
+          return articles.doc(title)
+        }).map(function (doc) {
+          return getCount(doc)
+        })
+        Promise.all(promises).then(function (counts) {
+          var metas = $('.post-meta')
+          counts.forEach(function (val, idx) {
+            appendCountTo(metas[idx])(val)
+          })
+        })
+      }
+    })()
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

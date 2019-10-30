@@ -151,15 +151,20 @@
 <meta property="og:site_name" content="种花家">
 <meta property="og:description" content="Deep Reinforcement Learning强化学习情景 Agent ：与环境发生交互的智能体、智能代理 State： 环境状态，智能体能观察到的东西 Action：智能体与环境发生的交互，对环境会产生影响 Reward：环境反馈给智能体的一个信息，好亦或坏  监督学习中，对于一种状态，智能体可能会有应对的措施，以alphago为例，不同的棋句有不同的策略，这样可以通过学习学到对应策略，">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/10/30/ParkAg9WVCqHUd8.png">
+<meta property="og:image" content="https://i.loli.net/2019/10/30/ywde1TmbP6iaXnG.png">
 <meta property="og:image" content="https://i.loli.net/2019/10/25/vjXH8MGRTfBZpy7.png">
 <meta property="og:image" content="https://i.loli.net/2019/10/25/WMTk6Xgo4BHiDxO.png">
 <meta property="og:image" content="https://i.loli.net/2019/10/25/GKx4RNTJjDI6YcB.png">
+<meta property="og:image" content="https://i.loli.net/2019/10/30/DYyt6ISoMw8GXVq.png">
+<meta property="og:image" content="https://i.loli.net/2019/10/30/NSZKg2CE1hDdBWy.png">
+<meta property="og:image" content="https://i.loli.net/2019/10/30/srqUJSCbYn6hWxl.png">
 <meta property="og:image" content="https://i.loli.net/2019/10/25/GSxB57CaQF1WPDJ.png">
-<meta property="og:updated_time" content="2019-10-27T02:57:10.564Z">
+<meta property="og:updated_time" content="2019-10-30T08:01:38.589Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="强化学习导论">
 <meta name="twitter:description" content="Deep Reinforcement Learning强化学习情景 Agent ：与环境发生交互的智能体、智能代理 State： 环境状态，智能体能观察到的东西 Action：智能体与环境发生的交互，对环境会产生影响 Reward：环境反馈给智能体的一个信息，好亦或坏  监督学习中，对于一种状态，智能体可能会有应对的措施，以alphago为例，不同的棋句有不同的策略，这样可以通过学习学到对应策略，">
-<meta name="twitter:image" content="https://i.loli.net/2019/10/25/vjXH8MGRTfBZpy7.png">
+<meta name="twitter:image" content="https://i.loli.net/2019/10/30/ParkAg9WVCqHUd8.png">
 
 
 
@@ -457,7 +462,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-10-27 10:57:10" itemprop="dateModified" datetime="2019-10-27T10:57:10+08:00">2019-10-27</time>
+                <time title="Modified: 2019-10-30 16:01:38" itemprop="dateModified" datetime="2019-10-30T16:01:38+08:00">2019-10-30</time>
               
             
           </span>
@@ -532,9 +537,10 @@
 <li><p>智能体的行为会影响之后看到的东西，所以智能体需要学会去探索环境，探索未知世界，探索没有做过的事</p>
 </li>
 </ol>
-<h4 id="强化学习类别"><a href="#强化学习类别" class="headerlink" title="强化学习类别"></a>强化学习类别</h4><h5 id="Policy-based"><a href="#Policy-based" class="headerlink" title="Policy-based"></a>Policy-based</h5><p>实质： <code>Learning an Actor</code></p>
+<h4 id="强化学习类别"><a href="#强化学习类别" class="headerlink" title="强化学习类别"></a>强化学习类别</h4><p><img src="https://i.loli.net/2019/10/30/ParkAg9WVCqHUd8.png" alt="2019-10-30 15-02-04 的屏幕截图.png"></p>
+<h5 id="Policy-based"><a href="#Policy-based" class="headerlink" title="Policy-based"></a>Policy-based</h5><p>实质： <code>Learning an Actor</code></p>
 <p>在机器学习中，其实就是学习一个函数，基于规则的强化学习做了类似的事  </p>
-<p><code>Actor</code>就是一个<code>Function</code>，通常写成<code>Policy</code>，这个<code>Function</code>的输入就是智能体所看到的环境状态，输出就是智能体的行为决策，根据<code>Reward</code>找出<code>best function</code><br><strong> 以上公式化为： Action=&pi;(Observation) </strong></p>
+<p><code>Actor</code>就是一个<code>Function</code>，通常写成<code>Policy</code>，这个<code>Function</code>的输入就是智能体所看到的环境状态，输出就是智能体的行为决策，根据<code>Reward</code>找出<code>best function</code><br><strong> 以上公式化为： Action=&pi;(Observation) </strong><br><img src="https://i.loli.net/2019/10/30/ywde1TmbP6iaXnG.png" alt="2019-10-30 15-18-22 的屏幕截图.png"></p>
 <h6 id="寻找Function的三个步骤"><a href="#寻找Function的三个步骤" class="headerlink" title="寻找Function的三个步骤"></a>寻找Function的三个步骤</h6><ol>
 <li>定义Function，比如用NN神网作为Actor</li>
 <li>决定Functino的好坏，Goodness of Actor<ul>
@@ -542,7 +548,7 @@
 <li>如何计算R<sub>&theta;</sub>的期望值<br><img src="https://i.loli.net/2019/10/25/vjXH8MGRTfBZpy7.png" alt="2019-10-25 21-41-34 的屏幕截图.png"></li>
 </ul>
 </li>
-<li>选取最佳function<br><img src="https://i.loli.net/2019/10/25/WMTk6Xgo4BHiDxO.png" alt="2019-10-25 21-50-11 的屏幕截图.png"><br><img src="https://i.loli.net/2019/10/25/GKx4RNTJjDI6YcB.png" alt="2019-10-25 21-55-10 的屏幕截图.png"></li>
+<li>选取最佳function<br><img src="https://i.loli.net/2019/10/25/WMTk6Xgo4BHiDxO.png" alt="2019-10-25 21-50-11 的屏幕截图.png"><br><img src="https://i.loli.net/2019/10/25/GKx4RNTJjDI6YcB.png" alt="2019-10-25 21-55-10 的屏幕截图.png"><br><img src="https://i.loli.net/2019/10/30/DYyt6ISoMw8GXVq.png" alt="2019-10-30 15-58-17 的屏幕截图.png"><br><img src="https://i.loli.net/2019/10/30/NSZKg2CE1hDdBWy.png" alt="2019-10-30 15-59-06 的屏幕截图.png"><br><img src="https://i.loli.net/2019/10/30/srqUJSCbYn6hWxl.png" alt="2019-10-30 15-56-08 的屏幕截图.png"></li>
 </ol>
 <h5 id="Value-based"><a href="#Value-based" class="headerlink" title="Value-based"></a>Value-based</h5><p>实质： <code>Learning a Critic</code><br><code>Critic</code> 并不做决策，它评估的是actor的好与坏<br><img src="https://i.loli.net/2019/10/25/GSxB57CaQF1WPDJ.png" alt="2019-10-25 22-09-43 的屏幕截图.png"></p>
 

@@ -143,25 +143,30 @@
 
 
 
-  <meta name="description" content="学习地址应用 数据压缩：   简单来说样本的特征维数可能很多，这样造成数据量特别大，在实际应用中我们可能只侧重与某些特征就能得出想要的结果了；而我们不太侧重的那些特征就可以删除，减轻工作量，提高效率。   还有一种，就像想方设法用更适合可取的数据代替当前样本，达到同样的目的，比如对内存的需求，运算量等。 实例： 2D压缩到1D，3D压缩到2D   可视化数据 ：  假如数据特征维数很高，通常不太可">
-<meta name="keywords" content="机器学习">
+  <meta name="description" content="学习地址CriticQ-Learning是value-based的强化学习，它学习的是一个Critic，评价所给出的actor &amp;pi;有多好 例如： State value function V&amp;pi;(s)  当使用actor &amp;pi;，V&amp;pi;(s)所代表就是在观察到状态s后累积的期望收益值  如何衡量V&amp;pi;(s)基于蒙特卡罗Critic观察 &amp;pi; 玩游戏，让Agent与环境互动当">
+<meta name="keywords" content="强化学习,RL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="降维">
-<meta property="og:url" content="http://sfz-lyq.cn/2019/09/15/降维/index.html">
+<meta property="og:title" content="Q-Learning-1">
+<meta property="og:url" content="http://sfz-lyq.cn/2019/11/01/Q-Learning/index.html">
 <meta property="og:site_name" content="种花家">
-<meta property="og:description" content="学习地址应用 数据压缩：   简单来说样本的特征维数可能很多，这样造成数据量特别大，在实际应用中我们可能只侧重与某些特征就能得出想要的结果了；而我们不太侧重的那些特征就可以删除，减轻工作量，提高效率。   还有一种，就像想方设法用更适合可取的数据代替当前样本，达到同样的目的，比如对内存的需求，运算量等。 实例： 2D压缩到1D，3D压缩到2D   可视化数据 ：  假如数据特征维数很高，通常不太可">
+<meta property="og:description" content="学习地址CriticQ-Learning是value-based的强化学习，它学习的是一个Critic，评价所给出的actor &amp;pi;有多好 例如： State value function V&amp;pi;(s)  当使用actor &amp;pi;，V&amp;pi;(s)所代表就是在观察到状态s后累积的期望收益值  如何衡量V&amp;pi;(s)基于蒙特卡罗Critic观察 &amp;pi; 玩游戏，让Agent与环境互动当">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.loli.net/2019/09/15/MQstVbeuDjzqyI9.png">
-<meta property="og:image" content="https://i.loli.net/2019/09/15/tGOTLs2WbYDVKIP.png">
-<meta property="og:image" content="https://i.loli.net/2019/09/15/GeznbWclXRayBZr.png">
-<meta property="og:image" content="https://i.loli.net/2019/09/15/nmhIb6qGTKsyr7V.png">
-<meta property="og:image" content="https://i.loli.net/2019/09/15/psqnHTgktYfd5ea.png">
-<meta property="og:image" content="https://i.loli.net/2019/09/15/klvfAF8TweaobuB.png">
-<meta property="og:updated_time" content="2019-10-25T08:06:31.252Z">
+<meta property="og:image" content="https://i.loli.net/2019/11/01/i4tYBJ2KdleNo9E.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/01/VGoFzMyOu1CQ96U.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/01/4RWOC312ciGVxZJ.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/01/9uAbaZvyBxhU648.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/01/Ni8olFM1qpVfcWE.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/01/rpYwaVzjtBcWZSA.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/01/HE9Qd8AMxXc4yPR.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/01/aQlE4YnH1BkzfvU.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/01/4TK6MwrfdHEcmVZ.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/01/Gh2W4mM6QUn5pXZ.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/01/2yUXV1f8xMpLCwb.png">
+<meta property="og:updated_time" content="2019-11-01T09:12:02.844Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="降维">
-<meta name="twitter:description" content="学习地址应用 数据压缩：   简单来说样本的特征维数可能很多，这样造成数据量特别大，在实际应用中我们可能只侧重与某些特征就能得出想要的结果了；而我们不太侧重的那些特征就可以删除，减轻工作量，提高效率。   还有一种，就像想方设法用更适合可取的数据代替当前样本，达到同样的目的，比如对内存的需求，运算量等。 实例： 2D压缩到1D，3D压缩到2D   可视化数据 ：  假如数据特征维数很高，通常不太可">
-<meta name="twitter:image" content="https://i.loli.net/2019/09/15/MQstVbeuDjzqyI9.png">
+<meta name="twitter:title" content="Q-Learning-1">
+<meta name="twitter:description" content="学习地址CriticQ-Learning是value-based的强化学习，它学习的是一个Critic，评价所给出的actor &amp;pi;有多好 例如： State value function V&amp;pi;(s)  当使用actor &amp;pi;，V&amp;pi;(s)所代表就是在观察到状态s后累积的期望收益值  如何衡量V&amp;pi;(s)基于蒙特卡罗Critic观察 &amp;pi; 玩游戏，让Agent与环境互动当">
+<meta name="twitter:image" content="https://i.loli.net/2019/11/01/i4tYBJ2KdleNo9E.png">
 
 
 
@@ -169,7 +174,7 @@
 
   
   
-  <link rel="canonical" href="http://sfz-lyq.cn/2019/09/15/降维/">
+  <link rel="canonical" href="http://sfz-lyq.cn/2019/11/01/Q-Learning/">
 
 
 
@@ -179,7 +184,7 @@
   };
 </script>
 
-  <title>降维 | 种花家</title>
+  <title>Q-Learning-1 | 种花家</title>
   
 
 
@@ -399,7 +404,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sfz-lyq.cn/2019/09/15/降维/">
+    <link itemprop="mainEntityOfPage" href="http://sfz-lyq.cn/2019/11/01/Q-Learning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liuyuqiang0">
@@ -416,7 +421,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">降维
+          <h1 class="post-title" itemprop="name headline">Q-Learning-1
 
               
             
@@ -442,24 +447,12 @@
                 
               
 
-              <time title="Created: 2019-09-15 14:41:00" itemprop="dateCreated datePublished" datetime="2019-09-15T14:41:00+08:00">2019-09-15</time>
+              <time title="Created: 2019-11-01 15:43:00 / Modified: 17:12:02" itemprop="dateCreated datePublished" datetime="2019-11-01T15:43:00+08:00">2019-11-01</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-10-25 16:06:31" itemprop="dateModified" datetime="2019-10-25T16:06:31+08:00">2019-10-25</time>
               
             
           </span>
@@ -476,7 +469,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/强化学习/" itemprop="url" rel="index"><span itemprop="name">强化学习</span></a></span>
 
                 
                 
@@ -518,26 +511,20 @@
       
 
       
-        <h3 id="学习地址"><a href="#学习地址" class="headerlink" title="学习地址"></a><center><a href="https://study.163.com/course/courseLearn.htm?courseId=1004570029#/learn/video?lessonId=1052316982&amp;courseId=1004570029" target="_blank" rel="noopener">学习地址</a></center></h3><h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><p><strong> 数据压缩</strong>： </p>
+        <h3 id="学习地址"><a href="#学习地址" class="headerlink" title="学习地址"></a><center><a href="https://www.bilibili.com/video/av58458003/?p=4" target="_blank" rel="noopener">学习地址</a></center></h3><h4 id="Critic"><a href="#Critic" class="headerlink" title="Critic"></a>Critic</h4><p><code>Q-Learning</code>是value-based的强化学习，它学习的是一个<code>Critic</code>，评价所给出的actor &pi;有多好</p>
+<p>例如： State value function V<sup>&pi;</sup>(s)</p>
 <ul>
-<li>简单来说样本的特征维数可能很多，这样造成数据量特别大，在实际应用中我们可能只侧重与某些特征就能得出想要的结果了；而我们不太侧重的那些特征就可以删除，减轻工作量，提高效率。  </li>
-<li>还有一种，就像想方设法用更适合可取的数据代替当前样本，达到同样的目的，比如对内存的需求，运算量等。</li>
-<li>实例： 2D压缩到1D，3D压缩到2D</li>
+<li>当使用actor &pi;，V<sup>&pi;</sup>(s)所代表就是在观察到状态s后累积的期望收益值<br><img src="https://i.loli.net/2019/11/01/i4tYBJ2KdleNo9E.png" alt="2019-11-01 15-55-14 的屏幕截图.png"></li>
 </ul>
-<p><strong> 可视化数据 </strong>：</p>
-<ul>
-<li>假如数据特征维数很高，通常不太可能作出简单的图来理解，故需要选取某些维数进行作图，或者，自己使用某种方法将原来的高维数数据转化为低维数据再进行作图，以便理解。</li>
-</ul>
-<h4 id="主成份分析法PCA"><a href="#主成份分析法PCA" class="headerlink" title="主成份分析法PCA"></a>主成份分析法PCA</h4><h5 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h5><p>PCA算法： Principal Component Analysis<br> 试图找出一个低维平面，使得所有数据都可以投影在上面，并且投影误差平方最小化，用新的维度空间代替原来高维空间，达到降维的目的。<br> <img src="https://i.loli.net/2019/09/15/MQstVbeuDjzqyI9.png" alt="2019-09-15 15-24-39 的屏幕截图.png"></p>
-<p> PCA并不是线形回归，线形回归是拟合一条直线(在二维特征集中)使得样本到这条直线的平方误差最小；而PCA是使得样本到这条直线的投影距离最小。在三维数据集中，PCA尝试的是找出一个二维平面，使得所有样本数据投影到这个平面的投影距离最小，那么就可以用这个二维平面来表示这些数据。</p>
-<h5 id="应用-1"><a href="#应用-1" class="headerlink" title="应用"></a>应用</h5><p>首先需要进行数据预处理：特征缩放或均值标准化<br><img src="https://i.loli.net/2019/09/15/tGOTLs2WbYDVKIP.png" alt="2019-09-15 16-01-43 的屏幕截图.png"><br> S<sub>j</sub>是特征j的标准偏差</p>
-<p>然后，使用主成份分析法进行降维映射。<br>主成份分析法需要用到一些高等代数如奇异值分解等运算和证明。</p>
-<h4 id="主成份数量选择"><a href="#主成份数量选择" class="headerlink" title="主成份数量选择"></a>主成份数量选择</h4><p><img src="https://i.loli.net/2019/09/15/GeznbWclXRayBZr.png" alt="2019-09-15 16-27-38 的屏幕截图.png"><br><img src="https://i.loli.net/2019/09/15/nmhIb6qGTKsyr7V.png" alt="2019-09-15 16-32-40 的屏幕截图.png"><br><img src="https://i.loli.net/2019/09/15/psqnHTgktYfd5ea.png" alt="2019-09-15 16-33-30 的屏幕截图.png"></p>
-<h4 id="压缩重现"><a href="#压缩重现" class="headerlink" title="压缩重现"></a>压缩重现</h4><p><img src="https://i.loli.net/2019/09/15/klvfAF8TweaobuB.png" alt="2019-09-15 16-37-10 的屏幕截图.png"></p>
-<h4 id="应用PCA的建议"><a href="#应用PCA的建议" class="headerlink" title="应用PCA的建议"></a>应用PCA的建议</h4><ol>
-<li>不建议使用PCA防止过拟合。   </li>
-<li>不建议项目一开始就使用PCA，而是先按普通方法去做，再考虑PCA优化有什么不同</li>
-</ol>
+<h3 id="如何衡量V-pi-s"><a href="#如何衡量V-pi-s" class="headerlink" title="如何衡量V&pi;(s)"></a>如何衡量V<sup>&pi;</sup>(s)</h3><h4 id="基于蒙特卡罗"><a href="#基于蒙特卡罗" class="headerlink" title="基于蒙特卡罗"></a>基于蒙特卡罗</h4><p><code>Critic</code>观察 &pi; 玩游戏，让Agent与环境互动<br>当看到状态s<sub>a</sub>时，到游戏结束所得到的累积收益越接近G<sub>a</sub>越好，但需要等到游戏结束才能得到结果<br><img src="https://i.loli.net/2019/11/01/VGoFzMyOu1CQ96U.png" alt="2019-11-01 16-00-35 的屏幕截图.png"></p>
+<h4 id="基于时间差分-Temporal-difference"><a href="#基于时间差分-Temporal-difference" class="headerlink" title="基于时间差分(Temporal-difference)"></a>基于时间差分(Temporal-difference)</h4><p>不需要等一整个episode结束，只需等到一个状态(s<sub>t</sub> ，a<sub>t</sub>，r<sub>t</sub>)到下一个状态s<sub>t+1</sub><br>V<sup>&pi;</sup>(s<sub>t</sub>)=V<sup>&pi;</sup>(s<sub>t+1</sub>) + r<sub>t</sub><br><img src="https://i.loli.net/2019/11/01/4RWOC312ciGVxZJ.png" alt="2019-11-01 16-10-36 的屏幕截图.png"></p>
+<p><img src="https://i.loli.net/2019/11/01/9uAbaZvyBxhU648.png" alt="2019-11-01 16-14-08 的屏幕截图.png"></p>
+<h3 id="State-action-value-function-Q-pi-s-a"><a href="#State-action-value-function-Q-pi-s-a" class="headerlink" title="State-action value function Q&pi;(s,a)"></a>State-action value function Q<sup>&pi;</sup>(s,a)</h3><p>假设在状态s采取的行为是a，在策略&pi;下所累积的收益期望<br><img src="https://i.loli.net/2019/11/01/Ni8olFM1qpVfcWE.png" alt="2019-11-01 16-23-23 的屏幕截图.png"></p>
+<p><img src="https://i.loli.net/2019/11/01/rpYwaVzjtBcWZSA.png" alt="2019-11-01 16-30-49 的屏幕截图.png"><br><img src="https://i.loli.net/2019/11/01/HE9Qd8AMxXc4yPR.png" alt="2019-11-01 16-52-12 的屏幕截图.png"></p>
+<h3 id="Target-Network"><a href="#Target-Network" class="headerlink" title="Target Network"></a>Target Network</h3><p>训练时固定一个Q<sup>&pi;</sup>，作为目标网络，更新其他的Q<sup>&pi;</sup>，然后用更新好几次的Q代替所固定的Q<br><img src="https://i.loli.net/2019/11/01/aQlE4YnH1BkzfvU.png" alt="2019-11-01 16-57-07 的屏幕截图.png"></p>
+<h3 id="Exploration"><a href="#Exploration" class="headerlink" title="Exploration"></a>Exploration</h3><p><img src="https://i.loli.net/2019/11/01/4TK6MwrfdHEcmVZ.png" alt="2019-11-01 17-04-18 的屏幕截图.png"></p>
+<h3 id="Replay-Buffer"><a href="#Replay-Buffer" class="headerlink" title="Replay Buffer"></a>Replay Buffer</h3><p><img src="https://i.loli.net/2019/11/01/Gh2W4mM6QUn5pXZ.png" alt="2019-11-01 17-07-05 的屏幕截图.png"></p>
+<h3 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h3><p><img src="https://i.loli.net/2019/11/01/2yUXV1f8xMpLCwb.png" alt="2019-11-01 17-11-18 的屏幕截图.png"></p>
 
       
     </div>
@@ -561,7 +548,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+            <a href="/tags/强化学习/" rel="tag"># 强化学习</a>
+          
+            <a href="/tags/RL/" rel="tag"># RL</a>
           
         </div>
       
@@ -586,8 +575,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/14/无监督学习/" rel="next" title="无监督学习： K-Means">
-                <i class="fa fa-chevron-left"></i> 无监督学习： K-Means
+              <a href="/2019/10/28/From-on-policy-to-off-policy/" rel="next" title="From on-policy to off-policy">
+                <i class="fa fa-chevron-left"></i> From on-policy to off-policy
               </a>
             
           </div>
@@ -595,10 +584,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/09/16/吴恩达机器学习第七次编程作业/" rel="prev" title="吴恩达机器学习第七次编程作业-K-means Clustering and Principal Component Analysis">
-                吴恩达机器学习第七次编程作业-K-means Clustering and Principal Component Analysis <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -857,7 +842,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习地址"><span class="nav-number">1.</span> <span class="nav-text">学习地址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#应用"><span class="nav-number">1.1.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主成份分析法PCA"><span class="nav-number">1.2.</span> <span class="nav-text">主成份分析法PCA</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#概念"><span class="nav-number">1.2.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#应用-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">应用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主成份数量选择"><span class="nav-number">1.3.</span> <span class="nav-text">主成份数量选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#压缩重现"><span class="nav-number">1.4.</span> <span class="nav-text">压缩重现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用PCA的建议"><span class="nav-number">1.5.</span> <span class="nav-text">应用PCA的建议</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习地址"><span class="nav-number">1.</span> <span class="nav-text">学习地址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Critic"><span class="nav-number">1.1.</span> <span class="nav-text">Critic</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何衡量V-pi-s"><span class="nav-number">2.</span> <span class="nav-text">如何衡量Vπ(s)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于蒙特卡罗"><span class="nav-number">2.1.</span> <span class="nav-text">基于蒙特卡罗</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于时间差分-Temporal-difference"><span class="nav-number">2.2.</span> <span class="nav-text">基于时间差分(Temporal-difference)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#State-action-value-function-Q-pi-s-a"><span class="nav-number">3.</span> <span class="nav-text">State-action value function Qπ(s,a)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Target-Network"><span class="nav-number">4.</span> <span class="nav-text">Target Network</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploration"><span class="nav-number">5.</span> <span class="nav-text">Exploration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Replay-Buffer"><span class="nav-number">6.</span> <span class="nav-text">Replay Buffer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Algorithm"><span class="nav-number">7.</span> <span class="nav-text">Algorithm</span></a></li></ol></div>
             
 
           </div>
@@ -1111,13 +1096,13 @@
       var articles = db.collection('articles')
 
       //https://hexo.io/docs/variables.html
-      var isPost = '降维'.length > 0
+      var isPost = 'Q-Learning-1'.length > 0
       var isArchive = '' === 'true'
       var isCategory = ''.length > 0
       var isTag = ''.length > 0
 
       if (isPost) { //is article page
-        var title = '降维'
+        var title = 'Q-Learning-1'
         var doc = articles.doc(title)
 
         getCount(doc, true).then(appendCountTo($('.post-meta')))

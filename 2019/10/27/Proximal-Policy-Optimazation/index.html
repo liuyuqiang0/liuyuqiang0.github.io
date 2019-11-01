@@ -155,9 +155,9 @@
 <meta property="og:image" content="https://i.loli.net/2019/10/27/oZsjftg3PvuLWm6.png">
 <meta property="og:image" content="https://i.loli.net/2019/10/27/7H8JIXMGSsRz3E4.png">
 <meta property="og:image" content="https://i.loli.net/2019/10/27/7H8JIXMGSsRz3E4.png">
-<meta property="og:image" content="https://i.loli.net/2019/10/27/yQ5sGdLkxO7SZg4.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/01/TYMG4SrCf19oijt.png">
 <meta property="og:image" content="https://i.loli.net/2019/10/27/irj5AW8Xy4twCJT.png">
-<meta property="og:updated_time" content="2019-10-27T06:48:00.778Z">
+<meta property="og:updated_time" content="2019-11-01T02:01:57.292Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Proximal Policy Optimazation">
 <meta name="twitter:description" content="学习地址策略梯度Policy of Actor Policy &amp;pi; is  a network with parameter &amp;theta; Input: the observation of machine represented as a vector or a matrix Output: each action corresponds to a neuron in output lay">
@@ -442,12 +442,24 @@
                 
               
 
-              <time title="Created: 2019-10-27 10:56:00 / Modified: 14:48:00" itemprop="dateCreated datePublished" datetime="2019-10-27T10:56:00+08:00">2019-10-27</time>
+              <time title="Created: 2019-10-27 10:56:00" itemprop="dateCreated datePublished" datetime="2019-10-27T10:56:00+08:00">2019-10-27</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-11-01 10:01:57" itemprop="dateModified" datetime="2019-11-01T10:01:57+08:00">2019-11-01</time>
               
             
           </span>
@@ -513,7 +525,13 @@
 </ul>
 </li>
 </ul>
-<p><img src="https://i.loli.net/2019/10/27/cqaKmdgNfuRtOZh.png" alt="2019-10-27 11-34-27 的屏幕截图.png"><br><img src="https://i.loli.net/2019/10/27/oZsjftg3PvuLWm6.png" alt="2019-10-27 11-42-51 的屏幕截图.png"><br><img src="https://i.loli.net/2019/10/27/7H8JIXMGSsRz3E4.png" alt="2019-10-27 11-44-49 的屏幕截图.png"><br><img src="https://i.loli.net/2019/10/27/7H8JIXMGSsRz3E4.png" alt="2019-10-27 11-44-49 的屏幕截图.png"><br><img src="https://i.loli.net/2019/10/27/yQ5sGdLkxO7SZg4.png" alt="2019-10-27 11-58-22 的屏幕截图.png"><br><img src="https://i.loli.net/2019/10/27/irj5AW8Xy4twCJT.png" alt="2019-10-27 14-47-16 的屏幕截图.png"></p>
+<p><img src="https://i.loli.net/2019/10/27/cqaKmdgNfuRtOZh.png" alt="2019-10-27 11-34-27 的屏幕截图.png"><br><img src="https://i.loli.net/2019/10/27/oZsjftg3PvuLWm6.png" alt="2019-10-27 11-42-51 的屏幕截图.png"><br><img src="https://i.loli.net/2019/10/27/7H8JIXMGSsRz3E4.png" alt="2019-10-27 11-44-49 的屏幕截图.png"><br><img src="https://i.loli.net/2019/10/27/7H8JIXMGSsRz3E4.png" alt="2019-10-27 11-44-49 的屏幕截图.png"><br><img src="https://i.loli.net/2019/11/01/TYMG4SrCf19oijt.png" alt="2019-11-01 09-47-31 的屏幕截图.png"><br><img src="https://i.loli.net/2019/10/27/irj5AW8Xy4twCJT.png" alt="2019-10-27 14-47-16 的屏幕截图.png"></p>
+<p>Tips</p>
+<ol>
+<li>关于上述图片的一些解释，结合前面章节</li>
+<li>技巧1表示有的数据可能没有被采样，但它对结果可能是正反馈，我们给所有数据减去一个基准值，使得所有数据有正有负，这样采样平均一些。</li>
+<li>技巧2表示应该考虑各种情况，故 t’ 不从0开始，折扣因子表示当前对以后的影响，这个影响应该是越来越小的。</li>
+</ol>
 
       
     </div>

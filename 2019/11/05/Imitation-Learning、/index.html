@@ -143,18 +143,27 @@
 
 
 
-  <meta name="description" content="非数字型： 字符串、列表、元组、字典 在python中，所有非数字型变量都支持以下特点: 都是一个序列sequence，也可以理解为容器 取值[] 遍历 for in 计算长度、最大值/最小值、比较、删除 链接 . 和重复 切片    列表的定义： list_name=[] List(列表)是Python中使用最频繁的数据类型，在其他语言中通常叫做 数组 专门用于存储一串信息，数据类型可以不同，">
-<meta name="keywords" content="Python">
+  <meta name="description" content="学习地址介绍 Behavior Cloning观察专业行为或者说标准行为，然后进行决策，但这样收集的数据可能比较单一，没有各种情况下的数据。上图是以学说话为例的，在说话时可能会用手势促进理解，但是学习者应该学会的是语言，而非附带的手势。 Inverse Reinforcement Learning(IRL)传统学习模型现在在观察专业行为的基础上反推出Function，再应用到学习行为中 假设专业行">
+<meta name="keywords" content="强化学习,RL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pyhton列表">
-<meta property="og:url" content="http://sfz-lyq.cn/2019/05/31/Pyhton/index.html">
+<meta property="og:title" content="Imitation Learning">
+<meta property="og:url" content="http://sfz-lyq.cn/2019/11/05/Imitation-Learning、/index.html">
 <meta property="og:site_name" content="种花家">
-<meta property="og:description" content="非数字型： 字符串、列表、元组、字典 在python中，所有非数字型变量都支持以下特点: 都是一个序列sequence，也可以理解为容器 取值[] 遍历 for in 计算长度、最大值/最小值、比较、删除 链接 . 和重复 切片    列表的定义： list_name=[] List(列表)是Python中使用最频繁的数据类型，在其他语言中通常叫做 数组 专门用于存储一串信息，数据类型可以不同，">
+<meta property="og:description" content="学习地址介绍 Behavior Cloning观察专业行为或者说标准行为，然后进行决策，但这样收集的数据可能比较单一，没有各种情况下的数据。上图是以学说话为例的，在说话时可能会用手势促进理解，但是学习者应该学会的是语言，而非附带的手势。 Inverse Reinforcement Learning(IRL)传统学习模型现在在观察专业行为的基础上反推出Function，再应用到学习行为中 假设专业行">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-25T08:26:36.618Z">
+<meta property="og:image" content="https://i.loli.net/2019/11/05/TXklH3QfSjOU4ds.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/05/IijAu7xGD8FXlsh.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/05/WOLhZc2MmFjGVda.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/05/SWK1HExnhvbaQUG.png">
+<meta property="og:image" content="https://www.privacypic.com/images/2019/11/05/2019-11-05-14-51-38-fdc76c7f35e9ecfc.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/05/ySYmfCHhKB4g1pT.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/05/3NO9wQTHE7kylpo.png">
+<meta property="og:image" content="https://i.loli.net/2019/11/05/iPzYlH8Nu6Egqj9.png">
+<meta property="og:updated_time" content="2019-11-05T07:19:12.907Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Pyhton列表">
-<meta name="twitter:description" content="非数字型： 字符串、列表、元组、字典 在python中，所有非数字型变量都支持以下特点: 都是一个序列sequence，也可以理解为容器 取值[] 遍历 for in 计算长度、最大值/最小值、比较、删除 链接 . 和重复 切片    列表的定义： list_name=[] List(列表)是Python中使用最频繁的数据类型，在其他语言中通常叫做 数组 专门用于存储一串信息，数据类型可以不同，">
+<meta name="twitter:title" content="Imitation Learning">
+<meta name="twitter:description" content="学习地址介绍 Behavior Cloning观察专业行为或者说标准行为，然后进行决策，但这样收集的数据可能比较单一，没有各种情况下的数据。上图是以学说话为例的，在说话时可能会用手势促进理解，但是学习者应该学会的是语言，而非附带的手势。 Inverse Reinforcement Learning(IRL)传统学习模型现在在观察专业行为的基础上反推出Function，再应用到学习行为中 假设专业行">
+<meta name="twitter:image" content="https://i.loli.net/2019/11/05/TXklH3QfSjOU4ds.png">
 
 
 
@@ -162,7 +171,7 @@
 
   
   
-  <link rel="canonical" href="http://sfz-lyq.cn/2019/05/31/Pyhton/">
+  <link rel="canonical" href="http://sfz-lyq.cn/2019/11/05/Imitation-Learning、/">
 
 
 
@@ -172,7 +181,7 @@
   };
 </script>
 
-  <title>Pyhton列表 | 种花家</title>
+  <title>Imitation Learning | 种花家</title>
   
 
 
@@ -392,7 +401,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sfz-lyq.cn/2019/05/31/Pyhton/">
+    <link itemprop="mainEntityOfPage" href="http://sfz-lyq.cn/2019/11/05/Imitation-Learning、/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liuyuqiang0">
@@ -409,7 +418,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Pyhton列表
+          <h1 class="post-title" itemprop="name headline">Imitation Learning
 
               
             
@@ -435,24 +444,12 @@
                 
               
 
-              <time title="Created: 2019-05-31 20:36:00" itemprop="dateCreated datePublished" datetime="2019-05-31T20:36:00+08:00">2019-05-31</time>
+              <time title="Created: 2019-11-05 14:37:00 / Modified: 15:19:12" itemprop="dateCreated datePublished" datetime="2019-11-05T14:37:00+08:00">2019-11-05</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-10-25 16:26:36" itemprop="dateModified" datetime="2019-10-25T16:26:36+08:00">2019-10-25</time>
               
             
           </span>
@@ -469,7 +466,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/强化学习/" itemprop="url" rel="index"><span itemprop="name">强化学习</span></a></span>
 
                 
                 
@@ -511,68 +508,12 @@
       
 
       
-        <ul>
-<li>非数字型： 字符串、列表、元组、字典</li>
-<li>在python中，所有非数字型变量都支持以下特点:<ol>
-<li>都是一个序列sequence，也可以理解为容器</li>
-<li>取值[]</li>
-<li>遍历 for in</li>
-<li>计算长度、最大值/最小值、比较、删除</li>
-<li>链接 . 和重复</li>
-<li>切片</li>
-</ol>
-</li>
-</ul>
-<h4 id="列表的定义：-list-name"><a href="#列表的定义：-list-name" class="headerlink" title="列表的定义： list_name=[]"></a>列表的定义： list_name=[]</h4><ul>
-<li>List(列表)是Python中使用最频繁的数据类型，在其他语言中通常叫做 数组</li>
-<li>专门用于存储一串信息，数据类型可以不同，但在使用排序方法时要求列表内所有数据类型相同</li>
-<li>列表用[]定义，数据之间使用 , 分隔</li>
-<li>列表的索引(下标)从0开始，从列表中取值时，如果超出索引范围，程序会报错： IndexError: list index out of range</li>
-</ul>
-<h4 id="列表常用操作方法：-列表名-方法名"><a href="#列表常用操作方法：-列表名-方法名" class="headerlink" title="列表常用操作方法：  列表名.方法名()"></a>列表常用操作方法：  列表名.方法名()</h4><ul>
-<li>知道索引取值： list_name[index]</li>
-<li>知道内容取索引： list_name.index(value)  <ol>
-<li>如果有多个相同的内容，则取第一个出现的位置</li>
-<li>如果列表中无此内容，则程序报错： ValueError: ‘value’ is not in list</li>
-</ol>
-</li>
-<li>修改指定位置的值： list_name[index]=value # 指定的索引不能超出范围：IndexError: list assignment index out of range</li>
-<li>向列表中增加数据:  <ol>
-<li>ist_name.append(value) # 向列表末尾追加数据</li>
-<li>list_name.insert(index,value) # 在index位置插入数据 </li>
-<li>list_name.extend(temp_list) # 把另一个列表的内容追加到当前列表末尾</li>
-</ol>
-</li>
-<li>从列表中删除数据：  <ol>
-<li>list_name.remove(value)  # 多个value只删第一个，如果value不在列表中则报错</li>
-<li>list_name.pop(index)  # 默认删除最后一个元素，可以带索引参数删除指定位置值</li>
-<li>list_name.clear() # 清空列表</li>
-</ol>
-</li>
-<li>使用 del 关键字删除列表元素：  del list_name[index]  <ol>
-<li>del 关键字本质上是用来将一个变量从内存中删除，后续代码就不能再使用此变量</li>
-</ol>
-</li>
-<li>统计列表长度： len(list_name)  # 返回列表长度</li>
-<li>统计某个值出现次数： list_name.count(value)  #返回value 在列表中出现的次数</li>
-<li>列表的排序和反转: <ol>
-<li>list_name.sort()    # 升序排序，排序时要求列表中的元素类型都相同</li>
-<li>list_name.sort(reverse=True)  # 降序排序</li>
-<li>list_name.reverse()  # 反转                 </li>
-</ol>
-</li>
-<li>Tips： 对于上述方法并不用死记硬背，变量名后面输入 . ，然后选择要针对这个变量进行的操作，如果对于方法的功能不熟悉，只需用CTRL + Q 查看</li>
-</ul>
-<h4 id="列表的循环遍历"><a href="#列表的循环遍历" class="headerlink" title="列表的循环遍历"></a>列表的循环遍历</h4><ul>
-<li>在Python 中为了提高列表的遍历效率，专门提供的迭代iteration 遍历</li>
-<li>使用 for 循环就能实现迭代遍历  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for name in list_name:</span><br><span class="line">    print(name)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="列表的截取和连接"><a href="#列表的截取和连接" class="headerlink" title="列表的截取和连接"></a>列表的截取和连接</h4><ul>
-<li>list_name[start:end]<br> 输出一个子列表，如果end小与start 输出的是空列表</li>
-<li>tmp_list=list1 + list2<br> 和extend函数类似</li>
-</ul>
-<h4 id="用列表定义二维数组"><a href="#用列表定义二维数组" class="headerlink" title="用列表定义二维数组"></a>用列表定义二维数组</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list=[[0]*n for i in range(n)]</span><br></pre></td></tr></table></figure>
+        <h3 id="学习地址"><a href="#学习地址" class="headerlink" title="学习地址"></a><center><a href="https://www.bilibili.com/video/av58458003/?p=9" target="_blank" rel="noopener">学习地址</a></center></h3><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p><img src="https://i.loli.net/2019/11/05/TXklH3QfSjOU4ds.png" alt="2019-11-05 14-41-24 的屏幕截图.png"></p>
+<h4 id="Behavior-Cloning"><a href="#Behavior-Cloning" class="headerlink" title="Behavior Cloning"></a>Behavior Cloning</h4><p>观察专业行为或者说标准行为，然后进行决策，但这样收集的数据可能比较单一，没有各种情况下的数据。<br><img src="https://i.loli.net/2019/11/05/IijAu7xGD8FXlsh.png" alt="2019-11-05 14-43-44 的屏幕截图.png"><br><img src="https://i.loli.net/2019/11/05/WOLhZc2MmFjGVda.png" alt="2019-11-05 14-46-25 的屏幕截图.png"><br><img src="https://i.loli.net/2019/11/05/SWK1HExnhvbaQUG.png" alt="2019-11-05 14-48-40 的屏幕截图.png"><br><img src="https://www.privacypic.com/images/2019/11/05/2019-11-05-14-51-38-fdc76c7f35e9ecfc.png" alt="2019-11-05-14-51-38-fdc76c7f35e9ecfc.png"><br>上图是以学说话为例的，在说话时可能会用手势促进理解，但是学习者应该学会的是语言，而非附带的手势。</p>
+<h4 id="Inverse-Reinforcement-Learning-IRL"><a href="#Inverse-Reinforcement-Learning-IRL" class="headerlink" title="Inverse Reinforcement Learning(IRL)"></a>Inverse Reinforcement Learning(IRL)</h4><p>传统学习模型<br><img src="https://i.loli.net/2019/11/05/ySYmfCHhKB4g1pT.png" alt="2019-11-05 15-02-40 的屏幕截图.png"><br>现在在观察专业行为的基础上反推出Function，再应用到学习行为中<br><img src="https://i.loli.net/2019/11/05/3NO9wQTHE7kylpo.png" alt="2019-11-05 15-04-13 的屏幕截图.png"></p>
+<p>假设专业行为是最好的，那么，</p>
+<p><img src="https://i.loli.net/2019/11/05/iPzYlH8Nu6Egqj9.png" alt="2019-11-05 15-10-08 的屏幕截图.png"></p>
+
       
     </div>
 
@@ -595,7 +536,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Python/" rel="tag"># Python</a>
+            <a href="/tags/强化学习/" rel="tag"># 强化学习</a>
+          
+            <a href="/tags/RL/" rel="tag"># RL</a>
           
         </div>
       
@@ -620,8 +563,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/31/Python函数与模块/" rel="next" title="Python函数与模块">
-                <i class="fa fa-chevron-left"></i> Python函数与模块
+              <a href="/2019/11/05/Spase-Reward/" rel="next" title="Sparse Reward">
+                <i class="fa fa-chevron-left"></i> Sparse Reward
               </a>
             
           </div>
@@ -629,10 +572,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/31/Python元组/" rel="prev" title="Python元组">
-                Python元组 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -889,7 +828,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#列表的定义：-list-name"><span class="nav-number">1.</span> <span class="nav-text">列表的定义： list_name=[]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列表常用操作方法：-列表名-方法名"><span class="nav-number">2.</span> <span class="nav-text">列表常用操作方法：  列表名.方法名()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列表的循环遍历"><span class="nav-number">3.</span> <span class="nav-text">列表的循环遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列表的截取和连接"><span class="nav-number">4.</span> <span class="nav-text">列表的截取和连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用列表定义二维数组"><span class="nav-number">5.</span> <span class="nav-text">用列表定义二维数组</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习地址"><span class="nav-number">1.</span> <span class="nav-text">学习地址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#介绍"><span class="nav-number">1.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Behavior-Cloning"><span class="nav-number">1.2.</span> <span class="nav-text">Behavior Cloning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Inverse-Reinforcement-Learning-IRL"><span class="nav-number">1.3.</span> <span class="nav-text">Inverse Reinforcement Learning(IRL)</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1143,13 +1082,13 @@
       var articles = db.collection('articles')
 
       //https://hexo.io/docs/variables.html
-      var isPost = 'Pyhton列表'.length > 0
+      var isPost = 'Imitation Learning'.length > 0
       var isArchive = '' === 'true'
       var isCategory = ''.length > 0
       var isTag = ''.length > 0
 
       if (isPost) { //is article page
-        var title = 'Pyhton列表'
+        var title = 'Imitation Learning'
         var doc = articles.doc(title)
 
         getCount(doc, true).then(appendCountTo($('.post-meta')))

@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+    
+
+    
+  
+
+  
+
+  
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Times New Roman:300,300italic,400,400italic,700,700italicTimes New Roman:300,300italic,400,400italic,700,700italicTimes New Roman:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Programming Exercise 8: Recommender Systems目标：实现协同过滤算法并应用于电影评分系统  工具：Pycharn，Python3.6  参考资料：  ex8_cofi.m numpy中的ravel()、flatten()、squeeze()的用法与区别 python中numpy.r_和numpy.c_ 正则化 矩阵分解在协同过滤推荐算法中的应用 推荐系统 s">
+<meta name="keywords" content="机器学习,ML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="吴恩达机器学习第八次编程作业-推荐系统">
+<meta property="og:url" content="http://sfz-lyq.cn/2019/12/01/吴恩达机器学习第八次编程作业-推荐系统/index.html">
+<meta property="og:site_name" content="种花家">
+<meta property="og:description" content="Programming Exercise 8: Recommender Systems目标：实现协同过滤算法并应用于电影评分系统  工具：Pycharn，Python3.6  参考资料：  ex8_cofi.m numpy中的ravel()、flatten()、squeeze()的用法与区别 python中numpy.r_和numpy.c_ 正则化 矩阵分解在协同过滤推荐算法中的应用 推荐系统 s">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMTAyMzI2Mi05M2U3ZmU0MDUxODNjYTI1LnBuZw">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMTAyMzI2Mi0zMWNlODIwZmMyYTU1ZmM2LnBuZw">
+<meta property="og:updated_time" content="2019-12-01T08:29:53.819Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="吴恩达机器学习第八次编程作业-推荐系统">
+<meta name="twitter:description" content="Programming Exercise 8: Recommender Systems目标：实现协同过滤算法并应用于电影评分系统  工具：Pycharn，Python3.6  参考资料：  ex8_cofi.m numpy中的ravel()、flatten()、squeeze()的用法与区别 python中numpy.r_和numpy.c_ 正则化 矩阵分解在协同过滤推荐算法中的应用 推荐系统 s">
+<meta name="twitter:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMTAyMzI2Mi05M2U3ZmU0MDUxODNjYTI1LnBuZw">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://sfz-lyq.cn/2019/12/01/吴恩达机器学习第八次编程作业-推荐系统/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>吴恩达机器学习第八次编程作业-推荐系统 | 种花家</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">种花家</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">null   =   *</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sfz-lyq.cn/2019/12/01/吴恩达机器学习第八次编程作业-推荐系统/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liuyuqiang0">
+      <meta itemprop="description" content="what you will be,the world will be">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="种花家">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">吴恩达机器学习第八次编程作业-推荐系统
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-12-01 16:29:00 / Modified: 16:29:53" itemprop="dateCreated datePublished" datetime="2019-12-01T16:29:00+08:00">2019-12-01</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Programming-Exercise-8-Recommender-Systems"><a href="#Programming-Exercise-8-Recommender-Systems" class="headerlink" title="Programming Exercise 8: Recommender Systems"></a><center><a href="https://github.com/CaptainLYN/Andrew-NG-Meachine-Learning" target="_blank" rel="noopener">Programming Exercise 8: Recommender Systems</a></center></h3><p>目标：实现协同过滤算法并应用于电影评分系统</p>
+<hr>
+<p>工具：Pycharn，Python3.6</p>
+<hr>
+<p>参考资料：</p>
+<ol>
+<li>ex8_cofi.m</li>
+<li><a href="https://blog.csdn.net/tymatlab/article/details/79009618" target="_blank" rel="noopener">numpy中的ravel()、flatten()、squeeze()的用法与区别</a></li>
+<li><a href="https://blog.csdn.net/weixin_30867015/article/details/98410874" target="_blank" rel="noopener">python中numpy.r_和numpy.c_</a></li>
+<li><a href="https://blog.csdn.net/speargod/article/details/80233619" target="_blank" rel="noopener">正则化</a></li>
+<li><a href="https://www.cnblogs.com/pinard/p/6351319.html" target="_blank" rel="noopener">矩阵分解在协同过滤推荐算法中的应用</a></li>
+<li><a href="https://sfz-lyq.cn/2019/11/18/1/#more">推荐系统</a></li>
+<li><a href="https://blog.csdn.net/jiang425776024/article/details/87885969" target="_blank" rel="noopener">scipy.optimize优化器的各种使用</a></li>
+</ol>
+<hr>
+<p>完整代码</p>
+<ol>
+<li><a href="https://paste.ubuntu.com/p/8dmTjVT2SK/" target="_blank" rel="noopener">Recommender Systems</a></li>
+</ol>
+<hr>
+<h4 id="Movie-ratings-dataset"><a href="#Movie-ratings-dataset" class="headerlink" title="Movie ratings dataset"></a>Movie ratings dataset</h4><p>主要是介绍数据格式(特征维度为100)。略  </p>
+<h4 id="Collaborative-filtering-learning-algorithm"><a href="#Collaborative-filtering-learning-algorithm" class="headerlink" title="Collaborative filtering learning algorithm"></a>Collaborative filtering learning algorithm</h4><p>特征矩阵X ：( n<sub>m</sub> , 100)<br>参数矩阵&theta; : （  n<sub>u</sub> ，100 ）<br>评分矩阵Y ：X&theta;<sup>T</sup> ,  y<sup>(i,j)</sup>=(&theta;<sup>(j)</sup>)<sup>T</sup>x<sup>(i)</sup>(具体运算以实际数据为准)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">data1=Get_Data(&apos;./ex8/ex8_movies.mat&apos;)</span><br><span class="line">Y,R=data1[&apos;Y&apos;],data1[&apos;R&apos;]</span><br><span class="line"></span><br><span class="line">data2=Get_Data(&apos;./ex8/ex8_movieParams.mat&apos;)</span><br><span class="line">X,theta=data2[&apos;X&apos;],data2[&apos;Theta&apos;]</span><br><span class="line"></span><br><span class="line">num_u,num_m,num_f=map(int,[data2[&apos;num_users&apos;],data2[&apos;num_movies&apos;],data2[&apos;num_features&apos;]])</span><br><span class="line">print(X.shape,theta.shape)  # (1682, 10) (943, 10)</span><br><span class="line">print(num_u,num_m,num_f)  # 943 1682 10</span><br><span class="line"></span><br><span class="line"># Reduce the data set size so that this runs faster</span><br><span class="line">num_u,num_m,num_f=4,5,3</span><br><span class="line">X,theta=X[:num_m,:num_f],theta[:num_u,:num_f]</span><br><span class="line">Y,R=Y[:num_m,:num_u],R[:num_m,:num_u]</span><br><span class="line"># print(X.shape,theta.shape) # (5, 3) (4, 3)</span><br><span class="line">print(cofiCostFunc(Merge(X,theta),Y,R,num_u,num_m,num_f,0)) # 22.224603725685675</span><br></pre></td></tr></table></figure></p>
+<p>为了方便简洁，下述图片与实现均合并了正则化</p>
+<h5 id="Collaborative-filtering-cost-function"><a href="#Collaborative-filtering-cost-function" class="headerlink" title="Collaborative filtering cost function"></a>Collaborative filtering cost function</h5><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMTAyMzI2Mi05M2U3ZmU0MDUxODNjYTI1LnBuZw" alt><br>为了使用高级优化算法，首先把参数合并成一个向量，在函数中再进行分解<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def Merge(X,theta):</span><br><span class="line">    return np.r_[X.flatten(),theta.flatten()] # 按行合并</span><br></pre></td></tr></table></figure></p>
+<p>协同过滤的参数不需要加偏置项了，故可直接正则化<br>关于正则化：回去又查了一下为什么不惩罚&theta;<sub>0</sub>，倒是找到一篇资料说是约定不惩罚第0项，吴恩达机器学习视频课时57也只是粗略的提了一下‘区别对待’<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def cofiCostFunc(params,Y,R,num_u,num_m,num_f,lamda):</span><br><span class="line">    X,theta=params[:num_m*num_f].reshape(num_m,num_f),params[num_m*num_f:].reshape(num_u,num_f) # 分解</span><br><span class="line">    # print(X.shape,theta.shape,Y.shape,R.shape)</span><br><span class="line">    error=0.5*np.square((X.dot(theta.T)-Y)*R).sum()</span><br><span class="line">    reg1=0.5*lamda*np.square(theta).sum()</span><br><span class="line">    reg2=0.5*lamda*np.square(X).sum()</span><br><span class="line">    return error + reg1 + reg2</span><br></pre></td></tr></table></figure></p>
+<p>注意计算error要乘以R，区别评分与未评分</p>
+<h5 id="Collaborative-filtering-gradient"><a href="#Collaborative-filtering-gradient" class="headerlink" title="Collaborative filtering gradient"></a>Collaborative filtering gradient</h5><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMTAyMzI2Mi0zMWNlODIwZmMyYTU1ZmM2LnBuZw" alt><br>为了使用高级优化算法，这里返回的也是两个梯度矩阵的合并形式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def cofiFradient(params,Y,R,num_u,num_m,num_f,lamda):</span><br><span class="line">    X, theta = params[:num_m * num_f].reshape(num_m, num_f), params[num_m * num_f:].reshape(num_u, num_f)</span><br><span class="line">    X_grad=((X.dot(theta.T)-Y)*R)@theta+lamda*X</span><br><span class="line">    theta_grad=((X.dot(theta.T)-Y)*R).T@X+lamda*theta</span><br><span class="line">    return Merge(X_grad,theta_grad)</span><br></pre></td></tr></table></figure></p>
+<h4 id="Learning-movie-recommendations"><a href="#Learning-movie-recommendations" class="headerlink" title="Learning movie recommendations"></a>Learning movie recommendations</h4><ol>
+<li><p>导入电影列表，然后手动添加一些评分</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">movies=[]</span><br><span class="line">with open(&apos;./ex8/movie_ids.txt&apos;,&apos;r&apos;,encoding=&apos;utf-16&apos;) as f:</span><br><span class="line">    for line in f:</span><br><span class="line">        movies.append(&apos; &apos;.join(line.split()[1:]))</span><br><span class="line"></span><br><span class="line">my_ratings = np.zeros(len(movies)) # 1682</span><br><span class="line"></span><br><span class="line">my_ratings[0]   = 4</span><br><span class="line">my_ratings[97]  = 2</span><br><span class="line">my_ratings[6]   = 3</span><br><span class="line">my_ratings[11]  = 5</span><br><span class="line">my_ratings[53]  = 4</span><br><span class="line">my_ratings[63]  = 5</span><br><span class="line">my_ratings[65]  = 3</span><br><span class="line">my_ratings[68]  = 5</span><br><span class="line">my_ratings[182] = 4</span><br><span class="line">my_ratings[225] = 5</span><br><span class="line">my_ratings[354] = 5</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将自己的评分向量添加到评分矩阵中，注意评分标记矩阵也要作相应修改，然后随机初始化特征矩阵X与参数矩阵&theta;，用高级优化算法运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Y = np.c_[Y, my_ratings]  # (1682, 944)</span><br><span class="line">R = np.c_[R, my_ratings!=0]  # (1682, 944)</span><br><span class="line">num_m,num_u=Y.shape</span><br><span class="line">num_f=10</span><br><span class="line"></span><br><span class="line">Y_mean,Y_norm=Normalize_rating(Y,R)</span><br><span class="line"></span><br><span class="line">lambd = 10</span><br><span class="line"></span><br><span class="line"># Set Initial Parameters (Theta, X)</span><br><span class="line">X=np.random.random((num_m,num_f))</span><br><span class="line">theta=np.random.random((num_u,num_f))</span><br><span class="line">res=opt.minimize(fun=cofiCostFunc,</span><br><span class="line">                 x0=Merge(X,theta),</span><br><span class="line">                 args=(Y,R,num_u,num_m,num_f,lambd),</span><br><span class="line">                 method=&apos;TNC&apos;,</span><br><span class="line">                 jac=cofiGradient,</span><br><span class="line">                 options=&#123;&apos;maxiter&apos;:100&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>根据返回的参数，预测评分，进行推荐</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ret=res.x</span><br><span class="line">fit_x,fit_theta=ret[:num_m*num_f].reshape(num_m,num_f),ret[num_m*num_f:].reshape(num_u,num_f)</span><br><span class="line"></span><br><span class="line">p=fit_x@fit_theta.T # 预测的评分矩阵</span><br><span class="line"></span><br><span class="line">my_predict=p[:,-1]+Y_mean.flatten() # 在预测基础上加上行均值（之前做过均值归一化）</span><br><span class="line"></span><br><span class="line">idx=np.argsort(my_predict)[::-1] # Returns the indices that would sort an array</span><br><span class="line"></span><br><span class="line">print(&quot;Top recommendations for you:&quot;)</span><br><span class="line">for i in range(10):</span><br><span class="line">    print(&apos;Predicting rating %.1f for movie %s.&apos; \</span><br><span class="line">          %(my_predict[idx[i]],movies[idx[i]]))</span><br><span class="line"></span><br><span class="line">print(&quot;\nOriginal ratings provided:&quot;)</span><br><span class="line">for i in range(len(my_ratings)):</span><br><span class="line">    if my_ratings[i] &gt; 0:</span><br><span class="line">        print(&apos;Rated %d for movie %s.&apos;% (my_ratings[i],movies[i]))</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Top recommendations for you:</span><br><span class="line">Predicting rating 8.3 for movie Shawshank Redemption, The (1994).</span><br><span class="line">Predicting rating 8.3 for movie Titanic (1997).</span><br><span class="line">Predicting rating 8.3 for movie Star Wars (1977).</span><br><span class="line">Predicting rating 8.2 for movie Schindler&apos;s List (1993).</span><br><span class="line">Predicting rating 8.2 for movie Close Shave, A (1995).</span><br><span class="line">Predicting rating 8.2 for movie Wrong Trousers, The (1993).</span><br><span class="line">Predicting rating 8.2 for movie Raiders of the Lost Ark (1981).</span><br><span class="line">Predicting rating 8.1 for movie Casablanca (1942).</span><br><span class="line">Predicting rating 8.1 for movie Usual Suspects, The (1995).</span><br><span class="line">Predicting rating 8.1 for movie Good Will Hunting (1997).</span><br><span class="line"></span><br><span class="line">Original ratings provided:</span><br><span class="line">Rated 4 for movie Toy Story (1995).</span><br><span class="line">Rated 3 for movie Twelve Monkeys (1995).</span><br><span class="line">Rated 5 for movie Usual Suspects, The (1995).</span><br><span class="line">Rated 4 for movie Outbreak (1995).</span><br><span class="line">Rated 5 for movie Shawshank Redemption, The (1994).</span><br><span class="line">Rated 3 for movie While You Were Sleeping (1995).</span><br><span class="line">Rated 5 for movie Forrest Gump (1994).</span><br><span class="line">Rated 2 for movie Silence of the Lambs, The (1991).</span><br><span class="line">Rated 4 for movie Alien (1979).</span><br><span class="line">Rated 5 for movie Die Hard 2 (1990).</span><br><span class="line">Rated 5 for movie Sphere (1998).</span><br></pre></td></tr></table></figure>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>大体就是以下几个步骤：</p>
+<ol>
+<li>正确实现代价函数</li>
+<li>正确实现梯度计算</li>
+<li>进行细节化处理：如均值归一化</li>
+<li>调用优化器求出最优参数</li>
+<li>进行预测，注意如果进行过均值归一化还需要加上均值</li>
+<li>根据预测评分进行推荐</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/18/1/" rel="next" title="推荐系统">
+                <i class="fa fa-chevron-left"></i> 推荐系统
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">liuyuqiang0</p>
+              <div class="site-description motion-element" itemprop="description">what you will be,the world will be</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">107</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/NYIST_TC_LYQ" title="CSDN &rarr; https://blog.csdn.net/NYIST_TC_LYQ" rel="noopener" target="_blank"><i class="fa fa-fw fa-CSDN"></i>CSDN</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" title="qq &rarr; tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1759421378" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>qq</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://nyoj.top" title="http://nyoj.top" rel="noopener" target="_blank">NYOJ</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Programming-Exercise-8-Recommender-Systems"><span class="nav-number">1.</span> <span class="nav-text">Programming Exercise 8: Recommender Systems</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Movie-ratings-dataset"><span class="nav-number">1.1.</span> <span class="nav-text">Movie ratings dataset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Collaborative-filtering-learning-algorithm"><span class="nav-number">1.2.</span> <span class="nav-text">Collaborative filtering learning algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Collaborative-filtering-cost-function"><span class="nav-number">1.2.1.</span> <span class="nav-text">Collaborative filtering cost function</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Collaborative-filtering-gradient"><span class="nav-number">1.2.2.</span> <span class="nav-text">Collaborative filtering gradient</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Learning-movie-recommendations"><span class="nav-number">1.3.</span> <span class="nav-text">Learning movie recommendations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liuyuqiang0</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="Total Visitors">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="Total Views">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+  
+  <script>
+    (function () {
+
+      firebase.initializeApp({
+        apiKey: '',
+        projectId: ''
+      })
+
+      function getCount(doc, increaseCount) {
+        //increaseCount will be false when not in article page
+
+        return doc.get().then(function (d) {
+          var count
+          if (!d.exists) { //has no data, initialize count
+            if (increaseCount) {
+              doc.set({
+                count: 1
+              })
+              count = 1
+            }
+            else {
+              count = 0
+            }
+          }
+          else { //has data
+            count = d.data().count
+            if (increaseCount) {
+              if (!(window.localStorage && window.localStorage.getItem(title))) { //if first view this article
+                doc.set({ //increase count
+                  count: count + 1
+                })
+                count++
+              }
+            }
+          }
+          if (window.localStorage && increaseCount) { //mark as visited
+            localStorage.setItem(title, true)
+          }
+
+          return count
+        })
+      }
+
+      function appendCountTo(el) {
+        return function (count) {
+          $(el).append(
+            $('<span>').addClass('post-visitors-count').append(
+              $('<span>').addClass('post-meta-divider').text('|')
+            ).append(
+              $('<span>').addClass('post-meta-item-icon').append(
+                $('<i>').addClass('fa fa-users')
+              )
+              ).append($('<span>').text('Views ' + count))
+          )
+        }
+      }
+
+      var db = firebase.firestore()
+      var articles = db.collection('articles')
+
+      //https://hexo.io/docs/variables.html
+      var isPost = '吴恩达机器学习第八次编程作业-推荐系统'.length > 0
+      var isArchive = '' === 'true'
+      var isCategory = ''.length > 0
+      var isTag = ''.length > 0
+
+      if (isPost) { //is article page
+        var title = '吴恩达机器学习第八次编程作业-推荐系统'
+        var doc = articles.doc(title)
+
+        getCount(doc, true).then(appendCountTo($('.post-meta')))
+      }
+      else if (!isArchive && !isCategory && !isTag) { //is index page
+        var titles = [] //array to titles
+
+        var postsstr = '' //if you have a better way to get titles of posts, please change it
+        eval(postsstr)
+
+        var promises = titles.map(function (title) {
+          return articles.doc(title)
+        }).map(function (doc) {
+          return getCount(doc)
+        })
+        Promise.all(promises).then(function (counts) {
+          var metas = $('.post-meta')
+          counts.forEach(function (val, idx) {
+            appendCountTo(metas[idx])(val)
+          })
+        })
+      }
+    })()
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    wpac_init = window.wpac_init || [];
+    wpac_init.push({
+      widget: 'Rating',
+      id: ,
+      el: 'wpac-rating',
+      color: 'fc6423'
+    });
+    (function() {
+      if ('WIDGETPACK_LOADED' in window) return;
+      WIDGETPACK_LOADED = true;
+      var mc = document.createElement('script');
+      mc.type = 'text/javascript';
+      mc.async = true;
+      mc.src = '//embed.widgetpack.com/widget.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

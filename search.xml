@@ -4,11 +4,14 @@
     <title>大规模机器学习</title>
     <url>/2019/12/17/%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<h3 id="学习地址"><a href="#学习地址" class="headerlink" title="学习地址"></a><center><a href="https://study.163.com/course/courseLearn.htm?courseId=1004570029#/learn/video?lessonId=1052569043&amp;courseId=1004570029" target="_blank" rel="noopener">学习地址</a></center></h3><h4 id="学习数据集"><a href="#学习数据集" class="headerlink" title="学习数据集"></a>学习数据集</h4><p>机器学习问题往往大量数据集训练效果比算法更有优势，但大量数据集带来的问题就是计算问题，如何快速计算梯度、误差等？  </p>
-<h4 id="随机梯度下降"><a href="#随机梯度下降" class="headerlink" title="随机梯度下降"></a>随机梯度下降</h4><p>之前的线性回归模型、逻辑回归、神经网络等模型都是提出一个优化目标/函数，然后使用梯度下降寻找最优点。但普通梯度法并不适用大数据集（计算梯度需要对数据集求和），这种每次都要考虑所有数据集或者说一批数据集叫做批量梯度下降。而随机梯度下降则适用于大数据集。<br>例，计算一个梯度就要遍历整个数据集<br><img src="https://img-blog.csdnimg.cn/2019121710560753.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="批量梯度下降"><br>随机梯度下降：</p>
+<h4 id="随机梯度下降"><a href="#随机梯度下降" class="headerlink" title="随机梯度下降"></a>随机梯度下降</h4><p>之前的线性回归模型、逻辑回归、神经网络等模型都是提出一个优化目标/函数，然后使用梯度下降寻找最优点。但普通梯度法并不适用大数据集（计算梯度需要对数据集求和），这种每次都要考虑所有数据集或者说一批数据集叫做批量梯度下降。而随机梯度下降则适用于大数据集。<br>例，计算一个梯度就要遍历整个数据集<br><img src="https://img-blog.csdnimg.cn/2019121710560753.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="批量梯度下降"></p>
+<p>随机梯度下降：</p>
 <ul>
 <li>不需要考虑所有样本，只需对单个样本进行考虑，单个样本的代价函数</li>
 <li>这样，在梯度下降时不需要遍历整个数据集更新参数&theta; ，而是一点一点更新</li>
-<li>最重要的一点是随机打乱数据集<br><img src="https://img-blog.csdnimg.cn/20191217110911440.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="随机梯度下降"><br><img src="https://img-blog.csdnimg.cn/20191217112558550.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="随机梯度下降"><h4 id="Mini-Batch-梯度下降"><a href="#Mini-Batch-梯度下降" class="headerlink" title="Mini-Batch 梯度下降"></a>Mini-Batch 梯度下降</h4></li>
+<li>最重要的一点是随机打乱数据集<br><img src="https://img-blog.csdnimg.cn/20191217110911440.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="随机梯度下降"><br><img src="https://img-blog.csdnimg.cn/20191217112558550.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="随机梯度下降"></li>
+</ul>
+<h4 id="Mini-Batch-梯度下降"><a href="#Mini-Batch-梯度下降" class="headerlink" title="Mini-Batch 梯度下降"></a>Mini-Batch 梯度下降</h4><ul>
 <li>批量梯度下降每次迭代使用所有m个样本  </li>
 <li>随机梯度下降每次迭代使用 1个样本</li>
 <li>Mini-batch梯度下降每次迭代使用b个样本，b表示Mini-batch size</li>
@@ -35,7 +38,7 @@
   </entry>
   <entry>
     <title>浅谈互信息与熵</title>
-    <url>/2019/12/05/Untitled/</url>
+    <url>/2019/12/05/%E6%B5%85%E8%B0%88%E4%BA%92%E4%BF%A1%E6%81%AF%E4%B8%8E%E7%86%B5/</url>
     <content><![CDATA[<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><p>最近在做有关曲线相关/似性的方法实现，找到了基于点、形状、分段的方法，考虑到实际研究问题我们选用了基于点的三种方法：DTW（参考<a href="https://blog.csdn.net/qcyfred/article/details/53824507" target="_blank" rel="noopener">1</a>、<a href="https://www.cnblogs.com/luxiaoxun/archive/2013/05/09/3069036.html" target="_blank" rel="noopener">2</a>、<a href="https://blog.csdn.net/raym0ndkwan/article/details/45614813" target="_blank" rel="noopener">3</a>）；LCSS（参考<a href="https://www.cnblogs.com/hugechuanqi/p/10642684.html" target="_blank" rel="noopener">1</a>、<a href="https://blog.csdn.net/NYIST_TC_LYQ/article/details/50826231" target="_blank" rel="noopener">2</a>、<a href="https://www.jianshu.com/nb/33818152" target="_blank" rel="noopener">3</a>）、EDR（参考<a href="https://blog.csdn.net/baodream/article/details/80417695" target="_blank" rel="noopener">1</a>、<a href="https://www.jianshu.com/p/f8f08621fcb5" target="_blank" rel="noopener">2</a>、<a href="https://dl.acm.org/citation.cfm?id=1066213" target="_blank" rel="noopener">3</a>）。<a href="https://paste.ubuntu.com/p/n5KpCXBbSH/" target="_blank" rel="noopener">有关源码</a>   ，非终极版<br>但上述方法还是存在一定的缺陷(如何证明不是自己一厢情愿)，老板又给了一种方法：<a href="https://blog.csdn.net/u011730199/article/details/82935792" target="_blank" rel="noopener">互信息</a><br>本文基于基于互信息，简单介绍一下自己这几天有关熵的补充和理解。</p>
 <h4 id="信息量"><a href="#信息量" class="headerlink" title="信息量"></a>信息量</h4><p>就是描述一个信息所需要的数据量。而信息量的大小和这件事的概率有关。简单来说，概率越小，那么信息量越大，比如国足世界杯夺冠（手动狗头）。信息量也可以说是一个事件的不确定性，如果一个事件或者说一个随机变量所有可能的概率之和为1，我这里将一个事件的某种可能记为一条信息，那么这条信息的信息量用I(x<sub>i</sub>)表示。那么<br><img src="https://img-blog.csdnimg.cn/20191205212606736.jpg" alt="信息量"><br>这便是信息量的计算定义，<code>log</code>函数应用非常巧妙，在实际应用中也非常广泛。<br>有了信息量就可以引出信息熵了</p>
 <h4 id="信息熵-information-entropy"><a href="#信息熵-information-entropy" class="headerlink" title="信息熵 (information entropy)"></a>信息熵 (information entropy)</h4><p>熵这个概念本质来说我认为是一个期望值，即随机变量所有可能的信息量的期望。通常用H(X)来表示，那么<br><img src="https://img-blog.csdnimg.cn/20191205213920357.png" alt="信息熵"></p>
@@ -1483,8 +1486,85 @@
   <entry>
     <title>决策树</title>
     <url>/2019/09/26/%E5%86%B3%E7%AD%96%E6%A0%91/</url>
-    <content><![CDATA[<h4 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h4><p>一种树型判断结构。</p>
-<h4 id="熵和信息增益"><a href="#熵和信息增益" class="headerlink" title="熵和信息增益"></a>熵和信息增益</h4><p>H=&sum;<sub>l&in;labels</sub>P(l)*log<sub>2</sub>p(l)</p>
+    <content><![CDATA[<h3 id="学习地址"><a href="#学习地址" class="headerlink" title="学习地址"></a><center><a href="https://www.bilibili.com/video/av62758431" target="_blank" rel="noopener">学习地址</a></center></h3><hr>
+<ol>
+<li><a href="https://www.bilibili.com/video/av62758431" target="_blank" rel="noopener">理论篇</a></li>
+<li><a href="https://www.bilibili.com/video/av35523476" target="_blank" rel="noopener">实战篇</a></li>
+</ol>
+<hr>
+<h4 id="关于数据"><a href="#关于数据" class="headerlink" title="关于数据"></a><font size="5" color="red">关于数据</font></h4><p>数据集矩阵X:</p>
+<ul>
+<li>和之前接触到的数据集一样，m个样本（X<sup>(1)</sup>，X<sup>(2)</sup>，X<sup>(3)</sup>，…），每个样本有n个特征，即数据集是一个<code>m×n</code>的矩阵。  </li>
+</ul>
+<p>数据集划分：</p>
+<ul>
+<li>我们可以从这个原始数据集中<strong>随机</strong>选取70%作为训练集/测试集，另30%作为验证集。  </li>
+</ul>
+<p>决策树模型</p>
+<ul>
+<li>决策树模型类似一个二叉树，非叶节点都是<strong>判定点/决策点</strong>，所有样本都在叶节点，根据非叶节点划分，预测最终所属分类</li>
+<li>决策树是一种基本的分类与回归方法，学习通常包含三个步骤：<strong>特征选择</strong>、<strong>决策树的生成</strong>和<strong>决策树的剪枝</strong>。    </li>
+<li>一个关键的议题就是该从这n个特征中选取哪个特征作为根节点的分裂点呢？这个涉及到决策树一个很重要的一个概念：<strong>信息熵</strong></li>
+</ul>
+<p>输出y</p>
+<ul>
+<li>决策树生成并优化之后，所有样本数据就可以通过这个二叉树进行分类了，确定最终归属</li>
+</ul>
+<h4 id="熵理论"><a href="#熵理论" class="headerlink" title="熵理论"></a><font size="5" color="red">熵理论</font></h4><p>首先引入之前做的总结：<a href="https://sfz-lyq.cn/2019/12/05/Untitled/">浅谈互信息与熵</a>  </p>
+<p><strong>熵</strong>是从热力学引入过来的，最初描述一个系统的混乱程度。在这里，可以理解为一个事件的<strong>不确定性</strong>。<br>先从<strong>信息量</strong>说起，信息量顾名思义就是一个信息或者说一个子事件(可能)的信息量，比如：马云破产、国足夺冠，这种概率很小的事件包含的信息量很大。<br>而我们要研究一整个范围称为一个事件的话，这些子事件就是若干可能的情况，比如我们研究天气，有若干种可能的情况，每种情况有一个<strong>概率</strong>，但不难理解总的概率之和为1。<br>那么，假设某种可能事件x发生的概率为p(x)，那么这个可能事件所包含的信息量的度量方式就是：<code>I(X)=-log p(x)</code>。再回到熵，我们要知道我们所研究的这整个事件的不确定性，其实称之为信息熵就是这些子事件/可能的 信息量的<strong>期望</strong>。用H(X)来度量整体事件X的信息熵，<code>H(X)=-p(x)log p(x    )</code>    </p>
+<p><font size="3" color="green">条件熵</font></p>
+<ul>
+<li>定义H(Y|X)，也等于H(X,Y) - H(X)，其中H(X,Y)表示X，Y的联合熵，具体计算详见之前引用</li>
+<li>含义：X确定的情况下，确定Y所需要的信息量，即Y的不确定性</li>
+<li>需要注意的是，联合概率联合熵是对称的，而条件熵和条件概率一样是不对称的</li>
+</ul>
+<h4 id="决策树理论"><a href="#决策树理论" class="headerlink" title="决策树理论"></a><font size="5px" color="red">决策树理论</font></h4><ol>
+<li>决策树是一种树形判定结构，每个非叶节点都是表示对一种属性(特征)的测试，每个分支代表一个测试输出，而每个叶节点代表一种类别</li>
+<li>决策树学习采用自顶向下的递归方法，其基本思想是以信息熵为度量构造一颗熵值下降最快的树，到叶子节点处的熵值为零（完全确定），每个叶节点中的实例都属于同一类</li>
+<li>容易理解这颗判定树越到底层不确定性就越少</li>
+<li>决策树的优点是可以进行自学习</li>
+</ol>
+<h5 id="信息增益-ID3"><a href="#信息增益-ID3" class="headerlink" title="信息增益 - ID3"></a><font size="3px" color="red">信息增益 - ID3</font></h5><p>上图：<br><img src="https://img-blog.csdnimg.cn/20191218163122118.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="信息增益"></p>
+<h5 id="互信息"><a href="#互信息" class="headerlink" title="互信息"></a><font size="3px" color="red">互信息</font></h5><p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltYWdlczIwMTUuY25ibG9ncy5jb20vYmxvZy83ODg3NTMvMjAxNjEwLzc4ODc1My0yMDE2MTAyNzE1MTIxMDg0My03NDUzNDgwMjYucG5n?x-oss-process=image/format,png" alt="互信息"></p>
+<h4 id="决策树标记"><a href="#决策树标记" class="headerlink" title="决策树标记"></a><font size="5px" color="red">决策树标记</font></h4><ul>
+<li>记： 数据集记为D，样本数m=|D|</li>
+<li>记：最终叶节点个数为K，即有K个分类C<sub>K</sub></li>
+<li>记：根据不同的特征将数据集划分为{D<sub>1</sub>, … , D<sub>n</sub> }</li>
+<li>记：子集D<sub>i</sub>中属于类C<sub>k</sub>的样本集合为D<sub>ik</sub></li>
+<li>以上若干标记符号加绝对值符号表示取集合数量</li>
+</ul>
+<h4 id="ID3流程"><a href="#ID3流程" class="headerlink" title="ID3流程"></a><font size="5px" color="red">ID3流程</font></h4><ol>
+<li>计算数据集D的经验熵H(D)=-&sum;(|C<sub>k</sub>| ÷ |D|) × In(|C<sub>k</sub>| ÷ |D|)</li>
+<li>遍历所有特征，对于每个特征A<sub>i</sub>，计算经验条件熵H(D|A<sub>i</sub>)</li>
+<li>计算信息增益G(D,A<sub>i</sub>)=H(D)-H(D|A<sub>i</sub>)</li>
+<li>选择信息增益最大的当做根节点的分裂特征</li>
+<li>关于经验条件熵的计算如图<br><img src="https://img-blog.csdnimg.cn/20191218204149145.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="经验条件熵"><br><img src="https://img-blog.csdnimg.cn/20191218182947620.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="信息增益计算"></li>
+</ol>
+<h5 id="信息增益率C4-5-与-Gini系数"><a href="#信息增益率C4-5-与-Gini系数" class="headerlink" title="信息增益率C4.5 与 Gini系数"></a><font size="3px" color="red">信息增益率C4.5 与 Gini系数</font></h5><p>G<sub>r</sub>(D,A)=g(D,A)÷H(A)<br>Gini=&sum;p<sub>k</sub>(1-p<sub>k</sub>) = 1-&sum;p<sub>k</sub><sup>2</sup> = 1-&sum;(|C<sub>k</sub>|÷|D|)<sup>2</sup></p>
+<h4 id="决策树评价"><a href="#决策树评价" class="headerlink" title="决策树评价"></a><font size="5px" color="red">决策树评价</font></h4><p><img src="https://img-blog.csdnimg.cn/20191218211751802.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="决策树评价"></p>
+<h4 id="决策树实例"><a href="#决策树实例" class="headerlink" title="决策树实例"></a><font size="5px" color="red">决策树实例</font></h4><h5 id="scikit-learn建模基本流程"><a href="#scikit-learn建模基本流程" class="headerlink" title="scikit-learn建模基本流程"></a><font size="3px" color="red">scikit-learn建模基本流程</font></h5><p><img src="https://img-blog.csdnimg.cn/2019121822071283.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="sklearn借口调用"></p>
+<h5 id="DecisionTree重要参数"><a href="#DecisionTree重要参数" class="headerlink" title="DecisionTree重要参数"></a><font size="3px" color="red">DecisionTree重要参数</font></h5><ol>
+<li><code>criterion</code>：用来决定计算方法，可选[<code>&quot;entropy&quot;</code>, <code>&quot;gini&quot;</code>]，<strong>默认基尼系数</strong></li>
+<li>比起基尼系数，信息熵对不纯度更加敏感，对不纯度的惩罚最强。但是<strong>在实际使用中，信息熵和基尼系数的效果基本相同</strong>。信息熵的计算比基尼系数缓慢一些，因为基尼系数不涉及对数。</li>
+<li><code>random_state</code>: 随机性，一旦这个参数指定值那么每次运行结果都是确定的，<strong>默认随机</strong></li>
+<li><code>splitter</code>: 控制决策树中随机选项，可选[<code></code>best, <code>random</code>]，<code>best</code>表示虽然决策树在分枝时虽然是随机的但优先选取更重要的特征进行分枝（重要性可以通过属性<code>feature_importances_</code>查看），而<code>random</code>在分枝时会更随机，树可能会更深，同时也<strong>可以防止 过拟合</strong></li>
+</ol>
+<h5 id="建树"><a href="#建树" class="headerlink" title="建树"></a><font size="3px" color="red">建树</font></h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from sklearn.tree import DecisionTreeClassifier # 导入分类树</span><br><span class="line">from sklearn.datasets import load_wine  # 数据集</span><br><span class="line">from sklearn.model_selection import train_test_split # 区分训练集和测试集</span><br></pre></td></tr></table></figure>
+<h5 id="简单实例化"><a href="#简单实例化" class="headerlink" title="简单实例化"></a><font size="3px" color="red">简单实例化</font></h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 导入数据集</span><br><span class="line">wine=load_wine() # Load and return the wine dataset (classification)</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">wine.data 是特征</span><br><span class="line">wine.feature_names 是属性</span><br><span class="line">print(wine.feature_names) [&apos;alcohol&apos;, &apos;malic_acid&apos;, &apos;ash&apos;,..., &apos;proline&apos;] totally 13</span><br><span class="line">wine.target 是标签</span><br><span class="line">print(wine.target_names) # [&apos;class_0&apos; &apos;class_1&apos; &apos;class_2&apos;]</span><br><span class="line">print(wine.data.shape) # (178, 13)</span><br><span class="line">print(wine.target.shape) # (178,)</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"></span><br><span class="line"># 完整数据集</span><br><span class="line">data=pd.concat([pd.DataFrame(wine.data),pd.DataFrame(wine.target)],axis=1)</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">print(data.shape) # (178, 14)  # DataFrame</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"></span><br><span class="line"># 划分测试集和训练集，其中30%作为测试集，注意赋值顺序固定</span><br><span class="line">X_train,X_test,Y_train,Y_test=train_test_split(wine.data,wine.target,test_size=0.3)</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">print(X_train.shape) # (124, 13)</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"></span><br><span class="line"># 实例化</span><br><span class="line">clf=DecisionTreeClassifier(criterion=&apos;entropy&apos;)</span><br><span class="line"># 使用训练集训练模型</span><br><span class="line">clf=clf.fit(X_train,Y_train)</span><br><span class="line"># 调用接口导出我们所需要的数据，比如精确度</span><br><span class="line">score=clf.score(X_test,Y_test)</span><br><span class="line">print(score) # 0.9259259259259259</span><br></pre></td></tr></table></figure>
+<h5 id="剪枝参数"><a href="#剪枝参数" class="headerlink" title="剪枝参数"></a><font size="3px" color="red">剪枝参数</font></h5><p>为了让决策树有更好的泛化性（在测试集上表现同样好），需要对决策树进行剪枝。剪枝策略对决策树影响巨大，正确的剪枝策略是优化决策树算法的核心。</p>
+<ol>
+<li><code>max_depth=</code>: 限制树的最大深度，超过设定深度的树枝全部剪掉</li>
+<li><code>min_samples_leaf=</code>和<code>min_samples_split=</code>: 前者限定一个节点在分枝后每个子节点都必须包含至少min_samples_leaf个训练样本，否则将会被剪掉；后者限定一个节点至少包含min_samples_split个训练样本，这个节点才会被分枝，否者分枝不会被发生</li>
+<li><code>max_features=</code>和<code>min_impurity_decrease=</code>: 前者限制分枝时考虑的特征个数，超过限制个数的特征都会被舍弃，用来限制高维度过拟合，但如果不知道属性重要性强行剪去特征可能会导致学习不足；后者限制信息增益的大小，信息增益小于设定数值分枝不会发生</li>
+</ol>
+<h5 id="超参数曲线"><a href="#超参数曲线" class="headerlink" title="超参数曲线"></a><font size="3px" color="red">超参数曲线</font></h5><p>实际就是根据调参将结果绘制出来，衡量模型表现<br>例如：以深度作为参数，精确度作为衡量指标<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from sklearn.tree import DecisionTreeClassifier # 导入分类树</span><br><span class="line">from sklearn.datasets import load_wine  # 数据集</span><br><span class="line">from sklearn.model_selection import train_test_split # 区分训练集和测试集</span><br><span class="line">import pandas as pd</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line"># 导入数据集</span><br><span class="line">wine=load_wine() # Load and return the wine dataset (classification)</span><br><span class="line"># 划分数据集</span><br><span class="line">X_train,X_test,Y_train,Y_test=train_test_split(wine.data,wine.target,test_size=0.3)</span><br><span class="line"></span><br><span class="line">score=[]</span><br><span class="line">for i in range(10):</span><br><span class="line">    clf = DecisionTreeClassifier(max_depth=i+1</span><br><span class="line">                                 ,criterion=&apos;entropy&apos;</span><br><span class="line">                                 ,random_state=30</span><br><span class="line">                                )</span><br><span class="line">    clf = clf.fit(X_train, Y_train)</span><br><span class="line">    score .append(clf.score(X_test, Y_test))</span><br><span class="line"></span><br><span class="line">plt.plot(range(1,11),score,&apos;r&apos;,label=&quot;max_depth&quot;)</span><br><span class="line">plt.legend(loc=&quot;best&quot;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/20191219140332401.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="超参数曲线"><br>根据上图可以明显地观察到<code>max_depth</code>取值为3就可以了</p>
+<h5 id="重要属性和接口"><a href="#重要属性和接口" class="headerlink" title="重要属性和接口"></a><font size="3px" color="red">重要属性和接口</font></h5><p>这里的属性是指算法模型训练之后能够查看的各种模型的性质</p>
+<ol>
+<li><code>clf.apply(X_test)</code>：返回每个测试样本所在叶子节点的索引</li>
+<li><code>clf.predict(X_test)</code>：返回每个测试样本的预测结果 </li>
+</ol>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p><img src="https://img-blog.csdnimg.cn/20191219141024408.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="总结"></p>
 ]]></content>
       <categories>
         <category>机器学习</category>
@@ -1492,6 +1572,7 @@
       <tags>
         <tag>机器学习</tag>
         <tag>NLP</tag>
+        <tag>ML</tag>
       </tags>
   </entry>
   <entry>

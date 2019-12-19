@@ -64,11 +64,14 @@
 
       
         <h3 id="学习地址"><a href="#学习地址" class="headerlink" title="学习地址"></a><center><a href="https://study.163.com/course/courseLearn.htm?courseId=1004570029#/learn/video?lessonId=1052569043&amp;courseId=1004570029" target="_blank" rel="noopener">学习地址</a></center></h3><h4 id="学习数据集"><a href="#学习数据集" class="headerlink" title="学习数据集"></a>学习数据集</h4><p>机器学习问题往往大量数据集训练效果比算法更有优势，但大量数据集带来的问题就是计算问题，如何快速计算梯度、误差等？  </p>
-<h4 id="随机梯度下降"><a href="#随机梯度下降" class="headerlink" title="随机梯度下降"></a>随机梯度下降</h4><p>之前的线性回归模型、逻辑回归、神经网络等模型都是提出一个优化目标/函数，然后使用梯度下降寻找最优点。但普通梯度法并不适用大数据集（计算梯度需要对数据集求和），这种每次都要考虑所有数据集或者说一批数据集叫做批量梯度下降。而随机梯度下降则适用于大数据集。<br>例，计算一个梯度就要遍历整个数据集<br><img src="https://img-blog.csdnimg.cn/2019121710560753.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="批量梯度下降"><br>随机梯度下降：</p>
+<h4 id="随机梯度下降"><a href="#随机梯度下降" class="headerlink" title="随机梯度下降"></a>随机梯度下降</h4><p>之前的线性回归模型、逻辑回归、神经网络等模型都是提出一个优化目标/函数，然后使用梯度下降寻找最优点。但普通梯度法并不适用大数据集（计算梯度需要对数据集求和），这种每次都要考虑所有数据集或者说一批数据集叫做批量梯度下降。而随机梯度下降则适用于大数据集。<br>例，计算一个梯度就要遍历整个数据集<br><img src="https://img-blog.csdnimg.cn/2019121710560753.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="批量梯度下降"></p>
+<p>随机梯度下降：</p>
 <ul>
 <li>不需要考虑所有样本，只需对单个样本进行考虑，单个样本的代价函数</li>
 <li>这样，在梯度下降时不需要遍历整个数据集更新参数&theta; ，而是一点一点更新</li>
-<li>最重要的一点是随机打乱数据集<br><img src="https://img-blog.csdnimg.cn/20191217110911440.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="随机梯度下降"><br><img src="https://img-blog.csdnimg.cn/20191217112558550.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="随机梯度下降"><h4 id="Mini-Batch-梯度下降"><a href="#Mini-Batch-梯度下降" class="headerlink" title="Mini-Batch 梯度下降"></a>Mini-Batch 梯度下降</h4></li>
+<li>最重要的一点是随机打乱数据集<br><img src="https://img-blog.csdnimg.cn/20191217110911440.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="随机梯度下降"><br><img src="https://img-blog.csdnimg.cn/20191217112558550.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="随机梯度下降"></li>
+</ul>
+<h4 id="Mini-Batch-梯度下降"><a href="#Mini-Batch-梯度下降" class="headerlink" title="Mini-Batch 梯度下降"></a>Mini-Batch 梯度下降</h4><ul>
 <li>批量梯度下降每次迭代使用所有m个样本  </li>
 <li>随机梯度下降每次迭代使用 1个样本</li>
 <li>Mini-batch梯度下降每次迭代使用b个样本，b表示Mini-batch size</li>
@@ -88,7 +91,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sfz-lyq.cn/2019/12/17/大规模机器学习/" data-id="ck49mz9g500fa5lpvfr2kgm1m" class="article-share-link">分享</a>
+      <a data-url="http://sfz-lyq.cn/2019/12/17/大规模机器学习/" data-id="ck4azp6fl007hkapvae9iamps" class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/ML/">ML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/机器学习/">机器学习</a></li></ul>
 
@@ -101,7 +104,7 @@
   <nav class="article-nav">
     
     
-      <a href="../../05/Untitled/" class="article-nav-link">
+      <a href="../../05/浅谈互信息与熵/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
         <div class="article-nav-title">浅谈互信息与熵</div>
       </a>

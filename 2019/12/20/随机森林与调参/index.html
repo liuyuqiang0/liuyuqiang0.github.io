@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="NO response">
+  
+  
+    <meta name="description" content="what you will be,the world will be">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    随机森林与调参 |
+    
+    种花家</title>
+  
+    <link rel="shortcut icon" href="/images/rabbit.png">
+  
+  <link rel="stylesheet" href="../../../../css/style.css">
+  <link rel="stylesheet" href="../../../../css/technology.css">
+  
+    <link rel="stylesheet" href="../../../../fancybox/jquery.fancybox.min.css">
+  
+  <script src="../../../../js/pace.min.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <section class="outer">
+  <article id="post-随机森林与调参" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      随机森林与调参
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href class="article-date">
+  <time datetime="2019-12-20T07:36:00.000Z" itemprop="datePublished">2019-12-20</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="../../../../categories/机器学习/">机器学习</a>
+  </div>
+
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h3 id="学习地址"><a href="#学习地址" class="headerlink" title="学习地址"></a><center size="8px"><a href="https://www.bilibili.com/video/av35973040/" target="_blank" rel="noopener">学习地址</a></center></h3><p><a href="https://sfz-lyq.cn/2019/09/26/%E5%86%B3%E7%AD%96%E6%A0%91/">决策树</a><br><a href="http://file.sh.peixun.net/file/201811/14/201811142251i2i649620m.pdf" target="_blank" rel="noopener">随机森林与调参课件</a><br><a href="http://www.peixun.net/view/1281.html" target="_blank" rel="noopener">菜菜的机器学习Sklearn课堂</a></p>
+<hr>
+<h4 id="集成算法"><a href="#集成算法" class="headerlink" title="集成算法"></a><font size="5px" color="red">集成算法</font></h4><p><strong>集成学习</strong>(ensemble learning)是时下非常流行的机器学习算法，它本身不是一个单独的机器学习算法，而是通过在数据上构建多个模型，集成所有模型的建模结果。在各种算法竞赛中，随机森林，梯度提升树(GBDT)，Xgboost等集成算法的身影随处可见，效果之好，应用之广。  </p>
+<p><strong>集成学习的目标</strong>考虑多个评估器的建模结果，汇总之后得到一个综合结果，以此来获取一个比单个模型更好的回归或者分类表现。  </p>
+<p>多个模型集成成为的模型叫做<strong>集成评估器</strong>(ensemble estimator)，组成集成评估器的每个模型都叫做<strong>基评估器</strong>(base estimator)。</p>
+<p>通常来说，有三类集成算法：<strong>装袋法</strong>(Bagging)， <strong>提升法</strong>(Boosting)以及<strong>Stacking</strong><br><img src="https://img-blog.csdnimg.cn/20191219220257909.jpg" alt="集成算法"></p>
+<h4 id="sklearn中的集成算法"><a href="#sklearn中的集成算法" class="headerlink" title="sklearn中的集成算法"></a><font size="5px" color="red">sklearn中的集成算法</font></h4><ul>
+<li>sklearn中的集成算法模块<code>ensemble</code><br><img src="https://img-blog.csdnimg.cn/20191219220502882.jpg" alt="各种集成算法"></li>
+</ul>
+<h4 id="随机森林建模"><a href="#随机森林建模" class="headerlink" title="随机森林建模"></a><font size="5px" color="red">随机森林建模</font></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.tree import RandomForestClassifier #导入需要的模块</span><br><span class="line"></span><br><span class="line">rfc = RandomForestClassifier()     #实例化</span><br><span class="line">rfc = rfc.fit(X_train,y_train) #用训练集数据训练模型</span><br><span class="line">result = rfc.score(X_test,y_test) #导入测试集，从接口中调用需要的信息</span><br></pre></td></tr></table></figure>
+<h4 id="随机森林分类器"><a href="#随机森林分类器" class="headerlink" title="随机森林分类器"></a><font size="5px" color="red">随机森林分类器</font></h4><p>随机森林是非常具有代表性的Bagging集成算法，它的所有基评估器都是决策树，分类树组成的森林就叫做随机森林分类器，回归树所集成的森林就叫做随机森林回归器。</p>
+<h5 id="重要参数"><a href="#重要参数" class="headerlink" title="重要参数"></a><font size="3px" color="red">重要参数</font></h5><ol>
+<li><code>n_estimators=</code>: 森林中树的数量，即基评估器的数量，数量越大模型效果往往越好，默认为10，但是在即将更新的0.22版本中，这个默认值会被修正为100</li>
+<li>其他基本和决策树一样</li>
+</ol>
+<p>单个决策树的准确率越高，随机森林的准确率也会越高，因为装袋法是依赖于平均值或者少数服从多数原则来决定集成的结果的。</p>
+<h5 id="实例"><a href="#实例" class="headerlink" title="实例"></a><font size="3px" color="red">实例</font></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.tree import DecisionTreeClassifier # 导入分类树</span><br><span class="line">from sklearn.ensemble import RandomForestClassifier # 导入集成随机森林</span><br><span class="line">from sklearn.datasets import load_wine  # 数据集</span><br><span class="line">from sklearn.model_selection import train_test_split # 区分训练集和测试集</span><br><span class="line">import pandas as pd</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">wine=load_wine()</span><br><span class="line"></span><br><span class="line">X_train,X_test,Y_train,Y_test=train_test_split(wine.data,wine.target,test_size=0.3) # 30%作为测试集</span><br><span class="line"></span><br><span class="line">clf=DecisionTreeClassifier(random_state=0) # 确定随机性</span><br><span class="line">rfc=RandomForestClassifier(random_state=0) # 固定随机森林</span><br><span class="line"></span><br><span class="line">clf=clf.fit(X_train,Y_train)</span><br><span class="line">rfc=rfc.fit(X_train,Y_train)</span><br><span class="line"></span><br><span class="line">score_c=clf.score(X_test,Y_test)</span><br><span class="line">score_r=rfc.score(X_test,Y_test)</span><br><span class="line">print(score_c,score_r)  # 0.8518518518518519 0.9814814814814815</span><br></pre></td></tr></table></figure>
+<h5 id="随机森林与决策树对比"><a href="#随机森林与决策树对比" class="headerlink" title="随机森林与决策树对比"></a><font size="3px" color="red">随机森林与决策树对比</font></h5><ul>
+<li>交叉验证：是数据集划分为n分，依次取每一份做测试集，每n-1份做训练集，多次训练模型以观测模型稳定性的方法，这样就会有n个结果，取均值即可<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.tree import DecisionTreeClassifier # 导入分类树</span><br><span class="line">from sklearn.ensemble import RandomForestClassifier</span><br><span class="line">from sklearn.datasets import load_wine  # 数据集</span><br><span class="line">from sklearn.model_selection import train_test_split # 区分训练集和测试集</span><br><span class="line">from sklearn.model_selection import cross_val_score </span><br><span class="line">import pandas as pd</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">wine=load_wine()</span><br><span class="line"></span><br><span class="line">X_train,X_test,Y_train,Y_test=train_test_split(wine.data,wine.target,test_size=0.3) # 30%作为测试集</span><br><span class="line"></span><br><span class="line">score_r=[]</span><br><span class="line">score_c=[]</span><br><span class="line">for i in range(10):</span><br><span class="line">    clf=DecisionTreeClassifier()</span><br><span class="line">    clf_s=cross_val_score(clf,wine.data,wine.target,cv=10).mean() # Evaluate a score by cross-validation</span><br><span class="line">    score_c.append(clf_s)</span><br><span class="line">    rfc=RandomForestClassifier(n_estimators=25)</span><br><span class="line">    rfc_s=cross_val_score(rfc,wine.data,wine.target,cv=10).mean()</span><br><span class="line">    score_r.append(rfc_s)</span><br><span class="line"></span><br><span class="line">plt.plot(range(1,11),score_r,label = &quot;Random Forest&quot;)</span><br><span class="line">plt.plot(range(1,11),score_c,label = &quot;Decision Tree&quot;)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20191219224321482.png" alt="交叉验证"></p>
+<h5 id="重要属性和接口"><a href="#重要属性和接口" class="headerlink" title="重要属性和接口"></a><font size="3px" color="red">重要属性和接口</font></h5><p>随机森林中有三个非常重要的属性：<code>.estimators_</code>，<code>.oob_score_</code>以及<code>.feature_importances_</code></p>
+<ol>
+<li><code>.estimators_</code>是用来查看随机森林中所有树的列表的</li>
+<li><code>.oob_score_</code>指的是袋外得分。随机森林为了确保林中的每棵树都不尽相同，所以采用了对训练集进行有放回抽样的方式来不断组成信的训练集，在这个过程中，会有一些数据从来没有被随机挑选到，他们就被叫做“袋外数据”。这些袋外数据，没有被模型用来进行训练，sklearn可以帮助我们用他们来测试模型，测试的结果就由这个属性oob_score_来导出，本质还是模型的精确度</li>
+<li><code>.feature_importances_</code>和决策树中的<code>.feature_importances_</code>用法和含义都一致，是返回特征的重要性</li>
+</ol>
+<p>随机森林的接口与决策树完全一致，因此依然有四个常用接口：<code>apply</code>, <code>fit</code>, <code>predict</code>和<code>score</code>。除此之外，还需要注意随机森林的predict_proba接口，这个接口返回每个测试样本对应的被分到每一类标签的概率，标签有几个分类就返回几个概率。</p>
+<h4 id="机器学习中调参的基本思想"><a href="#机器学习中调参的基本思想" class="headerlink" title="机器学习中调参的基本思想"></a><font size="5px" color="red">机器学习中调参的基本思想</font></h4><p>通过画学习曲线，或者网格搜索，我们能够探索到调参边缘（代价可能是训练一次模型要跑三天三夜）<br>但是在现实中，高手调参恐怕还是多依赖于经验，而这些经验，来源于：<br>    1）非常正确的调参思路和方法<br>    2）对模型评估指标的理解<br>    3）对数据的感觉和经验<br>    4）用洪荒之力去不断地尝试</p>
+<h5 id="泛化误差"><a href="#泛化误差" class="headerlink" title="泛化误差"></a><font size="3px" color="red">泛化误差</font></h5><p>用来<strong>衡量模型在未知数据上的准确率</strong>的指标<br>当模型在未知数据上（训练集或袋外数据）表现糟糕时，我们说模型的泛化程度不够，泛化误差大，模型效果不好。泛化误差与模型复杂度关系：<br><img src="https://img-blog.csdnimg.cn/20191220142559817.jpg" alt="泛化误差"><br>对于本文的树模型来说，树越茂盛，深度越深，模型也就越复杂，所以树模型是天生趋于复杂的模型，随机森林以树模型为基础。所以，随机森林的参数都是向着一个目标去的：减少模型的复杂度，防止过拟合。但是，调参没有绝对的，再调参之前需要判断模型处于过拟合还是欠拟合。<br>泛化误差实际上是<strong>偏差-方差困境</strong>。</p>
+<h5 id="参数对模型的影响程度"><a href="#参数对模型的影响程度" class="headerlink" title="参数对模型的影响程度"></a><font size="3px" color="red">参数对模型的影响程度</font></h5><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>对模型在未知数据上的评估性能的影响</th>
+<th>影响程度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>n_estimators</td>
+<td>提升至平稳，n_estimators↑，不影响单个模型的复杂度</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td>max_depth</td>
+<td>有增有减，默认最大深度，即最高复杂度，向复杂度降低的方向调参max_depth↓，模型更简单，且向图像的左边移动</td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td>min_samples_leaf</td>
+<td>有增有减，默认最小限制1，即最高复杂度，向复杂度降低的方向调参min_samples_leaf↑，模型更简单，且向图像的左边移动</td>
+<td>⭐⭐</td>
+</tr>
+<tr>
+<td>min_samples_split</td>
+<td>有增有减，默认最小限制2，即最高复杂度，向复杂度降低的方向调参min_samples_split↑，模型更简单，且向图像的左边移动</td>
+<td>⭐⭐</td>
+</tr>
+<tr>
+<td>max_features</td>
+<td>有增有减，默认<strong>auto</strong>，是特征总数的开平方，位于中间复杂度，既可以向复杂度升高的方向，也可以向复杂度降低的方向调参max_features↓，模型更简单，图像左移max_features↑，模型更复杂，图像右移max_features是唯一的，能够让模型更简单，也能够让模型更复杂的参数，所以在调整这个参数的时候，需要考虑我们调参的方向</td>
+<td>⭐</td>
+</tr>
+<tr>
+<td>criterion</td>
+<td>有增有减，一般使用gini</td>
+<td>看具体情况</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://img-blog.csdnimg.cn/20191220144638454.jpg" target="_blank" rel="noopener"></a></p>
+<h4 id="关于偏差与方差"><a href="#关于偏差与方差" class="headerlink" title="关于偏差与方差"></a><font size="5px" color="red">关于偏差与方差</font></h4><p>一个集成模型(f)在未知数据集(D)上的泛化误差E(f;D)，由方差(var)，偏差(bais)和噪声(ε)共同决定：<br><img src="https://img-blog.csdnimg.cn/20191220145346250.jpg" alt="泛化误差"></p>
+<p><font size="4px" color="greey">偏差</font>：模型的预测值与真实值之间的差异。在集成算法中，每个基评估器都会有自己的偏差，集成评估器的偏差是所有基评估器偏差的均值。模型越精确，偏差越低。   </p>
+<p><font size="4px" color="greey">方差</font>：反映的是模型每一次输出结果与模型预测值的平均水平之间的误差，衡量模型的稳定性。模型越稳定，方差越低。   </p>
+<p>随着模型越来越复杂，偏差会越来越小，而方差可能就越来越大了。调参的目的就是为了找到偏差曲线与方差曲线的<strong>交叉点</strong>。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://sfz-lyq.cn/2019/12/20/随机森林与调参/" data-id="ck4dub7zs00f2eqpvlayil0wr" class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/ML/">ML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/机器学习/">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/集成学习/">集成学习</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="../../17/大规模机器学习/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">大规模机器学习</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+    </div>
+    <script src="../../../../js/jquery-2.0.3.min.js"></script>
+<script src="../../../../js/lazyload.min.js"></script>
+<script src="../../../../js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="../../../../fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="../../../../js/search.js"></script>
+
+
+<script src="../../../../js/technology.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

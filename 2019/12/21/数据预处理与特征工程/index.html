@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="NO response">
+  
+  
+    <meta name="description" content="what you will be,the world will be">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    数据预处理与特征工程 |
+    
+    种花家</title>
+  
+    <link rel="shortcut icon" href="/images/rabbit.png">
+  
+  <link rel="stylesheet" href="../../../../css/style.css">
+  <link rel="stylesheet" href="../../../../css/technology.css">
+  
+    <link rel="stylesheet" href="../../../../fancybox/jquery.fancybox.min.css">
+  
+  <script src="../../../../js/pace.min.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <section class="outer">
+  <article id="post-数据预处理与特征工程" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数据预处理与特征工程
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href class="article-date">
+  <time datetime="2019-12-21T12:03:00.000Z" itemprop="datePublished">2019-12-21</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="../../../../categories/机器学习/">机器学习</a>
+  </div>
+
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h3 id="学习地址"><a href="#学习地址" class="headerlink" title="学习地址"></a><center><a href="https://www.bilibili.com/video/av36467376/" target="_blank" rel="noopener">学习地址</a></center></h3><p><a href="http://file.sh.peixun.net/file/201811/21/20181121222491i0fm21a9.pdf" target="_blank" rel="noopener">课件</a><br><a href="https://sklearn.apachecn.org/docs/0.21.3/" target="_blank" rel="noopener">scikit-learn (sklearn) 官方文档中文版</a><br><a href="https://www.cntofu.com/book/170/readme.html" target="_blank" rel="noopener">scikit-learn (sklearn) 官方文档中文版</a><br><a href="https://www.cnblogs.com/HuZihu/p/9761161.html" target="_blank" rel="noopener">特征缩放（Feature Scaling）</a></p>
+<hr>
+<h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a><font size="5px" color="red">概述</font></h4><p><strong>数据不给力，再高级的算法能无能为力。</strong>  </p>
+<p>数据挖掘的五大流程：</p>
+<ol>
+<li><strong>获取数据</strong></li>
+<li><strong>数据预处理</strong><br>数据预处理是从数据中检测，纠正或删除损坏，不准确或不适用于模型的记录的过程<br>可能面对的问题有：数据类型不同，比如有的是文字，有的是数字，有的含时间序列，有的连续，有的间断。也可能，数据的质量不行，有噪声，有异常，有缺失，数据出错，量纲不一，有重复，数据是偏态，数据量太大或太小<br>数据预处理的<strong>目的</strong>：让数据适应模型，匹配模型的需求</li>
+<li><strong>特征工程</strong>：<br>特征工程是将原始数据转换为更能代表预测模型的潜在问题的特征的过程，可以通过挑选最相关的特征，提取特征以及创造特征来实现。其中创造特征又经常以降维算法的方式实现。<br>可能面对的问题有：特征之间有相关性，特征和标签无关，特征太多或太小，或者干脆就无法表现出应有的数据现象或无法展示数据的真实面貌<br>特征工程的<strong>目的</strong>：1) 降低计算成本，2) 提升模型上限</li>
+<li>建模，测试模型并预测出结果</li>
+<li>上线，验证模型效果</li>
+</ol>
+<h4 id="sklearn中的数据预处理和特征工程"><a href="#sklearn中的数据预处理和特征工程" class="headerlink" title="sklearn中的数据预处理和特征工程"></a><font size="5px" color="red">sklearn中的数据预处理和特征工程</font></h4><ul>
+<li><code>sklearn.preprocessing</code>模块：几乎包含数据预处理的所有内容</li>
+<li><code>sklearn.impute</code>模块：填补缺失值专用</li>
+<li><code>sklearn.feature_selection</code>模块：包含特征选择的各种方法的实践</li>
+<li><code>sklearn.decomposition</code>模块：包含降维算法</li>
+</ul>
+<h4 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a><font size="5px" color="red">数据预处理</font></h4><h5 id="数据无量纲化"><a href="#数据无量纲化" class="headerlink" title="数据无量纲化"></a><font size="3px" color="red">数据无量纲化</font></h5><p>在机器学习算法实践中，我们往往有着<strong>将不同规格的数据转换到同一规格</strong>，或不同分布的数据转换到某个特定分布的需求，这种需求统称为将数据“无量纲化”。<br>无量纲化可以加快求解速度，可以帮我们提升模型精度，避免某一个取值范围特别大的特征对距离计算造成影响。  </p>
+<p>数据的无量纲化可以是线性的，也可以是非线性的。线性的无量纲化包括<strong>中心化</strong>（Zero-centered或者Meansubtraction）处理和<strong>缩放处理</strong>（Scale）。中心化的本质是让所有记录减去一个固定值，即让数据样本数据平移到某个位置。缩放的本质是通过除以一个固定值，将数据固定在某个范围之中，取对数也算是一种缩放处理。</p>
+<ul>
+<li><font size="5px" color="greey">preprocessing.MinMaxScaler</font><br>当数据(x)按照最小值中心化后，再按极差（最大值 - 最小值）缩放，数据移动了最小值个单位，并且会被收敛到<br>[0,1]之间，而这个过程，就叫做<strong>数据归一化</strong>(Normalization，又称Min-Max Scaling)。注意，Normalization是归<br>一化，不是正则化，真正的正则化是regularization，不是数据预处理的一种手段。归一化之后的数据服从正态分布<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWcyMDE4LmNuYmxvZ3MuY29tL2Jsb2cvMTI0NzU3MC8yMDE5MDEvMTI0NzU3MC0yMDE5MDEwMzE2Mjc1MjU1Ny03MTEwNjI5OTMucG5n?x-oss-process=image/format,png" alt="归一化"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">from sklearn.preprocessing import MinMaxScaler</span><br><span class="line"></span><br><span class="line">data=np.array([[1,3],[2,4],[4,1],[2,5]])</span><br><span class="line">print(data.shape) # (4,2)</span><br><span class="line"></span><br><span class="line"># 实现归一化</span><br><span class="line">scaler=MinMaxScaler() # 实例化，默认范围[0-1]</span><br><span class="line">result=scaler.fit_transform(data) # 直接生成结果</span><br><span class="line">print(result)</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">[[0.         0.5       ]</span><br><span class="line"> [0.33333333 0.75      ]</span><br><span class="line"> [1.         0.        ]</span><br><span class="line"> [0.33333333 1.        ]]</span><br><span class="line"># 实际上上述步骤可拆分成.fit()和.transform()两步，fit()本质是生成min(x)和max(x)</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"></span><br><span class="line"># 结果逆转，生成原始数据</span><br><span class="line">data=scaler.inverse_transform(result)</span><br><span class="line">print(data)</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">[[1. 3.]</span><br><span class="line"> [2. 4.]</span><br><span class="line"> [4. 1.]</span><br><span class="line"> [2. 5.]]</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"></span><br><span class="line"># 归一化到指定范围</span><br><span class="line">data = [[-1, 2], [-0.5, 6], [0, 10], [1, 18]]</span><br><span class="line">scaler=MinMaxScaler(feature_range=[5,10])</span><br><span class="line">result=scaler.fit_transform(data)</span><br><span class="line">print(result)</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">[[ 5.    5.  ]</span><br><span class="line"> [ 6.25  6.25]</span><br><span class="line"> [ 7.5   7.5 ]</span><br><span class="line"> [10.   10.  ]]</span><br><span class="line">&apos;&apos;&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>注： 如果待预处理数据X中特征非常多，使用<code>.fit</code>接口可能会报错，因为数据量太大无法计算，可以使用<code>.partial_fit</code>接口实现同样功能。</p>
+<p>当然，已知计算公式，也可以借助<code>numpy</code>利用矩阵运算对数据进行归一化处理。</p>
+<ul>
+<li><font size="5px" color="greey">preprocessing.StandardScaler</font><br>当数据(x)按均值(μ)中心化后，再按标准差(σ)缩放，数据就会服从为均值为0，方差为1的正态分布（即标准正态分布），而这个过程，就叫做<strong>数据标准化</strong>(Standardization，又称Z-score normalization)<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWcyMDE4LmNuYmxvZ3MuY29tL2Jsb2cvMTI0NzU3MC8yMDE5MDEvMTI0NzU3MC0yMDE5MDEwMzE2MjkwMzQzNC0xNDA2ODAxNzc0LnBuZw?x-oss-process=image/format,png" alt="标准化"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">from sklearn.preprocessing import MinMaxScaler</span><br><span class="line">from sklearn.preprocessing import StandardScaler</span><br><span class="line"></span><br><span class="line">data=np.array([[1,3],[2,4],[4,1],[2,5]])</span><br><span class="line">scaler=StandardScaler() # 实例化</span><br><span class="line">scaler=scaler.fit(data) # 本质是生成均值和方差，按列</span><br><span class="line">print(scaler.mean_) # 查看均值 [2.25 3.25]</span><br><span class="line">print(scaler.var_) # 查看方差 [1.1875 2.1875]</span><br><span class="line"></span><br><span class="line">X_std=scaler.transform(data)</span><br><span class="line">print(X_std)</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">[[-1.14707867 -0.16903085]</span><br><span class="line"> [-0.22941573  0.50709255]</span><br><span class="line"> [ 1.60591014 -1.52127766]</span><br><span class="line"> [-0.22941573  1.18321596]]</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"># result=scaler.fit_transform(data) # 一步达成结果</span><br><span class="line"># datascaler.inverse_transform(result)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>注意：对于<code>StandardScaler</code>和<code>MinMaxScaler</code>来说，空值<code>NaN</code>会被当做是缺失值，在fit的时候忽略，在transform的时候<br><strong>保持缺失NaN</strong>的状态显示。<br>并且，尽管去量纲化过程不是具体的算法，但在fit接口中，依然<strong>只允许导入至少二维数组，一维数组导入会报错</strong></p>
+<ul>
+<li><font size="4px" color="red">StandardScaler和MinMaxScaler选哪个？</font><br>大多数机器学习算法中，会选择StandardScaler来进行特征缩放，因为<strong>MinMaxScaler对异常值非常敏感</strong>。在PCA，聚类，逻辑回归，支持向量机，神经网络这些算法中，StandardScaler往往是最好的选择<br>MinMaxScaler在不涉及距离度量、梯度、协方差计算以及数据需要被压缩到特定区间时使用广泛，比如数字图像处理中量化像素强度时，都会使用MinMaxScaler将数据压缩于[0,1]区间之中。<br><img src="https://img-blog.csdnimg.cn/20191221162515520.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="各种缩放"></li>
+</ul>
+<h5 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a><font size="3px" color="red">缺失值处理</font></h5><ul>
+<li><font size="4px" color="greey">impute.SimpleImputer</font><br>这个类是专门用来填补缺失值的。它包括四个重要参数：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义&amp;输入</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>missing_values</td>
+<td>告诉SimpleImputer，数据中的缺失值长什么样，默认空值np.nan</td>
+</tr>
+<tr>
+<td>strategy</td>
+<td>我们填补缺失值的策略，默认均值“mean”使用均值填补）（仅对数值型特征可用），“median”用中值填补（ 对数值型特征可用），”most_frequent”用众数填补（对数值型和字符型特征都可用），“constant”表示请参考参 “fill_value”中的值（对数值型和字符型特征都可用</td>
+</tr>
+<tr>
+<td>fill_value</td>
+<td>当参数startegy为”constant”的时候可用，可输入字符串或数字表示要填充的值，常用0</td>
+</tr>
+<tr>
+<td>copy</td>
+<td>默认为True，将创建特征矩阵的副本，反之则会将缺失值填补到原本的特征矩阵中去</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line">from sklearn.impute import SimpleImputer</span><br><span class="line"></span><br><span class="line">data=pd.read_csv(&apos;Data/Narrativedata.csv&apos;,index_col=0) # 指定第一列为索引读取数据</span><br><span class="line">print(data.head())</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">    Age     Sex Embarked Survived</span><br><span class="line">0  22.0    male        S       No</span><br><span class="line">1  38.0  female        C      Yes</span><br><span class="line">2  26.0  female        S      Yes</span><br><span class="line">3  35.0  female        S      Yes</span><br><span class="line">4  35.0    male        S       No</span><br><span class="line"></span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"></span><br><span class="line">print(data.info())</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">&lt;class &apos;pandas.core.frame.DataFrame&apos;&gt;</span><br><span class="line">Int64Index: 891 entries, 0 to 890</span><br><span class="line">Data columns (total 4 columns):</span><br><span class="line">Age         714 non-null float64</span><br><span class="line">Sex         891 non-null object</span><br><span class="line">Embarked    889 non-null object</span><br><span class="line">Survived    891 non-null object</span><br><span class="line">dtypes: float64(1), object(3)</span><br><span class="line">memory usage: 34.8+ KB</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"># 发现 Age、sex和Embarked具有空值</span><br><span class="line"></span><br><span class="line">Age=data.loc[:,&apos;Age&apos;].values.reshape(-1,1) # 将series的值取出并生成二维的</span><br><span class="line">_mean=SimpleImputer() # 实例化默认均值填充</span><br><span class="line">_median=SimpleImputer(strategy=&apos;median&apos;) # 用中位数填充</span><br><span class="line">_zero=SimpleImputer(strategy=&apos;constant&apos;,fill_value=0) # 用常数0填充，需要指定填充值</span><br><span class="line">_most=SimpleImputer(strategy=&apos;most_frequent&apos;) # 使用众数填充</span><br><span class="line"></span><br><span class="line">_mean=_mean.fit_transform(Age) # 一步完成调取结果</span><br><span class="line">_median=_median.fit_transform(Age)</span><br><span class="line">_zero=_zero.fit_transform(Age)</span><br><span class="line">_most=_most.fit_transform(Age)</span><br><span class="line"></span><br><span class="line">data.loc[:,&apos;Age&apos;]=_median # 使用众数填充，也可以用填充好的_median、_zero或_most</span><br><span class="line">print(data.info())</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">&lt;class &apos;pandas.core.frame.DataFrame&apos;&gt;</span><br><span class="line">Int64Index: 891 entries, 0 to 890</span><br><span class="line">Data columns (total 4 columns):</span><br><span class="line">Age         891 non-null float64</span><br><span class="line">Sex         891 non-null object</span><br><span class="line">Embarked    889 non-null object</span><br><span class="line">Survived    891 non-null object</span><br><span class="line">dtypes: float64(1), object(3)</span><br><span class="line">memory usage: 34.8+ KB</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"># 发现Age字段的值全部非空，填充成功</span><br></pre></td></tr></table></figure>
+<p>当然，直接使用<code>numpy</code>和<code>pandas</code>填充也十分方便</p>
+<h5 id="处理分类型特征：编码与哑变量"><a href="#处理分类型特征：编码与哑变量" class="headerlink" title="处理分类型特征：编码与哑变量"></a><font size="3px" color="red">处理分类型特征：编码与哑变量</font></h5><p>在机器学习中，大多数算法，譬如逻辑回归，支持向量机SVM，k近邻算法等都只能够处理数值型数据，不能处理文字，在sklearn当中，除了专用来处理文字的算法，其他算法在fit的时候全部要求输入数组或矩阵，也不能够导入文字型数据。为了让数据适应算法和库，我们必须<strong>将数据进行编码</strong>，即是说，将<strong>文字型数据转换为数值型</strong></p>
+<ul>
+<li><font size="4px" color="greey">preprocessing.LabelEncoder</font>: <strong>标签专用</strong>，能够将分类转换为分类数值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line">from sklearn.preprocessing import LabelEncoder</span><br><span class="line"></span><br><span class="line">data=pd.read_csv(&apos;Data/Narrativedata.csv&apos;,index_col=0) # 指定第一列为索引读取数据</span><br><span class="line"></span><br><span class="line">y=data.iloc[:,-1] # 取最后一列，标签允许一维</span><br><span class="line">le=LabelEncoder()  # 实例化</span><br><span class="line">lable=le.fit_transform(y) # 一步生成，也可以拆分</span><br><span class="line"># y=le.inverse_transform(lable) # 也可以逆转</span><br><span class="line">data.iloc[:,-1]=lable</span><br><span class="line">print(data.head())</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">    Age     Sex Embarked  Survived</span><br><span class="line">0  22.0    male        S         0</span><br><span class="line">1  38.0  female        C         2</span><br><span class="line">2  26.0  female        S         2</span><br><span class="line">3  35.0  female        S         2</span><br><span class="line">4  35.0    male        S         0</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"># data.iloc[:,-1] = LabelEncoder().fit_transform(data.iloc[:,-1]) # 熟悉之后也可以这样一步操作</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在<code>fiit</code>之后和<code>.transform</code>之前也可以用实例属性<code>le.classes_</code>查看标签中究竟有多少类别</p>
+<ul>
+<li><font size="4px" color="greey">preprocessing.OrdinalEncoder</font>: <strong>特征专用</strong>，能够将分类特征转换为分类数值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 以下代码基于上述代码，即将空值全部填充完毕，否则报错</span><br><span class="line">_data=data.copy()</span><br><span class="line">_data.iloc[:,1:-1]=OrdinalEncoder().fit_transform(_data.iloc[:,1:-1])</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这个类的用法和标签编码的用法基本一样的，但是如果要查看类别需要在<code>.fit</code>之后使用实例属性<code>.categories_</code>查看，注意同样需要在<code>.transform</code>之前查看，如果不需要查看直接使用<code>.fir_transform</code>一步生成即可</p>
+<ul>
+<li><font size="4px" color="greey">preprocessing.OneHotEncoder</font>: 独热编码，创建哑变量<br>把分类转换成数字的时候，忽略了数字中自带的数学性质，所以给算法传达了一些不准确的信息，而这会影响我们的建模。<br><strong>独热编码one-hot</strong>: 将特征转换为哑变量<br><img src="https://img-blog.csdnimg.cn/20191221193415493.jpg" alt="独热编码"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.preprocessing import OneHotEncoder</span><br><span class="line">X = data.iloc[:,1:-1]</span><br><span class="line">enc = OneHotEncoder(categories=&apos;auto&apos;).fit(X)</span><br><span class="line">result = enc.transform(X).toarray()</span><br><span class="line"># OneHotEncoder(categories=&apos;auto&apos;).fit_transform(X).toarray()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/2019122119530984.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="编码与哑变量"></p>
+<h5 id="处理连续型特征：二值化与分段"><a href="#处理连续型特征：二值化与分段" class="headerlink" title="处理连续型特征：二值化与分段"></a><font size="3px" color="red">处理连续型特征：二值化与分段</font></h5><ul>
+<li><font size="5px" color="greey">sklearn.preprocessing.Binarizer</font><br>根据阈值将数据二值化（将特征值设置为0或1），用于处理连续型变量。大于阈值的值映射为1，而小于或等于阈值的值映射为0。默认阈值为0时，特征中所有的正值都映射到1。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.preprocessing import Binarizer</span><br><span class="line">X = data.iloc[:,0].values.reshape(-1,1) #类为特征专用，所以不能使用一维数组</span><br><span class="line">transformer = Binarizer(threshold=30).fit_transform(X)  #  大于30的全部变成1</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://sfz-lyq.cn/2019/12/21/数据预处理与特征工程/" data-id="ck4fjarij00f7gupv5zt1yp2i" class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/ML/">ML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/数据预处理/">数据预处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/机器学习/">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/特征工程/">特征工程</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="../../20/随机森林与调参/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">随机森林与调参</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+    </div>
+    <script src="../../../../js/jquery-2.0.3.min.js"></script>
+<script src="../../../../js/lazyload.min.js"></script>
+<script src="../../../../js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="../../../../fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="../../../../js/search.js"></script>
+
+
+<script src="../../../../js/technology.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

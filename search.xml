@@ -1,9 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>主成分分析PCA与奇异值分解SVD</title>
+    <url>/2019/12/22/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90PCA%E4%B8%8E%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3SVD/</url>
+    <content><![CDATA[<h3 id="学习地址"><a href="#学习地址" class="headerlink" title="学习地址"></a><center><a href="https://www.bilibili.com/video/av36965169" target="_blank" rel="noopener">学习地址</a></center></h3><p><a href="http://file.sh.peixun.net/file/201811/28/201811282159x84x0o4puv.pdf" target="_blank" rel="noopener">课件</a></p>
+<hr>
+<h4 id="关于维度"><a href="#关于维度" class="headerlink" title="关于维度"></a><font size="5px" color="red">关于维度</font></h4><p>对于数组和Series来说，维度就是功能shape返回的结果，shape中返回了几个数字，就是几维。对于numpy类型数据来说，可以使用<code>numpy.ndim</code>接口来查看维度。<br>数组中的每一张表，都可以是一个特征矩阵或一个DataFrame，这些结构永远只有一张表，所以一定有行列，其中行是样本，列是特征。针对每一张表，<strong>维度指的是样本的数量或特征的数量</strong>，一般无特别说明，指的都是特征的数量<br><strong>对图像来说，维度就是图像中特征向量的数量</strong>  </p>
+<p><strong>降维算法中的”降维“，指的是降低特征矩阵中特征的数量</strong>，降维的目的是为了让算法运算更快，效果更好，但其实还有另一种需求：<strong>数据可视化</strong>。三维以上特征矩阵的则不能被可视化，数据的性质也就比较难理解。  </p>
+<p><strong>降维</strong>能够即减少特征的数量，又保留大部分有效信息——将那些带有重复信息的特征合并，并删除那些带无效信息的特征等等——逐渐创造出能够代表原特征矩阵大部分信息的，特征更少的，新特征矩阵</p>
+<h4 id="sklearn中的降维算法"><a href="#sklearn中的降维算法" class="headerlink" title="sklearn中的降维算法"></a><font size="5px" color="red">sklearn中的降维算法</font></h4><p><strong>sklearn</strong>中降维算法都被包括在模块<strong>decomposition</strong>中，这个模块本质是一个矩阵分解模块。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191222143508981.jpg?type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="sklearn中的降维算法"></p>
+<h4 id="PCA"><a href="#PCA" class="headerlink" title="PCA"></a><font size="5px" color="red">PCA</font></h4><p><strong>一种重要的特征选择方法：<font color="red">方差过滤</font></strong></p>
+<ul>
+<li>如果一个特征的方差很小，则意味着这个特征上很可能有大量取值都相同，那这一个特征的取值对样本而言就没有区分度，这种特征就不带有有效信息。从方差的这种应用就可以推断出，如果一个特征的方差很大，则说明这个特征上带有大量的信息。  </li>
+</ul>
+<p>在降维中，<strong>PCA使用的信息量衡量指标，就是样本方差，又称可解释性方差，方差越大，特征所带的信息量越多</strong><br><img src="https://img-blog.csdnimg.cn/20191222144146538.jpg" alt="方差"><br>Var代表一个特征的方差，n代表样本量，x<sub>i</sub>代表一个特征中的每个样本取值，xhat代表这一列样本的均值。  </p>
+<p><font color="red" size="4px">面试高危问题</font>：方差计算公式中为什么除数是n-1? 这是为了得到样本方差的无偏估计</p>
+<p>降维过程中，几个重要的步骤</p>
+<table>
+<thead>
+<tr>
+<th>过程</th>
+<th>二维特征矩阵</th>
+<th>n维特征矩阵</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>输入原数据，结构为 (3,2) 找出原本的2个特征对应的直角坐标系，本质 是找出这2个特征构成的2维平面</td>
+<td>输入原数据，结构为 (m,n) 找出原本的n个特征向量构成的n维空间</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2 决定降维后的特征数量：1</td>
+<td>决定降维后的特征数量：k</td>
+</tr>
+<tr>
+<td>3</td>
+<td>旋转，找出一个新坐标系本质是找出2个新的特征向量，以及它们构成的新2维平面新特征向量让数据能够被压缩到少数特征上，并且总信息量不损失太多</td>
+<td>通过某种变化，找出n个新的特征向量，以及它们构成的新n维空间</td>
+</tr>
+<tr>
+<td>4</td>
+<td>找出数据点在新坐标系上，2个新坐标轴上的坐标</td>
+<td>找出原始数据在新特征空间V中的n个新特征向量上对应的值，即“将数据映射到新空间中”</td>
+</tr>
+<tr>
+<td>5</td>
+<td>选取第1个方差最大的特征向量，删掉没有被选中的特征，成功将2维平面降为1维</td>
+<td>选取前k个信息量最大的特征，删掉没有被选中的特征，成功将n维空间V降为k维</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>在步骤3当中，我们用来找出n个新特征向量，让数据能够被压缩到少数特征上并且总信息量不损失太多的技术就是<strong>矩阵分解</strong>。PCA和SVD是两种不同的降维算法，但他们都遵从上面的过程来实现降维，只是两种算法中矩阵分解的方法不同，信息量的衡量指标不同罢了。<strong>PCA使用方差作为信息量的衡量指标</strong>，并且用特征值分解来找出空间V。</li>
+</ul>
+<p>降维完成之后，PCA找到的每个新特征向量就叫做“主成分”，而被丢弃的特征向量被认为信息量很少，这些信息很可能就是噪音。<br><img src="https://img-blog.csdnimg.cn/20191222151921488.jpg" alt="PCA矩阵分解"><br>而SVD使用奇异值分解来找出空间V，其中Σ也是一个对角矩阵，不过它对角线上的元素是奇异值，这也是SVD中用来衡量特征上的信息量的指标<br><img src="https://img-blog.csdnimg.cn/20191222151950978.jpg" alt="奇异值分解"><br>以上两种分解一种称为特征矩阵分解，一种为奇异值分解，在线性代数与矩阵论中会有详细讲解。<br>其中涉及的矩阵运算无论使用任何语言都不可避免的需要庞大的计算过程，因此算法运行较缓慢。但目前它的功能暂时无法替代，依然是机器学习领域的宠儿。</p>
+<h4 id="特征工程中的降维和特征选择"><a href="#特征工程中的降维和特征选择" class="headerlink" title="特征工程中的降维和特征选择"></a><font size="5px" color="red">特征工程中的降维和特征选择</font></h4><p>特征工程中有三种方式：<strong>特征提取</strong>，<strong>特征创造</strong>和<strong>特征选择</strong>  </p>
+<ul>
+<li><strong>特征选择</strong>是从已存在的特征中选取携带<strong>信息最多</strong>的，选完之后的特征依然具有可解释性，我们依然知道这个特征在原数据的哪个位置，代表着原数据上的什么含义</li>
+<li>而降维算法，是将已存在的特征进行压缩，降维完毕后的特征不是原本的特征矩阵中的任何一个特征，而是通过某些方式组合起来的新特征。通常来说，在新的特征矩阵生成之前，我们无法知晓降维算法们都建立了怎样的新特征向量，新特征矩阵生成之后也不具有可读性，我们无法判断新特征矩阵的特征是从原数据中的什么特征组合而来，新特征虽然带有原始数据的信息，却已经不是原数据上代表着的含义了。降维算法因此是<strong>特征创造</strong>（feature creation，或feature construction）的一种  </li>
+</ul>
+<h4 id="PCA重要参数"><a href="#PCA重要参数" class="headerlink" title="PCA重要参数"></a><font size="5px" color="red">PCA重要参数</font></h4><ul>
+<li><font size="3px" color="red">n_components</font><br><code>n_components</code>是我们降维后需要的维度，即降维后需要保留的特征数量，降维流程中第二步里需要确认的k值，一般输入[0, min(X.shape)]范围中的整数。不过，为了方便可视化，一般将数据维度降到3维以下</li>
+</ul>
+<h5 id="案例"><a href="#案例" class="headerlink" title="案例"></a><font size="3px" color="red">案例</font></h5><ul>
+<li><p>实例化</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line">from sklearn.datasets import load_iris</span><br><span class="line">from sklearn.decomposition import PCA</span><br><span class="line"></span><br><span class="line">iris=load_iris()</span><br><span class="line">X=iris.data</span><br><span class="line">y=iris.target</span><br><span class="line">print(X.shape,y.shape) # (150, 4) (150,)</span><br><span class="line">print(iris.target_names) # [&apos;setosa&apos; &apos;versicolor&apos; &apos;virginica&apos;]</span><br><span class="line"># .target_names属性分别对应iris.target中的数字</span><br><span class="line">print(set(y)) # &#123;0, 1, 2&#125;</span><br><span class="line"># .target_names[i]就表示i对应的花的名称</span><br><span class="line"></span><br><span class="line">pca=PCA(n_components=2) # 实例化</span><br><span class="line">X_=pca.fit_transform(X) # 一步实现，同之前的预处理类似也可以拆分成.fit和.transform</span><br><span class="line">print(X_.shape) # (150, 2)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可视化</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">plt.scatter(X_[y==0,0],X_[y==0,1],c=&apos;red&apos;,label=iris.target_names[0])  # 对应布尔索引</span><br><span class="line">plt.scatter(X_[y==1,0],X_[y==1,1],c=&apos;black&apos;,label=iris.target_names[1])</span><br><span class="line">plt.scatter(X_[y==2,0],X_[y==2,1],c=&apos;orange&apos;,label=iris.target_names[2])</span><br><span class="line">plt.legend(loc=&quot;best&quot;)</span><br><span class="line">plt.title(&apos;PCA of IRIS dataset&apos;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/2019122215593927.png?type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="PCA of IRIS dataset"></p>
+<h5 id="降维后的信息属性"><a href="#降维后的信息属性" class="headerlink" title="降维后的信息属性"></a><font size="3px" color="red">降维后的信息属性</font></h5><ul>
+<li><p>属性<code>explained_variance_</code>，查看降维后每个新特征向量上所带的信息量大小（可解释性方差的大小）<br>·pca.explained_variance_·</p>
+</li>
+<li><p>属性<code>explained_variance_ratio_</code>，查看降维后每个新特征向量所占的信息量占原始数据总信息量的百分比，又叫做可解释方差贡献率<br><code>pca.explained_variance_ratio_</code> ，大部分信息都被有效地集中在了第一个特征上</p>
+</li>
+<li><p><code>pca.explained_variance_ratio_.sum()</code>，表示<code>explained_variance_ratio_</code>的数字之和，即降维后保留的数据信息占总信息的百分比</p>
+</li>
+</ul>
+<h5 id="如何选择n-components"><a href="#如何选择n-components" class="headerlink" title="如何选择n_components"></a><font size="3px" color="red">如何选择n_components</font></h5><ul>
+<li>当参数components中不填写任何值，则默认返回min(X.shape)个特征，一般来说，样本量都会大于特征数目，所以什么都不填就相当于转换了新特征空间，但没有减少特征的个数。但我们可以使用这个计算出累计方差贡献率曲线。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pca_line=PCA() # 默认选择min(X.shape)，虽然维度不变但还是会改变特征维度空间</span><br><span class="line">pca_line=pca_line.fit(X) # 这里就把特征的信息量占比区分并排序出来了</span><br><span class="line"># 通过累计图查找总信息量突然变平滑的点就是我们要的最佳维度</span><br><span class="line">plt.plot([1,2,3,4],np.cumsum(pca_line.explained_variance_ratio_))</span><br><span class="line">plt.xticks([1,2,3,4])</span><br><span class="line">plt.xlabel(&quot;number of components after dimension reduction&quot;)</span><br><span class="line">plt.ylabel(&quot;cumulative explained variance&quot;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20191222162317337.png?,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="累计方差贡献率"></p>
+<ul>
+<li>最大似然估计自动选择超参数<br><strong>极大似然估计</strong> ： 也叫最大似然估计(maximum likelihoodestimation)<br>在实例化时输入<code>mle</code>作为<code>n_components</code>的参数即可。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>ML</tag>
+        <tag>PCA</tag>
+        <tag>SVD</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数据预处理与特征工程</title>
     <url>/2019/12/21/%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E4%B8%8E%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/</url>
-    <content><![CDATA[<h3 id="学习地址"><a href="#学习地址" class="headerlink" title="学习地址"></a><center><a href="https://www.bilibili.com/video/av36467376/" target="_blank" rel="noopener">学习地址</a></center></h3><p><a href="http://file.sh.peixun.net/file/201811/21/20181121222491i0fm21a9.pdf" target="_blank" rel="noopener">课件</a><br><a href="https://sklearn.apachecn.org/docs/0.21.3/" target="_blank" rel="noopener">scikit-learn (sklearn) 官方文档中文版</a><br><a href="https://www.cntofu.com/book/170/readme.html" target="_blank" rel="noopener">scikit-learn (sklearn) 官方文档中文版</a><br><a href="https://www.cnblogs.com/HuZihu/p/9761161.html" target="_blank" rel="noopener">特征缩放（Feature Scaling）</a></p>
+    <content><![CDATA[<h3 id="学习地址"><a href="#学习地址" class="headerlink" title="学习地址"></a><center><a href="https://www.bilibili.com/video/av36467376/" target="_blank" rel="noopener">学习地址</a></center></h3><p><a href="http://file.sh.peixun.net/file/201811/21/20181121222491i0fm21a9.pdf" target="_blank" rel="noopener">课件</a><br><a href="https://sklearn.apachecn.org/docs/0.21.3/" target="_blank" rel="noopener">scikit-learn (sklearn) 官方文档中文版</a><br><a href="https://www.cntofu.com/book/170/readme.html" target="_blank" rel="noopener">scikit-learn (sklearn) 官方文档中文版</a><br><a href="https://www.cnblogs.com/HuZihu/p/9761161.html" target="_blank" rel="noopener">特征缩放（Feature Scaling）</a><br><a href="https://www.cnblogs.com/jasonfreak/p/5448385.html" target="_blank" rel="noopener">使用sklearn做单机特征工程</a><br><a href="https://www.zhihu.com/question/29316149" target="_blank" rel="noopener">特征工程到底是什么？</a></p>
 <hr>
 <h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a><font size="5px" color="red">概述</font></h4><p><strong>数据不给力，再高级的算法能无能为力。</strong>  </p>
 <p>数据挖掘的五大流程：</p>
@@ -84,8 +185,7 @@
 </ul>
 <p><img src="https://img-blog.csdnimg.cn/2019122119530984.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="编码与哑变量"></p>
 <h5 id="处理连续型特征：二值化与分段"><a href="#处理连续型特征：二值化与分段" class="headerlink" title="处理连续型特征：二值化与分段"></a><font size="3px" color="red">处理连续型特征：二值化与分段</font></h5><ul>
-<li><font size="5px" color="greey">sklearn.preprocessing.Binarizer</font><br>根据阈值将数据二值化（将特征值设置为0或1），用于处理连续型变量。大于阈值的值映射为1，而小于或等于阈值的值映射为0。默认阈值为0时，特征中所有的正值都映射到1。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from sklearn.preprocessing import Binarizer</span><br><span class="line">X = data.iloc[:,0].values.reshape(-1,1) #类为特征专用，所以不能使用一维数组</span><br><span class="line">transformer = Binarizer(threshold=30).fit_transform(X)  #  大于30的全部变成1</span><br></pre></td></tr></table></figure>
-</li>
+<li><font size="5px" color="greey">sklearn.preprocessing.Binarizer</font><br>根据阈值将数据二值化（将特征值设置为0或1），用于处理连续型变量。大于阈值的值映射为1，而小于或等于阈值的值映射为0。默认阈值为0时，特征中所有的正值都映射到1。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from sklearn.preprocessing import Binarizer</span><br><span class="line">X = data.iloc[:,0].values.reshape(-1,1) #类为特征专用，所以不能使用一维数组</span><br><span class="line">transformer = Binarizer(threshold=30).fit_transform(X)  #  大于30的全部变成1</span><br></pre></td></tr></table></figure></li>
 </ul>
 ]]></content>
       <categories>

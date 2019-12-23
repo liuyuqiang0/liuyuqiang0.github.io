@@ -105,11 +105,99 @@
 <p>这些高级算法一般封装在某个库中，可以直接调用。</p>
 <h4 id="多元分类：一对多"><a href="#多元分类：一对多" class="headerlink" title="多元分类：一对多"></a>多元分类：一对多</h4><p>即： 待分类的对象 对 多个类别<br>比如：邮件，类别有家人、工作、朋友等</p>
 <p>大致是对不同的类别设置不同的分类器：选择其中一种作为正，其余都为0，那么就可以得出不同的分类器，我们将数据输入到不同的分类器中选择hypothesis最大的最可信的那个。<br><img src="https://i.loli.net/2019/07/15/5d2c269d5004814353.png" alt="2019-07-15 15-09-03 的屏幕截图.png"><br><img src="https://i.loli.net/2019/07/15/5d2c26ea8ca8062647.png" alt="2019-07-15 15-10-02 的屏幕截图.png"></p>
+<hr>
+<hr>
+<center>补充</center>
+
+<hr>
+<ol>
+<li><a href="https://blog.csdn.net/sinat_34328764/article/details/80246139" target="_blank" rel="noopener">Python Matplotlib 改变坐标轴的默认位置</a></li>
+<li><a href="http://file.sh.peixun.net/file/201812/05/2018120522460ukuzqukq7.pdf" target="_blank" rel="noopener">课件</a></li>
+</ol>
+<h3 id="sklearn中的逻辑回归"><a href="#sklearn中的逻辑回归" class="headerlink" title="sklearn中的逻辑回归"></a><font size="5px" color="red">sklearn中的逻辑回归</font></h3><h4 id="Sigmoid函数"><a href="#Sigmoid函数" class="headerlink" title="Sigmoid函数"></a><font size="3px" color="red">Sigmoid函数</font></h4><p><img src="https://img-blog.csdnimg.cn/20191223145742591.jpg?aHR0cHM6Ly9hdmF0YXIuY3Nkbi5uZXQvNy83L0IvMV9yYWxmX2h4MTYzY29tLmpwZw =250x150" alt="Sigmoid函数"></p>
+<ul>
+<li>绘制函数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">x=np.linspace(-10,10,10000)</span><br><span class="line">ax = plt.gca()  # a表示axis</span><br><span class="line">ax.spines[&apos;right&apos;].set_color(&apos;none&apos;) # 隐藏右边的线</span><br><span class="line">ax.spines[&apos;top&apos;].set_color(&apos;none&apos;) # 隐藏上面的线</span><br><span class="line">ax.spines[&apos;bottom&apos;].set_position((&apos;data&apos;, 0)) # 设置纵轴起点</span><br><span class="line">ax.spines[&apos;left&apos;].set_position((&apos;data&apos;, 0)) # 设置横轴中点</span><br><span class="line">plt.plot(x,1/(1+np.power(np.e,-x)))</span><br><span class="line">plt.grid(True)</span><br><span class="line">plt.title(&apos;Figmoid Function&apos;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20191223145855618.png?type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="sigmoid 函数"><br><code>Sigmoid</code>函数是一个S型的函数，当自变量z趋近正无穷时，因变量g(z)趋近于1，而当z趋近负无穷时，g(z)趋近于0，<strong>它能够将任何实数映射到(0,1)区间</strong>，使其可用于将任意值函数转换为更适合二分类的函数。因为这个性质，<strong>Sigmoid函数也被当作是归一化的一种方法</strong>，与我们之前学过的MinMaxSclaer同理，是属于数据预处理中的“<strong>缩放</strong>”功能，可以将数据压缩到[0,1]之内。区别在于，MinMaxScaler归一化之后，是可以取到0和1的（最大值归一化后就是1，最小值归一化后就是0），但<strong>Sigmoid函数只是无限趋近于0和1</strong>。</p>
+<h4 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a><font size="3px" color="red">逻辑回归</font></h4><ol>
+<li>逻辑回归对<strong>线性关系</strong>的拟合效果好到丧心病狂，相对的，逻辑回归在<strong>非线性数据</strong>的效果很多时候比瞎猜还不如，所以如果你已经知道数据之间的联系是非线性的，千万不要迷信逻辑回归</li>
+<li><strong>逻辑回归计算快</strong></li>
+<li><strong>逻辑回归返回的分类结果不是固定的0，1，而是以小数形式呈现的类概率数字</strong></li>
+</ol>
+<h4 id="sklearn中的逻辑回归-1"><a href="#sklearn中的逻辑回归-1" class="headerlink" title="sklearn中的逻辑回归"></a><font size="3px" color="red">sklearn中的逻辑回归</font></h4><table>
+<thead>
+<tr>
+<th>逻辑回归相关的类</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear_model.LogisticRegression</td>
+<td>逻辑回归回归分类器（又叫logit回归，最大熵分类器）</td>
+</tr>
+<tr>
+<td>linear_model.LogisticRegressionCV</td>
+<td>带交叉验证的逻辑回归分类器</td>
+</tr>
+<tr>
+<td>linear_model.logistic_regression_path</td>
+<td>计算Logistic回归模型以获得正则化参数的列表</td>
+</tr>
+<tr>
+<td>linear_model.SGDClassifier</td>
+<td>利用梯度下降求解的线性分类器（SVM，逻辑回归等等）</td>
+</tr>
+<tr>
+<td>linear_model.SGDRegressor</td>
+<td>利用梯度下降最小化正则化后的损失函数的线性回归模型</td>
+</tr>
+<tr>
+<td>metrics.log_loss</td>
+<td>对数损失，又称逻辑损失或交叉熵损失</td>
+</tr>
+<tr>
+<td><strong>其他会涉及的类</strong></td>
+<td><strong>说明</strong></td>
+</tr>
+<tr>
+<td>metrics.confusion_matrix</td>
+<td>混淆矩阵，模型评估指标之一</td>
+</tr>
+<tr>
+<td>metrics.roc_auc_score</td>
+<td>ROC曲线，模型评估指标之一</td>
+</tr>
+<tr>
+<td><strong>metrics.accuracy_score</strong></td>
+<td>精确性，模型评估指标之一</td>
+</tr>
+</tbody>
+</table>
+<h4 id="linear-model-LogisticRegression"><a href="#linear-model-LogisticRegression" class="headerlink" title="linear_model.LogisticRegression"></a><font size="3px" color="red">linear_model.LogisticRegression</font></h4><ul>
+<li><code>sklearn.linear_model.LogisticRegression (penalty=’l2’, dual=False, tol=0.0001, C=1.0, fit_intercept=True, intercept_scaling=1,   class_weight=None, random_state=None, solver=’warn’, max_iter=100, multi_class=’warn’, verbose=0, warm_start=False, n_jobs=None)</code></li>
+</ul>
+<h4 id="重要参数-penalty-amp-C"><a href="#重要参数-penalty-amp-C" class="headerlink" title="重要参数 penalty &amp; C"></a><font size="3px" color="red">重要参数 penalty &amp; C</font></h4><ul>
+<li><code>penalty</code>和<code>C</code>都是正则化参数，<strong>正则化</strong>是用来防止模型过拟合的过程。常用的有L1正则化和L2正则化两种选项，分别通过在损失函数后加上参数向量&theta;的L1范式和L2范式的倍数来实现。  </li>
+<li>这个增加的范式，被称为“<strong>正则项</strong>”，也被称为”惩罚项”。其中L1范数表现为参数向量中的每个参数的绝对值之和，L2范数表现为参数向量中的每个参数的平方和的开方值。</li>
+<li>损失函数<br><img src="https://img-blog.csdnimg.cn/20191223152842631.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="逻辑回归损失函数"><br>C是用来控制正则化程度的超参数，n是方程中特征的总数，也是方程中参数的总数，j代表每个参数。在这里，J要大于等于1，是因为我们的参数向量&theta;中，第一个参数是&theta;<sub>0</sub>是我们的截距，它通常是不参与正则化的<br><img src="https://img-blog.csdnimg.cn/20191223153110591.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="参数说明"></li>
+</ul>
+<h4 id="学习曲线选择C"><a href="#学习曲线选择C" class="headerlink" title="学习曲线选择C"></a><font size="3px" color="red">学习曲线选择C</font></h4><ul>
+<li>逻辑回归的重要属性<code>coef_</code>，查看每个特征所对应的参数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">from sklearn.linear_model import LogisticRegression as RL</span><br><span class="line">from sklearn.datasets import load_breast_cancer</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line">from sklearn.metrics import accuracy_score</span><br><span class="line"></span><br><span class="line">data=load_breast_cancer()</span><br><span class="line">X=data.data</span><br><span class="line">Y=data.target</span><br><span class="line">print(X.shape,Y.shape) # (569, 30) (569,)</span><br><span class="line"></span><br><span class="line">RL_L1=RL(penalty=&apos;l1&apos;,C=0.5,max_iter=1000) # 实例化并初始化参数</span><br><span class="line">RL_L2=RL(penalty=&apos;l2&apos;,C=0.5,max_iter=1000) # 实例化并初始化参数</span><br><span class="line"></span><br><span class="line">RL_L1=RL_L1.fit(X,Y) # 训练模型</span><br><span class="line">RL_L2=RL_L2.fit(X,Y)</span><br><span class="line"></span><br><span class="line">print(RL_L1.coef_)</span><br><span class="line">print(RL_L2.coef_.shape) # (1, 30)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>可以看见，当选择L1正则化的时候，许多特征的参数都被设置为了0，这些特征在真正建模的时候，就不会出现在我们的模型当中了，而L2正则化则是对所有的特征都给出了参数。</p>
+<ul>
+<li>分别实例化L1和L2两种正则化方法并进行绘制学习曲线选择最佳C值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">from sklearn.linear_model import LogisticRegression as RL</span><br><span class="line">from sklearn.datasets import load_breast_cancer</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line">from sklearn.metrics import accuracy_score</span><br><span class="line"></span><br><span class="line">data=load_breast_cancer()</span><br><span class="line">X_train,X_test,y_train,y_test=train_test_split(data.data,data.target,test_size=0.3,random_state=10) # 30%数据作为测试集，其余作为训练集</span><br><span class="line"></span><br><span class="line">l1=[]</span><br><span class="line">l2=[]</span><br><span class="line">l1_test=[]</span><br><span class="line">l2_test=[]</span><br><span class="line">for i in np.linspace(0.05,1,19):  # C的可选值</span><br><span class="line">    RL_l1=RL(penalty=&apos;l1&apos;,C=i,max_iter=1000)</span><br><span class="line">    RL_l2=RL(penalty=&apos;l2&apos;,C=i,max_iter=1000)</span><br><span class="line"></span><br><span class="line">    RL_l1=RL_l1.fit(X_train,y_train)</span><br><span class="line">    l1.append(accuracy_score(RL_l1.predict(X_train),y_train))</span><br><span class="line">    l1_test.append(accuracy_score(RL_l1.predict(X_test),y_test))</span><br><span class="line"></span><br><span class="line">    RL_l2 = RL_l2.fit(X_train, y_train)</span><br><span class="line">    l2.append(accuracy_score(RL_l2.predict(X_train), y_train))</span><br><span class="line">    l2_test.append(accuracy_score(RL_l2.predict(X_test), y_test))</span><br><span class="line"></span><br><span class="line">graph=[l1,l2,l1_test,l2_test]</span><br><span class="line">color = [&quot;green&quot;,&quot;black&quot;,&quot;lightgreen&quot;,&quot;gray&quot;]</span><br><span class="line">label = [&quot;l1&quot;,&quot;l2&quot;,&quot;l1test&quot;,&quot;l2test&quot;]</span><br><span class="line">for i in range(len(graph)):</span><br><span class="line">    plt.plot(np.linspace(0.05,1,19),graph[i],color[i],label=label[i])</span><br><span class="line"></span><br><span class="line">plt.legend(loc=&apos;best&apos;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20191223160326919.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="学习曲线"><br>可见，至少在我们的乳腺癌数据集下，两种正则化的结果区别不大。但随着C的逐渐变大，正则化的强度越来越小，模型在训练集和测试集上的表现都呈上升趋势，直到C=0.8左右，训练集上的表现依然在走高，但模型在未知数据集上的表现开始下跌，这时候就是出现了过拟合。我们可以认为，C设定为0.9会比较好。在实际使用时，基本就默认使用l2正则化，如果感觉到模型的效果不好，那就换L1试试看。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sfz-lyq.cn/2019/07/15/Logistic-回归/" data-id="ck4grj0eh0018jdpv0f58majc" class="article-share-link">分享</a>
+      <a data-url="http://sfz-lyq.cn/2019/07/15/Logistic-回归/" data-id="ck4i6ap1a001ek4pvc9po85ub" class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/机器学习/">机器学习</a></li></ul>
 

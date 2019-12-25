@@ -2252,12 +2252,135 @@
 </ul>
 <h4 id="选取聚类数量"><a href="#选取聚类数量" class="headerlink" title="选取聚类数量"></a>选取聚类数量</h4><p>肘部法则： 改变K，计算最优代价函数，画图（代价函数关于K的变化）,找到那个肘部即拐点，之后变化平缓了。<br><img src="https://i.loli.net/2019/09/15/CsONdD5vplfyFQc.png" alt="2019-09-15 11-14-48 的屏幕截图.png"></p>
 <p>但，大多数时候我们会得到右图的结果，这并不好决定。需要自己决定分类的目的是什么。</p>
+<hr>
+<center><font size="5px" color="red">补充</font></center>
+
+<hr>
+<h3 id="sklearn中的聚类算法K-Means"><a href="#sklearn中的聚类算法K-Means" class="headerlink" title="sklearn中的聚类算法K-Means"></a><font size="5px" color="red">sklearn中的聚类算法K-Means</font></h3><h4 id="聚类与分类"><a href="#聚类与分类" class="headerlink" title="聚类与分类"></a><font size="3px" color="red">聚类与分类</font></h4><table>
+<thead>
+<tr>
+<th></th>
+<th>聚类</th>
+<th>分类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心</td>
+<td>将数据分成多个组，探索每个组的数据是否有联系</td>
+<td>从已经分组的数据中去学习，把新数据放到已经分好的组中去</td>
+</tr>
+<tr>
+<td>学习类型</td>
+<td>无监督，无需<strong>标签</strong>进行训练</td>
+<td>有监督，需要<strong>标签</strong>进行训练</td>
+</tr>
+<tr>
+<td>典型算法</td>
+<td>K-Means，DBSCAN，层次聚类，光谱聚类</td>
+<td>决策树，贝叶斯，逻辑回归</td>
+</tr>
+<tr>
+<td>算法输出</td>
+<td>聚类结果是不确定的，不一定总是能够反映数据的真实分类，同样的聚类，根据不同的业务需求可能是一个好结果，也可能是一个坏结果</td>
+<td>分类结果是确定的，分类的优劣是客观的，不是根据业务或算法需求决定</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sklearn中的聚类算法"><a href="#sklearn中的聚类算法" class="headerlink" title="sklearn中的聚类算法"></a><font size="3px" color="red">sklearn中的聚类算法</font></h4><p>聚类算法在sklearn中有两种表现形式，一种是类（和我们目前为止学过的分类算法以及数据预处理方法们都一样），需要<strong>实例化</strong>，训练并使用接口和属性来调用结果。另一种是函数（function），只需要输入特征矩阵和超参数，即可返回聚类的结果和各种指标。</p>
+<table>
+<thead>
+<tr>
+<th>类</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sklearn.cluster.Birch</td>
+<td>实现Birtch聚类算法</td>
+</tr>
+<tr>
+<td>sklearn.cluster.DBSCAN</td>
+<td>从矢量数组或距离矩阵执行DBSCAN聚类</td>
+</tr>
+<tr>
+<td>cluster.KMeans</td>
+<td>K均值聚类</td>
+</tr>
+<tr>
+<td>cluster.MiniBatchKMeans</td>
+<td>小批量K均值聚类</td>
+</tr>
+<tr>
+<td>cluster.SpectralClustering</td>
+<td>光谱聚类，将聚类应用于规范化拉普拉斯的投影</td>
+</tr>
+<tr>
+<td>cluste.AgglomerativeClustering</td>
+<td>凝聚聚类</td>
+</tr>
+<tr>
+<td><strong>函数</strong></td>
+<td><strong>含义</strong></td>
+</tr>
+<tr>
+<td>cluster.k_means</td>
+<td>k均值聚类</td>
+</tr>
+<tr>
+<td>cluster.ward_tree</td>
+<td>光谱聚类</td>
+</tr>
+<tr>
+<td>cluster.affinity_propagation</td>
+<td>执行亲和传播数据聚类</td>
+</tr>
+<tr>
+<td>cluster.mean_shift</td>
+<td>使用平坦核函数的平均移位聚类</td>
+</tr>
+</tbody>
+</table>
+<h4 id="KMeans"><a href="#KMeans" class="headerlink" title="KMeans"></a><font size="3px" color="red">KMeans</font></h4><p><img src="https://img-blog.csdnimg.cn/20191224170942253.jpg?type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="KMeans"></p>
+<font size="4px" color="green">Kmeans没有损失函数</font>  
+
+
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a><font size="3px" color="red">实例</font></h4><ul>
+<li><code>sklearn.cluster.KMeans</code><br>重要参数<code>n_clusters</code>：n_clusters是KMeans中的k，表示着我们告诉模型我们要分几类。这是KMeans当中唯一一个必填的参数，默认为8类。</li>
+</ul>
+<p>数据：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from sklearn.datasets import make_blobs</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">X, y = make_blobs(n_samples=500,n_features=2,centers=4,random_state=1)</span><br><span class="line">color = [&quot;red&quot;,&quot;pink&quot;,&quot;orange&quot;,&quot;gray&quot;]</span><br><span class="line">for i in range(4):</span><br><span class="line">    plt.scatter(X[y==i, 0], X[y==i, 1]</span><br><span class="line">           ,marker=&apos;o&apos;</span><br><span class="line">           ,s=8</span><br><span class="line">           ,c=color[i]</span><br><span class="line">           )</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/20191224173418537.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="数据"><br>先简单实例化：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from sklearn.cluster import KMeans</span><br><span class="line">cluster = KMeans(n_clusters=3, random_state=0).fit(X)  # 先设置3类，训练好模型</span><br><span class="line"></span><br><span class="line"># 重要属性</span><br><span class="line">y_pred = cluster.labels_ # 每个样本所对应的类,(500,)</span><br><span class="line"></span><br><span class="line">pre = cluster.fit_predict(X) # 训练并预测所有数据所属类</span><br><span class="line">print(pre==y_pred) # 全是True</span><br><span class="line"></span><br><span class="line">centroid=cluster.cluster_centers_</span><br><span class="line">print(centroid) # 簇心</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">[[-7.09306648 -8.10994454]</span><br><span class="line"> [-1.54234022  4.43517599]</span><br><span class="line"> [-8.0862351  -3.5179868 ]]</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"></span><br><span class="line">inertia=cluster.inertia_ # 总距离平方和</span><br><span class="line">print(inertia) # 1903.4503741659223</span><br></pre></td></tr></table></figure></p>
+<p>查看结果：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">color = [&quot;red&quot;,&quot;pink&quot;,&quot;orange&quot;,&quot;gray&quot;]</span><br><span class="line">for i in range(3): # 聚类结果</span><br><span class="line">    plt.scatter(X[y_pred==i,0],X[y_pred==i,1]</span><br><span class="line">                ,marker=&apos;o&apos;</span><br><span class="line">                ,s=8</span><br><span class="line">                ,c=color[i])</span><br><span class="line"></span><br><span class="line">plt.scatter(centroid[:,0],centroid[:,1],marker=&apos;X&apos;,s=15,c=&apos;black&apos;) # 绘制质心</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/20191224175030244.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="聚类结果"><br>根据整体平方和inertia和聚类结果可以发现橙色区域聚类效果可以更优，inertia可以更小。</p>
+<p>尝试其他的n_clusters，可以发现簇数量越大，总距离平方和<code>cluster.inertia_</code>越小，但<code>cluster.inertia_</code>并不能用来评估算法好坏</p>
+<h4 id="聚类算法的模型评估指标"><a href="#聚类算法的模型评估指标" class="headerlink" title="聚类算法的模型评估指标"></a><font size="3px" color="red">聚类算法的模型评估指标</font></h4><p>在<strong>分类</strong>中，有直接结果（标签）的输出，并且分类的结果有正误之分，所以我们使用预测的<strong>准确度</strong>，<strong>混淆矩阵</strong>，<strong>ROC曲线</strong>等等指标来进行评估，但无论如何评估，都是在”模型找到正确答案“的能力。而回归中，由于要拟合数据，我们有SSE均方误差，有损失函数来衡量模型的拟合程度。但这些衡量指标都不能够使用于聚类。</p>
+<p><font size="5px" color="greey">面试高危问题：如何衡量聚类算法的效果？</font><br>聚类模型的结果不是某种标签输出，并且<strong>聚类的结果是不确定的</strong>，其优劣由业务需求或者算法需求来决定，并且没有永远的正确答案。那我们如何衡量聚类的效果呢？<br>KMeans的目标是确保<strong>簇内差异小，簇外差异大</strong>，可以通过衡量簇内差异来衡量聚类的效果。而<code>Inertia</code>是用距离来衡量簇内差异的指标，但是Inertia越小模型越好吗？   </p>
+<ul>
+<li>首先，它不是有界的。我们只知道，Inertia是越小越好，是0最好，但我们不知道，一个较小的Inertia究竟有没有达到模型的极限，能否继续提高。</li>
+<li>第二，它的计算太容易受到特征数目的影响，数据维度很大的时候，Inertia的计算量会陷入维度诅咒之中，计算量会爆炸，不适合用来一次次评估模型。</li>
+<li>第三，Inertia对数据的分布有假设，它假设数据满足凸分布（即数据在二维平面图像上看起来是一个凸函数的样子），并且它假设数据是各向同性的（isotropic），即是说数据的属性在不同方向上代表着相同的含义。但是现实中的数据往往不是这样。所以使用Inertia作为评估指标，会让聚类算法在一些细长簇，环形簇，或者不规则形状的流形时表现不佳：<br><img src="https://img-blog.csdnimg.cn/2019122420540115.jpg" alt="环形簇"><br>可以看出，实际上期望效果应该是内环作为一簇，外环作为一簇，而如果使用<code>cluster.inertia_</code>作为衡量指标，效果就会很差</li>
+</ul>
+<h5 id="轮廓系数"><a href="#轮廓系数" class="headerlink" title="轮廓系数"></a><font size="3px" color="red">轮廓系数</font></h5><p>最常用的聚类算法的评价指标。它是对每个样本来定义的，它能够同时衡量：</p>
+<ol>
+<li>样本与其自身所在的簇中的其他样本的相似度<strong>a</strong>，等于样本与同一簇中所有其他点之间的平均距离</li>
+<li>样本与其他簇中的样本的相似度<strong>b</strong>，等于样本与下一个最近的簇中得所有点之间的平均距离</li>
+</ol>
+<p>根据聚类的要求”簇内差异小，簇外差异大“，我们希望b永远大于a，并且大得越多越好。<br>单个样本的轮廓系数计算为：<br><img src="https://img-blog.csdnimg.cn/20191224210005965.png" alt="轮廓系数"><br>即：<br><img src="https://img-blog.csdnimg.cn/20191224210052149.jpg" alt="轮廓系数"><br>很容易理解轮廓系数范围是(-1,1)，其中值越接近1表示样本与自己所在的簇中的样本很相似，并且与其他簇中的样本不相似，当样本点与簇外的样本更相似的时候，轮廓系数就为负。当轮廓系数为0时，则代表两个簇中的样本相似度一致，两个簇本应该是一个簇。</p>
+<p><font color="red">在sklearn中，我们使用模块metrics中的类<code>silhouette_score</code>来计算轮廓系数，它返回的是一个数据集中，所有样本的<strong>轮廓系数的均值</strong>。</font></p>
+<ul>
+<li>学习曲线<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from sklearn.cluster import KMeans</span><br><span class="line">from sklearn.metrics import silhouette_score</span><br><span class="line">from sklearn.metrics import silhouette_samples</span><br><span class="line"></span><br><span class="line">score=[]</span><br><span class="line">for i in range(3,7):</span><br><span class="line">    y_pred=KMeans(n_clusters=i,random_state=10).fit_predict(X)</span><br><span class="line">    score.append(silhouette_score(X,y_pred))</span><br><span class="line">    </span><br><span class="line">plt.plot(range(3,7),score)</span><br><span class="line">plt.xticks([3,4,5,6])</span><br><span class="line">plt.show()</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">print(silhouette_samples(X,y_pred)) </span><br><span class="line">这个是返回所有样本的聚类情况，为True或者False，如果是False则说明这个样本的轮廓系数为负，聚类失败</span><br><span class="line">&apos;&apos;&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20191224211620466.png?,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="学习曲线"></p>
 ]]></content>
       <categories>
         <category>机器学习</category>
       </categories>
       <tags>
         <tag>机器学习</tag>
+        <tag>ML</tag>
+        <tag>聚类</tag>
       </tags>
   </entry>
   <entry>
@@ -2476,12 +2599,119 @@
 <li>如果n很小，m很大：增加特征，使用逻辑回归或线形核函数</li>
 </ul>
 <p>神经网络可能都适用，但训练可能要更慢些。</p>
+<hr>
+<p><center><table><tr><td bgcolor="yellow">华丽分割</td></tr></table></center></p>
+<p><center><font size="5px" color="red">以下为补充，更新于2019.12.25</font></center></p>
+<hr>
+<h3 id="sklearn中的支持向量机SVM"><a href="#sklearn中的支持向量机SVM" class="headerlink" title="sklearn中的支持向量机SVM"></a><font size="5px" color="red">sklearn中的支持向量机SVM</font></h3><h4 id="超平面"><a href="#超平面" class="headerlink" title="超平面"></a><font size="3px" color="red">超平面</font></h4><p>在几何中，<strong>超平面是一个空间的子空间</strong>，它是维度比所在空间小一维的空间。 如果数据空间本身是三维的， 则其超平面是二维平面，而如果数据空间本身是二维的，则其超平面是一维的直线。</p>
+<p>在二分类问题中，如果一个超平面能够将数据划分为两个集合，其中每个集合中包含单独的一个类别，则称这个超平面是数据的<strong>决策边界</strong></p>
+<p>样本点到决策边界的距离叫做<strong>边际(margin)</strong>，通常记作d，SVM是使得d越大越好，这样泛化误差就会小了。<strong>拥有更大边际的决策边界在分类中的泛化误差更小。支持向量机，就是通过找出边际最大的决策边界，来对数据进行分类的分类器</strong>。</p>
+<h4 id="sklearn中的支持向量机"><a href="#sklearn中的支持向量机" class="headerlink" title="sklearn中的支持向量机"></a><font size="3px" color="red">sklearn中的支持向量机</font></h4><table>
+<thead>
+<tr>
+<th>类</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>svm.LinearSVC</td>
+<td>线性支持向量分类</td>
+</tr>
+<tr>
+<td>svm.LinearSVR</td>
+<td>线性支向量回归</td>
+</tr>
+<tr>
+<td>svm.SVC</td>
+<td>非线性多维支持向量分类</td>
+</tr>
+<tr>
+<td>svm.SVR</td>
+<td>非线性多维支持向量回归</td>
+</tr>
+<tr>
+<td>svm.NuSVC</td>
+<td>Nu支持向量分类</td>
+</tr>
+<tr>
+<td>svm.NuSVR</td>
+<td>Nu支持向量回归</td>
+</tr>
+<tr>
+<td>svm.OneClassSVM</td>
+<td>无监督异常值检测</td>
+</tr>
+<tr>
+<td><strong>直接使用libsvm的函数</strong></td>
+<td><strong>含义</strong></td>
+</tr>
+<tr>
+<td>svm.libsvm.cross_validation()</td>
+<td>SVM专用的交叉验证</td>
+</tr>
+<tr>
+<td>svm.libsvm.decision_function()</td>
+<td>SVM专用的预测边际函数（libsvm名称为predict_values）</td>
+</tr>
+<tr>
+<td>svm.libsvm.fit()</td>
+<td>使用libsvm训练模型</td>
+</tr>
+<tr>
+<td>svm.libsvm.predict()</td>
+<td>给定模型预测X的目标值</td>
+</tr>
+<tr>
+<td>svm.libsvm.predict_proba()</td>
+<td>预测概率</td>
+</tr>
+</tbody>
+</table>
+<p>注意： </p>
+<ul>
+<li>除了特别表明是线性的两个类LinearSVC和LinearSVR之外，其他的所有类都是同时支持线性和非线性的。</li>
+<li>NuSVC和NuSVC可以手动调节支持向量的数目，其他参数都与最常用的SVC和SVR一致。注意OneClassSVM是无监督的类。</li>
+</ul>
+<h4 id="sklearn-svm-SVC"><a href="#sklearn-svm-SVC" class="headerlink" title="sklearn.svm.SVC"></a><font size="3px" color="red">sklearn.svm.SVC</font></h4><ul>
+<li><code>class sklearn.svm.SVC (C=1.0, kernel=’rbf’, degree=3, gamma=’auto_deprecated’, coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=False, max_iter=-1, decision_function_shape=’ovr’, random_state=None)</code></li>
+</ul>
+<p>参数解释：</p>
+<ul>
+<li><code>kernel</code>为核函数，可选<code>[‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’ ]</code>， kernel=’rbf’时（default），为高斯核</li>
+<li>错误项的惩罚系数。C越大，即<strong>对分错样本的惩罚程度越大</strong>，<code>C</code>越大分类效果越好，但可能过拟合泛化误差大（default C=1.0）</li>
+<li><code>decision_function_shape</code>为分类器，可选<code>[‘ovo’,’ovr’]</code>分别表示一对一分类器，一对多分类。默认为’ovr’，’one vs rest’。</li>
+</ul>
+<h3 id="实践与调参"><a href="#实践与调参" class="headerlink" title="实践与调参"></a><font size="5px" color="red">实践与调参</font></h3><p>数据:</p>
+<ul>
+<li>数据集选用乳腺癌数据集。</li>
+</ul>
+<h4 id="kernel的选择"><a href="#kernel的选择" class="headerlink" title="kernel的选择"></a><font size="3px" color="red">kernel的选择</font></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">from sklearn.svm import SVC</span><br><span class="line">from sklearn.datasets import load_breast_cancer</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line">from time import time</span><br><span class="line"></span><br><span class="line">data=load_breast_cancer()</span><br><span class="line">X=data.data</span><br><span class="line">y=data.target</span><br><span class="line"># print(X.shape,y.shape) # (569, 30) (569,)</span><br><span class="line"># print(np.unique(y)) # [0 1]</span><br><span class="line"></span><br><span class="line">Xtrain,Xtest,Ytrain,Ytest=train_test_split(X,y,test_size=0.3,random_state=10)</span><br><span class="line">kernel=[&apos;linear&apos;, &apos;rbf&apos;, &apos;sigmoid&apos;] # poly，这核函数特别耗时间，所以不做演示</span><br><span class="line"></span><br><span class="line">for kernel in kernel:</span><br><span class="line">    time0=time()</span><br><span class="line">    clf=SVC(kernel=kernel</span><br><span class="line">            ,C=1.0</span><br><span class="line">            ,gamma=&apos;auto&apos;</span><br><span class="line">            # ,degree=1</span><br><span class="line">            ,cache_size=5000 # 允许使用的内存MB</span><br><span class="line">            ).fit(Xtrain,Ytrain)</span><br><span class="line">    print(&apos;The accuracy under kernel %s is %.2f&apos; %(kernel,clf.score(Xtest,Ytest)))</span><br><span class="line">    print(time()-time0)</span><br><span class="line"></span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">The accuracy under kernel linear is 0.96</span><br><span class="line">1.7291104793548584</span><br><span class="line">The accuracy under kernel rbf is 0.65</span><br><span class="line">0.04491472244262695</span><br><span class="line">The accuracy under kernel sigmoid is 0.65</span><br><span class="line">0.004982948303222656</span><br><span class="line">&apos;&apos;&apos;</span><br></pre></td></tr></table></figure>
+<p>注意</p>
+<ul>
+<li><p><code>degree=</code>参数是多项式核<code>ploy</code>特有的，如果设置为1就表示线性核，这样上述代码的结果：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">The accuracy under kernel linear is 0.96</span><br><span class="line">1.6605808734893799</span><br><span class="line">The accuracy under kernel poly is 0.95</span><br><span class="line">0.0538640022277832</span><br><span class="line">The accuracy under kernel rbf is 0.65</span><br><span class="line">0.043853759765625</span><br><span class="line">The accuracy under kernel sigmoid is 0.65</span><br><span class="line">0.0060122013092041016</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以看出，线性核的效果特别好，据此就可以说明所使用的数据就是线性的</p>
+</li>
+<li>但是存在一个问题是正确确实应该选择线性核，但是它的运行时间确是个缺陷，这个时候就要从<strong>数据预处理</strong>的角度出发了，实际上做了标准化后运行时间和其他核函数的结果都会很出色</li>
+</ul>
+<h4 id="其他参数的选取问题"><a href="#其他参数的选取问题" class="headerlink" title="其他参数的选取问题"></a><font size="3px" color="red">其他参数的选取问题</font></h4><p>确定单个参数：</p>
+<ul>
+<li>学习曲线</li>
+</ul>
+<p>协同参数：比如多项式核函数<code>ploy</code>有三个可调参数<code>gamma、degree、coef0</code></p>
+<ul>
+<li><strong>网格搜索</strong><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">from sklearn.svm import SVC</span><br><span class="line">from sklearn.datasets import load_breast_cancer</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line">from time import time</span><br><span class="line"></span><br><span class="line">data=load_breast_cancer()</span><br><span class="line">X=data.data</span><br><span class="line">y=data.target</span><br><span class="line"></span><br><span class="line">from sklearn.model_selection import StratifiedShuffleSplit # 专门用来设置交叉验证模式</span><br><span class="line">from sklearn.model_selection import GridSearchCV # 带交叉验证的网格搜索</span><br><span class="line"></span><br><span class="line">time0=time()</span><br><span class="line">gamma_range=np.logspace(-5,1,10) # Return numbers spaced evenly on a log scale.</span><br><span class="line">coef0_range=np.linspace(0,5,10)</span><br><span class="line"></span><br><span class="line">param_grid=dict(gamma=gamma_range,coef0=coef0_range)</span><br><span class="line"></span><br><span class="line">cv=StratifiedShuffleSplit(n_splits=5,test_size=0.3,random_state=10) # 数据集分n份，每一份数据轮流做测试集，即做5次交叉验证</span><br><span class="line">grid=GridSearchCV(SVC(kernel=&apos;poly&apos;,degree=1,cache_size=5000)</span><br><span class="line">                  ,param_grid=param_grid</span><br><span class="line">                  ,cv=cv)</span><br><span class="line"></span><br><span class="line">grid=grid.fit(X,y)</span><br><span class="line">print(&apos;The best parameters are %s with a score of %0.5f &apos; %(grid.best_params_,grid.best_score_))</span><br><span class="line">print(time()-time0)</span><br><span class="line"></span><br><span class="line"># 这段代码运行很慢，不过最终会返回最佳参数对与最高分数</span><br></pre></td></tr></table></figure></li>
+</ul>
 ]]></content>
       <categories>
         <category>机器学习</category>
       </categories>
       <tags>
         <tag>机器学习</tag>
+        <tag>ML</tag>
+        <tag>SVM</tag>
       </tags>
   </entry>
   <entry>
@@ -3771,8 +4001,9 @@ string.join(seq)  # 以string作为分隔符，将 seq 中所有的元素(的字
 <h5 id="缩进问题"><a href="#缩进问题" class="headerlink" title="缩进问题"></a>缩进问题</h5><p><code>&amp;nbsp;</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;markdown里直接打空格的话是不行的，直接按键盘的空格，三个以内都没有效果，从第四个开始就变成了代码片段了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文章全是中文的话，需要打六个上述符号就能空出两个中文字啦。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;哈哈哈</p>
 <h5 id="常用特殊符号"><a href="#常用特殊符号" class="headerlink" title="常用特殊符号"></a>常用特殊符号</h5><p>α：<code>&amp;alpha;</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; β：<code>&amp;beta;</code><br>γ：<code>&amp;gamma;</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; θ：<code>&amp;theta;</code><br>λ：<code>&amp;lambda;</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Σ：<code>&amp;Sigma;</code><br>≤：<code>&amp;le;</code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;≥：<code>&amp;ge;</code><br>≠：<code>&amp;ne;</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;±：<code>&amp;plusmn;</code></p>
 <h5 id="字体和颜色"><a href="#字体和颜色" class="headerlink" title="字体和颜色"></a>字体和颜色</h5><p>字体大小： <code>&lt;font size=&quot;12px&quot;&gt;字体&lt;/font&gt;</code> &nbsp;&nbsp;&nbsp;示例：<font size="12px">字体</font><br>颜色： <code>&lt;font color=&quot;red&quot;&gt;&lt;/font&gt;</code> &nbsp;&nbsp;&nbsp;示例：<font color="red">红色</font><br>加粗：<code>&lt;strong&gt;粗体&lt;strong&gt;</code> &nbsp;&nbsp;&nbsp;示例：<strong>粗体<strong><br>下划线：<code>&lt;u&gt;下化线&lt;/u&gt;</code>&nbsp;&nbsp;&nbsp;&nbsp;示例：<u>下划线</u><br>字体颜色一起设置：<br>    <code>&lt;p style=&quot;font-size:12;color:#0F3&quot;&gt;课程&lt;/p&gt;</code>&nbsp;&nbsp;&nbsp;&nbsp;示例： <p style="font-size:30px;color:#0F3">课程</p><br><code>&lt;font color=&quot;red&quot; size=&quot;12px&quot;&gt;红色&lt;/font&gt;</code>&nbsp;&nbsp;&nbsp;&nbsp;示例：<font color="red" size="12">红色</font></strong></strong></p>
+<h5 id="背景色"><a href="#背景色" class="headerlink" title="背景色"></a>背景色</h5><p><code>&lt;table&gt;&lt;td bgcolor=yellow&gt;&lt;center&gt;背景色yellow&lt;/center&gt;&lt;/td&gt;&lt;/table&gt;</code><br>示例：<table><td bgcolor="yellow"><center>背景色yellow</center></td></table></p>
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://www.jianshu.com/p/80ac23666a98" target="_blank" rel="noopener">如何在markdown中打出上标、下标和一些特殊符号</a><br><a href="https://blog.csdn.net/html5_/article/details/21639475" target="_blank" rel="noopener">HTML中的特殊符号</a><br><a href="http://www.divcss5.com/html/h50807.shtml" target="_blank" rel="noopener">HTML 符号</a><br><a href="https://blog.csdn.net/sinat_34719507/article/details/53693418" target="_blank" rel="noopener">HTML H5数学符号、希腊字符、各种箭头符号、科技符号以及形状转义符号
-</a><br><a href="https://zhidao.baidu.com/question/460760819492379085.html" target="_blank" rel="noopener">html怎么改变字体大小和颜色</a></p>
+</a><br><a href="https://zhidao.baidu.com/question/460760819492379085.html" target="_blank" rel="noopener">html怎么改变字体大小和颜色</a><br><a href="https://blog.csdn.net/heimu24/article/details/81189700" target="_blank" rel="noopener">Markdown进阶</a></p>
 ]]></content>
       <categories>
         <category>教程</category>

@@ -101,13 +101,118 @@
 <li>如果n很小，m很大：增加特征，使用逻辑回归或线形核函数</li>
 </ul>
 <p>神经网络可能都适用，但训练可能要更慢些。</p>
+<hr>
+<p><center><table><tr><td bgcolor="yellow">华丽分割</td></tr></table></center></p>
+<p><center><font size="5px" color="red">以下为补充，更新于2019.12.25</font></center></p>
+<hr>
+<h3 id="sklearn中的支持向量机SVM"><a href="#sklearn中的支持向量机SVM" class="headerlink" title="sklearn中的支持向量机SVM"></a><font size="5px" color="red">sklearn中的支持向量机SVM</font></h3><h4 id="超平面"><a href="#超平面" class="headerlink" title="超平面"></a><font size="3px" color="red">超平面</font></h4><p>在几何中，<strong>超平面是一个空间的子空间</strong>，它是维度比所在空间小一维的空间。 如果数据空间本身是三维的， 则其超平面是二维平面，而如果数据空间本身是二维的，则其超平面是一维的直线。</p>
+<p>在二分类问题中，如果一个超平面能够将数据划分为两个集合，其中每个集合中包含单独的一个类别，则称这个超平面是数据的<strong>决策边界</strong></p>
+<p>样本点到决策边界的距离叫做<strong>边际(margin)</strong>，通常记作d，SVM是使得d越大越好，这样泛化误差就会小了。<strong>拥有更大边际的决策边界在分类中的泛化误差更小。支持向量机，就是通过找出边际最大的决策边界，来对数据进行分类的分类器</strong>。</p>
+<h4 id="sklearn中的支持向量机"><a href="#sklearn中的支持向量机" class="headerlink" title="sklearn中的支持向量机"></a><font size="3px" color="red">sklearn中的支持向量机</font></h4><table>
+<thead>
+<tr>
+<th>类</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>svm.LinearSVC</td>
+<td>线性支持向量分类</td>
+</tr>
+<tr>
+<td>svm.LinearSVR</td>
+<td>线性支向量回归</td>
+</tr>
+<tr>
+<td>svm.SVC</td>
+<td>非线性多维支持向量分类</td>
+</tr>
+<tr>
+<td>svm.SVR</td>
+<td>非线性多维支持向量回归</td>
+</tr>
+<tr>
+<td>svm.NuSVC</td>
+<td>Nu支持向量分类</td>
+</tr>
+<tr>
+<td>svm.NuSVR</td>
+<td>Nu支持向量回归</td>
+</tr>
+<tr>
+<td>svm.OneClassSVM</td>
+<td>无监督异常值检测</td>
+</tr>
+<tr>
+<td><strong>直接使用libsvm的函数</strong></td>
+<td><strong>含义</strong></td>
+</tr>
+<tr>
+<td>svm.libsvm.cross_validation()</td>
+<td>SVM专用的交叉验证</td>
+</tr>
+<tr>
+<td>svm.libsvm.decision_function()</td>
+<td>SVM专用的预测边际函数（libsvm名称为predict_values）</td>
+</tr>
+<tr>
+<td>svm.libsvm.fit()</td>
+<td>使用libsvm训练模型</td>
+</tr>
+<tr>
+<td>svm.libsvm.predict()</td>
+<td>给定模型预测X的目标值</td>
+</tr>
+<tr>
+<td>svm.libsvm.predict_proba()</td>
+<td>预测概率</td>
+</tr>
+</tbody>
+</table>
+<p>注意： </p>
+<ul>
+<li>除了特别表明是线性的两个类LinearSVC和LinearSVR之外，其他的所有类都是同时支持线性和非线性的。</li>
+<li>NuSVC和NuSVC可以手动调节支持向量的数目，其他参数都与最常用的SVC和SVR一致。注意OneClassSVM是无监督的类。</li>
+</ul>
+<h4 id="sklearn-svm-SVC"><a href="#sklearn-svm-SVC" class="headerlink" title="sklearn.svm.SVC"></a><font size="3px" color="red">sklearn.svm.SVC</font></h4><ul>
+<li><code>class sklearn.svm.SVC (C=1.0, kernel=’rbf’, degree=3, gamma=’auto_deprecated’, coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=False, max_iter=-1, decision_function_shape=’ovr’, random_state=None)</code></li>
+</ul>
+<p>参数解释：</p>
+<ul>
+<li><code>kernel</code>为核函数，可选<code>[‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’ ]</code>， kernel=’rbf’时（default），为高斯核</li>
+<li>错误项的惩罚系数。C越大，即<strong>对分错样本的惩罚程度越大</strong>，<code>C</code>越大分类效果越好，但可能过拟合泛化误差大（default C=1.0）</li>
+<li><code>decision_function_shape</code>为分类器，可选<code>[‘ovo’,’ovr’]</code>分别表示一对一分类器，一对多分类。默认为’ovr’，’one vs rest’。</li>
+</ul>
+<h3 id="实践与调参"><a href="#实践与调参" class="headerlink" title="实践与调参"></a><font size="5px" color="red">实践与调参</font></h3><p>数据:</p>
+<ul>
+<li>数据集选用乳腺癌数据集。</li>
+</ul>
+<h4 id="kernel的选择"><a href="#kernel的选择" class="headerlink" title="kernel的选择"></a><font size="3px" color="red">kernel的选择</font></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">from sklearn.svm import SVC</span><br><span class="line">from sklearn.datasets import load_breast_cancer</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line">from time import time</span><br><span class="line"></span><br><span class="line">data=load_breast_cancer()</span><br><span class="line">X=data.data</span><br><span class="line">y=data.target</span><br><span class="line"># print(X.shape,y.shape) # (569, 30) (569,)</span><br><span class="line"># print(np.unique(y)) # [0 1]</span><br><span class="line"></span><br><span class="line">Xtrain,Xtest,Ytrain,Ytest=train_test_split(X,y,test_size=0.3,random_state=10)</span><br><span class="line">kernel=[&apos;linear&apos;, &apos;rbf&apos;, &apos;sigmoid&apos;] # poly，这核函数特别耗时间，所以不做演示</span><br><span class="line"></span><br><span class="line">for kernel in kernel:</span><br><span class="line">    time0=time()</span><br><span class="line">    clf=SVC(kernel=kernel</span><br><span class="line">            ,C=1.0</span><br><span class="line">            ,gamma=&apos;auto&apos;</span><br><span class="line">            # ,degree=1</span><br><span class="line">            ,cache_size=5000 # 允许使用的内存MB</span><br><span class="line">            ).fit(Xtrain,Ytrain)</span><br><span class="line">    print(&apos;The accuracy under kernel %s is %.2f&apos; %(kernel,clf.score(Xtest,Ytest)))</span><br><span class="line">    print(time()-time0)</span><br><span class="line"></span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">The accuracy under kernel linear is 0.96</span><br><span class="line">1.7291104793548584</span><br><span class="line">The accuracy under kernel rbf is 0.65</span><br><span class="line">0.04491472244262695</span><br><span class="line">The accuracy under kernel sigmoid is 0.65</span><br><span class="line">0.004982948303222656</span><br><span class="line">&apos;&apos;&apos;</span><br></pre></td></tr></table></figure>
+<p>注意</p>
+<ul>
+<li><p><code>degree=</code>参数是多项式核<code>ploy</code>特有的，如果设置为1就表示线性核，这样上述代码的结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">The accuracy under kernel linear is 0.96</span><br><span class="line">1.6605808734893799</span><br><span class="line">The accuracy under kernel poly is 0.95</span><br><span class="line">0.0538640022277832</span><br><span class="line">The accuracy under kernel rbf is 0.65</span><br><span class="line">0.043853759765625</span><br><span class="line">The accuracy under kernel sigmoid is 0.65</span><br><span class="line">0.0060122013092041016</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以看出，线性核的效果特别好，据此就可以说明所使用的数据就是线性的</p>
+</li>
+<li>但是存在一个问题是正确确实应该选择线性核，但是它的运行时间确是个缺陷，这个时候就要从<strong>数据预处理</strong>的角度出发了，实际上做了标准化后运行时间和其他核函数的结果都会很出色</li>
+</ul>
+<h4 id="其他参数的选取问题"><a href="#其他参数的选取问题" class="headerlink" title="其他参数的选取问题"></a><font size="3px" color="red">其他参数的选取问题</font></h4><p>确定单个参数：</p>
+<ul>
+<li>学习曲线</li>
+</ul>
+<p>协同参数：比如多项式核函数<code>ploy</code>有三个可调参数<code>gamma、degree、coef0</code></p>
+<ul>
+<li><strong>网格搜索</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">from sklearn.svm import SVC</span><br><span class="line">from sklearn.datasets import load_breast_cancer</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line">from time import time</span><br><span class="line"></span><br><span class="line">data=load_breast_cancer()</span><br><span class="line">X=data.data</span><br><span class="line">y=data.target</span><br><span class="line"></span><br><span class="line">from sklearn.model_selection import StratifiedShuffleSplit # 专门用来设置交叉验证模式</span><br><span class="line">from sklearn.model_selection import GridSearchCV # 带交叉验证的网格搜索</span><br><span class="line"></span><br><span class="line">time0=time()</span><br><span class="line">gamma_range=np.logspace(-5,1,10) # Return numbers spaced evenly on a log scale.</span><br><span class="line">coef0_range=np.linspace(0,5,10)</span><br><span class="line"></span><br><span class="line">param_grid=dict(gamma=gamma_range,coef0=coef0_range)</span><br><span class="line"></span><br><span class="line">cv=StratifiedShuffleSplit(n_splits=5,test_size=0.3,random_state=10) # 数据集分n份，每一份数据轮流做测试集，即做5次交叉验证</span><br><span class="line">grid=GridSearchCV(SVC(kernel=&apos;poly&apos;,degree=1,cache_size=5000)</span><br><span class="line">                  ,param_grid=param_grid</span><br><span class="line">                  ,cv=cv)</span><br><span class="line"></span><br><span class="line">grid=grid.fit(X,y)</span><br><span class="line">print(&apos;The best parameters are %s with a score of %0.5f &apos; %(grid.best_params_,grid.best_score_))</span><br><span class="line">print(time()-time0)</span><br><span class="line"></span><br><span class="line"># 这段代码运行很慢，不过最终会返回最佳参数对与最高分数</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://sfz-lyq.cn/2019/09/03/支持向量机/" data-id="ck4i6ap7k006uk4pv6rxzaadl" class="article-share-link">分享</a>
+      <a data-url="http://sfz-lyq.cn/2019/09/03/支持向量机/" data-id="ck4lanvwr006sx5pvnq00izqf" class="article-share-link">分享</a>
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/机器学习/">机器学习</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/ML/">ML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/SVM/">SVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/机器学习/">机器学习</a></li></ul>
 
     </footer>
 

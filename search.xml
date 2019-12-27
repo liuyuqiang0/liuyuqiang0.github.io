@@ -1,6 +1,618 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>XGBoost</title>
+    <url>/2019/12/27/XGBoost/</url>
+    <content><![CDATA[<h3 id="XGBoost"><a href="#XGBoost" class="headerlink" title="XGBoost"></a><table><td bgcolor="gren"><font size="5px" color="b">XGBoost</font></td></table></h3><p>参考</p>
+<ol>
+<li><a href="https://cosx.org/2015/03/xgboost/" target="_blank" rel="noopener">xgboost: 速度快效果好的 boosting 模型</a></li>
+<li><a href="https://www.bilibili.com/video/av43162159?p=2" target="_blank" rel="noopener">菜菜的sklearn课堂11 -XGBoost</a></li>
+<li><a href="http://file.sh.peixun.net/file/201902/11/201902110008wdrryyy669.pdf" target="_blank" rel="noopener">课件</a></li>
+<li></li>
+</ol>
+<hr>
+<h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a><font size="4px" color="red">概述</font></h4><p><code>XGBoost</code>全称是eXtreme Gradient Boosting，可译为<strong>极限梯度提升算法</strong>。<strong>它由<a href="https://cosx.org/2015/06/interview-of-tianqi/" target="_blank" rel="noopener">陈天奇</a>所设计，致力于让提升树突破自身的计算极限，以实现运算快速，性能优秀的工程目标</strong>。和传统的梯度提升算法相比，XGBoost进行了许多改进，它能够比其他使用梯度提升的集成算法更加快速，并且已经被认为是在分类和回归上都拥有超高性能的先进评估器。</p>
+<p>从2016年开始，各大竞赛平台排名前列的解决方案逐渐由XGBoost算法统治，业界甚至将其称之为“机器学习竞赛的胜利女神”。</p>
+<h4 id="xgboost库与XGB的sklearn-API"><a href="#xgboost库与XGB的sklearn-API" class="headerlink" title="xgboost库与XGB的sklearn API"></a><font size="4px" color="red">xgboost库与XGB的sklearn API</font></h4><ol>
+<li><code>xgboost</code>是一个独立的，开源的，专门提供梯度提升树以及XGBoost算法应用的算法库。它和sklearn类似，有一个详细的官方网站可以供我们查看，并且可以与C，Python，R，Julia等语言连用，但需要我们单独安装和下载<br>官方文档：<a href="https://xgboost.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">xgboost documents</a><br>xgboost建模流程：对数据格式有特定要求，参数需要提前设置(字典格式)，<br><img src="https://img-blog.csdnimg.cn/20191227171149260.jpg" alt="xgboost建模"></li>
+<li><code>sklearn的API</code>，建模流程和其他的sklearn算法类似，属性和接口也类似<br>比如：<code>class xgboost.XGBRegressor (max_depth=3, learning_rate=0.1, n_estimators=100, silent=True,objective=&#39;reg:linear&#39;, booster=&#39;gbtree&#39;, n_jobs=1, nthread=None, gamma=0, min_child_weight=1, max_delta_step=0, subsample=1, colsample_bytree=1, colsample_bylevel=1, reg_alpha=0, reg_lambda=1, scale_pos_weight=1, base_score=0.5, random_state=0, seed=None, missing=None, importance_type=&#39;gain&#39;, **kwargs)</code></li>
+</ol>
+<h4 id="XGBoost的三大板块"><a href="#XGBoost的三大板块" class="headerlink" title="XGBoost的三大板块"></a><font size="4px" color="red">XGBoost的三大板块</font></h4><p>XGBoost本身的核心是基于梯度提升树实现的集成算法，整体来说可以有三个核心部分：集成算法本身，用于集成的<br>弱评估器，以及应用中的其他过程。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>集成算法</th>
+<th>弱评估器</th>
+<th>其他过程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>n_estimators</td>
+<td>√</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>learning_rate</td>
+<td>√</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>silent</td>
+<td>√</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>subsample</td>
+<td>√</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>max_depth</td>
+<td></td>
+<td>√</td>
+<td></td>
+</tr>
+<tr>
+<td>objective</td>
+<td></td>
+<td>√</td>
+<td></td>
+</tr>
+<tr>
+<td>booster</td>
+<td></td>
+<td>√</td>
+<td></td>
+</tr>
+<tr>
+<td>gamma</td>
+<td></td>
+<td>√</td>
+<td></td>
+</tr>
+<tr>
+<td>min_child_weight</td>
+<td></td>
+<td>√</td>
+<td></td>
+</tr>
+<tr>
+<td>max_delta_step</td>
+<td></td>
+<td>√</td>
+<td></td>
+</tr>
+<tr>
+<td>colsample_bytree</td>
+<td></td>
+<td>√</td>
+<td></td>
+</tr>
+<tr>
+<td>colsample_bylevel</td>
+<td></td>
+<td>√</td>
+<td></td>
+</tr>
+<tr>
+<td>reg_alpha</td>
+<td></td>
+<td>√</td>
+<td></td>
+</tr>
+<tr>
+<td>reg_lambda</td>
+<td></td>
+<td>√</td>
+<td></td>
+</tr>
+<tr>
+<td>nthread</td>
+<td></td>
+<td></td>
+<td>√</td>
+</tr>
+<tr>
+<td>n_jobs</td>
+<td></td>
+<td></td>
+<td>√</td>
+</tr>
+<tr>
+<td>scale_pos_weight</td>
+<td></td>
+<td></td>
+<td>√</td>
+</tr>
+<tr>
+<td>base_score</td>
+<td></td>
+<td></td>
+<td>√</td>
+</tr>
+<tr>
+<td>seed</td>
+<td></td>
+<td></td>
+<td>√</td>
+</tr>
+<tr>
+<td>random_state</td>
+<td></td>
+<td></td>
+<td>√</td>
+</tr>
+<tr>
+<td>missing</td>
+<td></td>
+<td></td>
+<td>√</td>
+</tr>
+<tr>
+<td>importance_type</td>
+<td></td>
+<td></td>
+<td>√</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>ML</tag>
+        <tag>XGBoost</tag>
+        <tag>数据竞赛</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>朴素贝叶斯</title>
+    <url>/2019/12/26/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/</url>
+    <content><![CDATA[<h3 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a><table><td bgcolor="gren"><center><font size="5px" color="b">朴素贝叶斯</font></center></td></table></h3><p>参考：</p>
+<ol>
+<li><a href="https://www.bilibili.com/video/av40337118" target="_blank" rel="noopener">菜菜的sklearn课堂10 - 朴素贝叶斯</a>  </li>
+<li><a href="http://file.sh.peixun.net/file/201901/10/201901100005ts1yyj881y.pdf" target="_blank" rel="noopener">课件</a>  </li>
+<li><a href="https://sfz-lyq.cn/2019/12/03/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87-%E5%85%A8%E6%A6%82%E7%8E%87-%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%85%AC%E5%BC%8F-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">条件概率/全概率/贝叶斯公式 个人理解</a></li>
+</ol>
+<hr>
+<h4 id="真正的概率分类器"><a href="#真正的概率分类器" class="headerlink" title="真正的概率分类器"></a><font size="4px" color="red">真正的概率分类器</font></h4><p>为什么称之为<strong>真正</strong>?  </p>
+<ul>
+<li>在之前学习的算法中，我们都明白只根据训练集训练的模型是无法给出<strong>肯定的答案的</strong>，它只能尽量预测正确。而这个尽量，是人为强行定义的。比如逻辑回归的sigmoid函数，只要大于0.5我们就将其分为1。  <ul>
+<li>朴素贝叶斯是一种直接衡量标签和特征之间的概率关系的有监督算法，它既可以做回归也可以分类，不过多是用于分类之中。朴素贝叶斯的算法根源就是基于概率论和数理统计的贝叶斯理论，因此它是根正苗红的概率模型。也就是说它是真正基于概率的算法，真正计算的概率。</li>
+</ul>
+</li>
+</ul>
+<p>关于贝叶斯公式详见参考：<br><img src="https://img-blog.csdnimg.cn/20191227132950730.jpg" alt="贝叶斯公式"><br>这即是一切贝叶斯算法的根源理论。</p>
+<h5 id="后验概率"><a href="#后验概率" class="headerlink" title="后验概率"></a><font size="3px" color="red">后验概率</font></h5><p>把特征X当成条件事件，要求解的标签Y当成是被满足条件后会被影响的结果，两者之间的概率关系就是P(Y|X)，在机器学习中这个概率公式称之为是标签的<strong>后验概率</strong>（posterior probability），即是说我们先知道了条件，再去求解结果</p>
+<h5 id="先验概率"><a href="#先验概率" class="headerlink" title="先验概率"></a><font size="3px" color="red">先验概率</font></h5><p>标签Y在没有任何条件限制下取值为某个值的概率记作P(Y)，称之为标签的<strong>先验概率</strong>（prior probability）</p>
+<h5 id="为什么叫朴素"><a href="#为什么叫朴素" class="headerlink" title="为什么叫朴素"></a><font size="3px" color="red">为什么叫朴素</font></h5><p>在机器学习中，对于每一个样本，都可能是包含n个特征的特征向量<strong>X</strong>={X<sub>1</sub>, X<sub>2</sub>, …. , X<sub>n</sub>}，那么：<br><img src="https://img-blog.csdnimg.cn/20191227151412857.jpg" alt="后验概率"><br>如果特征之间是<strong>独立的</strong>，那么可以结合条件概率与全概率化简进而求得P(X)，P(X=X<sub>1,2,3…</sub>|Y):<br><img src="https://img-blog.csdnimg.cn/20191227151833976.jpg" alt><br>简单来说，如果特征之间是有条件独立的，可以解决众多问题也可以简化很多计算，这就是朴素贝叶斯被称为“朴素”的理由。</p>
+<p><strong>朴素贝叶斯是一个不建模的算法</strong>，所需要的样本量比较少。当然，如果样本量少于特征数目，贝叶斯的效果就会被削弱。</p>
+<h4 id="sklearn中的朴素贝叶斯"><a href="#sklearn中的朴素贝叶斯" class="headerlink" title="sklearn中的朴素贝叶斯"></a><font size="4px" color="red">sklearn中的朴素贝叶斯</font></h4><table>
+<thead>
+<tr>
+<th>类</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>naive_bayes.BernoulliNB</td>
+<td>伯努利分布下的朴素贝叶斯</td>
+</tr>
+<tr>
+<td>naive_bayes.GaussianNB</td>
+<td>高斯分布下的朴素贝叶斯</td>
+<td></td>
+</tr>
+<tr>
+<td>naive_bayes.MultinomialNB</td>
+<td>多项式分布下的朴素贝叶斯</td>
+</tr>
+<tr>
+<td>naive_bayes.ComplementNB</td>
+<td>补充朴素贝叶斯</td>
+</tr>
+<tr>
+<td>linear_model.BayesianRidge</td>
+<td>贝叶斯岭回归，在参数估计过程中使用贝叶斯回归技术来包括正则化参数</td>
+</tr>
+</tbody>
+</table>
+<h4 id="高斯朴素贝叶斯GaussianNB"><a href="#高斯朴素贝叶斯GaussianNB" class="headerlink" title="高斯朴素贝叶斯GaussianNB"></a><font size="4px" color="red">高斯朴素贝叶斯GaussianNB</font></h4><ul>
+<li><code>class sklearn.naive_bayes.GaussianNB (priors=None, var_smoothing=1e-09)</code><br>通过假设某一类的特征服从正态分布，来估计每个特征下每个类别上的条件概率<br><img src="https://img-blog.csdnimg.cn/20191227155254627.jpg" alt="高斯贝叶斯"></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>prior</td>
+<td>可输入任何类数组结构，形状为（n_classes，）表示类的先验概率。如果指定，则不根据数据调整先验，如果不指定，则自行根据数据计算先验概率 P(Y)</td>
+</tr>
+<tr>
+<td>var_smoothing</td>
+<td>浮点数，可不填（默认值= 1e-9）在估计方差时，为了追求估计的稳定性，将所有特征的方差中最大的方差以某个比例添加到估计的方差中。这个比例，由var_smoothing参数控制。</td>
+</tr>
+</tbody>
+</table>
+<p>实例：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">from sklearn.naive_bayes import GaussianNB</span><br><span class="line">from sklearn.datasets import load_digits</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line"></span><br><span class="line">digits = load_digits()</span><br><span class="line">X, y = digits.data, digits.target</span><br><span class="line">Xtrain,Xtest,Ytrain,Ytest = train_test_split(X,y,test_size=0.3,random_state=420)</span><br><span class="line"></span><br><span class="line">gnb = GaussianNB().fit(Xtrain,Ytrain) # 建模</span><br><span class="line"></span><br><span class="line">#查看分数</span><br><span class="line">acc_score = gnb.score(Xtest,Ytest) # 预测</span><br><span class="line"></span><br><span class="line">#查看预测结果</span><br><span class="line">Y_pred = gnb.predict(Xtest)  # 返回每个样本的预测分类</span><br><span class="line"></span><br><span class="line">#查看预测的概率结果</span><br><span class="line">prob = gnb.predict_proba(Xtest) # 返回一个矩阵，每个样本所属每个分类的概率</span><br></pre></td></tr></table></figure></p>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>ML</tag>
+        <tag>贝叶斯</tag>
+        <tag>Sklearn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>sklearn中的线性回归</title>
+    <url>/2019/12/26/sklearn%E4%B8%AD%E7%9A%84%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</url>
+    <content><![CDATA[<h3 id="sklearn中的线性回归"><a href="#sklearn中的线性回归" class="headerlink" title="sklearn中的线性回归"></a><table><tr><td bgcolor="greey"><center><font size="5px" color="b">sklearn中的线性回归</font></center></td></tr></table></h3><p>参考</p>
+<ol>
+<li><a href="https://www.bilibili.com/video/av39811682" target="_blank" rel="noopener">菜菜的sklearn课堂09 - 线性回归和回归类模型的评估指标（非完整版）</a></li>
+<li><a href="http://file.sh.peixun.net/file/201901/02/201901022212bcpxh53gnd.pdf" target="_blank" rel="noopener">课件</a></li>
+</ol>
+<hr>
+<h4 id="sklearn中的线性回归-1"><a href="#sklearn中的线性回归-1" class="headerlink" title="sklearn中的线性回归"></a><font size="4px" color="red">sklearn中的线性回归</font></h4><ul>
+<li>普通线性回归<code>LinearRegression</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类/函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear_model.LinearRegression</td>
+<td>使用普通最小二乘法的线性回归</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>岭回归<code>Ridge</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类/函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear_model.Ridge</td>
+<td>岭回归，一种将L2作为正则化工具的线性最小二乘回归</td>
+</tr>
+<tr>
+<td>linear_model.RidgeCV</td>
+<td>带交叉验证的岭回归</td>
+</tr>
+<tr>
+<td>linear_model.RidgeClassifier</td>
+<td>岭回归的分类器</td>
+</tr>
+<tr>
+<td>linear_model.RidgeClassifierCV</td>
+<td>带交叉验证的岭回归的分类器</td>
+</tr>
+<tr>
+<td>linear_model.ridge_regression</td>
+<td>【函数】用正太方程法求解岭回归</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>LASSO</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类/函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear_model.Lasso</td>
+<td>Lasso，使用L1作为正则化工具来训练的线性回归模型</td>
+</tr>
+<tr>
+<td>linear_model.LassoCV</td>
+<td>带交叉验证和正则化迭代路径的Lasso</td>
+</tr>
+<tr>
+<td>linear_model.LassoLars</td>
+<td>使用最小角度回归求解的Lasso</td>
+</tr>
+<tr>
+<td>linear_model.LassoLarsCV</td>
+<td>带交叉验证的使用最小角度回归求解的Lasso</td>
+</tr>
+<tr>
+<td>linear_model.LassoLarsIC</td>
+<td>使用BIC或AIC进行模型选择的，使用最小角度回归求解的Lasso</td>
+</tr>
+<tr>
+<td>linear_model.MultiTaskLasso</td>
+<td>使用L1 / L2混合范数作为正则化工具训练的多标签Lasso</td>
+</tr>
+<tr>
+<td>linear_model.MultiTaskLassoCV</td>
+<td>使用L1 / L2混合范数作为正则化工具训练的，带交叉验证的多标签Lasso</td>
+</tr>
+<tr>
+<td>linear_model.lasso_path</td>
+<td>【函数】用坐标下降计算Lasso路径</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>弹性网</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类/函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear_model.ElasticNet</td>
+<td>弹性网，一种将L1和L2组合作为正则化工具的线性回归</td>
+</tr>
+<tr>
+<td>linear_model.ElasticNetCV</td>
+<td>带交叉验证和正则化迭代路径的弹性网</td>
+</tr>
+<tr>
+<td>linear_model.MultiTaskElasticNet</td>
+<td>多标签弹性网</td>
+</tr>
+<tr>
+<td>linear_model.MultiTaskElasticNetCV</td>
+<td>带交叉验证的多标签弹性网</td>
+</tr>
+<tr>
+<td>linear_model.enet_path</td>
+<td>【函数】用坐标下降法计算弹性网的路径</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>最小角度回归</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类/函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear_model.Lars</td>
+<td>最小角度回归（Least Angle Regression，LAR）</td>
+</tr>
+<tr>
+<td>linear_model.LarsCV</td>
+<td>带交叉验证的最小角度回归模型</td>
+</tr>
+<tr>
+<td>linear_model.lars_path</td>
+<td>【函数】使用LARS算法计算最小角度回归路径或Lasso的路径</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>正交匹配追踪</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类/函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear_model.OrthogonalMatchingPursuit</td>
+<td>正交匹配追踪模型（OMP）</td>
+</tr>
+<tr>
+<td>linear_model.OrthogonalMatchingPursuitCV</td>
+<td>交叉验证的正交匹配追踪模型（OMP）</td>
+</tr>
+<tr>
+<td>linear_model.orthogonal_mp</td>
+<td>【函数】正交匹配追踪（OMP）</td>
+</tr>
+<tr>
+<td>linear_model.orthogonal_mp_gram</td>
+<td>【函数】Gram正交匹配追踪（OMP）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>贝叶斯回归</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类/函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear_model.ARDRegression</td>
+<td>贝叶斯ARD回归。ARD是自动相关性确定回归 （Automatic Relevance Determination Regression）， 是一种类似于最小二乘的，用来计算参数向量的数学方 法。</td>
+</tr>
+<tr>
+<td>linear_model.BayesianRidge</td>
+<td>贝叶斯岭回归</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>其他回归</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类/函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear_model.PassiveAggressiveClassifier</td>
+<td>被动攻击性分类器</td>
+</tr>
+<tr>
+<td>linear_model.PassiveAggressiveRegressor</td>
+<td>被动攻击性回归</td>
+</tr>
+<tr>
+<td>linear_model.Perceptron</td>
+<td>感知机</td>
+</tr>
+<tr>
+<td>linear_model.RANSACRegressor</td>
+<td>RANSAC（RANdom SAmple Consensus）算法。</td>
+</tr>
+<tr>
+<td>linear_model.HuberRegressor</td>
+<td>胡博回归，对异常值具有鲁棒性的一种线性回归模型</td>
+</tr>
+<tr>
+<td>linear_model.SGDRegressor</td>
+<td>通过最小化SGD的正则化损失函数来拟合线性模型</td>
+</tr>
+<tr>
+<td>linear_model.TheilSenRegressor</td>
+<td>Theil-Sen估计器，一种鲁棒的多元回归模型</td>
+</tr>
+</tbody>
+</table>
+<h4 id="多元线性回归LinearRegression"><a href="#多元线性回归LinearRegression" class="headerlink" title="多元线性回归LinearRegression"></a><font size="4px" color="red">多元线性回归LinearRegression</font></h4><p>虽然之前的吴恩达视频中已经有了关于单变量/多变量线性回归的简单讲解，不过在具体应用上使用的梯度下降法结合<code>scipy.optimize</code>中的优化器，但是尚不熟悉。这里为了了解sklearn，又重新作补充。</p>
+<p>回归问题的经典案例是<strong>房价预测问题</strong>，这个预测函数可以表示成参数向量和特征的简单线性组合。本质则是通过损失函数的定义求得最佳参数向量。</p>
+<p>简单的L2范数形式的损失函数：不带正则项<br><img src="https://img-blog.csdnimg.cn/20191226152826165.jpg" alt="损失函数"><br>我们往往称呼这个上式为<strong>SSE</strong>（Sum of Sqaured Error，误差平方和）或者<strong>RSS</strong>（Residual Sum of Squares 残差平方和）。<strong>在sklearn所有官方文档和网页上都称之为RSS残差平方和</strong>。</p>
+<p>关于参数的矩阵形式求导（算法工程师基本要求）： <a href="https://en.wikipedia.org/wiki/Matrix_calculus" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Matrix_calculus
+</a></p>
+<h4 id="linear-model-LinearRegression"><a href="#linear-model-LinearRegression" class="headerlink" title=" linear_model.LinearRegression"></a><font size="4px" color="red"> linear_model.LinearRegression</font></h4><ul>
+<li><code>class sklearn.linear_model.LinearRegression (fit_intercept=True, normalize=False, copy_X=True, n_jobs=None)</code></li>
+<li>参数解释</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fit_intercept</td>
+<td>布尔值，可不填，默认为True 是否计算此模型的截距。如果设置为False，则不会计算截距。</td>
+</tr>
+<tr>
+<td>normalize</td>
+<td>布尔值，可不填，默认为False。当fit_intercept设置为False时，将忽略此参数。如果为True，则特征矩阵X在进入回 之前 将会被减去均值（中心化）并除以L2范式（缩放）。如果你希望进行标准化，请在fit数据 前使用preprocessing模块中的标准化专用类StandardScaler。</td>
+</tr>
+<tr>
+<td>copy_X</td>
+<td>b布尔值，可不填，默认为True。如果为真，将在X.copy()上进行操作，否则的话原本的特征矩阵X可能被线性回归影响并覆盖。</td>
+</tr>
+<tr>
+<td>n_jobs</td>
+<td>整数或者None，可不填，默认为None 用于计算的作业数。只在多标签的回归和数据量足够大的时候才生效。除非None在joblib.parallel_backend上下文中，否则None统一表示为1。如果输入 -1，则表示使用全 部的CPU来进行计算。更多详细内容，请参阅词汇表：<a href="https://scikit-learn.org/stable/glossary.html#term-n-jobs" target="_blank" rel="noopener">https://scikit-learn.org/stable/glossary.html#term-n-jobs</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="实践"><a href="#实践" class="headerlink" title="实践"></a><font size="4px" color="red">实践</font></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from sklearn.linear_model import LinearRegression as LR</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line">from sklearn.model_selection import cross_val_score</span><br><span class="line">from sklearn.datasets import fetch_california_housing as fch #加利福尼亚房屋价值数据集</span><br><span class="line">import pandas as pd</span><br><span class="line"></span><br><span class="line">housevalue = fch() #没有下载过需要下载</span><br><span class="line"></span><br><span class="line">X=housevalue.data</span><br><span class="line">y=housevalue.target</span><br><span class="line">print(X.shape,y.shape)</span><br><span class="line">print(housevalue.feature_names) # 输出所有特征名称</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">(20640, 8) (20640,)</span><br><span class="line">[&apos;MedInc&apos;, &apos;HouseAge&apos;, &apos;AveRooms&apos;, &apos;AveBedrms&apos;, &apos;Population&apos;, &apos;AveOccup&apos;, &apos;Latitude&apos;, &apos;Longitude&apos;] </span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"></span><br><span class="line"># 分训练集和测试集</span><br><span class="line">Xtrain, Xtest, Ytrain, Ytest = train_test_split(X,y,test_size=0.3,random_state=420)</span><br><span class="line"></span><br><span class="line"># 建模</span><br><span class="line">reg = LR().fit(Xtrain, Ytrain) # 实例化+ fit来训练模型</span><br><span class="line">yhat = reg.predict(Xtest) # 接口</span><br><span class="line"></span><br><span class="line"># 探索建好的模型-属性</span><br><span class="line">print(reg.coef_) # 参数向量</span><br><span class="line"># *zip(Xtrain.columns,reg.coef_) # *zip 表示将数据打包变成一组一组的形式，可以转化成列表用tolist，或者[*]</span><br><span class="line">print([*zip(housevalue.feature_names,reg.coef_)]) # 这个含义是特征对应的参数</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">[ 4.37358931e-01  1.02112683e-02 -1.07807216e-01  6.26433828e-01 5.21612535e-07 -3.34850965e-03 -4.13095938e-01 -4.26210954e-01]</span><br><span class="line">[(&apos;MedInc&apos;, 0.4373589305968407), (&apos;HouseAge&apos;, 0.01021126829449407), (&apos;AveRooms&apos;, -0.10780721617317679), (&apos;AveBedrms&apos;, 0.6264338275363791), </span><br><span class="line">(&apos;Population&apos;, 5.216125353556256e-07), (&apos;AveOccup&apos;, -0.003348509646333535), (&apos;Latitude&apos;, -0.41309593789477095), (&apos;Longitude&apos;, -0.42621095362084693)]</span><br><span class="line">&apos;&apos;&apos;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>coef_</td>
+<td>参数数组，形状为 (n_features, )或者(n_targets, n_features) 线性回归方程中估计出的系数。如果在fit中传递多个标签（当y为二维或以上的时候），则返回的系数是形状为（n_targets，n_features）的二维数组，而如果仅传递一个标签，则返回 的系数是长度为n_features的一维数组或说向量</td>
+</tr>
+<tr>
+<td>intercept_</td>
+<td>数组，线性回归中的截距项</td>
+</tr>
+</tbody>
+</table>
+<h4 id="多元线性回归的模型评估指标"><a href="#多元线性回归的模型评估指标" class="headerlink" title="多元线性回归的模型评估指标"></a><font size="4px" color="red">多元线性回归的模型评估指标</font></h4><p>回归类算法的模型评估一直都是回归算法中的一个难点，但不像我们曾经讲过的无监督学习算法中的轮廓系数等等评估指标，回归类与分类型算法的模型评估其实是相似的法则——找真实标签和预测值的差异。只不过在分类型算法中，这个差异只有一种角度来评判，那就是是否预测到了正确的分类，而在我们的回归类算法中，我们有两种不同的角度来看待回归的效果：</p>
+<ul>
+<li>我们是否预测到了正确的数值。</li>
+<li>我们是否拟合到了足够的信息。</li>
+</ul>
+<p>这两种角度，分别对应着不同的模型评估指标</p>
+<h5 id="是否预测了正确的数值"><a href="#是否预测了正确的数值" class="headerlink" title="是否预测了正确的数值"></a><font size="3px" color="red">是否预测了正确的数值</font></h5><p>RSS残差平方和，它的本质是我们的预测值与真实值之间的差异，也就是从第一种角度来评估我们回归的效力，所以RSS既是我们的损失函数，也是我们回归类模型的模型评估指标之一。但是，RSS有着致命的缺点：<strong>它是一个无界的和，可以无限地大</strong>。我们希望这个RSS越小越好，但并没有一个概念究竟多小才好。</p>
+<p>为了应对这种状况，sklearn中使用RSS的变体，均方误差MSE（mean squared error）来衡量我们的预测值和真实值的差异：<br><img src="https://img-blog.csdnimg.cn/20191226160829831.jpg" alt="均方误差"><br>均方误差，本质是在RSS的基础上除以了样本总量，得到了每个样本量上的平均误差<br>在sklearn当中，我们有两种方式调用这个评估指标，一种是使用sklearn专用的模型评估模块<strong>metrics</strong>里的类<strong>mean_squared_error</strong>，另一种是调用交叉验证的类<strong>cross_val_score</strong>并使用里面的<strong>scoring参数</strong>来设置使用均方误差。<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from sklearn.metrics import mean_squared_error as MSE</span><br><span class="line">print(MSE(yhat,Ytest),y.max(),y.min()) # 0.5309012639324554 5.00001 0.14999</span><br><span class="line"># 发现平均误差可到0.5，然而实际数据最小值才0.14，这个误差50%就有点大了，这个模型可能就不太好</span><br><span class="line"></span><br><span class="line">print(cross_val_score(reg,X,y,cv=10,scoring=&quot;neg_mean_squared_error&quot;)) # 返回每次交叉验证的均方误差</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">[-0.48922052 -0.43335865 -0.8864377  -0.39091641 -0.7479731  -0.52980278</span><br><span class="line"> -0.28798456 -0.77326441 -0.64305557 -0.3275106 ]</span><br><span class="line">&apos;&apos;&apos;</span><br></pre></td></tr></table></figure></p>
+<p>说明：</p>
+<ol>
+<li><code>sklearn</code>中评估指标并没有<code>mean_squared_error</code>，而是<code>neg_mean_squared_error</code></li>
+<li>但是返回的10个交叉验证的误差为什么为负数？<br>均方误差本身是一种误差，所以被sklearn划分为模型的一种损失(loss)。在sklearn当中，所有的损失都使用负数表示，因此均方误差也被显示为负数了。真正的均方误差MSE的数值，其实就 是neg_mean_squared_error去掉负号的数字</li>
+<li>类似均方误差MSE，还有一种<strong>绝对值误差MAE</strong>（Mean absolute error）<br>其表达的概念与均方误差完全一致，不过在真实标签和预测值之间的差异外我们使用的是L1范式（绝对值）。现实使用中，MSE和MAE选一个来使用就好了。在sklearn当中，我们使用命令<code>from sklearn.metrics importmean_absolute_error</code>来调用MAE，同时，我们也可以使用交叉验证中的<code>scoring = &quot;neg_mean_absolute_error&quot;</code>，以此在交叉验证时调用MAE。<br><img src="https://img-blog.csdnimg.cn/20191226172512276.jpg" alt="MAE"></li>
+</ol>
+<h5 id="是否拟合了足够的信息"><a href="#是否拟合了足够的信息" class="headerlink" title="是否拟合了足够的信息"></a><font size="3px" color="red">是否拟合了足够的信息</font></h5><p>均方形式化的误差的一个缺陷是平均之后并无法反映到底正确拟合了多少数据信息。</p>
+<p>为了衡量模型对数据上的信息量的捕捉，我们定义了R<sup>2</sup>和<strong>可解释性方差分数</strong>(explained_variance_score，EVS)来帮助我们：<br><img src="https://img-blog.csdnimg.cn/20191226172715234.jpg?type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt><br>所以两者都衡量 1 - 我们的模型没有捕获到的信息量占真实标签中所带的信息量的比例，所以，两者都是越接近1越好。</p>
+<ul>
+<li><p>R<sup>2</sup>：我们可以使用三种方式来调用，一种是直接从metrics中导入r2_score，输入预测值和真实值后打分。第二种是直接从线性回归LinearRegression的接口score来进行调用。第三种是在交叉验证中，输入”r2”来调用。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from sklearn.metrics import r2_score</span><br><span class="line">print(r2_score(Ytest,yhat))  # 注意参数顺序，第一个参数需要是真实值</span><br><span class="line">r2 = reg.score(Xtest,Ytest)</span><br><span class="line">print(cross_val_score(reg,X,y,cv=10,scoring=&quot;r2&quot;).mean())</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>EVS</strong>有两种调用方法：可以从<code>metrics</code>中导入，也可以在交叉验证中输入<code>”explained_variance“</code>来调用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from sklearn.metrics import explained_variance_score as EVS</span><br><span class="line">print(EVS(Ytest,yhat))</span><br><span class="line">print(cross_val_score(reg,X,y,cv=10,scoring=&quot;explained_variance&quot;))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>注意：</p>
+<ol>
+<li>R<sup>2</sup>可能为负</li>
+<li>当R<sup>2</sup><strong>为负时说明模型对数据拟合非常糟糕，模型完全无法使用</strong></li>
+</ol>
+<p>补充：</p>
+<ol>
+<li>解释平方和<strong>ESS</strong>（Explained Sum of Squares，也叫做SSR回归平方和）</li>
+<li>总离差平方和<strong>TSS</strong>（Total Sum of Squares，也叫做SST总离差平方和）。</li>
+<li>解释平方和ESS定义了我们的<strong>预测值和样本均值之间的差异</strong>，而<strong>总离差平方和定义了真实值和样本均值之间的差异</strong>，两个指标分别写作：<br><img src="https://img-blog.csdnimg.cn/20191226191716194.jpg?type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt></li>
+</ol>
+]]></content>
+      <categories>
+        <category>机器学习</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>ML</tag>
+        <tag>Sklearn</tag>
+        <tag>线形回归</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>主成分分析PCA与奇异值分解SVD</title>
     <url>/2019/12/22/%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90PCA%E4%B8%8E%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3SVD/</url>
     <content><![CDATA[<h3 id="学习地址"><a href="#学习地址" class="headerlink" title="学习地址"></a><center><a href="https://www.bilibili.com/video/av36965169" target="_blank" rel="noopener">学习地址</a></center></h3><p><a href="http://file.sh.peixun.net/file/201811/28/201811282159x84x0o4puv.pdf" target="_blank" rel="noopener">课件</a></p>
@@ -183,7 +795,7 @@
 <li><font size="4px" color="greey">preprocessing.OneHotEncoder</font>: 独热编码，创建哑变量<br>把分类转换成数字的时候，忽略了数字中自带的数学性质，所以给算法传达了一些不准确的信息，而这会影响我们的建模。<br><strong>独热编码one-hot</strong>: 将特征转换为哑变量<br><img src="https://img-blog.csdnimg.cn/20191221193415493.jpg" alt="独热编码"><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from sklearn.preprocessing import OneHotEncoder</span><br><span class="line">X = data.iloc[:,1:-1]</span><br><span class="line">enc = OneHotEncoder(categories=&apos;auto&apos;).fit(X)</span><br><span class="line">result = enc.transform(X).toarray()</span><br><span class="line"># OneHotEncoder(categories=&apos;auto&apos;).fit_transform(X).toarray()</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/2019122119530984.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="编码与哑变量"></p>
+<p><img src="https://img-blog.csdnimg.cn/2019122119530984.jpg?type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="编码与哑变量"></p>
 <h5 id="处理连续型特征：二值化与分段"><a href="#处理连续型特征：二值化与分段" class="headerlink" title="处理连续型特征：二值化与分段"></a><font size="3px" color="red">处理连续型特征：二值化与分段</font></h5><ul>
 <li><font size="5px" color="greey">sklearn.preprocessing.Binarizer</font><br>根据阈值将数据二值化（将特征值设置为0或1），用于处理连续型变量。大于阈值的值映射为1，而小于或等于阈值的值映射为0。默认阈值为0时，特征中所有的正值都映射到1。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from sklearn.preprocessing import Binarizer</span><br><span class="line">X = data.iloc[:,0].values.reshape(-1,1) #类为特征专用，所以不能使用一维数组</span><br><span class="line">transformer = Binarizer(threshold=30).fit_transform(X)  #  大于30的全部变成1</span><br></pre></td></tr></table></figure></li>
 </ul>

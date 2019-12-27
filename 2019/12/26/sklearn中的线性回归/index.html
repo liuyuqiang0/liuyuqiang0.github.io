@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="NO response">
+  
+  
+    <meta name="description" content="what you will be,the world will be">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    sklearn中的线性回归 |
+    
+    种花家</title>
+  
+    <link rel="shortcut icon" href="/images/rabbit.png">
+  
+  <link rel="stylesheet" href="../../../../css/style.css">
+  <link rel="stylesheet" href="../../../../css/technology.css">
+  
+    <link rel="stylesheet" href="../../../../fancybox/jquery.fancybox.min.css">
+  
+  <script src="../../../../js/pace.min.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <section class="outer">
+  <article id="post-sklearn中的线性回归" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      sklearn中的线性回归
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href class="article-date">
+  <time datetime="2019-12-26T11:33:00.000Z" itemprop="datePublished">2019-12-26</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="../../../../categories/机器学习/">机器学习</a>
+  </div>
+
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h3 id="sklearn中的线性回归"><a href="#sklearn中的线性回归" class="headerlink" title="sklearn中的线性回归"></a><table><tr><td bgcolor="greey"><center><font size="5px" color="b">sklearn中的线性回归</font></center></td></tr></table></h3><p>参考</p>
+<ol>
+<li><a href="https://www.bilibili.com/video/av39811682" target="_blank" rel="noopener">菜菜的sklearn课堂09 - 线性回归和回归类模型的评估指标（非完整版）</a></li>
+<li><a href="http://file.sh.peixun.net/file/201901/02/201901022212bcpxh53gnd.pdf" target="_blank" rel="noopener">课件</a></li>
+</ol>
+<hr>
+<h4 id="sklearn中的线性回归-1"><a href="#sklearn中的线性回归-1" class="headerlink" title="sklearn中的线性回归"></a><font size="4px" color="red">sklearn中的线性回归</font></h4><ul>
+<li>普通线性回归<code>LinearRegression</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类/函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear_model.LinearRegression</td>
+<td>使用普通最小二乘法的线性回归</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>岭回归<code>Ridge</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类/函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear_model.Ridge</td>
+<td>岭回归，一种将L2作为正则化工具的线性最小二乘回归</td>
+</tr>
+<tr>
+<td>linear_model.RidgeCV</td>
+<td>带交叉验证的岭回归</td>
+</tr>
+<tr>
+<td>linear_model.RidgeClassifier</td>
+<td>岭回归的分类器</td>
+</tr>
+<tr>
+<td>linear_model.RidgeClassifierCV</td>
+<td>带交叉验证的岭回归的分类器</td>
+</tr>
+<tr>
+<td>linear_model.ridge_regression</td>
+<td>【函数】用正太方程法求解岭回归</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>LASSO</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类/函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear_model.Lasso</td>
+<td>Lasso，使用L1作为正则化工具来训练的线性回归模型</td>
+</tr>
+<tr>
+<td>linear_model.LassoCV</td>
+<td>带交叉验证和正则化迭代路径的Lasso</td>
+</tr>
+<tr>
+<td>linear_model.LassoLars</td>
+<td>使用最小角度回归求解的Lasso</td>
+</tr>
+<tr>
+<td>linear_model.LassoLarsCV</td>
+<td>带交叉验证的使用最小角度回归求解的Lasso</td>
+</tr>
+<tr>
+<td>linear_model.LassoLarsIC</td>
+<td>使用BIC或AIC进行模型选择的，使用最小角度回归求解的Lasso</td>
+</tr>
+<tr>
+<td>linear_model.MultiTaskLasso</td>
+<td>使用L1 / L2混合范数作为正则化工具训练的多标签Lasso</td>
+</tr>
+<tr>
+<td>linear_model.MultiTaskLassoCV</td>
+<td>使用L1 / L2混合范数作为正则化工具训练的，带交叉验证的多标签Lasso</td>
+</tr>
+<tr>
+<td>linear_model.lasso_path</td>
+<td>【函数】用坐标下降计算Lasso路径</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>弹性网</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类/函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear_model.ElasticNet</td>
+<td>弹性网，一种将L1和L2组合作为正则化工具的线性回归</td>
+</tr>
+<tr>
+<td>linear_model.ElasticNetCV</td>
+<td>带交叉验证和正则化迭代路径的弹性网</td>
+</tr>
+<tr>
+<td>linear_model.MultiTaskElasticNet</td>
+<td>多标签弹性网</td>
+</tr>
+<tr>
+<td>linear_model.MultiTaskElasticNetCV</td>
+<td>带交叉验证的多标签弹性网</td>
+</tr>
+<tr>
+<td>linear_model.enet_path</td>
+<td>【函数】用坐标下降法计算弹性网的路径</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>最小角度回归</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类/函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear_model.Lars</td>
+<td>最小角度回归（Least Angle Regression，LAR）</td>
+</tr>
+<tr>
+<td>linear_model.LarsCV</td>
+<td>带交叉验证的最小角度回归模型</td>
+</tr>
+<tr>
+<td>linear_model.lars_path</td>
+<td>【函数】使用LARS算法计算最小角度回归路径或Lasso的路径</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>正交匹配追踪</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类/函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear_model.OrthogonalMatchingPursuit</td>
+<td>正交匹配追踪模型（OMP）</td>
+</tr>
+<tr>
+<td>linear_model.OrthogonalMatchingPursuitCV</td>
+<td>交叉验证的正交匹配追踪模型（OMP）</td>
+</tr>
+<tr>
+<td>linear_model.orthogonal_mp</td>
+<td>【函数】正交匹配追踪（OMP）</td>
+</tr>
+<tr>
+<td>linear_model.orthogonal_mp_gram</td>
+<td>【函数】Gram正交匹配追踪（OMP）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>贝叶斯回归</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类/函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear_model.ARDRegression</td>
+<td>贝叶斯ARD回归。ARD是自动相关性确定回归 （Automatic Relevance Determination Regression）， 是一种类似于最小二乘的，用来计算参数向量的数学方 法。</td>
+</tr>
+<tr>
+<td>linear_model.BayesianRidge</td>
+<td>贝叶斯岭回归</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>其他回归</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类/函数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear_model.PassiveAggressiveClassifier</td>
+<td>被动攻击性分类器</td>
+</tr>
+<tr>
+<td>linear_model.PassiveAggressiveRegressor</td>
+<td>被动攻击性回归</td>
+</tr>
+<tr>
+<td>linear_model.Perceptron</td>
+<td>感知机</td>
+</tr>
+<tr>
+<td>linear_model.RANSACRegressor</td>
+<td>RANSAC（RANdom SAmple Consensus）算法。</td>
+</tr>
+<tr>
+<td>linear_model.HuberRegressor</td>
+<td>胡博回归，对异常值具有鲁棒性的一种线性回归模型</td>
+</tr>
+<tr>
+<td>linear_model.SGDRegressor</td>
+<td>通过最小化SGD的正则化损失函数来拟合线性模型</td>
+</tr>
+<tr>
+<td>linear_model.TheilSenRegressor</td>
+<td>Theil-Sen估计器，一种鲁棒的多元回归模型</td>
+</tr>
+</tbody>
+</table>
+<h4 id="多元线性回归LinearRegression"><a href="#多元线性回归LinearRegression" class="headerlink" title="多元线性回归LinearRegression"></a><font size="4px" color="red">多元线性回归LinearRegression</font></h4><p>虽然之前的吴恩达视频中已经有了关于单变量/多变量线性回归的简单讲解，不过在具体应用上使用的梯度下降法结合<code>scipy.optimize</code>中的优化器，但是尚不熟悉。这里为了了解sklearn，又重新作补充。</p>
+<p>回归问题的经典案例是<strong>房价预测问题</strong>，这个预测函数可以表示成参数向量和特征的简单线性组合。本质则是通过损失函数的定义求得最佳参数向量。</p>
+<p>简单的L2范数形式的损失函数：不带正则项<br><img src="https://img-blog.csdnimg.cn/20191226152826165.jpg" alt="损失函数"><br>我们往往称呼这个上式为<strong>SSE</strong>（Sum of Sqaured Error，误差平方和）或者<strong>RSS</strong>（Residual Sum of Squares 残差平方和）。<strong>在sklearn所有官方文档和网页上都称之为RSS残差平方和</strong>。</p>
+<p>关于参数的矩阵形式求导（算法工程师基本要求）： <a href="https://en.wikipedia.org/wiki/Matrix_calculus" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Matrix_calculus
+</a></p>
+<h4 id="linear-model-LinearRegression"><a href="#linear-model-LinearRegression" class="headerlink" title=" linear_model.LinearRegression"></a><font size="4px" color="red"> linear_model.LinearRegression</font></h4><ul>
+<li><code>class sklearn.linear_model.LinearRegression (fit_intercept=True, normalize=False, copy_X=True, n_jobs=None)</code></li>
+<li>参数解释</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fit_intercept</td>
+<td>布尔值，可不填，默认为True 是否计算此模型的截距。如果设置为False，则不会计算截距。</td>
+</tr>
+<tr>
+<td>normalize</td>
+<td>布尔值，可不填，默认为False。当fit_intercept设置为False时，将忽略此参数。如果为True，则特征矩阵X在进入回 之前 将会被减去均值（中心化）并除以L2范式（缩放）。如果你希望进行标准化，请在fit数据 前使用preprocessing模块中的标准化专用类StandardScaler。</td>
+</tr>
+<tr>
+<td>copy_X</td>
+<td>b布尔值，可不填，默认为True。如果为真，将在X.copy()上进行操作，否则的话原本的特征矩阵X可能被线性回归影响并覆盖。</td>
+</tr>
+<tr>
+<td>n_jobs</td>
+<td>整数或者None，可不填，默认为None 用于计算的作业数。只在多标签的回归和数据量足够大的时候才生效。除非None在joblib.parallel_backend上下文中，否则None统一表示为1。如果输入 -1，则表示使用全 部的CPU来进行计算。更多详细内容，请参阅词汇表：<a href="https://scikit-learn.org/stable/glossary.html#term-n-jobs" target="_blank" rel="noopener">https://scikit-learn.org/stable/glossary.html#term-n-jobs</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="实践"><a href="#实践" class="headerlink" title="实践"></a><font size="4px" color="red">实践</font></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.linear_model import LinearRegression as LR</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line">from sklearn.model_selection import cross_val_score</span><br><span class="line">from sklearn.datasets import fetch_california_housing as fch #加利福尼亚房屋价值数据集</span><br><span class="line">import pandas as pd</span><br><span class="line"></span><br><span class="line">housevalue = fch() #没有下载过需要下载</span><br><span class="line"></span><br><span class="line">X=housevalue.data</span><br><span class="line">y=housevalue.target</span><br><span class="line">print(X.shape,y.shape)</span><br><span class="line">print(housevalue.feature_names) # 输出所有特征名称</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">(20640, 8) (20640,)</span><br><span class="line">[&apos;MedInc&apos;, &apos;HouseAge&apos;, &apos;AveRooms&apos;, &apos;AveBedrms&apos;, &apos;Population&apos;, &apos;AveOccup&apos;, &apos;Latitude&apos;, &apos;Longitude&apos;] </span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"></span><br><span class="line"># 分训练集和测试集</span><br><span class="line">Xtrain, Xtest, Ytrain, Ytest = train_test_split(X,y,test_size=0.3,random_state=420)</span><br><span class="line"></span><br><span class="line"># 建模</span><br><span class="line">reg = LR().fit(Xtrain, Ytrain) # 实例化+ fit来训练模型</span><br><span class="line">yhat = reg.predict(Xtest) # 接口</span><br><span class="line"></span><br><span class="line"># 探索建好的模型-属性</span><br><span class="line">print(reg.coef_) # 参数向量</span><br><span class="line"># *zip(Xtrain.columns,reg.coef_) # *zip 表示将数据打包变成一组一组的形式，可以转化成列表用tolist，或者[*]</span><br><span class="line">print([*zip(housevalue.feature_names,reg.coef_)]) # 这个含义是特征对应的参数</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">[ 4.37358931e-01  1.02112683e-02 -1.07807216e-01  6.26433828e-01 5.21612535e-07 -3.34850965e-03 -4.13095938e-01 -4.26210954e-01]</span><br><span class="line">[(&apos;MedInc&apos;, 0.4373589305968407), (&apos;HouseAge&apos;, 0.01021126829449407), (&apos;AveRooms&apos;, -0.10780721617317679), (&apos;AveBedrms&apos;, 0.6264338275363791), </span><br><span class="line">(&apos;Population&apos;, 5.216125353556256e-07), (&apos;AveOccup&apos;, -0.003348509646333535), (&apos;Latitude&apos;, -0.41309593789477095), (&apos;Longitude&apos;, -0.42621095362084693)]</span><br><span class="line">&apos;&apos;&apos;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>coef_</td>
+<td>参数数组，形状为 (n_features, )或者(n_targets, n_features) 线性回归方程中估计出的系数。如果在fit中传递多个标签（当y为二维或以上的时候），则返回的系数是形状为（n_targets，n_features）的二维数组，而如果仅传递一个标签，则返回 的系数是长度为n_features的一维数组或说向量</td>
+</tr>
+<tr>
+<td>intercept_</td>
+<td>数组，线性回归中的截距项</td>
+</tr>
+</tbody>
+</table>
+<h4 id="多元线性回归的模型评估指标"><a href="#多元线性回归的模型评估指标" class="headerlink" title="多元线性回归的模型评估指标"></a><font size="4px" color="red">多元线性回归的模型评估指标</font></h4><p>回归类算法的模型评估一直都是回归算法中的一个难点，但不像我们曾经讲过的无监督学习算法中的轮廓系数等等评估指标，回归类与分类型算法的模型评估其实是相似的法则——找真实标签和预测值的差异。只不过在分类型算法中，这个差异只有一种角度来评判，那就是是否预测到了正确的分类，而在我们的回归类算法中，我们有两种不同的角度来看待回归的效果：</p>
+<ul>
+<li>我们是否预测到了正确的数值。</li>
+<li>我们是否拟合到了足够的信息。</li>
+</ul>
+<p>这两种角度，分别对应着不同的模型评估指标</p>
+<h5 id="是否预测了正确的数值"><a href="#是否预测了正确的数值" class="headerlink" title="是否预测了正确的数值"></a><font size="3px" color="red">是否预测了正确的数值</font></h5><p>RSS残差平方和，它的本质是我们的预测值与真实值之间的差异，也就是从第一种角度来评估我们回归的效力，所以RSS既是我们的损失函数，也是我们回归类模型的模型评估指标之一。但是，RSS有着致命的缺点：<strong>它是一个无界的和，可以无限地大</strong>。我们希望这个RSS越小越好，但并没有一个概念究竟多小才好。</p>
+<p>为了应对这种状况，sklearn中使用RSS的变体，均方误差MSE（mean squared error）来衡量我们的预测值和真实值的差异：<br><img src="https://img-blog.csdnimg.cn/20191226160829831.jpg" alt="均方误差"><br>均方误差，本质是在RSS的基础上除以了样本总量，得到了每个样本量上的平均误差<br>在sklearn当中，我们有两种方式调用这个评估指标，一种是使用sklearn专用的模型评估模块<strong>metrics</strong>里的类<strong>mean_squared_error</strong>，另一种是调用交叉验证的类<strong>cross_val_score</strong>并使用里面的<strong>scoring参数</strong>来设置使用均方误差。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.metrics import mean_squared_error as MSE</span><br><span class="line">print(MSE(yhat,Ytest),y.max(),y.min()) # 0.5309012639324554 5.00001 0.14999</span><br><span class="line"># 发现平均误差可到0.5，然而实际数据最小值才0.14，这个误差50%就有点大了，这个模型可能就不太好</span><br><span class="line"></span><br><span class="line">print(cross_val_score(reg,X,y,cv=10,scoring=&quot;neg_mean_squared_error&quot;)) # 返回每次交叉验证的均方误差</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">[-0.48922052 -0.43335865 -0.8864377  -0.39091641 -0.7479731  -0.52980278</span><br><span class="line"> -0.28798456 -0.77326441 -0.64305557 -0.3275106 ]</span><br><span class="line">&apos;&apos;&apos;</span><br></pre></td></tr></table></figure></p>
+<p>说明：</p>
+<ol>
+<li><code>sklearn</code>中评估指标并没有<code>mean_squared_error</code>，而是<code>neg_mean_squared_error</code></li>
+<li>但是返回的10个交叉验证的误差为什么为负数？<br>均方误差本身是一种误差，所以被sklearn划分为模型的一种损失(loss)。在sklearn当中，所有的损失都使用负数表示，因此均方误差也被显示为负数了。真正的均方误差MSE的数值，其实就 是neg_mean_squared_error去掉负号的数字</li>
+<li>类似均方误差MSE，还有一种<strong>绝对值误差MAE</strong>（Mean absolute error）<br>其表达的概念与均方误差完全一致，不过在真实标签和预测值之间的差异外我们使用的是L1范式（绝对值）。现实使用中，MSE和MAE选一个来使用就好了。在sklearn当中，我们使用命令<code>from sklearn.metrics importmean_absolute_error</code>来调用MAE，同时，我们也可以使用交叉验证中的<code>scoring = &quot;neg_mean_absolute_error&quot;</code>，以此在交叉验证时调用MAE。<br><img src="https://img-blog.csdnimg.cn/20191226172512276.jpg" alt="MAE"></li>
+</ol>
+<h5 id="是否拟合了足够的信息"><a href="#是否拟合了足够的信息" class="headerlink" title="是否拟合了足够的信息"></a><font size="3px" color="red">是否拟合了足够的信息</font></h5><p>均方形式化的误差的一个缺陷是平均之后并无法反映到底正确拟合了多少数据信息。</p>
+<p>为了衡量模型对数据上的信息量的捕捉，我们定义了R<sup>2</sup>和<strong>可解释性方差分数</strong>(explained_variance_score，EVS)来帮助我们：<br><img src="https://img-blog.csdnimg.cn/20191226172715234.jpg?type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt><br>所以两者都衡量 1 - 我们的模型没有捕获到的信息量占真实标签中所带的信息量的比例，所以，两者都是越接近1越好。</p>
+<ul>
+<li><p>R<sup>2</sup>：我们可以使用三种方式来调用，一种是直接从metrics中导入r2_score，输入预测值和真实值后打分。第二种是直接从线性回归LinearRegression的接口score来进行调用。第三种是在交叉验证中，输入”r2”来调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.metrics import r2_score</span><br><span class="line">print(r2_score(Ytest,yhat))  # 注意参数顺序，第一个参数需要是真实值</span><br><span class="line">r2 = reg.score(Xtest,Ytest)</span><br><span class="line">print(cross_val_score(reg,X,y,cv=10,scoring=&quot;r2&quot;).mean())</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>EVS</strong>有两种调用方法：可以从<code>metrics</code>中导入，也可以在交叉验证中输入<code>”explained_variance“</code>来调用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.metrics import explained_variance_score as EVS</span><br><span class="line">print(EVS(Ytest,yhat))</span><br><span class="line">print(cross_val_score(reg,X,y,cv=10,scoring=&quot;explained_variance&quot;))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>注意：</p>
+<ol>
+<li>R<sup>2</sup>可能为负</li>
+<li>当R<sup>2</sup><strong>为负时说明模型对数据拟合非常糟糕，模型完全无法使用</strong></li>
+</ol>
+<p>补充：</p>
+<ol>
+<li>解释平方和<strong>ESS</strong>（Explained Sum of Squares，也叫做SSR回归平方和）</li>
+<li>总离差平方和<strong>TSS</strong>（Total Sum of Squares，也叫做SST总离差平方和）。</li>
+<li>解释平方和ESS定义了我们的<strong>预测值和样本均值之间的差异</strong>，而<strong>总离差平方和定义了真实值和样本均值之间的差异</strong>，两个指标分别写作：<br><img src="https://img-blog.csdnimg.cn/20191226191716194.jpg?type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://sfz-lyq.cn/2019/12/26/sklearn中的线性回归/" data-id="ck4nyprmp00f49mpvbgknusdg" class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/ML/">ML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/Sklearn/">Sklearn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/机器学习/">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/线形回归/">线形回归</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="../朴素贝叶斯/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            朴素贝叶斯
+          
+        </div>
+      </a>
+    
+    
+      <a href="../../22/主成分分析PCA与奇异值分解SVD/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">主成分分析PCA与奇异值分解SVD</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+    </div>
+    <script src="../../../../js/jquery-2.0.3.min.js"></script>
+<script src="../../../../js/lazyload.min.js"></script>
+<script src="../../../../js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="../../../../fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="../../../../js/search.js"></script>
+
+
+<script src="../../../../js/technology.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

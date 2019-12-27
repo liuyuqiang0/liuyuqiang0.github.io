@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="NO response">
+  
+  
+    <meta name="description" content="what you will be,the world will be">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    朴素贝叶斯 |
+    
+    种花家</title>
+  
+    <link rel="shortcut icon" href="/images/rabbit.png">
+  
+  <link rel="stylesheet" href="../../../../css/style.css">
+  <link rel="stylesheet" href="../../../../css/technology.css">
+  
+    <link rel="stylesheet" href="../../../../fancybox/jquery.fancybox.min.css">
+  
+  <script src="../../../../js/pace.min.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <section class="outer">
+  <article id="post-朴素贝叶斯" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      朴素贝叶斯
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href class="article-date">
+  <time datetime="2019-12-26T11:41:00.000Z" itemprop="datePublished">2019-12-26</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="../../../../categories/机器学习/">机器学习</a>
+  </div>
+
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h3 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a><table><td bgcolor="gren"><center><font size="5px" color="b">朴素贝叶斯</font></center></td></table></h3><p>参考：</p>
+<ol>
+<li><a href="https://www.bilibili.com/video/av40337118" target="_blank" rel="noopener">菜菜的sklearn课堂10 - 朴素贝叶斯</a>  </li>
+<li><a href="http://file.sh.peixun.net/file/201901/10/201901100005ts1yyj881y.pdf" target="_blank" rel="noopener">课件</a>  </li>
+<li><a href="https://sfz-lyq.cn/2019/12/03/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87-%E5%85%A8%E6%A6%82%E7%8E%87-%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%85%AC%E5%BC%8F-%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3/">条件概率/全概率/贝叶斯公式 个人理解</a></li>
+</ol>
+<hr>
+<h4 id="真正的概率分类器"><a href="#真正的概率分类器" class="headerlink" title="真正的概率分类器"></a><font size="4px" color="red">真正的概率分类器</font></h4><p>为什么称之为<strong>真正</strong>?  </p>
+<ul>
+<li>在之前学习的算法中，我们都明白只根据训练集训练的模型是无法给出<strong>肯定的答案的</strong>，它只能尽量预测正确。而这个尽量，是人为强行定义的。比如逻辑回归的sigmoid函数，只要大于0.5我们就将其分为1。  <ul>
+<li>朴素贝叶斯是一种直接衡量标签和特征之间的概率关系的有监督算法，它既可以做回归也可以分类，不过多是用于分类之中。朴素贝叶斯的算法根源就是基于概率论和数理统计的贝叶斯理论，因此它是根正苗红的概率模型。也就是说它是真正基于概率的算法，真正计算的概率。</li>
+</ul>
+</li>
+</ul>
+<p>关于贝叶斯公式详见参考：<br><img src="https://img-blog.csdnimg.cn/20191227132950730.jpg" alt="贝叶斯公式"><br>这即是一切贝叶斯算法的根源理论。</p>
+<h5 id="后验概率"><a href="#后验概率" class="headerlink" title="后验概率"></a><font size="3px" color="red">后验概率</font></h5><p>把特征X当成条件事件，要求解的标签Y当成是被满足条件后会被影响的结果，两者之间的概率关系就是P(Y|X)，在机器学习中这个概率公式称之为是标签的<strong>后验概率</strong>（posterior probability），即是说我们先知道了条件，再去求解结果</p>
+<h5 id="先验概率"><a href="#先验概率" class="headerlink" title="先验概率"></a><font size="3px" color="red">先验概率</font></h5><p>标签Y在没有任何条件限制下取值为某个值的概率记作P(Y)，称之为标签的<strong>先验概率</strong>（prior probability）</p>
+<h5 id="为什么叫朴素"><a href="#为什么叫朴素" class="headerlink" title="为什么叫朴素"></a><font size="3px" color="red">为什么叫朴素</font></h5><p>在机器学习中，对于每一个样本，都可能是包含n个特征的特征向量<strong>X</strong>={X<sub>1</sub>, X<sub>2</sub>, …. , X<sub>n</sub>}，那么：<br><img src="https://img-blog.csdnimg.cn/20191227151412857.jpg" alt="后验概率"><br>如果特征之间是<strong>独立的</strong>，那么可以结合条件概率与全概率化简进而求得P(X)，P(X=X<sub>1,2,3…</sub>|Y):<br><img src="https://img-blog.csdnimg.cn/20191227151833976.jpg" alt><br>简单来说，如果特征之间是有条件独立的，可以解决众多问题也可以简化很多计算，这就是朴素贝叶斯被称为“朴素”的理由。</p>
+<p><strong>朴素贝叶斯是一个不建模的算法</strong>，所需要的样本量比较少。当然，如果样本量少于特征数目，贝叶斯的效果就会被削弱。</p>
+<h4 id="sklearn中的朴素贝叶斯"><a href="#sklearn中的朴素贝叶斯" class="headerlink" title="sklearn中的朴素贝叶斯"></a><font size="4px" color="red">sklearn中的朴素贝叶斯</font></h4><table>
+<thead>
+<tr>
+<th>类</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>naive_bayes.BernoulliNB</td>
+<td>伯努利分布下的朴素贝叶斯</td>
+</tr>
+<tr>
+<td>naive_bayes.GaussianNB</td>
+<td>高斯分布下的朴素贝叶斯</td>
+<td></td>
+</tr>
+<tr>
+<td>naive_bayes.MultinomialNB</td>
+<td>多项式分布下的朴素贝叶斯</td>
+</tr>
+<tr>
+<td>naive_bayes.ComplementNB</td>
+<td>补充朴素贝叶斯</td>
+</tr>
+<tr>
+<td>linear_model.BayesianRidge</td>
+<td>贝叶斯岭回归，在参数估计过程中使用贝叶斯回归技术来包括正则化参数</td>
+</tr>
+</tbody>
+</table>
+<h4 id="高斯朴素贝叶斯GaussianNB"><a href="#高斯朴素贝叶斯GaussianNB" class="headerlink" title="高斯朴素贝叶斯GaussianNB"></a><font size="4px" color="red">高斯朴素贝叶斯GaussianNB</font></h4><ul>
+<li><code>class sklearn.naive_bayes.GaussianNB (priors=None, var_smoothing=1e-09)</code><br>通过假设某一类的特征服从正态分布，来估计每个特征下每个类别上的条件概率<br><img src="https://img-blog.csdnimg.cn/20191227155254627.jpg" alt="高斯贝叶斯"></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>prior</td>
+<td>可输入任何类数组结构，形状为（n_classes，）表示类的先验概率。如果指定，则不根据数据调整先验，如果不指定，则自行根据数据计算先验概率 P(Y)</td>
+</tr>
+<tr>
+<td>var_smoothing</td>
+<td>浮点数，可不填（默认值= 1e-9）在估计方差时，为了追求估计的稳定性，将所有特征的方差中最大的方差以某个比例添加到估计的方差中。这个比例，由var_smoothing参数控制。</td>
+</tr>
+</tbody>
+</table>
+<p>实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">from sklearn.naive_bayes import GaussianNB</span><br><span class="line">from sklearn.datasets import load_digits</span><br><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line"></span><br><span class="line">digits = load_digits()</span><br><span class="line">X, y = digits.data, digits.target</span><br><span class="line">Xtrain,Xtest,Ytrain,Ytest = train_test_split(X,y,test_size=0.3,random_state=420)</span><br><span class="line"></span><br><span class="line">gnb = GaussianNB().fit(Xtrain,Ytrain) # 建模</span><br><span class="line"></span><br><span class="line">#查看分数</span><br><span class="line">acc_score = gnb.score(Xtest,Ytest) # 预测</span><br><span class="line"></span><br><span class="line">#查看预测结果</span><br><span class="line">Y_pred = gnb.predict(Xtest)  # 返回每个样本的预测分类</span><br><span class="line"></span><br><span class="line">#查看预测的概率结果</span><br><span class="line">prob = gnb.predict_proba(Xtest) # 返回一个矩阵，每个样本所属每个分类的概率</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://sfz-lyq.cn/2019/12/26/朴素贝叶斯/" data-id="ck4nyprjm00789mpveqn5dr7f" class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/ML/">ML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/Sklearn/">Sklearn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/机器学习/">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/贝叶斯/">贝叶斯</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="../../27/XGBoost/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            XGBoost
+          
+        </div>
+      </a>
+    
+    
+      <a href="../sklearn中的线性回归/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">sklearn中的线性回归</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+    </div>
+    <script src="../../../../js/jquery-2.0.3.min.js"></script>
+<script src="../../../../js/lazyload.min.js"></script>
+<script src="../../../../js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="../../../../fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="../../../../js/search.js"></script>
+
+
+<script src="../../../../js/technology.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

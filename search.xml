@@ -8,7 +8,7 @@
 <li><a href="https://cosx.org/2015/03/xgboost/" target="_blank" rel="noopener">xgboost: 速度快效果好的 boosting 模型</a></li>
 <li><a href="https://www.bilibili.com/video/av43162159?p=2" target="_blank" rel="noopener">菜菜的sklearn课堂11 -XGBoost</a></li>
 <li><a href="http://file.sh.peixun.net/file/201902/11/201902110008wdrryyy669.pdf" target="_blank" rel="noopener">课件</a></li>
-<li></li>
+<li><a href="https://www.jianshu.com/p/0fe45d4e9542" target="_blank" rel="noopener">GBDT、XGBoost、LightGBM 的使用及参数调优</a></li>
 </ol>
 <hr>
 <h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a><font size="4px" color="red">概述</font></h4><p><code>XGBoost</code>全称是eXtreme Gradient Boosting，可译为<strong>极限梯度提升算法</strong>。<strong>它由<a href="https://cosx.org/2015/06/interview-of-tianqi/" target="_blank" rel="noopener">陈天奇</a>所设计，致力于让提升树突破自身的计算极限，以实现运算快速，性能优秀的工程目标</strong>。和传统的梯度提升算法相比，XGBoost进行了许多改进，它能够比其他使用梯度提升的集成算法更加快速，并且已经被认为是在分类和回归上都拥有超高性能的先进评估器。</p>
@@ -162,6 +162,114 @@
 </tr>
 </tbody>
 </table>
+<h4 id="提升集成算法"><a href="#提升集成算法" class="headerlink" title="提升集成算法"></a><font size="4px" color="red">提升集成算法</font></h4><p><code>XGBoost</code>的基础是梯度提升算法，<strong>梯度提升</strong>（Gradient boosting）是构建预测模型的最强大技术之一，它是集成算法中提升法（Boosting）的代表算法。<strong>集成算法通过在数据上构建多个弱评估器，汇总所有弱评估器的建模结果，以获取比单个模型更好的回归或分类表现</strong>。弱评估器被定义为是表现至少比随机猜测更好的模型，即预测准确率不低于50%的任意模型。</p>
+<p>提升法的中最著名的算法包括<code>Adaboost</code>和梯度提升树（GBDT），XGBoost就是由梯度提升树发展而来的。梯度提升树中可以有回归树也可以有分类树，两者都以<code>CART</code>树算法作为主流，XGBoost背后也是CART树，这意味着XGBoost中所有的树都是二叉的。</p>
+<p>就以梯度提升回归树为例，梯度提升回归树是专注于回归的树模型的提升集成模型，其建模过程大致如下：</p>
+<ul>
+<li>最开始先建立一棵树，然后逐渐迭代，每次迭代过程中都增加一棵树，逐渐形成众多树模型集成的强评估器。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20191228103033384.jpg?,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="GBDT"><br>先以分类树为例：</p>
+<ul>
+<li>对于决策树，每个样本最终都会有一个叶子节点归属，而分类树所给的预测则是少数服从多数的原则，即返回这个叶子上数量最多的标签。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20191228103538859.jpg?type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="分类树"></p>
+<p>对于回归树，每个叶子节点上的值就是这个<strong>叶子节点上所有样本的均值</strong>。对于<strong>梯度提升回归树</strong>来说，每个样本的预测结果可以表示为所有树上的结果的加权求和：<br><img src="https://img-blog.csdnimg.cn/20191228103938521.jpg" alt="梯度提升回归树"><br>其中，K 是树的总数量，k 代表第 k 棵树， &gamma;<sub>k</sub>是这棵树的权重，h<sub>k</sub> 表示这棵树上的预测结果。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191228104200507.jpg?,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="梯度提升归回树"></p>
+<p>注意：<code>XGB vs GBDT</code> 核心区别1：求解预测值 y_hat 的方式不同</p>
+<ul>
+<li>GBDT中预测值是由所有弱分类器上的预测结果的加权求和，其中每个样本上的预测结果就是样本所在的叶子节点的均值。而XGBT中的预测值是所有弱分类器上的叶子权重直接求和得到，计算叶子权重是一个复杂的过程</li>
+</ul>
+<p>在集成中我们需要的考虑的第一件事是我们的超参数 K ，究竟要建多少棵树?</p>
+<table>
+<thead>
+<tr>
+<th>参数含义</th>
+<th>xgb.train()</th>
+<th>xgb.XGBRegressor()</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集成中弱评估器的数量</td>
+<td>num_round，默认10</td>
+<td>n_estimators，默认100</td>
+</tr>
+<tr>
+<td>训练中是否打印每次训练的结果</td>
+<td>slient，默认False</td>
+<td>slient，默认True</td>
+</tr>
+</tbody>
+</table>
+<h4 id="不同模型的简单比对"><a href="#不同模型的简单比对" class="headerlink" title="不同模型的简单比对"></a><font size="4px" color="red">不同模型的简单比对</font></h4><ul>
+<li><p>导入需要的库，模块以及数据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 三种回归模型</span><br><span class="line">from xgboost import XGBRegressor as XGBR</span><br><span class="line">from sklearn.ensemble import RandomForestRegressor as RFR</span><br><span class="line">from sklearn.linear_model import LogisticRegression as LinearR</span><br><span class="line"></span><br><span class="line"># 数据集</span><br><span class="line">from sklearn.datasets import load_boston</span><br><span class="line">from sklearn.model_selection import KFold,cross_val_score as CVS,train_test_split as TTS</span><br><span class="line"></span><br><span class="line"># 模型评估，这里使用均方误差</span><br><span class="line">from sklearn.metrics import mean_squared_error as MSE</span><br><span class="line"></span><br><span class="line"># 其他辅助库</span><br><span class="line">import pandas as pd</span><br><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">from time import time</span><br><span class="line"></span><br><span class="line">data=load_boston()</span><br><span class="line">Xtrain,Xtest,Ytrain,Ytest = TTS(data.data,data.target,test_size=0.3,random_state=10)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建模，查看其他接口和属性</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">xgbr=XGBR(n_estimators=100).fit(Xtrain,Ytrain)</span><br><span class="line">print(xgbr.predict(Xtest).shape) # 传统接口predict，返回没个样本的预测结果，为了方便显示这里只看形状</span><br><span class="line">print(xgbr.score(Xtest,Ytest)) # 默认使用R2作为模型评估指标，越接近1越好</span><br><span class="line">print(data.target.mean(),MSE(Ytest,xgbr.predict(Xtest))) # 均方误差，可以与均值对比进行评估</span><br><span class="line">print(xgbr.feature_importances_) # 树模型的优势之一：能够查看模型的重要性分数，可以使用嵌入法（selectfrommodel）进行特征选择</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">(152,)</span><br><span class="line">0.8963630811711718</span><br><span class="line">22.532806324110677 10.11843177713594</span><br><span class="line">[0.02106727 0.00336115 0.0069604  0.01292224 0.04037843 0.19033682</span><br><span class="line"> 0.00970811 0.03515113 0.00808811 0.01782032 0.05347034 0.01479358</span><br><span class="line"> 0.5859421 ]</span><br><span class="line">&apos;&apos;&apos;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>交叉验证，与线性回归&amp;随机森林回归进行对比</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> # 查看一下sklearn中所有的模型评估指标</span><br><span class="line">import sklearn</span><br><span class="line">print(sorted(sklearn.metrics.SCORERS.keys()))</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">[&apos;accuracy&apos;, &apos;adjusted_mutual_info_score&apos;, &apos;adjusted_rand_score&apos;, &apos;average_precision&apos;, &apos;balanced_accuracy&apos;, &apos;brier_score_loss&apos;, &apos;completeness_score&apos;, &apos;explained_variance&apos;, &apos;f1&apos;, &apos;f1_macro&apos;, &apos;f1_micro&apos;, &apos;f1_samples&apos;, &apos;f1_weighted&apos;, &apos;fowlkes_mallows_score&apos;, &apos;homogeneity_score&apos;, &apos;jaccard&apos;, &apos;jaccard_macro&apos;, &apos;jaccard_micro&apos;, &apos;jaccard_samples&apos;, &apos;jaccard_weighted&apos;, &apos;max_error&apos;, &apos;mutual_info_score&apos;, &apos;neg_log_loss&apos;, &apos;neg_mean_absolute_error&apos;, &apos;neg_mean_squared_error&apos;, &apos;neg_mean_squared_log_error&apos;, &apos;neg_median_absolute_error&apos;, &apos;normalized_mutual_info_score&apos;, &apos;precision&apos;, &apos;precision_macro&apos;, &apos;precision_micro&apos;, &apos;precision_samples&apos;, &apos;precision_weighted&apos;, &apos;r2&apos;, &apos;recall&apos;, &apos;recall_macro&apos;, &apos;recall_micro&apos;, &apos;recall_samples&apos;, &apos;recall_weighted&apos;, &apos;roc_auc&apos;, &apos;v_measure_score&apos;]</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"></span><br><span class="line">rfr = RFR(n_estimators=100)</span><br><span class="line">print(CVS(rfr,Xtrain,Ytrain,cv=5).mean()) # 默认使用R2</span><br><span class="line">print(CVS(rfr,Xtrain,Ytrain,cv=5,scoring=&apos;neg_mean_squared_error&apos;).mean())</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">0.8237244585460111</span><br><span class="line">-13.459232065191156</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"></span><br><span class="line">lr = LinearR()</span><br><span class="line">print(CVS(lr,Xtrain,Ytrain,cv=5).mean())</span><br><span class="line">print(CVS(lr,Xtrain,Ytrain,cv=5,scoring=&apos;neg_mean_squared_error&apos;).mean())</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">0.7085045269202359</span><br><span class="line">-22.00708992916433</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"></span><br><span class="line">reg = XGBR(n_estimators=100,silent=False)  # 数据巨大预料到算法运行会非常缓慢的时候可以使用silent来监控模型的训练进度</span><br><span class="line">print(CVS(reg,Xtrain,Ytrain,cv=5,scoring=&apos;neg_mean_squared_error&apos;).mean())</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">-11.092755292508123</span><br><span class="line">&apos;&apos;&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>有一个地方需要商议一下，在交叉验证的时候改用训练集还是所有数据呢？正确做法应该是<strong>用训练集进行交叉验证</strong>，因为使用所有数据就存在泄露数据的嫌疑，这样是不严谨的做法。然而，如果用只用训练集可能无法提高模型的泛化能力，同时用所有数据也无法保证模型的泛化能力。实际上，导入全数据还是训练集并没有太大的改变，尤其是样本数量较少而模型较复杂的情况。</p>
+<h4 id="调参"><a href="#调参" class="headerlink" title="调参"></a><font size="5px" color="red">调参</font></h4><p>首先观察过拟合情况：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">data=load_boston()</span><br><span class="line">Xtrain,Xtest,Ytrain,Ytest = TTS(data.data,data.target,test_size=0.3,random_state=10)</span><br><span class="line"></span><br><span class="line"># 自定义绘图函数</span><br><span class="line">def plot_learning_curve(estimator, title, X, y,</span><br><span class="line">                        ax=None,  # 选择子图</span><br><span class="line">                        ylim=None,  # 设置纵坐标的取值范围</span><br><span class="line">                        cv=None,  # 交叉验证</span><br><span class="line">                        n_jobs=None  # 设定所要使用的线程</span><br><span class="line">                        ):</span><br><span class="line">    from sklearn.model_selection import learning_curve</span><br><span class="line">    train_sizes, train_scores, test_scores = learning_curve(estimator, X, y</span><br><span class="line">                                                            , shuffle=True</span><br><span class="line">                                                            , cv=cv</span><br><span class="line">                                                            ,random_state=420</span><br><span class="line">                                                            , n_jobs=n_jobs)</span><br><span class="line">    if ax == None:</span><br><span class="line">        ax = plt.gca()</span><br><span class="line">    else:</span><br><span class="line">        ax = plt.figure()</span><br><span class="line">    ax.set_title(title)</span><br><span class="line">    if ylim is not None:</span><br><span class="line">        ax.set_ylim(*ylim)</span><br><span class="line">    ax.set_xlabel(&quot;Training examples&quot;)</span><br><span class="line">    ax.set_ylabel(&quot;Score&quot;)</span><br><span class="line">    ax.grid()  # 绘制网格，不是必须</span><br><span class="line">    ax.plot(train_sizes, np.mean(train_scores, axis=1), &apos;o-&apos;, color=&quot;r&quot;, label=&quot;Training score&quot;)</span><br><span class="line">    ax.plot(train_sizes, np.mean(test_scores, axis=1), &apos;o-&apos;, color=&quot;g&quot;, label=&quot;Test score&quot;)</span><br><span class="line">    ax.legend(loc=&quot;best&quot;)</span><br><span class="line">    return ax</span><br><span class="line"></span><br><span class="line">cv = KFold(n_splits=5, shuffle = True, random_state=10)  # Split dataset into k consecutive folds (without shuffling by default).Each fold is then used once as a validation while the k - 1 remaining folds form the training set</span><br><span class="line">plot_learning_curve(XGBR(n_estimators=100,random_state=10,silent=True),&quot;XGB&quot;,Xtrain,Ytrain,ax=None,cv=cv)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/20191228174359475.png?type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="过拟合"><br>可以看出模型在训练集上表现很好，但在测试集上还是存在不足，这种就行典型的过拟合情况，我们希望训练集和测试集的表现趋近一致，这种情况是存在调参空间的。<br>关于learning_curve：<a href="https://www.jianshu.com/p/d114ded36fd4" target="_blank" rel="noopener">python基础之learning_curve（学习曲线）</a></p>
+<p>我们可以根据参数<code>n_estimators</code>来绘制学习曲线，但效果可能和预期的有所差别，比如可能出现的一种情况是学习曲线上得分最高的点和比较适合的点相差不大，但参数却千差万别，我们可能不需要为了这0.0000000001的提高而耗费巨大的计算资源。</p>
+<h4 id="进化的学习曲线：方差与泛化误差"><a href="#进化的学习曲线：方差与泛化误差" class="headerlink" title="进化的学习曲线：方差与泛化误差"></a><font size="5px" color="red">进化的学习曲线：方差与泛化误差</font></h4><p>首先来回顾一下什么是泛化误差：<strong>衡量模型在未知数据上的准确率的指标</strong>。<br>由偏差（bais），方差（var）和噪声（&epsilon;）共同决定。其中偏差就是训练集上的拟合程度决定，方差是模型的稳定性决定，噪音是不可控的<br><img src="https://img-blog.csdnimg.cn/20191220145346250.jpg" alt="泛化误差"></p>
+<p>在过去我们往往直接取学习曲线获得的分数的最高点，即考虑偏差最小的点，是因为模型极度不稳定，方差很大的情<br>况其实比较少见，但有的时候也可以使用方差来确定参数，即将方差考虑进去使用泛化误差曲线找到最小的点。<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cv = KFold(n_splits=5, shuffle = True, random_state=10)</span><br><span class="line">axisx = range(50,1050,50)</span><br><span class="line">rs = []</span><br><span class="line">var = []</span><br><span class="line">ge = []</span><br><span class="line">for i in axisx:</span><br><span class="line">    reg = XGBR(n_estimators=i,random_state=420)</span><br><span class="line">    cvresult = CVS(reg,Xtrain,Ytrain,cv=cv)</span><br><span class="line">    rs.append(cvresult.mean()) #记录1-偏差</span><br><span class="line">    var.append(cvresult.var()) #记录方差</span><br><span class="line">    ge.append((1 - cvresult.mean())**2+cvresult.var()) #计算泛化误差的可控部分</span><br><span class="line"></span><br><span class="line">print(axisx[rs.index(max(rs))],max(rs),var[rs.index(max(rs))]) #打印R2最高所对应的参数取值，并打印这个参数下的方差</span><br><span class="line">print(axisx[var.index(min(var))],rs[var.index(min(var))],min(var)) #打印方差最低时对应的参数取值，并打印这个参数下的R2</span><br><span class="line">print(axisx[ge.index(min(ge))],rs[ge.index(min(ge))],var[ge.index(min(ge))],min(ge)) #打印泛化误差可控部分的参数取值，并打印这个参数下的R2，方差以及泛化误差的可控部分</span><br><span class="line">plt.figure(figsize=(20,5))</span><br><span class="line">plt.plot(axisx,rs,c=&quot;red&quot;,label=&quot;XGB&quot;)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">350 0.8610046069434762 0.0017082134672292432</span><br><span class="line">50 0.833683748803972 0.0014732754886999603</span><br><span class="line">350 0.8610046069434762 0.0017082134672292432 0.02102793275816677</span><br><span class="line">&apos;&apos;&apos;</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://img-blog.csdnimg.cn/2020011315381065.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05ZSVNUX1RDX0xZUQ==,size_16,color_FFFFFF,t_70" alt="R^2"><br>根据泛化误差，最佳参数也就是树的数量在350棵效果最好。<br>接下来可以细化学习曲线，将参数调整为(200,400,10)的区间，找到最佳n_estimators。</p>
+<p>观察n_estimators参数对模型的影响，我们可以得出以下结论：</p>
+<ol>
+<li>XGB中的树的数量决定了模型的学习能力，树的数量越多，模型的学习能力越强</li>
+<li>XGB中树的数量很少的时候，对模型的影响较大，当树的数量已经很多的时候，对模型的影响比较小，只能有微弱的变化。当数据本身就处于过拟合的时候，再使用过多的树能达到的效果甚微，反而浪费计算资源。当唯一指标或者准确率给出的n_estimators看起来不太可靠的时候，我们可以改造学习曲线来帮助我们</li>
+<li>树的数量提升对模型的影响有极限，最开始，模型的表现会随着XGB的树的数量一起提升，但到达某个点之后，树的数量越多，模型的效果会逐步下降，这也说明了暴力增加n_estimators不一定有效果</li>
+</ol>
+<h4 id="有放回随机抽样：重要参数subsample"><a href="#有放回随机抽样：重要参数subsample" class="headerlink" title="有放回随机抽样：重要参数subsample"></a><font size="5px" color="red">有放回随机抽样：重要参数subsample</font></h4><p>对于所有提升集成算法，每构建一个评估器，集成模型的效果都会比之前的好。<br>树模型是天生过拟合的模型，如果数据量太大，树模型的计算非常缓慢，因此，我们要对我们的原始数据集进行有放回抽样（bootstrap）。有放回的抽样每次只能抽取一个样本，若我们需要总共N个样本，就需要抽取N次。每次抽取一个样本的过程是独立的，这一次被抽到的样本会被放回数据集中，下一次还可能被抽到，因此抽出的数据集中，可能有一些重复的数据。</p>
+<p>有放回抽样第一次是完全随机的，而后每一次抽样会加大前一棵树中被预测错误的样本权重，不停地进行迭代重复建模，最终总会成功预测的。</p>
+<p>在xgb和sklearn中都使用<code>subsample</code>来控制随机抽样，这个参数都默认为1且不能取到0。这说明我们无法控制模型是否进行随机有放回抽样，只能控制抽样抽出来的样本量大概是多少。</p>
+<table>
+<thead>
+<tr>
+<th>参数含义</th>
+<th>xgb.train()</th>
+<th>xgb.XGBRegressor()</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>随机抽样时抽取的样本比例，范围(0,1]</td>
+<td>subsample，默认1</td>
+<td>subsample，默认1</td>
+</tr>
+</tbody>
+</table>
+<p>采样会减少样本数量，而从学习曲线来看样本数量越少模型的过拟合会越严重，因为对模型来说，数据量越少模型学习越容易，学到的规则也会越具体越不适用于测试样本。所以subsample参数通常是在样本量本身很大的时候来调整和使用。  </p>
+<p>如果模型本身就处于过拟合状态，还可能会降低模型的效果。  </p>
+<h4 id="迭代决策树：重要参数eta"><a href="#迭代决策树：重要参数eta" class="headerlink" title=" 迭代决策树：重要参数eta"></a><font size="5px" color="red"> 迭代决策树：重要参数eta</font></h4><p>在逻辑回归中，我们自定义步长&alpha;；来干涉我们的迭代速率，而在XGB中，完整的迭代公式应该写作：<br><img src="https://img-blog.csdnimg.cn/20200113170032390.jpg" alt="梯度提升"><br>其中&eta;是迭代决策树中时的步长，又叫学习率（learnin rate）,&amp;eta越大，迭代的速度越快，算法的极限很快被达到，有可能无法收敛到真正的最佳。但越小，迭代的速度越慢。<br>在sklearn中，我们使用参数learning_rate来干涉我们的学习速率:</p>
+<table>
+<thead>
+<tr>
+<th>参数含义</th>
+<th>xgb.train()</th>
+<th>xgb.XGBRegressor()</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集成中的学习率，又称为步长以控制迭代速率，常用于防止过拟合</td>
+<td>eta，默认0.3，取值范围[0,1]</td>
+<td>learning_rate，默认0.1，取值范围[0,1]</td>
+</tr>
+</tbody>
+</table>
+<p>现在来看，我们的梯度提升树可是说是由三个重要的部分组成</p>
+<ol>
+<li>一个能够衡量集成算法效果的，能够被最优化的损失函数<em>Obj</em></li>
+<li>一个能够实现预测的弱评估器<em>f<sub>k</sub>(x)</em></li>
+<li>一种能够让弱评估器集成的手段，包括迭代方法，抽样手段，样本加权等等过程</li>
+</ol>
+<p>XGBoost是在梯度提升树的这三个核心要素上运行，它重新定义了损失函数和弱评估器，并且对提升算法的集成手段<br>进行了改进，实现了运算速度和模型效果的高度平衡</p>
 ]]></content>
       <categories>
         <category>机器学习</category>

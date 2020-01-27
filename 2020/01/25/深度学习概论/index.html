@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="NO response">
+  
+  
+    <meta name="description" content="what you will be,the world will be">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    深度学习概论 |
+    
+    种花家</title>
+  
+    <link rel="shortcut icon" href="/images/rabbit.png">
+  
+  <link rel="stylesheet" href="../../../../css/style.css">
+  <link rel="stylesheet" href="../../../../css/technology.css">
+  
+    <link rel="stylesheet" href="../../../../fancybox/jquery.fancybox.min.css">
+  
+  <script src="../../../../js/pace.min.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <section class="outer">
+  <article id="post-深度学习概论" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深度学习概论
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href class="article-date">
+  <time datetime="2020-01-25T05:22:00.000Z" itemprop="datePublished">2020-01-25</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="../../../../categories/深度学习/">深度学习</a>
+  </div>
+
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h3 id="神经网络与深度学习"><a href="#神经网络与深度学习" class="headerlink" title="神经网络与深度学习"></a><table><td bgcolor="gren"><font size="6px" color="b"><center>神经网络与深度学习</center></font></td></table></h3><ol>
+<li><a href="https://www.bilibili.com/video/av66314465" target="_blank" rel="noopener">学习地址</a></li>
+<li><a href></a></li>
+</ol>
+<hr>
+<h4 id="第一周：概述"><a href="#第一周：概述" class="headerlink" title="第一周：概述"></a><font size="5px" color="red">第一周：概述</font></h4><ol>
+<li>什么是神经网络: 结构（输入单元、处理单元、输出单元）</li>
+<li>神经网络进行监督学习：房价预测、广告点击率、照片打标签、语音识别与翻译、无人自动驾驶。带时序序列问题的属于循环神经网络范围，擅长处理一维时间序列。<br>结构化数据：有清晰定义的数据列或数据库<br>无结构化数据：语音、图像等计算机无法直接识别难以理解，而人却具有天生优势</li>
+<li>为什么深度学习兴起：数据、计算资源、算法</li>
+</ol>
+<h4 id="第二周：神经网络基础"><a href="#第二周：神经网络基础" class="headerlink" title="第二周：神经网络基础"></a><font size="5px" color="red">第二周：神经网络基础</font></h4><ol>
+<li>二分类问题 - 逻辑回归：损失函数理解</li>
+<li>导数与梯度下降</li>
+<li>向量化避免显式循环，numpy广播，避免一维数组出现</li>
+</ol>
+<h4 id="第三周：浅层神经网络"><a href="#第三周：浅层神经网络" class="headerlink" title="第三周：浅层神经网络"></a><font size="5px" color="red">第三周：浅层神经网络</font></h4><ol>
+<li>神经网络表示：输入层、隐藏层（看不到具体值）、输出层。隐藏层开始算层数</li>
+<li>从逻辑回归到神经网络</li>
+<li>向量化实现与理解</li>
+<li>激活函数：sigmoid函数比较传统，tanh类似sigmoid函数往下平移，比sigmoid函数性能稳定，但在二分类问题中输出层想要0或1还是sigmoid函数更适用</li>
+<li>sigmoid函数和tanh函数的缺点是如果Z=w<sup>T</sup>x+b非常大或者非常小，那么在激活函数曲线上导数就很小，不利于梯度下降。这就引出了修正线形单元ReLU：a=max(0,z)，现在基本默认使用了，在大部分情况速度非常快，少数梯度为负数的情况可以使用带泄露的修正函数: a=max(0.01z, z)，0.01可以修改</li>
+<li>如果隐藏层不使用非线形激活函数，那么神经网络基本就退化成了一堆线形函数的线形组合，线形隐层就没什么意义了，输出层倒是可以使用线形激活函数</li>
+<li>三个激活函数导数：微积分计算结合图示理解</li>
+<li>反向传播算法推导，建议观看吴老师早期机器学习视频</li>
+</ol>
+<h4 id="第四周：深层神经网络"><a href="#第四周：深层神经网络" class="headerlink" title="第四周：深层神经网络"></a><font size="5px" color="red">第四周：深层神经网络</font></h4><ol>
+<li>深度神经网络标记：输入层第0层、权重参数、激活函数值<br><img src="https://img-blog.csdnimg.cn/20200127193814575.png" alt="符号约定"></li>
+<li>前向传播与反向传播过程，类似于浅层神经网络</li>
+<li>传播过程各种矩阵的维数核对</li>
+<li>深层的优势：各司其职</li>
+<li>超参数调参，将每一层作为一个神经网络块去手动搭建</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://sfz-lyq.cn/2020/01/25/深度学习概论/" data-id="ck5t5dl7n00fftds6a8dvly7u" class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/DL/">DL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/深度学习/">深度学习</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="../../../../2019/12/27/XGBoost/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">XGBoost</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+    </div>
+    <script src="../../../../js/jquery-2.0.3.min.js"></script>
+<script src="../../../../js/lazyload.min.js"></script>
+<script src="../../../../js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="../../../../fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="../../../../js/search.js"></script>
+
+
+<script src="../../../../js/technology.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>

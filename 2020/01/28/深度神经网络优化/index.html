@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="NO response">
+  
+  
+    <meta name="description" content="what you will be,the world will be">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    深度神经网络优化 |
+    
+    种花家</title>
+  
+    <link rel="shortcut icon" href="/images/rabbit.png">
+  
+  <link rel="stylesheet" href="../../../../css/style.css">
+  <link rel="stylesheet" href="../../../../css/technology.css">
+  
+    <link rel="stylesheet" href="../../../../fancybox/jquery.fancybox.min.css">
+  
+  <script src="../../../../js/pace.min.js"></script>
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <section class="outer">
+  <article id="post-深度神经网络优化" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深度神经网络优化
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href class="article-date">
+  <time datetime="2020-01-28T12:15:00.000Z" itemprop="datePublished">2020-01-28</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="../../../../categories/深度学习/">深度学习</a>
+  </div>
+
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h3 id="深度神经网络优化"><a href="#深度神经网络优化" class="headerlink" title="深度神经网络优化"></a><table><td bgcolor="gren"><font size="6px" color="b"><center>深度神经网络优化</center></font></td></table></h3><ol>
+<li><a href="https://www.bilibili.com/video/av66524657" target="_blank" rel="noopener">学习地址</a></li>
+</ol>
+<hr>
+<h4 id="深度学习应用层面"><a href="#深度学习应用层面" class="headerlink" title="深度学习应用层面"></a><font size="5px" color="red">深度学习应用层面</font></h4><p>应用型机器学习是一个高度迭代的过程，其不确定性在于：</p>
+<ol>
+<li>隐藏层数</li>
+<li>隐藏单元数</li>
+<li>学习率</li>
+<li>激活函数  </li>
+<li>…</li>
+</ol>
+<p>最开始可以设计一个简单的模型，然后编码，最后实验，根据实验结果完善想法，改变策略；循环此过程找到称心如意的神经网络<br><img src="https://img-blog.csdnimg.cn/20200128205245177.png" alt></p>
+<p>关于数据集划分：</p>
+<ol>
+<li>已知数据集作为待划分数据集</li>
+<li>将数据集划分为训练集，交叉验证集和测试集；其中训练集用来训练模型，交叉验证集用来确定模型（调整模型），测试集用来评估模型</li>
+<li>如果数据集较小，按传统比例：60% 、20%、20%</li>
+<li>如果数据集较大，交叉验证集和测试集可以占较少比例，总共20%即可</li>
+<li><strong>经验法则</strong>：验证集和测试集的数据分布和来源需要保持一致</li>
+<li>测试集只是为了模型的无偏评估，如果不需要无偏评估可以不设置测试集，只有训练集和验证集，这个时候验证集也可以称为测试集</li>
+</ol>
+<p>偏差于方差问题：</p>
+<ol>
+<li>一句话理解：偏差bias过大表示欠拟合，对训练集拟合不足；方差variance过大则是过拟合，而在测试集上表现不好。即偏差描述在训练集上的表现（训练误差），方差则描述在测试集上的表现</li>
+<li>高偏差时可以尝试规模更大的网络；高方差时可以尝试更多的数据或者正则化</li>
+<li>在<strong>正则化</strong>问题中，L2范数比L1范数更常用，L1范数可能会使模型更稀疏。</li>
+<li>当&lambda;很大时，参数w会很小，很多隐藏单元趋于无效，神经网络接近逻辑回归，使用双曲正切函数作为激活函数时，z会很小，g(z)大致呈线形，不容易过拟合</li>
+</ol>
+<p>另一种实用正则方法：<strong>dropout - 随机失活</strong></p>
+<ol>
+<li>原理：遍历神经网络每一层，随机删除一些节点，概率为0.5，简化网络防止过拟合</li>
+<li>实现：反向随机失活(Inverted dropout)：在某一层的激活函数值乘以一个随机矩阵</li>
+<li>测试阶段不使用dropout</li>
+<li>其他正则化方法：数据扩增(数据翻转、裁剪如猫图)；Early Stopping，找到验证误差的拐点</li>
+</ol>
+<p>归一化输入数据，有利于梯度下降。</p>
+<p>深度神经网络在极端情况下会产生梯度消失或者梯度爆炸的现象：即若干个权重矩阵相乘，如果矩行列式大于1，那么会产生指数爆炸式增长，反之无限趋于0，这也曾是深度神经网络的阻碍；一个合理的解决方案是合理地初始化权重矩阵，避免梯度爆炸或者消失</p>
+<h4 id="第二周：优化算法"><a href="#第二周：优化算法" class="headerlink" title="第二周：优化算法"></a><font size="5px" color="red">第二周：优化算法</font></h4><ol>
+<li>Mini-batch梯度下降：参考早期吴恩达机器学习视频<strong>大规模机器学习</strong>。小批量梯度下降就是将大规模数据集分组，分组进行梯度下降，分组大小b任意。如果b=1，这种叫做随机梯度下降，噪声较多。</li>
+<li>指数加权平均：系数之和为1，称之为偏差修正。指数加权简单来说就是将一个递推式展开，那么会变成前面若干项乘以不同系数之和，而且系数中包含指数形式，故称为指数加权’平均’<br><img src="https://img-blog.csdnimg.cn/20200130201955467.png" alt="指数加权"><br><img src="https://img-blog.csdnimg.cn/20200130203310226.png" alt="在这里插入图片描述"></li>
+<li>动量梯度下降：以更快的速度向收敛半径靠拢，减少在竖直方向摆动<br><img src="https://img-blog.csdnimg.cn/2020013020493846.png" alt="实施细节"></li>
+<li><p>RMSprop：类似动量梯度下降，加快水平方向收敛，减缓竖直方向收敛<br><img src="https://img-blog.csdnimg.cn/20200130210631313.png" alt="RMSprop"></p>
+</li>
+<li><p>Adam优化算法：自适应动量估计。以上两种方法的结合，学习率&alpha;需要调试，其他参数可以默认<br><img src="https://img-blog.csdnimg.cn/20200130211243629.png" alt="Adam"></p>
+</li>
+<li>学习率衰减：随着收敛学习率动态减小。常用的有代数衰减和指数衰减<br>epach-num是当前迭代次数<br><img src="https://img-blog.csdnimg.cn/20200130212159797.png" alt><br><img src="https://img-blog.csdnimg.cn/20200130212138870.png" alt></li>
+</ol>
+<h4 id="第三周：超参数调式"><a href="#第三周：超参数调式" class="headerlink" title="第三周：超参数调式"></a><font size="5px" color="red">第三周：超参数调式</font></h4><ol>
+<li>最常见的参数确定方法是<strong>网格搜索</strong>，但是如何参数空间纬度较大会非常耗时，可以采用<strong>随机法</strong>，在网格的基础上随机选择参数点(对)，这样能够发现一些重要参数，同时快速找到效果比较好的参数范围，然后<strong>由粗到细</strong>，进一步方法这个范围，再重复上述步骤。</li>
+<li>Batch正则：将中间值 z = &theta;<sup>T</sup>X 正则化，然后应用到神经网络中，通常和训练集的Mini-Batch一起使用，下式中m就是指那组样本的数量，&epsilon;是让正则更稳健。有利于训练深度神网<br><img src="https://img-blog.csdnimg.cn/2020020717302641.png?" alt="Batch正则"><br><img src="https://img-blog.csdnimg.cn/20200207201410194.png?" alt="Batch正则"></li>
+<li>Softmax回归：用神经网络做多分类，参考识别手写数字篇</li>
+<li>深度学习常用开源框架：TensorFlow，待补充。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://sfz-lyq.cn/2020/01/28/深度神经网络优化/" data-id="ck6bxbggb007y82s6rklimey7" class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/DL/">DL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/深度学习/">深度学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/神经网络/">神经网络</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="../../25/深度学习概论/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">深度学习概论</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+    </div>
+    <script src="../../../../js/jquery-2.0.3.min.js"></script>
+<script src="../../../../js/lazyload.min.js"></script>
+<script src="../../../../js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="../../../../fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="../../../../js/search.js"></script>
+
+
+<script src="../../../../js/technology.js"></script>
+
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body>
+</html>
